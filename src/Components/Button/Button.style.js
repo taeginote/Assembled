@@ -2,11 +2,10 @@ import styled, { css } from 'styled-components'
 
 const variantCSS = {
 	default: css`
-		background-color: ${({ theme }) => theme.COLOR.common.white};
-		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
+		background-color: ${({ theme }) => theme.COLOR.main};
 		&:hover {
-			opacity: 0.8;
-			transition: all 0.2s ease-in-out;
+			background-color: ${({ theme }) => theme.COLOR.sub};
+			transition: all 0.3s ease-in-out;
 		}
 
 		&:disabled {
@@ -33,11 +32,6 @@ const shapeCSS = {
 
 const sizeCSS = {
 	default: css`
-		width: 8rem;
-		height: 3.3rem;
-	`,
-
-	full: css`
 		width: 100%;
 		height: 4.8rem;
 	`,
@@ -64,6 +58,7 @@ const fontSizeCSS = {
 }
 
 export const Button = styled.button`
+	color: white;
 	${({ variant }) => variantCSS[variant]}
 	${({ shape }) => shapeCSS[shape]}
     ${({ size }) => sizeCSS[size]}
