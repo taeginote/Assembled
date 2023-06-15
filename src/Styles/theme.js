@@ -8,6 +8,7 @@ const COLOR = {
 	main: '#FB9B00',
 	hover: '#FA7100',
 	sub: '#FCBA5C',
+	orange: '#FDD19B',
 	button: '#CEDFF6',
 	common: {
 		white: '#FFF',
@@ -24,11 +25,13 @@ const COLOR = {
 }
 
 const FONT_SIZE = {
+	ss: '1.0rem',
 	tiny: '1.4rem',
+	xs: '1.6rem',
 	small: '1.8rem',
 	medium: '2.0rem',
-	large: '2.4rem',
-	big: '3.2rem',
+	large: '2.6rem',
+	big: '3.6rem',
 	huge: '4.8rem',
 }
 

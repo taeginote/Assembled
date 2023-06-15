@@ -8,10 +8,13 @@ export const GridCenterCSS = css`
 
 export const ColumnNumberCSS = count => css`
 	grid-template-columns: repeat(${count}, 1fr);
-	column-gap: 3rem;
-	row-gap: 3rem;
+	column-gap: 2rem;
+	row-gap: 2rem;
 `
-
+export const FlexColumnCSS = css`
+	display: flex;
+	flex-direction: column;
+`
 export const FlexCenterCSS = css`
 	display: flex;
 	justify-content: center;

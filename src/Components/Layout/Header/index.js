@@ -5,30 +5,34 @@ import {
 	WidthAutoCSS,
 } from '../../../Styles/common'
 import SearchBar from './Components/SearchBar'
+import { Outlet } from 'react-router-dom'
 
 function Haeder() {
 	return (
-		<S.Wrapper>
-			<S.Container>
-				<div>
-					<S.Logo>어셈블</S.Logo>
-					<SearchBar />
-				</div>
-				<S.HeaderRightBox>
-					<S.Select>로그인</S.Select>
-					<div>|</div>
-					<S.Select>회원가입</S.Select>
-				</S.HeaderRightBox>
-			</S.Container>
-		</S.Wrapper>
+		<>
+			<S.Wrapper>
+				<S.Container>
+					<div>
+						<S.Logo>어셈블</S.Logo>
+						<SearchBar />
+					</div>
+					<S.HeaderRightBox>
+						<S.Select>로그인</S.Select>
+						<div>|</div>
+						<S.Select>회원가입</S.Select>
+					</S.HeaderRightBox>
+				</S.Container>
+			</S.Wrapper>
+			<Outlet />
+		</>
 	)
 }
 export default Haeder
 
 const Wrapper = styled.div`
 	background-color: ${({ theme }) => theme.COLOR.common.white};
-
-	position: sticky;
+	position: fixed;
+	width: 100%;
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 	z-index: 99;
 	padding: 1rem 0;
