@@ -5,8 +5,10 @@ import {
 	FlexColumnCSS,
 } from '../../Styles/common'
 import { Chat_Icon, Person_Icon } from '../Icons/Icons'
+import { useNavigate } from 'react-router-dom'
 
 function ItemBox() {
+	const navigate = useNavigate()
 	const item = {
 		title: '디자이너 모집 (게시판 프로젝트)',
 		contents:
@@ -18,7 +20,7 @@ function ItemBox() {
 		img: 'https://cdn.inflearn.com/public/users/thumbnails/234401/660102d4-1e7b-4c43-a7ba-7d0ee6d96b83',
 	}
 	return (
-		<S.Wrapper>
+		<S.Wrapper onClick={() => navigate('/Detail/321')}>
 			<S.Container>
 				<S.Status>모집중</S.Status>
 				<S.Period>마감일 | {item.expectedPeriod}달뒤</S.Period>
