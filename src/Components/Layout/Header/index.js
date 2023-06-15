@@ -5,21 +5,22 @@ import {
 	WidthAutoCSS,
 } from '../../../Styles/common'
 import SearchBar from './Components/SearchBar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 function Haeder() {
+	const navigate = useNavigate()
 	return (
 		<>
 			<S.Wrapper>
 				<S.Container>
 					<div>
-						<S.Logo>어셈블</S.Logo>
+						<S.Logo onClick={() => navigate('/')}>어셈블</S.Logo>
 						<SearchBar />
 					</div>
 					<S.HeaderRightBox>
-						<S.Select>로그인</S.Select>
+						<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
 						<div>|</div>
-						<S.Select>회원가입</S.Select>
+						<S.Select onClick={() => navigate('/signUp')}>회원가입</S.Select>
 					</S.HeaderRightBox>
 				</S.Container>
 			</S.Wrapper>
@@ -49,6 +50,7 @@ const Logo = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.big};
 	color: ${({ theme }) => theme.COLOR.main};
 	margin-right: 3rem;
+	cursor: pointer;
 `
 const HeaderRightBox = styled.div`
 	${FlexAlignCSS}

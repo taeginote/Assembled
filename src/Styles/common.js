@@ -37,6 +37,9 @@ export const WidthAutoCSS = css`
 	max-width: 119.4rem;
 	margin: 0 auto;
 `
+export const TopPadding = css`
+	padding-top: 7rem;
+`
 
 export const ShadowCSS = css`
 	box-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
