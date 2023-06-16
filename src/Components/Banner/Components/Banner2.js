@@ -18,16 +18,14 @@ const Wrapper = styled.div`
 	background-color: #99ccff;
 	height: 40rem;
 	${FlexCenterCSS}
-	position: relative;
+
 	img {
-		width: 20rem;
-		position: absolute;
-		right: 45rem;
-		top: 11rem;
+		width: 25rem;
+		padding: 0rem 6rem 0 0;
 	}
 `
 const Content = styled.div`
-	width: 55%;
+	width: 37%;
 `
 const Title = styled.div`
 	margin: 4rem 0 1rem 0;

@@ -17,18 +17,15 @@ export default Banner3
 const Wrapper = styled.div`
 	background-color: #f9e586;
 	height: 40rem;
-	/* color: ${({ theme }) => theme.COLOR.common.white}; */
 	${FlexCenterCSS}
-	position: relative;
+
 	img {
-		width: 20rem;
-		position: absolute;
-		right: 45rem;
-		top: 13rem;
+		width: 25rem;
+		padding: 2rem 6rem 0 0;
 	}
 `
 const Content = styled.div`
-	width: 55%;
+	width: 37%;
 `
 const Title = styled.div`
 	margin: 4rem 0 1rem 0;
