@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { ColumnNumberCSS, FlexAlignCSS, TopPadding } from '../../Styles/common'
+import CommentForm from '../../Components/CommentForm'
 
 function Detail() {
 	const item = {
@@ -39,6 +40,7 @@ function Detail() {
 				</S.Info>
 				<h3>프로젝트 설명</h3>
 				<S.Dec>{item.contents}</S.Dec>
+				<CommentForm />
 			</S.Container>
 		</S.Wrapper>
 	)
@@ -112,7 +114,7 @@ const Info = styled.div`
 	}
 `
 const Dec = styled.div`
-	margin-top: 3rem;
+	margin: 3rem 0 10rem 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 `
 const S = { Wrapper, Container, Profile, UserImg, Info, Dec }

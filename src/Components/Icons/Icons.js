@@ -1,4 +1,4 @@
-import { CiSearch } from 'react-icons/ci'
+import { CiSearch, CiWarning } from 'react-icons/ci'
 import {
 	AiOutlineClose,
 	AiOutlineHeart,
@@ -42,3 +42,7 @@ export const Phone_Icon = ({ size }) => <BsPhone size={size} /> //핸드폰
 export const Date_Icon = ({ size }) => <MdOutlineToday size={size} /> //달력
 
 export const Nickname_Icon = ({ size }) => <RiUser5Line size={size} /> //달력
+
+export const Warning_Icon = ({ size }) => (
+	<CiWarning size={size} color="#FB9B00" />
+) //경고

@@ -14,15 +14,17 @@ function List() {
 	}
 
 	return (
-		<S.Wrapper>
-			<Banner />
+		<>
+			<S.Wrapper>
+				<Banner />
 
-			<S.Container>
-				{a.map(() => (
-					<ItemBox />
-				))}
-			</S.Container>
-		</S.Wrapper>
+				<S.Container>
+					{a.map(() => (
+						<ItemBox />
+					))}
+				</S.Container>
+			</S.Wrapper>
+		</>
 	)
 }
 export default List

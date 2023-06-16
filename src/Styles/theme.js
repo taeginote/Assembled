@@ -9,7 +9,7 @@ const COLOR = {
 	hover: '#FA7100',
 	sub: '#FCBA5C',
 	orange: '#FDD19B',
-	button: '#CEDFF6',
+	button: '#070707',
 	common: {
 		white: '#FFF',
 		black: '#000',
