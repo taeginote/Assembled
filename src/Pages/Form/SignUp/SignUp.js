@@ -13,6 +13,8 @@ import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import Notice from './Components/Notice'
 import { useForm } from 'react-hook-form'
+import { HookFormRule } from '../../../Consts/HookFormRule'
+import HookFormError from '../../../Components/Error/HookFormError'
 
 function SignUp() {
 	const {
@@ -24,40 +26,83 @@ function SignUp() {
 	const onSubmit = () => {}
 
 	return (
-		<S.Wrapper>
+		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.container>
 				<h3>회원가입</h3>
-
 				<span>
 					<Email_Icon size={'22'} />
-					<Input placeholder="example@assembled.com" />
+					<Input
+						placeholder="example@assembled.com"
+						{...register('SignUpEmail', HookFormRule.SignUpEmail)}
+					/>
 				</span>
+				{errors.SignUpEmail && (
+					<HookFormError>{errors.SignUpEmail.message}</HookFormError>
+				)}
 				<span>
 					<Name_Icon size={'22'} />
-					<Input placeholder="이름을 입력해주세요" />
+					<Input
+						placeholder="이름을 입력해주세요"
+						{...register('SignUpName', HookFormRule.SignUpName)}
+					/>
 				</span>
+				{errors.SignUpName && (
+					<HookFormError>{errors.SignUpName.message}</HookFormError>
+				)}
 				<span>
 					<Nickname_Icon size={'22'} />
-					<Input placeholder="닉네임을 입력해주세요" />
+					<Input
+						placeholder="닉네임을 입력해주세요"
+						{...register('SignUpNickName', HookFormRule.SignUpNickName)}
+					/>
 				</span>
+				{errors.SignUpNickName && (
+					<HookFormError>{errors.SignUpNickName.message}</HookFormError>
+				)}
 				<span>
 					<Lock_Icon size={'22'} />
-					<Input placeholder="비밀번호를 입력해주세요" />
+					<Input
+						placeholder="비밀번호를 입력해주세요"
+						{...register('SignUpPw', HookFormRule.SignUpPw)}
+					/>
 				</span>
+				{errors.SignUpPw && (
+					<HookFormError>{errors.SignUpPw.message}</HookFormError>
+				)}
 				<span>
 					<Lock_Icon size={'22'} />
-					<Input placeholder="위에 설정한 비밀번호를 입력해주세요" />
+					<Input
+						placeholder="위에 설정한 비밀번호를 입력해주세요"
+						{...register('SignUpPwConfirm', {
+							required: '비밀번호 확인을 입력해주세요',
+						})}
+					/>
 				</span>
+				{errors.SignUpPwConfirm && (
+					<HookFormError>{errors.SignUpPwConfirm.message}</HookFormError>
+				)}
 				<span>
 					<Date_Icon size={'22'} />
-					<Input placeholder="생년월일(8자리) ex) 19980505" />
+					<Input
+						placeholder="생년월일(8자리) ex) 19980505"
+						{...register('SignUpBirthday', HookFormRule.SignUpBirthday)}
+					/>
 				</span>
+				{errors.SignUpBirthday && (
+					<HookFormError>{errors.SignUpBirthday.message}</HookFormError>
+				)}
 				<span>
 					<Phone_Icon size={'22'} />
-					<Input placeholder="휴대폰 번호를 -없이 입력해주세요" />
+					<Input
+						placeholder="휴대폰 번호를 -없이 입력해주세요"
+						{...register('SignUpPhone', HookFormRule.SignUpPhone)}
+					/>
 				</span>
-				<S.SignUpButton>로그인</S.SignUpButton>
+				{errors.SignUpPhone && (
+					<HookFormError>{errors.SignUpPhone.message}</HookFormError>
+				)}
 				<Notice />
+				<S.SignUpButton>로그인</S.SignUpButton>
 			</S.container>
 		</S.Wrapper>
 	)

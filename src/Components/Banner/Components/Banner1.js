@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { FlexCenterCSS } from '../../../Styles/common'
-// import '../../../../public'
+
 function Banner1() {
 	return (
 		<S.Wrapper>
