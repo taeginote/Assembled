@@ -14,7 +14,10 @@ function Haeder() {
 			<S.Wrapper>
 				<S.Container>
 					<div>
-						<S.Logo onClick={() => navigate('/')}>어셈블</S.Logo>
+						<S.Logo
+							src="/assets/img/Logo.png"
+							onClick={() => navigate('/')}
+						></S.Logo>
 						<SearchBar />
 					</div>
 					<S.HeaderRightBox>
@@ -45,12 +48,10 @@ const Container = styled.div`
 		${FlexAlignCSS}
 	}
 `
-const Logo = styled.div`
-	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
-	font-size: ${({ theme }) => theme.FONT_SIZE.big};
-	color: ${({ theme }) => theme.COLOR.main};
+const Logo = styled.img`
 	margin-right: 3rem;
 	cursor: pointer;
+	width: 20rem;
 `
 const HeaderRightBox = styled.div`
 	${FlexAlignCSS}

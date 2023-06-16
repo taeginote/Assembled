@@ -11,7 +11,7 @@ function Notice() {
 			</S.NoticeSec>
 			<S.Container>
 				<input type="radio" />
-				<div>회원가입 유용한 채용 소식을 받아볼래요.</div>
+				<div>회원가입하고 유용한 어셈블 서비스를 이용해볼래요</div>
 			</S.Container>
 		</>
 	)
