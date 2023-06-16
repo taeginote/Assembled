@@ -12,8 +12,17 @@ import {
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import Notice from './Components/Notice'
+import { useForm } from 'react-hook-form'
 
 function SignUp() {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
+
+	const onSubmit = () => {}
+
 	return (
 		<S.Wrapper>
 			<S.container>

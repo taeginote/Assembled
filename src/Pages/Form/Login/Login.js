@@ -5,24 +5,45 @@ import { Email_Icon, Lock_Icon } from '../../../Components/Icons/Icons'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import { Link } from 'react-router-dom'
-
+import { useForm } from 'react-hook-form'
+import HookFormError from '../../../Components/Error/HookFormError'
 function Login() {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
+
+	const onSubmit = () => {}
+
 	return (
-		<S.Wrapper>
+		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.container>
 				<h3>로그인</h3>
 
 				<span>
 					<Email_Icon size={'22'} />
-					<Input placeholder="example@assembled.com" />
+					<Input
+						placeholder="example@assembled.com"
+						{...register('LoginEmail', { required: '이메일을 입력해주세요' })}
+					/>
 				</span>
+				{errors.LoginEmail && (
+					<HookFormError>{errors.LoginEmail.message}</HookFormError>
+				)}
 				<span>
 					<Lock_Icon size={'22'} />
-					<Input placeholder="비밀번호를 입력해주세요" />
+					<Input
+						placeholder="비밀번호를 입력해주세요"
+						{...register('LoginPW', { required: '비밀번호를 입력해주세요' })}
+					/>
 				</span>
+				{errors.LoginPW && (
+					<HookFormError>{errors.LoginPW.message}</HookFormError>
+				)}
 				<S.GoSignUp>
-					아직 어셈블 계정이 없나요?{' '}
-					<S.LinkDesign to={'/Signup'}>회원가입하기</S.LinkDesign>
+					아직 어셈블 계정이 없나요?
+					<S.LinkDesign to={'/Signup'}> 회원가입하기</S.LinkDesign>
 				</S.GoSignUp>
 				<S.SignUpButton>로그인</S.SignUpButton>
 			</S.container>
