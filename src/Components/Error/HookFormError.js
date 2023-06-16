@@ -15,7 +15,7 @@ const Message = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
 	text-align: start;
 	width: 100%;
-	margin-bottom: 2rem;
+	margin-bottom: 0.5rem;
 `
 
 const S = { Message }
