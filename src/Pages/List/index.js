@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 import {
 	ColumnNumberCSS,
+	FlexColumnCSS,
 	GridCenterCSS,
 	WidthAutoCSS,
 } from '../../Styles/common'
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import Banner from '../../Components/Banner'
+import FilterSelectBox from '../../Components/SelectBox/FilterSelectBox'
+import CategoryCarousel from './Components/CategoryCarousel/CategoryCarousel'
 
 function List() {
 	let a = []
@@ -18,6 +21,10 @@ function List() {
 			<S.Wrapper>
 				<Banner />
 
+				<CategoryCarousel />
+				<S.FilterWrapper>
+					<FilterSelectBox />
+				</S.FilterWrapper>
 				<S.Container>
 					{a.map(() => (
 						<ItemBox />
@@ -38,4 +45,10 @@ const Container = styled.div`
 		${ColumnNumberCSS(2)};
 	}
 `
-const S = { Wrapper, Container }
+const FilterWrapper = styled.div`
+	${WidthAutoCSS}
+	display:flex;
+	justify-content: end;
+	padding: 0 0 3rem 0;
+`
+const S = { Wrapper, Container, FilterWrapper }

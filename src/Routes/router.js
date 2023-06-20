@@ -4,6 +4,7 @@ import List from '../Pages/List'
 import SignUp from '../Pages/Form/SignUp/SignUp'
 import Login from '../Pages/Form/Login/Login'
 import Detail from '../Pages/\bDetail/Detail'
+import Register from '../Pages/Register/Register'
 
 const router = createBrowserRouter([
 	{
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
 			{
 				path: '/detail/:idx',
 				element: <Detail />,
+			},
+			{
+				path: '/register',
+				element: <Register />,
 			},
 		],
 	},
