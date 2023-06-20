@@ -21,6 +21,10 @@ function Haeder() {
 						<SearchBar />
 					</div>
 					<S.HeaderRightBox>
+						<S.Select onClick={() => navigate('/register')}>
+							새 글 쓰기
+						</S.Select>
+						<div>|</div>
 						<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
 						<div>|</div>
 						<S.Select onClick={() => navigate('/signUp')}>회원가입</S.Select>
