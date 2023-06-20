@@ -28,7 +28,6 @@ function Banner() {
 				pagination={true}
 				modules={[Pagination]}
 				className="mySwiper"
-				navigation={true} // 네비게이션 버튼
 				autoplay={{ delay: 3000 }}
 			>
 				<SwiperSlide>
