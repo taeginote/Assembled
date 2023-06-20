@@ -1,47 +1,43 @@
 import styled from 'styled-components'
 import { ColumnNumberCSS, FlexAlignCSS, TopPadding } from '../../Styles/common'
-import CommentForm from '../../Components/CommentForm'
+import CommentForm from '../../Components/CommentForm/Comments'
+import useGetDetailData from '../../Hooks/Queries/get-detail'
+import LoadingPage from '../../Components/LoadingPage/Loading'
 
 function Detail() {
-	const item = {
-		title: '디자이너 모집 (게시판 프로젝트)',
-		contents:
-			'게시판 프로젝트를 만드는데 디자인 부분이 너무 힘들어서 디자이너 찾고있습니다. 같이 할수있는 학생이면 좋아요',
-		category: '개발/프로그래밍',
-		writer: '인프런',
-		personnelNumber: '4',
-		expectedPeriod: '2',
-		img: 'https://cdn.inflearn.com/public/users/thumbnails/234401/660102d4-1e7b-4c43-a7ba-7d0ee6d96b83',
-	}
-
+	const { data, isLoading, refetch } = useGetDetailData()
 	return (
 		<S.Wrapper>
-			<S.Container>
-				<h1>{item.title}</h1>
-				<S.Profile>
-					<S.UserImg src={item.img} />
-					<div>{item.writer}</div>
-					<span> | </span>
-					<span>2023.06.15 </span>
-				</S.Profile>
-				<S.Info>
-					<div>
-						<div>활동 기간</div>
-						<span>{item.expectedPeriod}달</span>
-					</div>
-					<div>
-						<div>카테고리</div>
-						<span>{item.category}</span>
-					</div>
-					<div>
-						<div>모집 인원</div>
-						<span>{item.personnelNumber}명</span>
-					</div>
-				</S.Info>
-				<h3>프로젝트 설명</h3>
-				<S.Dec>{item.contents}</S.Dec>
-				<CommentForm />
-			</S.Container>
+			{isLoading ? (
+				<LoadingPage />
+			) : (
+				<S.Container>
+					<h1>{data.title}</h1>
+					<S.Profile>
+						<S.UserImg src={data.img} />
+						<div>{data.creator}</div>
+						<span> | </span>
+						<span>{data.createdDate}</span>
+					</S.Profile>
+					<S.Info>
+						<div>
+							<div>활동 기간</div>
+							<span>{data.expectedPeriod}달</span>
+						</div>
+						<div>
+							<div>카테고리</div>
+							<span>{data.category}</span>
+						</div>
+						<div>
+							<div>모집 인원</div>
+							<span>{data.personnelNumber}명</span>
+						</div>
+					</S.Info>
+					<h3>프로젝트 설명</h3>
+					<S.Dec>{data.contents}</S.Dec>
+					<CommentForm comments={data.comments} refetch={refetch} />
+				</S.Container>
+			)}
 		</S.Wrapper>
 	)
 }
@@ -55,6 +51,7 @@ const Container = styled.div`
 	width: 50%;
 	margin: 0 auto;
 	margin-top: 7rem;
+	margin-bottom: 10rem;
 
 	& > h1 {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
