@@ -37,7 +37,7 @@ function CategoryNav() {
 			url: 'club',
 		},
 	]
-	console.log(category)
+
 	return (
 		<S.Wrapper>
 			<S.Container>

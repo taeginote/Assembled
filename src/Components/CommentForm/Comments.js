@@ -4,7 +4,6 @@ import { FlexAlignCSS } from '../../Styles/common'
 import { useMutation } from '@tanstack/react-query'
 import DetailApi from '../../Apis/DetailApi'
 import currentTime from '../../Utils/CurrentTime'
-import detailData from '../../mocks/Data/Detaildata'
 
 function CommentForm({ comments, refetch }) {
 	const { mutate } = useMutation(data => DetailApi.Comments(data), {
