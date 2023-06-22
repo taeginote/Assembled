@@ -4,10 +4,9 @@ const variantCSS = {
 	default: css`
 		background-color: ${({ theme }) => theme.COLOR.main};
 		&:hover {
-			background-color: ${({ theme }) => theme.COLOR.sub};
+			background-color: ${({ theme }) => theme.COLOR.hover};
 			transition: all 0.3s ease-in-out;
 		}
-
 		&:disabled {
 			background-color: ${({ theme }) => theme.COLOR.common.gray[200]};
 		}
@@ -17,6 +16,15 @@ const variantCSS = {
 
 		&:hover {
 			opacity: 0.7;
+			transition: all 0.2s ease-in-out;
+		}
+	`,
+	'default-white': css`
+		background-color: ${({ theme }) => theme.COLOR.common.white};
+		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
+		color: ${({ theme }) => theme.COLOR.common.black};
+		&:hover {
+			background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
 			transition: all 0.2s ease-in-out;
 		}
 	`,
