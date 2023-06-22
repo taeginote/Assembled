@@ -5,7 +5,10 @@ import { Link, useSearchParams } from 'react-router-dom'
 
 function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const category = searchParams.get('category')
+	let category = searchParams.get('category')
+	if (category === null) {
+		category = 'total'
+	}
 
 	const categoryArr = [
 		{
@@ -34,6 +37,7 @@ function CategoryNav() {
 			url: 'club',
 		},
 	]
+	console.log(category)
 	return (
 		<S.Wrapper>
 			<S.Container>
