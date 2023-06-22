@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { TopPadding } from '../../Styles/common'
-import SelectBox from './Components/SelectBox'
 
 function Register() {
 	// {
@@ -15,7 +14,6 @@ function Register() {
 		<S.Wrapper>
 			<S.Container>
 				<S.Title>자유롭게 프로젝트 정보를 선택해주세요.</S.Title>
-				<SelectBox />
 			</S.Container>
 		</S.Wrapper>
 	)
@@ -35,5 +33,4 @@ const Title = styled.h3`
 	padding-bottom: 3rem;
 	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 `
-
 const S = { Container, Wrapper, Title }

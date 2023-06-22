@@ -30,7 +30,6 @@ const FONT_SIZE = {
 	xs: '1.6rem',
 	small: '1.8rem',
 	medium: '2.0rem',
-	xslarge: '2.1rem',
 	large: '2.6rem',
 	big: '3.6rem',
 	huge: '4.8rem',
