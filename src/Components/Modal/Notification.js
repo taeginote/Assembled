@@ -3,6 +3,7 @@ import { FlexCenterCSS } from '../../Styles/common'
 import { Warning_Icon } from '../Icons/Icons'
 import { modalView } from '../../Atoms/modalView.atom'
 import { useSetRecoilState } from 'recoil'
+import Button from '../Button/Button'
 
 function Notification({ text }) {
 	const setRecoilCounter = useSetRecoilState(modalView)
@@ -11,11 +12,9 @@ function Notification({ text }) {
 			<S.Box>
 				<Warning_Icon size={'65'} />
 				<S.Text>{text}</S.Text>
-				<S.Ok
-					type="button"
-					value="확인"
-					onClick={() => setRecoilCounter(false)}
-				/>
+				<Button size={'normal'} onClick={() => setRecoilCounter(false)}>
+					확인
+				</Button>
 			</S.Box>
 		</S.Wrapper>
 	)
@@ -43,18 +42,18 @@ const Box = styled.div`
 	border-radius: 0.5rem;
 	background-color: ${({ theme }) => theme.COLOR.common.white};
 `
-const Ok = styled.input`
-	font-size: ${({ theme }) => theme.FONT_SIZE.small};
-	width: 6rem;
-	height: 3.8rem;
-	color: white;
-	background-color: ${({ theme }) => theme.COLOR.main};
-	border: none;
-	border-radius: 0.4rem;
-	&:hover {
-		background-color: ${({ theme }) => theme.COLOR.sub};
-		transition: all 0.3s ease-in-out;
-	}
-`
+// const Ok = styled.input`
+// 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
+// 	width: 6rem;
+// 	height: 3.8rem;
+// 	color: white;
+// 	background-color: ${({ theme }) => theme.COLOR.main};
+// 	border: none;
+// 	border-radius: 0.4rem;
+// 	&:hover {
+// 		background-color: ${({ theme }) => theme.COLOR.sub};
+// 		transition: all 0.3s ease-in-out;
+// 	}
+// `
 
-const S = { Wrapper, Text, Box, Ok }
+const S = { Wrapper, Text, Box }
