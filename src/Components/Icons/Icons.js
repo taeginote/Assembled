@@ -19,6 +19,7 @@ import { MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 
 import { FiBook } from 'react-icons/fi'
+import { FaQuestion } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
 
 export const Search_Icon = ({ color, position }) => (
@@ -56,3 +57,7 @@ export const People_Icon = () => <BsFileEarmarkPerson size={'30'} /> //면접
 export const Club_Icon = () => <AiFillBank size={'30'} /> //동아리
 
 export const Travel_Icon = () => <IoIosAirplane size={'30'} /> //여행
+
+export const Question_Icon = ({ size }) => (
+	<FaQuestion size={size} color="#FB9B00" />
+) //경고
