@@ -11,8 +11,13 @@ import { selectDataTeamMember } from '../Register/Components/SelectBox/SelectDat
 import { selectDataCategory } from '../Register/Components/SelectBox/SelectData'
 import { selectDataPeriod } from '../Register/Components/SelectBox/SelectData'
 import Button from '../../Components/Button/Button'
+import { useRecoilState } from 'recoil'
+import { modalViewConfirm } from '../../Atoms/modalViewConfirm.js'
+import ConfirmModal from '../../Components/Modal/confirmModal'
 
 function Register() {
+	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
+
 	return (
 		<S.Wrapper>
 			<S.Title>여러분이 원하는 모임 혹은 동아리를 만드세요</S.Title>
@@ -36,10 +41,15 @@ function Register() {
 			<textarea placeholder="설명을 입력해 주세요" />
 			<span>
 				<Button size={'normal'}>확인</Button>
-				<Button size={'normal'} variant={'default-white'}>
+				<Button
+					size={'normal'}
+					variant={'default-white'}
+					onClick={() => setRecoilCounter(true)}
+				>
 					취소
 				</Button>
 			</span>
+			{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
 		</S.Wrapper>
 	)
 }

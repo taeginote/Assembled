@@ -1,4 +1,4 @@
-function currentTime() {
+function CurrentTime() {
 	const now = new Date()
 
 	//년 월 일
@@ -25,4 +25,4 @@ function currentTime() {
 		seconds
 	)
 }
-export default currentTime
+export default CurrentTime

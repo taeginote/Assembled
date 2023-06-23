@@ -7,7 +7,6 @@ import {
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import Banner from '../../Components/Banner'
 import FilterSelectBox from '../../Components/SelectBox/FilterSelectBox'
-// import CategoryCarousel from './Components/CategoryCarousel/CategoryCarousel'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
 
 function List() {
@@ -20,9 +19,6 @@ function List() {
 		<>
 			<S.Wrapper>
 				<Banner />
-
-				{/* <CategoryCarousel /> */}
-
 				<S.FilterWrapper>
 					<CategoryNav />
 					<FilterSelectBox />

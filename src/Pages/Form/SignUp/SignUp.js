@@ -15,9 +15,9 @@ import Notice from './Components/Notice'
 import { useForm } from 'react-hook-form'
 import { HookFormRule } from '../../../Consts/HookFormRule'
 import HookFormError from '../../../Components/Error/HookFormError'
-import Notification from '../../../Components/Modal/Notification'
-import { modalView } from '../../../Atoms/modalView.atom'
+import NotificationModal from '../../../Components/Modal/NotificationModal'
 import { useRecoilState } from 'recoil'
+import { modalViewNotification } from '../../../Atoms/modalView.atom'
 
 function SignUp() {
 	const {
@@ -26,7 +26,9 @@ function SignUp() {
 		formState: { errors },
 	} = useForm()
 
-	const [recoilCounter, setRecoilCounter] = useRecoilState(modalView)
+	const [recoilCounter, setRecoilCounter] = useRecoilState(
+		modalViewNotification,
+	)
 
 	const onSubmit = e => {
 		e.preventDefault()
@@ -111,7 +113,7 @@ function SignUp() {
 				<Notice />
 				<S.SignUpButton>로그인</S.SignUpButton>
 
-				{recoilCounter && <Notification text={'실패'} />}
+				{recoilCounter && <NotificationModal text={'실패'} />}
 			</S.container>
 		</S.Wrapper>
 	)
