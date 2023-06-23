@@ -1,13 +1,15 @@
 import { CiSearch } from 'react-icons/ci'
 import styled from 'styled-components'
-import Notification from '../../../Modal/Notification'
+import NotificationModal from '../../../Modal/NotificationModal'
 import { useRecoilState } from 'recoil'
-import { modalView } from '../../../../Atoms/modalView.atom'
 import { useState } from 'react'
+import { modalViewNotification } from '../../../../Atoms/modalView.atom'
 
 function SearchBar() {
 	const [searchValue, setSearchValue] = useState('')
-	const [recoilCounter, setRecoilCounter] = useRecoilState(modalView)
+	const [recoilCounter, setRecoilCounter] = useRecoilState(
+		modalViewNotification,
+	)
 
 	//Click
 	const onClickSearch = () => {
@@ -33,7 +35,7 @@ function SearchBar() {
 				/>
 				<S.SearchIcon size={'26'} onClick={onClickSearch} />
 			</S.InputWrapper>
-			{recoilCounter && <Notification text={'검색어를 입력해주세요'} />}
+			{recoilCounter && <NotificationModal text={'검색어를 입력해주세요'} />}
 		</>
 	)
 }

@@ -14,7 +14,7 @@ function ItemBox() {
 		contents:
 			'게시판 프로젝트를 만드는데 디자인 부분이 너무 힘들어서 디자이너 찾고있습니다. 같이 할수있는 학생이면 좋아요',
 		category: '개발/프로그래밍',
-		writer: '인프런',
+		writer: '댓글 테스트',
 		personnelNumber: '4',
 		expectedPeriod: '2',
 		img: 'https://cdn.inflearn.com/public/users/thumbnails/234401/660102d4-1e7b-4c43-a7ba-7d0ee6d96b83',
@@ -53,7 +53,7 @@ const Wrapper = styled.div`
 	cursor: pointer;
 
 	&:hover {
-		transform: scale(1.05);
+		transform: scale(1.02);
 		transition: transform 0.5s;
 	}
 `
