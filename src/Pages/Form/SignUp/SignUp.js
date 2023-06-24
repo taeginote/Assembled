@@ -126,7 +126,7 @@ const Wrapper = styled.form`
 	justify-content: center;
 `
 const container = styled.div`
-	width: 25%;
+	min-width: 25%;
 	h3 {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
 		margin: 7rem 0 5rem 0;
