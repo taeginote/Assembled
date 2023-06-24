@@ -1,8 +1,8 @@
 import { rest } from 'msw'
 import detailData from '../../Data/Detaildata'
 
-export const CommentsData = [
-	rest.post('/Comments', (req, res, ctx) => {
+export const post_Register = [
+	rest.post('/register', (req, res, ctx) => {
 		const { data } = req.body
 
 		const newData = {

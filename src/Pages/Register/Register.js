@@ -17,6 +17,8 @@ import { Controller, useForm } from 'react-hook-form'
 import HookFormError from '../../Components/Error/HookFormError'
 import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
+import { useMutation } from '@tanstack/react-query'
+import RegisterApi from '../../Apis/RegisterApi'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -26,16 +28,22 @@ function Register() {
 		control,
 	} = useForm()
 
+	const { mutate } = useMutation(data => RegisterApi.Register(data), {
+		onSuccess: () => {},
+		onError: () => {},
+	})
+
 	const onSubmit = e => {
-		//보낼데이타
-		console.log({
+		//보낼데이터
+		const data = {
 			title: e.Title,
 			contents: e.Contents,
 			category: e.Category,
 			writer: '태선컴퍼니',
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
-		})
+		}
+		mutate({ data })
 	}
 
 	return (
