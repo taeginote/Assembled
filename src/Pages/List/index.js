@@ -8,13 +8,19 @@ import ItemBox from '../../Components/ItemBox/ItemBox'
 import Banner from '../../Components/Banner'
 import FilterSelectBox from '../../Components/SelectBox/FilterSelectBox'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
+import useGetListData from '../../Hooks/Queries/get-list'
+import LoadingPage from '../../Components/LoadingPage/Loading'
 
 function List() {
-	let a = []
-	for (let b = 0; b < 20; b++) {
-		a.push('dd')
-	}
+	// 리스트를 구동하는 MockData임
+	// let a = []
+	// for (let b = 0; b < 20; b++) {
+	// 	a.push('dd')
+	// }
 
+	const { data, isLoading } = useGetListData()
+	console.log(isLoading)
+	console.log(data)
 	return (
 		<>
 			<S.Wrapper>
@@ -23,11 +29,15 @@ function List() {
 					<CategoryNav />
 					<FilterSelectBox />
 				</S.FilterWrapper>
-				<S.Container>
-					{a.map(() => (
-						<ItemBox />
-					))}
-				</S.Container>
+				{isLoading ? (
+					<LoadingPage />
+				) : (
+					<S.Container>
+						{data.map(() => (
+							<ItemBox />
+						))}
+					</S.Container>
+				)}
 			</S.Wrapper>
 		</>
 	)

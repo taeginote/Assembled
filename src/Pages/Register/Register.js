@@ -19,6 +19,7 @@ import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
 import { useMutation } from '@tanstack/react-query'
 import RegisterApi from '../../Apis/RegisterApi'
+import listData from '../../mocks/Data/ListData'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -29,7 +30,9 @@ function Register() {
 	} = useForm()
 
 	const { mutate } = useMutation(data => RegisterApi.Register(data), {
-		onSuccess: () => {},
+		onSuccess: () => {
+			console.log(listData)
+		},
 		onError: () => {},
 	})
 

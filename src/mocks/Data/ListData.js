@@ -1,3 +1,3 @@
-const listData = {}
+const listData = []
 
 export default listData
