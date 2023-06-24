@@ -6,41 +6,154 @@ import {
 	TopPadding,
 	WidthAutoCSS,
 } from '../../Styles/common'
-import SelectBox from './Components/SelectBox/SelectBox'
+
 import { selectDataTeamMember } from '../Register/Components/SelectBox/SelectData'
 import { selectDataCategory } from '../Register/Components/SelectBox/SelectData'
 import { selectDataPeriod } from '../Register/Components/SelectBox/SelectData'
-import Button from '../../Components/Button/Button'
 import { useRecoilState } from 'recoil'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.js'
 import ConfirmModal from '../../Components/Modal/confirmModal'
+import { Controller, useForm } from 'react-hook-form'
+import HookFormError from '../../Components/Error/HookFormError'
+import Button from '../../Components/Button/Button'
+import SelectInput from './Components/SelectBox/SelectInput'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
+	const {
+		handleSubmit,
+		formState: { errors },
+		control,
+	} = useForm()
+
+	const onSubmit = e => {
+		//보낼데이타
+		console.log({
+			title: e.Title,
+			contents: e.Contents,
+			category: e.Category,
+			writer: '태선컴퍼니',
+			personnelNumber: e.TeamMember,
+			expectedPeriod: e.Period,
+		})
+	}
 
 	return (
-		<S.Wrapper>
+		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.Title>여러분이 원하는 모임 혹은 동아리를 만드세요</S.Title>
 			<S.Container>
 				<S.Box>
 					<div>카테고리 *</div>
-					<SelectBox Data={selectDataCategory} />
+					<Controller
+						name={'Category'}
+						control={control}
+						rules={{
+							required: '카테고리를 선택해주세요.',
+						}}
+						render={({ field }) => (
+							<SelectInput
+								Data={selectDataCategory}
+								errors={errors}
+								field={field}
+							/>
+						)}
+					></Controller>
+					<span>
+						{errors.Category && (
+							<HookFormError>{errors.Category.message}</HookFormError>
+						)}
+					</span>
 				</S.Box>
+
 				<S.Box>
 					<div>인원 수 *</div>
-					<SelectBox Data={selectDataTeamMember} />
+					<Controller
+						name={'TeamMember'}
+						control={control}
+						rules={{
+							required: '인원수를 선택해주세요.',
+						}}
+						render={({ field }) => (
+							<SelectInput
+								Data={selectDataTeamMember}
+								errors={errors}
+								field={field}
+							/>
+						)}
+					></Controller>
+					<span>
+						{errors.TeamMember && (
+							<HookFormError>{errors.TeamMember.message}</HookFormError>
+						)}
+					</span>
 				</S.Box>
 				<S.Box>
 					<div>총 진행 예정 달 *</div>
-					<SelectBox Data={selectDataPeriod} />
+					<Controller
+						name={'Period'}
+						control={control}
+						rules={{
+							required: '프로젝트 기간을 선택해주세요.',
+						}}
+						render={({ field }) => (
+							<SelectInput
+								Data={selectDataPeriod}
+								errors={errors}
+								field={field}
+							/>
+						)}
+					></Controller>
+					<span>
+						{errors.Period && (
+							<HookFormError>{errors.Period.message}</HookFormError>
+						)}
+					</span>
 				</S.Box>
 			</S.Container>
-			<div>제목 *</div>
-			<input placeholder="제목을 입력해 주세요" />
-			<div>모임에 대한 설명 *</div>
-			<textarea placeholder="설명을 입력해 주세요" />
+			<S.Box>
+				<div>제목 *</div>
+				<Controller
+					name={'Title'}
+					control={control}
+					rules={{
+						required: '제목을 입력해주세요',
+					}}
+					render={({ field }) => (
+						<input
+							placeholder="제목을 입력해 주세요"
+							status={field.value === undefined}
+							value={field.value}
+							onChange={e => field.onChange(e.target.value)}
+						/>
+					)}
+				></Controller>
+				{errors.Title && <HookFormError>{errors.Title.message}</HookFormError>}
+			</S.Box>
+			<S.Box>
+				<div>모임에 대한 설명 *</div>
+				<Controller
+					name={'Contents'}
+					control={control}
+					rules={{
+						required: '설명을 입력해 주세요',
+					}}
+					render={({ field }) => (
+						<textarea
+							placeholder="설명을 입력해 주세요"
+							status={field.value === undefined}
+							value={field.value}
+							onChange={e => field.onChange(e.target.value)}
+						/>
+					)}
+				></Controller>
+				{errors.Contents && (
+					<HookFormError>{errors.Contents.message}</HookFormError>
+				)}
+			</S.Box>
 			<span>
-				<Button size={'normal'}>확인</Button>
+				<Button type="submit" size={'normal'}>
+					확인
+				</Button>
 				<Button
 					size={'normal'}
 					variant={'default-white'}
@@ -55,35 +168,11 @@ function Register() {
 }
 export default Register
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
 	${TopPadding}
 	${WidthAutoCSS}
 	${FlexColumnCSS}
 	padding-top: 17rem;
-
-	& > input {
-		font-size: ${({ theme }) => theme.FONT_SIZE.small};
-		margin-bottom: 2rem;
-		padding: 1.3rem 1rem;
-		border-radius: 0.5rem;
-		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
-
-		:focus {
-			border: 1px solid ${({ theme }) => theme.COLOR.sub};
-		}
-	}
-	& > textarea {
-		font-size: ${({ theme }) => theme.FONT_SIZE.small};
-		outline: none;
-		padding: 1.3rem 1rem;
-		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
-		border-radius: 0.5rem;
-		min-height: 17rem;
-		resize: none;
-		:focus {
-			border: 1.5px solid ${({ theme }) => theme.COLOR.sub};
-		}
-	}
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		margin-top: 3rem;
@@ -92,6 +181,8 @@ const Wrapper = styled.div`
 	& > span {
 		text-align: end;
 		margin-top: 3rem;
+		display: flex;
+		justify-content: end;
 		* {
 			margin-left: 1rem;
 		}
@@ -106,10 +197,83 @@ const Title = styled.h3`
 `
 const Box = styled.div`
 	width: 100%;
+	position: relative;
+	margin-bottom: 2rem;
+	& > span {
+		position: absolute;
+		top: 8.5rem;
+		* {
+			font-size: ${({ theme }) => theme.FONT_SIZE.small};
+		}
+	}
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		margin-bottom: 1rem;
 	}
+	& > input {
+		font-size: ${({ theme }) => theme.FONT_SIZE.small};
+		width: 100%;
+		margin-bottom: 0.5rem;
+		padding: 1.3rem 1rem;
+		border-radius: 0.5rem;
+		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
+		color: ${({ theme, status }) =>
+			status ? theme.COLOR.common.gray[200] : 'black'};
+		:focus {
+			border: 1px solid ${({ theme }) => theme.COLOR.sub};
+		}
+	}
+	& > textarea {
+		width: 100%;
+		font-size: ${({ theme }) => theme.FONT_SIZE.small};
+		outline: none;
+		padding: 1.3rem 1rem;
+		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
+		border-radius: 0.5rem;
+		min-height: 17rem;
+		resize: none;
+		:focus {
+			border: 1.5px solid ${({ theme }) => theme.COLOR.sub};
+		}
+	}
+`
+const DivBtn = styled.div`
+	text-align: center;
+	padding-top: 0.5rem;
+	color: white;
+	border-radius: 0.4rem;
+	cursor: pointer;
+	width: 6rem;
+	height: 3.8rem;
+	background-color: ${({ theme }) => theme.COLOR.main};
+	&:hover {
+		background-color: ${({ theme }) => theme.COLOR.hover};
+		transition: all 0.3s ease-in-out;
+	}
+	&:disabled {
+		background-color: ${({ theme }) => theme.COLOR.common.gray[200]};
+	}
+`
+const DivBtn1 = styled.div`
+	text-align: center;
+	padding-top: 0.5rem;
+	color: ${({ theme }) => theme.COLOR.button};
+	border-radius: 0.4rem;
+	cursor: pointer;
+	width: 6rem;
+	height: 3.8rem;
+	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[300]};
+	&:hover {
+		transition: all 0.3s ease-in-out;
+		opacity: 0.4;
+	}
 `
 
-const S = { Container, Wrapper, Title, Box }
+const S = {
+	Container,
+	Wrapper,
+	Title,
+	Box,
+	DivBtn,
+	DivBtn1,
+}
