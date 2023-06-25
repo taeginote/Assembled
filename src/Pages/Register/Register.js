@@ -11,7 +11,7 @@ import { selectDataTeamMember } from '../Register/Components/SelectBox/SelectDat
 import { selectDataCategory } from '../Register/Components/SelectBox/SelectData'
 import { selectDataPeriod } from '../Register/Components/SelectBox/SelectData'
 import { useRecoilState } from 'recoil'
-import { modalViewConfirm } from '../../Atoms/modalViewConfirm.js'
+import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom.js'
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import { Controller, useForm } from 'react-hook-form'
 import HookFormError from '../../Components/Error/HookFormError'
@@ -20,9 +20,14 @@ import SelectInput from './Components/SelectBox/SelectInput'
 import { useMutation } from '@tanstack/react-query'
 import RegisterApi from '../../Apis/RegisterApi'
 import listData from '../../mocks/Data/ListData'
+import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
+import SuccessModal from '../../Components/Modal/successModal'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
+	const [recoilSuccessModal, setRecoilSuccessModal] =
+		useRecoilState(modalViewSuccess)
+
 	const {
 		handleSubmit,
 		formState: { errors },
@@ -31,7 +36,7 @@ function Register() {
 
 	const { mutate } = useMutation(data => RegisterApi.Register(data), {
 		onSuccess: () => {
-			console.log(listData)
+			setRecoilSuccessModal(true)
 		},
 		onError: () => {},
 	})
@@ -173,6 +178,7 @@ function Register() {
 					취소
 				</Button>
 			</span>
+			{recoilSuccessModal && <SuccessModal text={'등록 성공'} />}
 			{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
 		</S.Wrapper>
 	)

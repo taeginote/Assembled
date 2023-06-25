@@ -1,12 +1,5 @@
 import { CiSearch, CiWarning } from 'react-icons/ci'
-import {
-	AiOutlineClose,
-	AiOutlineHeart,
-	AiFillHeart,
-	AiOutlineMail,
-	AiOutlineLock,
-	AiFillBank,
-} from 'react-icons/ai'
+import { AiOutlineMail, AiOutlineLock, AiFillBank } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
 	BsChat,
@@ -14,10 +7,9 @@ import {
 	BsCaretDownFill,
 	BsFileEarmarkPerson,
 } from 'react-icons/bs'
-import { BiUser } from 'react-icons/bi'
+import { BiUser, BiHappy } from 'react-icons/bi'
 import { MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
-
 import { FiBook } from 'react-icons/fi'
 import { FaQuestion } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
@@ -61,3 +53,5 @@ export const Travel_Icon = () => <IoIosAirplane size={'30'} /> //여행
 export const Question_Icon = ({ size }) => (
 	<FaQuestion size={size} color="#FB9B00" />
 ) //경고
+
+export const Clap_Icon = () => <BiHappy size={'65'} color="#FB9B00" />

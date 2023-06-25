@@ -7,8 +7,10 @@ const getListData = async () => {
 }
 
 const useGetListData = () => {
-	const { data, isLoading, refetch } = useQuery(['list'], () => getListData())
-	return { data, isLoading, refetch }
+	const { data, isLoading, refetch, isError, error } = useQuery(['list'], () =>
+		getListData(),
+	)
+	return { data, isLoading, refetch, isError, error }
 }
 
 export default useGetListData

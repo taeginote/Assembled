@@ -15,7 +15,7 @@ function SelectInput(props) {
 	return (
 		<S.Wrapper onClick={() => setIsView(!isView)}>
 			<S.Title isView={isView} status={field.value === undefined}>
-				<div>{selectVal === null ? '선택해 주세요' : field.value}</div>
+				<div>{selectVal === null ? '선택해 주세요' : selectVal}</div>
 				<span>
 					<Down_Icon />
 				</span>
