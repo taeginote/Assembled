@@ -6,6 +6,7 @@ import {
 } from '../../../Styles/common'
 import SearchBar from './Components/SearchBar'
 import { Outlet, useNavigate } from 'react-router-dom'
+import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
 function Haeder() {
 	const navigate = useNavigate()
@@ -31,6 +32,10 @@ function Haeder() {
 					</S.HeaderRightBox>
 				</S.Container>
 			</S.Wrapper>
+			<S.FooterWrapper>
+				<MobileFooter />
+			</S.FooterWrapper>
+
 			<Outlet />
 		</>
 	)
@@ -79,4 +84,14 @@ const Select = styled.div`
 	}
 	cursor: pointer;
 `
-const S = { Wrapper, Container, Logo, HeaderRightBox, Select }
+const FooterWrapper = styled.div`
+	display: none;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		/* z-index: 100000000; */
+		display: block;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+`
+const S = { Wrapper, Container, Logo, HeaderRightBox, Select, FooterWrapper }

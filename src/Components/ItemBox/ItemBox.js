@@ -124,8 +124,8 @@ const Period = styled.div`
 	margin-top: 2rem;
 `
 const Title = styled.div`
-	min-height: 6rem;
-	max-height: 6rem;
+	min-height: 8rem;
+	max-height: 8rem;
 `
 const UserImg = styled.img`
 	border-radius: 50%;
