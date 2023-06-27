@@ -82,6 +82,9 @@ const UserBox = styled.div`
 		${FlexAlignCSS}
 	}
 	& > span {
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+			display: none;
+		}
 		${FlexAlignCSS}
 		span {
 			margin-right: 1rem;

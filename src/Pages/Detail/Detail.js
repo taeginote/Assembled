@@ -52,7 +52,6 @@ const Container = styled.div`
 	margin: 0 auto;
 	margin-top: 7rem;
 	margin-bottom: 10rem;
-
 	& > h1 {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
 		margin-bottom: 3rem;
@@ -62,6 +61,9 @@ const Container = styled.div`
 		font-size: 3rem;
 
 		border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 90%;
 	}
 `
 const Profile = styled.div`

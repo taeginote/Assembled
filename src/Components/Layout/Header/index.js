@@ -51,11 +51,17 @@ const Container = styled.div`
 	&>div {
 		${FlexAlignCSS}
 	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		/* background-color: red; */
+	}
 `
 const Logo = styled.img`
 	margin-right: 3rem;
 	cursor: pointer;
 	width: 20rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 18rem;
+	}
 `
 const HeaderRightBox = styled.div`
 	${FlexAlignCSS}
@@ -65,6 +71,9 @@ const HeaderRightBox = styled.div`
 `
 const Select = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+	}
 	:hover {
 		color: ${({ theme }) => theme.COLOR.hover};
 	}

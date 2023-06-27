@@ -59,6 +59,9 @@ const Wrapper = styled.form`
 `
 const container = styled.div`
 	min-width: 25%;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 90%;
+	}
 	h3 {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
 		margin: 7rem 0 5rem 0;

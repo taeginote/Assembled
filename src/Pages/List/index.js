@@ -53,5 +53,8 @@ const FilterWrapper = styled.div`
 	display:flex;
 	align-items: center;
 	padding: 2rem 0 3rem 0;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+		flex-direction: column;
+	}
 `
 const S = { Wrapper, Container, FilterWrapper }

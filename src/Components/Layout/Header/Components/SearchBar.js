@@ -53,6 +53,9 @@ const SearchInput = styled.input`
 `
 const InputWrapper = styled.div`
 	position: relative;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		display: none;
+	}
 `
 const SearchIcon = styled(CiSearch)`
 	position: absolute;

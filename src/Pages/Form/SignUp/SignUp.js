@@ -140,6 +140,9 @@ const container = styled.div`
 	}
 	${FlexColumnCSS}
 	align-items: center;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 90%;
+	}
 `
 const SignUpButton = styled(Button)`
 	margin-top: 2rem;

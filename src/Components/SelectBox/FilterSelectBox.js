@@ -19,10 +19,11 @@ function FilterSelectBox() {
 			</IconBox>
 			{isShowOptions && (
 				<SelectOptions>
-					{FilterArr.map(el => (
+					{FilterArr.map((el, idx) => (
 						<Option
 							onClick={el => onClickSelectFilter(el)}
 							select={selectFilter === el}
+							key={idx}
 						>
 							{el}
 						</Option>

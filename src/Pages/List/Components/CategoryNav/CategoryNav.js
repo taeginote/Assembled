@@ -41,8 +41,8 @@ function CategoryNav() {
 	return (
 		<S.Wrapper>
 			<S.Container>
-				{categoryArr.map(el => (
-					<S.NavBox state={el.url === category}>
+				{categoryArr.map((el, idx) => (
+					<S.NavBox key={idx} state={el.url === category}>
 						<Link to={`?category=${el.url}`}>{el.name}</Link>
 					</S.NavBox>
 				))}
@@ -62,7 +62,10 @@ const NavBox = styled.div`
 	margin-right: 4rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
 	font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
-
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		margin-right: 2rem;
+	}
 	cursor: pointer;
 	border-bottom: 3px solid
 		${({ theme, state }) => (state ? theme.COLOR.hover : 'none')};
