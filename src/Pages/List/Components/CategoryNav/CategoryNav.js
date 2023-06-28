@@ -18,23 +18,13 @@ function CategoryNav() {
 		},
 		{
 			id: 1,
-			name: '개발/프로그래밍',
-			url: 'programming',
+			name: '스터디',
+			url: 'study',
 		},
 		{
 			id: 2,
-			name: '독서',
-			url: 'book',
-		},
-		{
-			id: 3,
-			name: '면접 스터디',
-			url: 'interview',
-		},
-		{
-			id: 4,
-			name: '동아리',
-			url: 'club',
+			name: '프로젝트',
+			url: 'project',
 		},
 	]
 

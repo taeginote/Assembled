@@ -10,11 +10,13 @@ import FilterSelectBox from '../../Components/SelectBox/FilterSelectBox'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
 import useGetListData from '../../Hooks/Queries/get-list'
 import LoadingPage from '../../Components/LoadingPage/Loading'
+import { useSearchParams } from 'react-router-dom'
 
 function List() {
-	const { data, isLoading, isError, error } = useGetListData()
+	const [searchParams, setSearchParams] = useSearchParams()
+	let category = searchParams.get('category')
 
-	console.log(isError, error)
+	const { data, isLoading } = useGetListData(category)
 
 	return (
 		<>
@@ -56,6 +58,7 @@ const FilterWrapper = styled.div`
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		flex-direction: column;
 		align-items: start;
+
 		* {
 			margin-bottom: 1rem;
 		}

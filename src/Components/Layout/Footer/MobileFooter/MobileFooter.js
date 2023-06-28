@@ -1,8 +1,7 @@
 import { BottomNavigation, BottomNavigationAction } from '@mui/material'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
 import HomeIcon from '@mui/icons-material/Home'
-// import QueryStatsIcon from '@mui/icons-material/QueryStats'
-// import TextsmsIcon from '@mui/icons-material/Textsms'
+import QueryStatsIcon from '@mui/icons-material/QueryStats'
+import TextsmsIcon from '@mui/icons-material/Textsms'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -57,24 +56,24 @@ const MobileFooter = () => {
 				label="홈"
 				icon={<HomeIcon sx={{ fontSize: 30 }} />}
 			/>
-			{/* <BottomNavigationAction
+			<BottomNavigationAction
 				onClick={() => navigate('market_price')}
 				label="시세조회"
 				icon={<QueryStatsIcon sx={{ fontSize: 30 }} />}
-			/> */}
-			<BottomNavigationAction
+			/>
+			{/* <BottomNavigationAction
 				onClick={() => navigate('register')}
 				icon={
 					<AddCircleIcon
 						sx={{ fontSize: 70, marginBottom: '40px', color: '#FA7100' }}
 					/>
 				}
-			/>
-			{/* <BottomNavigationAction
+			/> */}
+			<BottomNavigationAction
 				onClick={() => navigate('chat')}
 				label="채팅"
 				icon={<TextsmsIcon sx={{ fontSize: 30 }} />}
-			/> */}
+			/>
 			<BottomNavigationAction
 				onClick={() => navigate('/mypage')}
 				label="내 정보"

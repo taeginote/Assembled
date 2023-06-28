@@ -22,13 +22,17 @@ function Haeder() {
 						<SearchBar />
 					</div>
 					<S.HeaderRightBox>
-						<S.Select onClick={() => navigate('/register')}>
-							새 글 쓰기
-						</S.Select>
-						<div>|</div>
-						<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
-						<div>|</div>
-						<S.Select onClick={() => navigate('/signUp')}>회원가입</S.Select>
+						<div>
+							<S.Select onClick={() => navigate('/register')}>
+								새 글 쓰기
+							</S.Select>
+						</div>
+						<span>
+							<div>|</div>
+							<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
+							<div>|</div>
+							<S.Select onClick={() => navigate('/signUp')}>회원가입</S.Select>
+						</span>
 					</S.HeaderRightBox>
 				</S.Container>
 			</S.Wrapper>
@@ -69,9 +73,11 @@ const Logo = styled.img`
 	}
 `
 const HeaderRightBox = styled.div`
-	${FlexAlignCSS}
-	& > * {
-		margin-left: 2rem;
+	& > span {
+		${FlexAlignCSS}
+		& > * {
+			margin-left: 2rem;
+		}
 	}
 `
 const Select = styled.div`

@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import ListApi from '../../Apis/ListApi'
 
-const getListData = async () => {
-	const res = await ListApi.getList()
+const getListData = async category => {
+	const res = await ListApi.getList({ category })
+
 	return res.data
 }
 
-const useGetListData = () => {
-	const { data, isLoading, refetch, isError, error } = useQuery(['list'], () =>
-		getListData(),
+const useGetListData = category => {
+	const { data, isLoading } = useQuery(['useGetListData', category], () =>
+		getListData(category),
 	)
-	return { data, isLoading, refetch, isError, error }
+
+	return { data, isLoading }
 }
 
 export default useGetListData
