@@ -3,9 +3,14 @@ import { ColumnNumberCSS, FlexAlignCSS, TopPadding } from '../../Styles/common'
 import useGetDetailData from '../../Hooks/Queries/get-detail'
 import LoadingPage from '../../Components/LoadingPage/Loading'
 import CommentForm from './Components/CommentForm'
+import { useSearchParams } from 'react-router-dom'
 
 function Detail() {
-	const { data, isLoading, refetch } = useGetDetailData()
+	const [searchParams, setSearchParams] = useSearchParams()
+	let assembleId = searchParams.get('assembleId')
+
+	const { data, isLoading, refetch } = useGetDetailData(assembleId)
+
 	return (
 		<S.Wrapper>
 			{isLoading ? (
@@ -35,7 +40,11 @@ function Detail() {
 					</S.Info>
 					<h3>프로젝트 설명</h3>
 					<S.Dec>{data.contents}</S.Dec>
-					<CommentForm comments={data.comments} refetch={refetch} />
+					<CommentForm
+						comments={data.comments}
+						postId={data.assembleId}
+						refetch={refetch}
+					/>
 				</S.Container>
 			)}
 		</S.Wrapper>

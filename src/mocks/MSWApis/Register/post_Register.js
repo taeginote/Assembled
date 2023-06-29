@@ -15,6 +15,7 @@ export const post_Register = [
 		} = data
 
 		const realData = {
+			id: Math.floor(Math.random() * 9999) + 1,
 			writer,
 			category: category === 'study' ? '스터디' : '프로젝트',
 			contents,

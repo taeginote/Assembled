@@ -27,12 +27,20 @@ function Haeder() {
 								새 글 쓰기
 							</S.Select>
 						</div>
-						<span>
+						<S.NotLogIn>
 							<div>|</div>
 							<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
 							<div>|</div>
 							<S.Select onClick={() => navigate('/signUp')}>회원가입</S.Select>
-						</span>
+						</S.NotLogIn>
+						<S.LogIn>
+							<div>|</div>
+							<S.Select onClick={() => navigate('/myPage')}>
+								마이페이지
+							</S.Select>
+							<div>|</div>
+							<S.Select onClick={() => navigate('/signUp')}>로그아웃</S.Select>
+						</S.LogIn>
 					</S.HeaderRightBox>
 				</S.Container>
 			</S.Wrapper>
@@ -72,14 +80,7 @@ const Logo = styled.img`
 		width: 18rem;
 	}
 `
-const HeaderRightBox = styled.div`
-	& > span {
-		${FlexAlignCSS}
-		& > * {
-			margin-left: 2rem;
-		}
-	}
-`
+const HeaderRightBox = styled.div``
 const Select = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
@@ -100,4 +101,25 @@ const FooterWrapper = styled.div`
 		width: 100%;
 	}
 `
-const S = { Wrapper, Container, Logo, HeaderRightBox, Select, FooterWrapper }
+const NotLogIn = styled.div`
+	${FlexAlignCSS}
+	&>* {
+		margin-left: 2rem;
+	}
+`
+const LogIn = styled.div`
+	${FlexAlignCSS}
+	* {
+		margin-left: 2rem;
+	}
+`
+const S = {
+	Wrapper,
+	Container,
+	Logo,
+	HeaderRightBox,
+	Select,
+	FooterWrapper,
+	NotLogIn,
+	LogIn,
+}

@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { useMutation } from '@tanstack/react-query'
-import CurrentTime from '../../../Utils/CurrentTime'
+
 import { FlexAlignCSS } from '../../../Styles/common'
 import DetailApi from '../../../Apis/DetailApi'
 import Button from '../../../Components/Button/Button'
 
-function CommentForm({ comments, refetch }) {
+function CommentForm({ comments, refetch, postId }) {
 	const { mutate } = useMutation(data => DetailApi.Comments(data), {
 		onSuccess: () => {
 			refetch()
@@ -18,9 +18,8 @@ function CommentForm({ comments, refetch }) {
 		const comment = e.target.textarea.value
 		const data = {
 			comment,
-			currentTime: CurrentTime(),
-			user: '댓글 테스트',
-			img: 'https://cdn.inflearn.com/public/users/thumbnails/234401/660102d4-1e7b-4c43-a7ba-7d0ee6d96b83',
+			email: 'taek2',
+			postId,
 		}
 		mutate({ data })
 	}

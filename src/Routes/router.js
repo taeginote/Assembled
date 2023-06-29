@@ -3,7 +3,7 @@ import Header from '../Components/Layout/Header/index'
 import List from '../Pages/List'
 import SignUp from '../Pages/Form/SignUp/SignUp'
 import Login from '../Pages/Form/Login/Login'
-import Detail from '../Pages/\bDetail/Detail'
+import Detail from '../Pages/Detail/Detail'
 import Register from '../Pages/Register/Register'
 import Error404 from '../Error/Error404'
 
@@ -25,11 +25,15 @@ const router = createBrowserRouter([
 				element: <List />,
 			},
 			{
-				path: '/detail/:idx',
+				path: '/Detail',
 				element: <Detail />,
 			},
 			{
 				path: '/register',
+				element: <Register />,
+			},
+			{
+				path: '/myPage',
 				element: <Register />,
 			},
 		],

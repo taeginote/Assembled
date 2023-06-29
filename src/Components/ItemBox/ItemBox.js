@@ -8,11 +8,19 @@ import { Chat_Icon, Person_Icon } from '../Icons/Icons'
 import { useNavigate } from 'react-router-dom'
 
 function ItemBox({ data }) {
-	const { title, contents, category, writer, personnelNumber, expectedPeriod } =
-		data
+	const {
+		assembleId,
+		title,
+		contents,
+		category,
+		writer,
+		personnelNumber,
+		expectedPeriod,
+	} = data
 	const navigate = useNavigate()
 
 	const item = {
+		assembleId,
 		title,
 		contents,
 		category,
@@ -23,7 +31,9 @@ function ItemBox({ data }) {
 	}
 
 	return (
-		<S.Wrapper onClick={() => navigate('/Detail/321')}>
+		<S.Wrapper
+			onClick={() => navigate(`/Detail?assembleId=${item.assembleId}`)}
+		>
 			<S.Container>
 				<S.Status>모집중</S.Status>
 				<S.Period>마감일 | {item.expectedPeriod}달뒤</S.Period>
