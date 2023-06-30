@@ -9,10 +9,10 @@ export const get_ListData = [
 			real_ListData = listData
 		}
 		if (category === 'project') {
-			real_ListData = listData.filter(el => el.category === '프로젝트')
+			real_ListData = listData.response.filter(el => el.category === '프로젝트')
 		}
 		if (category === 'study') {
-			real_ListData = listData.filter(el => el.category === '스터디')
+			real_ListData = listData.response.filter(el => el.category === '스터디')
 		}
 
 		return res(ctx.status(200), ctx.json(real_ListData))

@@ -17,7 +17,7 @@ function List() {
 	let category = searchParams.get('category')
 
 	const { data, isLoading } = useGetListData(category)
-	console.log(data)
+
 	return (
 		<>
 			<S.Wrapper>
@@ -30,7 +30,7 @@ function List() {
 					<LoadingPage />
 				) : (
 					<S.Container>
-						{data.map(data => (
+						{data.response.map(data => (
 							<ItemBox data={data} />
 						))}
 					</S.Container>
