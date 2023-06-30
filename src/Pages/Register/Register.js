@@ -19,7 +19,6 @@ import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
 import { useMutation } from '@tanstack/react-query'
 import RegisterApi from '../../Apis/RegisterApi'
-import listData from '../../mocks/Data/ListData'
 import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../Components/Modal/successModal'
 

@@ -17,7 +17,7 @@ function List() {
 	let category = searchParams.get('category')
 
 	const { data, isLoading } = useGetListData(category)
-
+	console.log(data)
 	return (
 		<>
 			<S.Wrapper>

@@ -6,6 +6,7 @@ import Login from '../Pages/Form/Login/Login'
 import Detail from '../Pages/Detail/Detail'
 import Register from '../Pages/Register/Register'
 import Error404 from '../Error/Error404'
+import Mypage from '../Pages/MyPage'
 
 const router = createBrowserRouter([
 	{
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/myPage',
-				element: <Register />,
+				element: <Mypage />,
 			},
 		],
 	},
