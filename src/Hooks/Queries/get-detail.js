@@ -1,15 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
 import DetailApi from '../../Apis/DetailApi'
 
-const getDetailData = async assembleId => {
-	const res = await DetailApi.getDetail({ assembleId })
+const getDetailData = async postId => {
+	const res = await DetailApi.getDetail({ postId })
+
 	return res.data
 }
 
-const useGetDetailData = assembleId => {
+const useGetDetailData = postId => {
 	const { data, isLoading, refetch } = useQuery(
-		['useGetDetailData', assembleId],
-		() => getDetailData(assembleId),
+		['useGetDetailData', postId],
+		() => getDetailData(postId),
 	)
 	return { data, isLoading, refetch }
 }

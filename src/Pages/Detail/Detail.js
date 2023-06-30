@@ -7,9 +7,9 @@ import { useSearchParams } from 'react-router-dom'
 
 function Detail() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	let assembleId = searchParams.get('assembleId')
+	let postId = searchParams.get('postId')
 
-	const { data, isLoading, refetch } = useGetDetailData(assembleId)
+	const { data, isLoading, refetch } = useGetDetailData(postId)
 
 	return (
 		<S.Wrapper>
@@ -19,10 +19,10 @@ function Detail() {
 				<S.Container>
 					<h1>{data.title}</h1>
 					<S.Profile>
-						<S.UserImg src={data.img} />
-						<div>{data.creator}</div>
+						<S.UserImg src={data.profile.fileFullPath} />
+						<div>{data.writer}</div>
 						<span> | </span>
-						<span>{data.createdDate}</span>
+						<span>{data.writeDate}</span>
 					</S.Profile>
 					<S.Info>
 						<div>
@@ -42,7 +42,8 @@ function Detail() {
 					<S.Dec>{data.contents}</S.Dec>
 					<CommentForm
 						comments={data.comments}
-						postId={data.assembleId}
+						userImg={data.profile.fileFullPath}
+						postId={postId}
 						refetch={refetch}
 					/>
 				</S.Container>

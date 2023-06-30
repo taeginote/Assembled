@@ -8,50 +8,35 @@ import { Chat_Icon, Person_Icon } from '../Icons/Icons'
 import { useNavigate } from 'react-router-dom'
 
 function ItemBox({ data }) {
+	const navigate = useNavigate()
 	const {
-		assembleId,
+		postId,
 		title,
-		contents,
 		category,
+		profile,
 		writer,
 		personnelNumber,
 		expectedPeriod,
 	} = data
-	const navigate = useNavigate()
-
-	const item = {
-		assembleId,
-		title,
-		contents,
-		category,
-		writer,
-		personnelNumber,
-		expectedPeriod,
-		img: 'https://cdn.inflearn.com/public/users/thumbnails/234401/660102d4-1e7b-4c43-a7ba-7d0ee6d96b83',
-	}
 
 	return (
-		<S.Wrapper
-			onClick={() => navigate(`/Detail?assembleId=${item.assembleId}`)}
-		>
+		<S.Wrapper onClick={() => navigate(`/Detail?postId=${postId}`)}>
 			<S.Container>
 				<S.Status>모집중</S.Status>
-				<S.Period>마감일 | {item.expectedPeriod}달뒤</S.Period>
+				<S.Period>마감일 | {expectedPeriod}달뒤</S.Period>
 				<S.Title>
-					{item.title.length > 45
-						? item.title.substr(0, 45) + '...'
-						: item.title}
+					{title.length > 45 ? title.substr(0, 45) + '...' : title}
 				</S.Title>
-				<S.Category>{item.category}</S.Category>
+				<S.Category>{category}</S.Category>
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={item.img} />
-					<div>{item.writer}</div>
+					<S.UserImg src={profile.fileFullPath} />
+					<div>{writer}</div>
 				</div>
 				<span>
 					<Person_Icon size={'20'} />
-					<span>{item.personnelNumber}인</span>
+					<span>{personnelNumber}인</span>
 					<Chat_Icon size={'20'} />
 					<div>4</div>
 				</span>
