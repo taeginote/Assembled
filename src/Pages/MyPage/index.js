@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { FlexCenterCSS, TopPadding, WidthAutoCSS } from '../../Styles/common'
+import { TopPadding, WidthAutoCSS } from '../../Styles/common'
 import SideFilterNav from './Components/SideFilterNav'
-import Active from './Components/Active'
+import { Outlet } from 'react-router-dom'
 
 function Mypage() {
 	return (
@@ -9,7 +9,7 @@ function Mypage() {
 			<S.Container>
 				<SideFilterNav />
 				<span>
-					<Active />
+					<Outlet />
 				</span>
 			</S.Container>
 		</S.Wrapper>
@@ -24,9 +24,9 @@ const Wrapper = styled.div`
 const Container = styled.div`
 	margin-top: 10rem;
 	display: flex;
+	justify-content: space-between;
 	& > span {
 		width: 100%;
-
 		display: flex;
 		justify-content: center;
 	}
