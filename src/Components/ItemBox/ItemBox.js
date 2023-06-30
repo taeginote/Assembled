@@ -19,11 +19,14 @@ function ItemBox({ data }) {
 		expectedPeriod,
 	} = data
 
+	let period =
+		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
+
 	return (
 		<S.Wrapper onClick={() => navigate(`/Detail?postId=${postId}`)}>
 			<S.Container>
 				<S.Status>모집중</S.Status>
-				<S.Period>마감일 | {expectedPeriod}달뒤</S.Period>
+				<S.Period>마감일 | {period}</S.Period>
 				<S.Title>
 					{title.length > 45 ? title.substr(0, 45) + '...' : title}
 				</S.Title>
