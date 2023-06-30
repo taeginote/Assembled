@@ -5,20 +5,21 @@ import { FlexAlignCSS } from '../../../Styles/common'
 import DetailApi from '../../../Apis/DetailApi'
 import Button from '../../../Components/Button/Button'
 
-function CommentForm({ comments, refetch, postId }) {
+function CommentForm({ comments, refetch, postId, userImg }) {
 	const { mutate } = useMutation(data => DetailApi.Comments(data), {
 		onSuccess: () => {
 			refetch()
+			console.log('댓글 성공했다아')
 		},
 		onError: () => {},
 	})
 
 	const onSubmitComment = e => {
 		e.preventDefault()
-		const comment = e.target.textarea.value
+		const commentContents = e.target.textarea.value
 		const data = {
-			comment,
-			email: 'taek2',
+			commentContents,
+			userId: 1,
 			postId,
 		}
 		mutate({ data })
@@ -31,7 +32,6 @@ function CommentForm({ comments, refetch, postId }) {
 					{comments.length}
 				</div>
 				<S.CommentInput>
-					<img src="https://cdn.inflearn.com/public/users/thumbnails/234401/660102d4-1e7b-4c43-a7ba-7d0ee6d96b83" />
 					<textarea placeholder="댓글을 작성하세요" name="textarea" />
 				</S.CommentInput>
 				<span>
@@ -43,7 +43,7 @@ function CommentForm({ comments, refetch, postId }) {
 			{comments.map(comment => (
 				<S.CommentsList>
 					<S.CommentTop>
-						<img src={comment.userImg} />
+						<img src={comment.userProfile.fileFullPath} />
 						<div>
 							<div>{comment.commentCreator}</div>
 							<span>{comment.commentCreatedDate}</span>
