@@ -4,15 +4,24 @@ import { Warning_Icon } from '../Icons/Icons'
 import { useSetRecoilState } from 'recoil'
 import Button from '../Button/Button'
 import { modalViewNotification } from '../../Atoms/modalView.atom'
+import { useNavigate } from 'react-router-dom'
 
-function NotificationModal({ text }) {
+function NotificationModal({ text, url }) {
 	const setRecoilCounter = useSetRecoilState(modalViewNotification)
+	const navigate = useNavigate()
+	const onClickBtn = () => {
+		setRecoilCounter(() => false)
+		if (url) {
+			navigate(url)
+		}
+	}
+
 	return (
 		<S.Wrapper>
 			<S.Box>
 				<Warning_Icon size={'65'} />
 				<S.Text>{text}</S.Text>
-				<Button size={'normal'} onClick={() => setRecoilCounter(false)}>
+				<Button size={'normal'} onClick={onClickBtn}>
 					확인
 				</Button>
 			</S.Box>

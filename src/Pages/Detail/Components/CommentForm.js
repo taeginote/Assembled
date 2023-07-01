@@ -9,7 +9,6 @@ function CommentForm({ comments, refetch, postId, userImg }) {
 	const { mutate } = useMutation(data => DetailApi.Comments(data), {
 		onSuccess: () => {
 			refetch()
-			console.log('댓글 성공했다아')
 		},
 		onError: () => {},
 	})

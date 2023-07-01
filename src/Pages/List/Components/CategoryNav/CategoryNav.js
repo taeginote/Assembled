@@ -7,7 +7,6 @@ function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let category = searchParams.get('category')
 	let filter = searchParams.get('filter')
-	console.log(filter)
 
 	if (category === null) {
 		category = 'total'

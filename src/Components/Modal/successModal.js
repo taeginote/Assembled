@@ -11,7 +11,7 @@ function SuccessModal({ text, url }) {
 	const navigate = useNavigate()
 	const onClickOkBtn = () => {
 		setRecoilCounter(false)
-		console.log(url)
+
 		if (url === undefined) return navigate('/')
 		navigate(`${url}`)
 	}
