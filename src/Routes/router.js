@@ -12,6 +12,7 @@ import Edit from '../Pages/MyPage/Pages/Edit'
 import Wrote from '../Pages/MyPage/Pages/Wrote'
 import Comment from '../Pages/MyPage/Pages/Comment'
 import Withdrawal from '../Pages/MyPage/Pages/Withdrawal'
+import PrivateRoute from './private'
 
 const router = createBrowserRouter([
 	{
@@ -34,33 +35,39 @@ const router = createBrowserRouter([
 				path: '/Detail',
 				element: <Detail />,
 			},
+
 			{
-				path: '/register',
-				element: <Register />,
-			},
-			{
-				path: '/myPage',
-				element: <Mypage />,
+				element: <PrivateRoute />,
 				children: [
 					{
-						path: '',
-						element: <Active />,
+						path: '/register',
+						element: <Register />,
 					},
 					{
-						path: '/myPage/edit',
-						element: <Edit />,
-					},
-					{
-						path: '/myPage/wrote',
-						element: <Wrote />,
-					},
-					{
-						path: '/myPage/comment',
-						element: <Comment />,
-					},
-					{
-						path: '/myPage/withdrawal',
-						element: <Withdrawal />,
+						path: '/myPage',
+						element: <Mypage />,
+						children: [
+							{
+								path: '',
+								element: <Active />,
+							},
+							{
+								path: '/myPage/edit',
+								element: <Edit />,
+							},
+							{
+								path: '/myPage/wrote',
+								element: <Wrote />,
+							},
+							{
+								path: '/myPage/comment',
+								element: <Comment />,
+							},
+							{
+								path: '/myPage/withdrawal',
+								element: <Withdrawal />,
+							},
+						],
 					},
 				],
 			},
