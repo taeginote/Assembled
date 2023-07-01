@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Down_Icon } from '../../../../Components/Icons/Icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 function FilterSelectBox() {
 	const navigate = useNavigate()
 	const [isShowOptions, setShowOptions] = useState(false)
 	const [selectFilter, setSelectFilter] = useState('최신 순 정렬')
+
+	const [searchParams, setSearchParams] = useSearchParams()
+	let category = searchParams.get('category')
+
 	const FilterArr = [
 		{
 			name: '최신 순 정렬',
@@ -24,7 +28,7 @@ function FilterSelectBox() {
 
 	const onClickSelectFilter = e => {
 		setSelectFilter(() => e.name)
-		navigate(`?filter=${e.url}`)
+		navigate(`?category=${category}&filter=${e.url}`)
 	}
 
 	return (

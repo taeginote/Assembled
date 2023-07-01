@@ -6,8 +6,14 @@ import { Link, useSearchParams } from 'react-router-dom'
 function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let category = searchParams.get('category')
+	let filter = searchParams.get('filter')
+	console.log(filter)
+
 	if (category === null) {
 		category = 'total'
+	}
+	if (filter === null) {
+		filter = 'recent'
 	}
 
 	const categoryArr = [
@@ -33,7 +39,7 @@ function CategoryNav() {
 			<S.Container>
 				{categoryArr.map((el, idx) => (
 					<S.NavBox key={idx} state={el.url === category}>
-						<Link to={`?category=${el.url}`}>{el.name}</Link>
+						<Link to={`?category=${el.url}&filter=${filter}`}>{el.name}</Link>
 					</S.NavBox>
 				))}
 			</S.Container>
