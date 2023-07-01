@@ -9,10 +9,16 @@ function FilterSelectBox() {
 	const [selectFilter, setSelectFilter] = useState('최신 순 정렬')
 
 	const [searchParams, setSearchParams] = useSearchParams()
+	let filter = searchParams.get('filter')
 	let category = searchParams.get('category')
+
 	if (category === null) {
 		category = 'total'
 	}
+	if (filter === null) {
+		filter = 'recent'
+	}
+
 	const FilterArr = [
 		{
 			name: '최신 순 정렬',
@@ -44,7 +50,7 @@ function FilterSelectBox() {
 					{FilterArr.map((el, idx) => (
 						<Option
 							onClick={() => onClickSelectFilter(el)}
-							select={selectFilter === el}
+							select={el.url === filter}
 							key={idx}
 						>
 							{el.name}

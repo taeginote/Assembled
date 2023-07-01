@@ -16,7 +16,7 @@ for (let i = 0; i < 10; i++) {
 			writeDate: CurrentTime(),
 			postStatus: '모집중',
 			hits: '5',
-			likes: '12',
+			likes: '3',
 			personnelNumber: '5',
 			expectedPeriod: '3',
 			profile: {
@@ -48,7 +48,7 @@ for (let i = 0; i < 10; i++) {
 			writeDate: CurrentTime(),
 			postStatus: '모집중',
 			hits: '50',
-			likes: '20',
+			likes: '10',
 			personnelNumber: '5',
 			expectedPeriod: '5',
 			profile: {
@@ -80,7 +80,7 @@ for (let i = 0; i < 10; i++) {
 			writeDate: CurrentTime(),
 			postStatus: '모집중',
 			hits: '4',
-			likes: '2',
+			likes: '20',
 			personnelNumber: '10',
 			expectedPeriod: '0',
 			profile: {

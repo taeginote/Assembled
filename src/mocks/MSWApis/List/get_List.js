@@ -31,8 +31,7 @@ export const get_ListData = [
 				response: [...listData.response.filter(el => el.category === '스터디')],
 			}
 		}
-		if (filter == 'popular') {
-			console.log('dsadassa')
+		if (filter === 'popular') {
 			real_ListData = {
 				success: true,
 				status: 200,
@@ -41,7 +40,17 @@ export const get_ListData = [
 				],
 			}
 		}
-		console.log(real_ListData)
+
+		if (filter === 'like') {
+			real_ListData = {
+				success: true,
+				status: 200,
+				response: [
+					...listData.response.sort((a, b) => a.likes - b.likes).reverse(),
+				],
+			}
+		}
+
 		return res(ctx.status(200), ctx.json(real_ListData))
 	}),
 ]
