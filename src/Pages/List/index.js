@@ -15,8 +15,9 @@ import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 function List() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let category = searchParams.get('category')
+	let filter = searchParams.get('filter')
 
-	const { data, isLoading } = useGetListData(category)
+	const { data, isLoading } = useGetListData(category, filter)
 
 	return (
 		<>

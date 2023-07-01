@@ -10,7 +10,9 @@ function FilterSelectBox() {
 
 	const [searchParams, setSearchParams] = useSearchParams()
 	let category = searchParams.get('category')
-
+	if (category === null) {
+		category = 'total'
+	}
 	const FilterArr = [
 		{
 			name: '최신 순 정렬',
@@ -18,11 +20,11 @@ function FilterSelectBox() {
 		},
 		{
 			name: '인기 순 정렬 (조회 수)',
-			url: 'total',
+			url: 'popular',
 		},
 		{
 			name: '좋아요 순 정렬',
-			url: 'total',
+			url: 'like',
 		},
 	]
 
