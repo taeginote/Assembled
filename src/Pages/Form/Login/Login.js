@@ -7,6 +7,14 @@ import Button from '../../../Components/Button/Button'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import HookFormError from '../../../Components/Error/HookFormError'
+import { useMutation } from '@tanstack/react-query'
+import UserApi from '../../../Apis/UserApi'
+import NotificationModal from '../../../Components/Modal/NotificationModal'
+import { useRecoilState } from 'recoil'
+import { modalViewNotification } from '../../../Atoms/modalView.atom'
+import SuccessModal from '../../../Components/Modal/successModal'
+import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
+
 function Login() {
 	const {
 		register,
@@ -14,7 +22,28 @@ function Login() {
 		formState: { errors },
 	} = useForm()
 
-	const onSubmit = () => {}
+	const [recoilCounter, setRecoilCounter] = useRecoilState(
+		modalViewNotification,
+	)
+	const [recoilSuccessModal, setRecoilSuccessModal] =
+		useRecoilState(modalViewSuccess)
+
+	const { mutate, isLoading } = useMutation(data => UserApi.Login(data), {
+		onSuccess: res => {
+			setRecoilSuccessModal(() => true)
+		},
+		onError: err => {
+			setRecoilCounter(() => true)
+		},
+	})
+
+	const onSubmit = e => {
+		const logInData = {
+			email: e.LoginEmail,
+			password: e.LoginPW,
+		}
+		mutate(logInData)
+	}
 
 	return (
 		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
@@ -46,6 +75,8 @@ function Login() {
 					<S.LinkDesign to={'/Signup'}> 회원가입하기</S.LinkDesign>
 				</S.GoSignUp>
 				<S.SignUpButton>로그인</S.SignUpButton>
+				{recoilSuccessModal && <SuccessModal text={'로그인 성공'} />}
+				{recoilCounter && <NotificationModal text={'로그인 실패'} />}
 			</S.container>
 		</S.Wrapper>
 	)

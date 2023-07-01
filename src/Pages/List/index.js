@@ -6,11 +6,11 @@ import {
 } from '../../Styles/common'
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import Banner from '../../Components/Banner'
-import FilterSelectBox from '../../Components/SelectBox/FilterSelectBox'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
 import useGetListData from '../../Hooks/Queries/get-list'
 import LoadingPage from '../../Components/LoadingPage/Loading'
 import { useSearchParams } from 'react-router-dom'
+import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 
 function List() {
 	const [searchParams, setSearchParams] = useSearchParams()

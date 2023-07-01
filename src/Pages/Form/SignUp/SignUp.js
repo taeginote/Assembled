@@ -18,6 +18,10 @@ import HookFormError from '../../../Components/Error/HookFormError'
 import NotificationModal from '../../../Components/Modal/NotificationModal'
 import { useRecoilState } from 'recoil'
 import { modalViewNotification } from '../../../Atoms/modalView.atom'
+import { useMutation } from '@tanstack/react-query'
+import UserApi from '../../../Apis/UserApi'
+import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
+import SuccessModal from '../../../Components/Modal/successModal'
 
 function SignUp() {
 	const {
@@ -29,9 +33,27 @@ function SignUp() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(
 		modalViewNotification,
 	)
+	const [recoilSuccessModal, setRecoilSuccessModal] =
+		useRecoilState(modalViewSuccess)
+
+	const { mutate, isLoading } = useMutation(data => UserApi.SignUp(data), {
+		onSuccess: res => {
+			setRecoilSuccessModal(() => true)
+		},
+		onError: err => {},
+	})
 
 	const onSubmit = e => {
-		e.preventDefault()
+		const formData = new FormData()
+
+		formData.append('email', e.SignUpEmail)
+		formData.append('name', e.SignUpName.trim())
+		formData.append('nickname', e.SignUpNickName.trim())
+		formData.append('password', e.SignUpPw)
+		formData.append('birthDate', e.SignUpBirthday)
+		formData.append('phoneNumber', e.SignUpPhone)
+
+		mutate(formData)
 	}
 
 	return (
@@ -112,7 +134,9 @@ function SignUp() {
 				)}
 				<Notice />
 				<S.SignUpButton>로그인</S.SignUpButton>
-
+				{recoilSuccessModal && (
+					<SuccessModal text={'회원가입 성공'} url={'/login'} />
+				)}
 				{recoilCounter && <NotificationModal text={'실패'} />}
 			</S.container>
 		</S.Wrapper>
