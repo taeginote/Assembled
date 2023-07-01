@@ -6,12 +6,14 @@ import Button from '../Button/Button'
 import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import { useNavigate } from 'react-router-dom'
 
-function SuccessModal({ text }) {
+function SuccessModal({ text, url }) {
 	const setRecoilCounter = useSetRecoilState(modalViewSuccess)
 	const navigate = useNavigate()
 	const onClickOkBtn = () => {
 		setRecoilCounter(false)
-		navigate('/')
+		console.log(url)
+		if (url === undefined) return navigate('/')
+		navigate(`${url}`)
 	}
 	return (
 		<S.Wrapper>
