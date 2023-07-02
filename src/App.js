@@ -5,6 +5,7 @@ import GlobalStyles from './Styles/global'
 import router from './Routes/router'
 import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import AuthProvider from './Contexts/auth'
 
 function App() {
 	const queryClient = new QueryClient({
@@ -17,14 +18,16 @@ function App() {
 	})
 
 	return (
-		<QueryClientProvider client={queryClient}>
-			<RecoilRoot>
-				<ThemeProvider theme={theme}>
-					<GlobalStyles />
-					<RouterProvider router={router} />
-				</ThemeProvider>
-			</RecoilRoot>
-		</QueryClientProvider>
+		<AuthProvider>
+			<QueryClientProvider client={queryClient}>
+				<RecoilRoot>
+					<ThemeProvider theme={theme}>
+						<GlobalStyles />
+						<RouterProvider router={router} />
+					</ThemeProvider>
+				</RecoilRoot>
+			</QueryClientProvider>
+		</AuthProvider>
 	)
 }
 

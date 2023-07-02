@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 import TokenService from '../Utils/TokenService'
 
 const axiosInstance = axios.create({

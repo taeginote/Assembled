@@ -7,9 +7,23 @@ import {
 import SearchBar from './Components/SearchBar'
 import { Outlet, useNavigate } from 'react-router-dom'
 import MobileFooter from '../Footer/MobileFooter/MobileFooter'
+import { useAuth } from '../../../Contexts/auth'
+import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
+import { useRecoilState } from 'recoil'
+import SuccessModal from '../../Modal/successModal'
 
 function Haeder() {
 	const navigate = useNavigate()
+	const auth = useAuth()
+
+	const [recoilSuccessModal, setRecoilSuccessModal] =
+		useRecoilState(modalViewSuccess)
+
+	const onClickLogOut = () => {
+		setRecoilSuccessModal(() => true)
+		auth.logout()
+	}
+
 	return (
 		<>
 			<S.Wrapper>
@@ -22,31 +36,36 @@ function Haeder() {
 						<SearchBar />
 					</div>
 					<S.HeaderRightBox>
-						<div>
-							<S.Select onClick={() => navigate('/register')}>
-								새 글 쓰기
-							</S.Select>
-						</div>
-						<S.NotLogIn>
-							<div>|</div>
-							<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
-							<div>|</div>
-							<S.Select onClick={() => navigate('/signUp')}>회원가입</S.Select>
-						</S.NotLogIn>
-						<S.LogIn>
-							<div>|</div>
-							<S.Select onClick={() => navigate('/myPage')}>
-								마이페이지
-							</S.Select>
-							<div>|</div>
-							<S.Select onClick={() => navigate('/signUp')}>로그아웃</S.Select>
-						</S.LogIn>
+						{!auth.accessToken ? (
+							<S.NotLogIn>
+								<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
+								<div>|</div>
+								<S.Select onClick={() => navigate('/signUp')}>
+									회원가입
+								</S.Select>
+							</S.NotLogIn>
+						) : (
+							<S.LogIn>
+								<div>
+									<S.Select onClick={() => navigate('/register')}>
+										새 글 쓰기
+									</S.Select>
+								</div>
+								<div>|</div>
+								<S.Select onClick={() => navigate('/myPage')}>
+									마이페이지
+								</S.Select>
+								<div>|</div>
+								<S.Select onClick={onClickLogOut}>로그아웃</S.Select>
+							</S.LogIn>
+						)}
 					</S.HeaderRightBox>
 				</S.Container>
 			</S.Wrapper>
 			<S.FooterWrapper>
 				<MobileFooter />
 			</S.FooterWrapper>
+			{recoilSuccessModal && <SuccessModal text={'로그아웃 되었습니다.'} />}
 
 			<Outlet />
 		</>

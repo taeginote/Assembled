@@ -17,6 +17,24 @@ export const post_Login = [
 				ctx.json({ message: '로그인을 실패하였습니다.' }),
 			)
 
-		return res(ctx.status(200), ctx.json())
+		const successData = {
+			success: true,
+			status: 200,
+			token: 'token',
+			response: {
+				userId: '1',
+				email: 'taegi@naver.com',
+				phoneNumber: '01011112222',
+				role: 'USER',
+				nickname: 'taek	',
+				name: 'teak',
+				profile: {
+					fileFullPath:
+						'https://img.suto.co.kr/data/file/free/562736188_c37uwHEJ_FB_IMG_1463665367004.jpg',
+					originalName: '파일 이름',
+				},
+			},
+		}
+		return res(ctx.status(200), ctx.json(successData))
 	}),
 ]

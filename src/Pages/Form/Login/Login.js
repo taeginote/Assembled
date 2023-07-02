@@ -14,6 +14,7 @@ import { useRecoilState } from 'recoil'
 import { modalViewNotification } from '../../../Atoms/modalView.atom'
 import SuccessModal from '../../../Components/Modal/successModal'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
+import { useAuth } from '../../../Contexts/auth'
 
 function Login() {
 	const {
@@ -28,9 +29,12 @@ function Login() {
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
+	const auth = useAuth()
+
 	const { mutate, isLoading } = useMutation(data => UserApi.Login(data), {
 		onSuccess: res => {
 			setRecoilSuccessModal(() => true)
+			auth.login(res.data.token)
 		},
 		onError: err => {
 			setRecoilCounter(() => true)
