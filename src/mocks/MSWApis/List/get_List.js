@@ -3,8 +3,9 @@ import listData from '../../Data/ListData'
 
 export const get_ListData = [
 	rest.get(`/List`, (req, res, ctx) => {
-		let category = req.url.searchParams.get('category')
-		let filter = req.url.searchParams.get('filter')
+		const category = req.url.searchParams.get('category')
+		const filter = req.url.searchParams.get('filter')
+		const page = req.url.searchParams.get('page') || 1
 
 		let real_ListData
 		listData.response.map(el => {
@@ -51,6 +52,20 @@ export const get_ListData = [
 			}
 		}
 
-		return res(ctx.status(200), ctx.json(real_ListData))
+		function chunk(data, size) {
+			let arr = []
+			for (let i = 0; i < data.length; i += size) {
+				arr.push({
+					status: 200,
+					success: true,
+					response: data.slice(i, i + size),
+				})
+			}
+			return arr
+		}
+
+		const real_ListData_Slice = chunk(real_ListData.response, 12)
+
+		return res(ctx.status(200), ctx.json(real_ListData_Slice[page - 1]))
 	}),
 ]

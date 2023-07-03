@@ -1,5 +1,10 @@
 import { CiSearch, CiWarning } from 'react-icons/ci'
-import { AiOutlineMail, AiOutlineLock, AiFillBank } from 'react-icons/ai'
+import {
+	AiOutlineMail,
+	AiOutlineLock,
+	AiFillBank,
+	AiFillCaretRight,
+} from 'react-icons/ai'
 import {
 	BsFillPersonFill,
 	BsChat,
@@ -55,3 +60,7 @@ export const Question_Icon = ({ size }) => (
 ) //경고
 
 export const Clap_Icon = () => <BiHappy size={'65'} color="#FB9B00" />
+
+export const PaginationArrowSingle_Icon = ({ rotate }) => (
+	<AiFillCaretRight style={{ transform: `rotate(${rotate}deg)` }} />
+) // 페이지네이션화살표 (>)

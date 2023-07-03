@@ -9,15 +9,20 @@ import Banner from '../../Components/Banner'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
 import useGetListData from '../../Hooks/Queries/get-list'
 import LoadingPage from '../../Components/LoadingPage/Loading'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
+import Pagination from '../../Components/Pagination/Pagination'
+import { useState } from 'react'
 
 function List() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let category = searchParams.get('category')
 	let filter = searchParams.get('filter')
+	const [page, setPage] = useState(searchParams.get('page'))
 
-	const { data, isLoading } = useGetListData(category, filter)
+	const { data, isLoading } = useGetListData(page, category, filter)
+	console.log(data)
+	const totalPage = 3
 
 	return (
 		<>
@@ -37,6 +42,12 @@ function List() {
 					</S.Container>
 				)}
 			</S.Wrapper>
+			<Pagination
+				totalPage={totalPage}
+				limit={10}
+				scroll={765}
+				setPage={setPage}
+			/>
 		</>
 	)
 }
