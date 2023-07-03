@@ -1,6 +1,6 @@
 import CurrentTime from '../../Utils/CurrentTime'
 
-const listData = {
+let listData = {
 	success: true,
 	status: 200,
 	response: [],
