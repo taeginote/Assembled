@@ -27,7 +27,7 @@ function List() {
 	return (
 		<>
 			<S.Wrapper>
-				<Banner />
+				{/* <Banner /> */}
 				<S.FilterWrapper>
 					<CategoryNav />
 					<FilterSelectBox />

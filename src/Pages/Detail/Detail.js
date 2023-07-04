@@ -8,7 +8,6 @@ import { useSearchParams } from 'react-router-dom'
 function Detail() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let postId = searchParams.get('postId')
-
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
 	return (
