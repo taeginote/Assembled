@@ -8,19 +8,20 @@ import {
 } from '../../../Styles/common'
 import { useRecoilState } from 'recoil'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
+import { useAuth } from '../../../Contexts/auth'
+import SuccessModal from '../../Modal/successModal'
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
-// import SuccessModal from '../../../Modal/successModal'
 
 function Haeder() {
 	const navigate = useNavigate()
-	// const auth = useAuth()
+	const auth = useAuth()
 
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
 	const onClickLogOut = () => {
 		setRecoilSuccessModal(() => true)
-		// auth.logout()
+		auth.logout()
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
@@ -37,32 +38,34 @@ function Haeder() {
 						<SearchBar />
 					</div>
 					<S.HeaderRightBox>
-						{/* {!auth.accessToken ? ( */}
-						<S.NotLogIn>
-							<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
-							<div>|</div>
-							<S.Select onClick={() => navigate('/signUp')}>회원가입</S.Select>
-						</S.NotLogIn>
-						{/* ) : ( */}
-						<S.LogIn>
-							<div>
-								<S.Select onClick={() => navigate('/register')}>
-									새 글 쓰기
+						{!auth.accessToken ? (
+							<S.NotLogIn>
+								<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
+								<div>|</div>
+								<S.Select onClick={() => navigate('/signUp')}>
+									회원가입
 								</S.Select>
-							</div>
-							<div>|</div>
-							<S.Select onClick={() => navigate('/myPage')}>
-								마이페이지
-							</S.Select>
-							<div>|</div>
-							<S.Select onClick={onClickLogOut}>로그아웃</S.Select>
-						</S.LogIn>
-						{/* )} */}
+							</S.NotLogIn>
+						) : (
+							<S.LogIn>
+								<div>
+									<S.Select onClick={() => navigate('/register')}>
+										새 글 쓰기
+									</S.Select>
+								</div>
+								<div>|</div>
+								<S.Select onClick={() => navigate('/myPage')}>
+									마이페이지
+								</S.Select>
+								<div>|</div>
+								<S.Select onClick={onClickLogOut}>로그아웃</S.Select>
+							</S.LogIn>
+						)}
 					</S.HeaderRightBox>
 				</S.Container>
 			</S.Wrapper>
 			<S.FooterWrapper>{/* <MobileFooter /> */}</S.FooterWrapper>
-			{/* {recoilSuccessModal && <SuccessModal text={'로그아웃 되었습니다.'} />} */}
+			{recoilSuccessModal && <SuccessModal text={'로그아웃 되었습니다.'} />}
 			<Outlet />
 		</>
 	)

@@ -3,8 +3,6 @@ import userData from '../../Data/UserData'
 
 export const post_SignUp = [
 	rest.post('/assemble/user/signup', (req, res, ctx) => {
-		const { data } = req.body
-
 		userData.push({
 			email: 'taegi@naver.com',
 			name: '김태기',

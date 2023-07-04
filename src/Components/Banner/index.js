@@ -2,14 +2,13 @@ import styled from 'styled-components'
 import Banner1 from './Components/Banner1'
 import Banner2 from './Components/Banner2'
 import Banner3 from './Components/Banner3'
-import { Swiper } from 'swiper'
-// import SwiperCore, { Pagination, Autoplay } from 'swiper'
 
+import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
-import { SwiperSlide } from 'swiper/react'
 
+// import SwiperCore, { Pagination, Autoplay } from 'swiper'
 // SwiperCore.use([Pagination, Autoplay]) // 추가
 
 function Banner() {
@@ -28,7 +27,6 @@ function Banner() {
 					slideShadows: true,
 				}}
 				pagination={true}
-				// modules={[Pagination]}
 				className="mySwiper"
 				autoplay={{ delay: 3000 }}
 			>

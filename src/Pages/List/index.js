@@ -21,13 +21,13 @@ function List() {
 	const [page, setPage] = useState(searchParams.get('page'))
 
 	const { data, isLoading } = useGetListData(page, category, filter)
-	console.log(data)
+
 	const totalPage = 3
 
 	return (
 		<>
 			<S.Wrapper>
-				{/* <Banner /> */}
+				<Banner />
 				<S.FilterWrapper>
 					<CategoryNav />
 					<FilterSelectBox />
