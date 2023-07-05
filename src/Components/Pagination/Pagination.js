@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { PaginationArrowSingle_Icon } from '../Icons/Icons'
+import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
 import scrollToTop from '../../Utils/scrollToTop'
 import { FlexCenterCSS } from '../../Styles/common'
 

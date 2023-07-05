@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Down_Icon } from '../../../../Components/Icons/Icons'
+import { Down_Icon } from '../../../../Icons/Icons'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 function FilterSelectBox() {

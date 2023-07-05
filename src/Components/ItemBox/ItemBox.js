@@ -4,7 +4,7 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../Styles/common'
-import { Chat_Icon, Person_Icon } from '../Icons/Icons'
+import { Chat_Icon, Person_Icon } from '../../Icons/Icons'
 import { useNavigate } from 'react-router-dom'
 
 function ItemBox({ data }) {

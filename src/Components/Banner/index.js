@@ -8,8 +8,8 @@ import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 
-// import SwiperCore, { Pagination, Autoplay } from 'swiper'
-// SwiperCore.use([Pagination, Autoplay]) // 추가
+import SwiperCore, { Pagination, Autoplay } from 'swiper'
+SwiperCore.use([Pagination, Autoplay]) // 추가
 
 function Banner() {
 	return (

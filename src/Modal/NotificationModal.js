@@ -1,10 +1,11 @@
-import styled from 'styled-components'
-import { FlexCenterCSS } from '../../Styles/common'
 import { Warning_Icon } from '../Icons/Icons'
 import { useSetRecoilState } from 'recoil'
-import Button from '../Button/Button'
-import { modalViewNotification } from '../../Atoms/modalView.atom'
+
 import { useNavigate } from 'react-router-dom'
+import Button from '../Components/Button/Button'
+import { modalViewNotification } from '../Atoms/modalView.atom'
+import { styled } from 'styled-components'
+import { FlexCenterCSS } from '../Styles/common'
 
 function NotificationModal({ text, url }) {
 	const setRecoilCounter = useSetRecoilState(modalViewNotification)

@@ -12,7 +12,7 @@ import {
 	Computer_Icon,
 	People_Icon,
 	Travel_Icon,
-} from '../../../../Components/Icons/Icons'
+} from '../../../../Icons/Icons'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
