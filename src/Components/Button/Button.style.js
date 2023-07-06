@@ -34,11 +34,9 @@ const shapeCSS = {
 	default: css`
 		border-radius: 0.4rem;
 	`,
-	round: css`
-		border-radius: 2rem;
-	`,
 }
 
+//normal,big
 const sizeCSS = {
 	default: css`
 		width: 100%;
@@ -57,15 +55,6 @@ const sizeCSS = {
 const fontSizeCSS = {
 	default: css`
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
-	`,
-	medium: css`
-		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
-	`,
-	xs: css`
-		font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-	`,
-	large: css`
-		font-size: ${({ theme }) => theme.FONT_SIZE.large};
 	`,
 }
 
