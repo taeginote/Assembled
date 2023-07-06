@@ -8,7 +8,7 @@ import {
 	Name_Icon,
 	Nickname_Icon,
 	Phone_Icon,
-} from '../../../Icons/Icons'
+} from '../../../Icons/Icons.js'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import Notice from './Components/Notice'

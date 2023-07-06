@@ -5,10 +5,11 @@ import { useState } from 'react'
 import { modalViewNotification } from '../../../../Atoms/modalView.atom'
 import { useRecoilState } from 'recoil'
 import NotificationModal from '../../../Modal/NotificationModal'
+import { EventTargetType } from '../../../../Types/type'
 
 function SearchBar() {
-	const [searchValue, setSearchValue] = useState('')
-	const [recoilCounter, setRecoilCounter] = useRecoilState(
+	const [searchValue, setSearchValue] = useState<string>('')
+	const [recoilCounter, setRecoilCounter] = useRecoilState<boolean>(
 		modalViewNotification,
 	)
 
@@ -16,8 +17,9 @@ function SearchBar() {
 	const onClickSearch = () => {
 		if (searchValue.trim().length === 0) return setRecoilCounter(() => true)
 	}
+
 	//Enter
-	const onkeyDown = e => {
+	const onkeyDown = (e: EventTargetType) => {
 		if (e.nativeEvent.isComposing) return
 		if (e.key === 'Enter') {
 			e.preventDefault()
@@ -30,7 +32,9 @@ function SearchBar() {
 		<>
 			<S.InputWrapper>
 				<S.SearchInput
-					onChange={e => setSearchValue(e.target.value)}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+						setSearchValue(e.target.value)
+					}
 					onKeyDown={onkeyDown}
 					value={searchValue}
 				/>

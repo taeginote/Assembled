@@ -4,10 +4,11 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../Styles/common'
-import { Chat_Icon, Person_Icon } from '../../Icons/Icons'
+import { Chat_Icon, Person_Icon } from '../../Icons/Icons.js'
 import { useNavigate } from 'react-router-dom'
+import { ItemDataType } from '../../Types/type'
 
-function ItemBox({ data }) {
+function ItemBox({ data }: { data: ItemDataType }) {
 	const navigate = useNavigate()
 	const {
 		postId,

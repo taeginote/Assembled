@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Input from '../../../Components/Input/Input'
 import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
-import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
+import { Email_Icon, Lock_Icon } from '../../../Icons/Icons.js'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import { Link } from 'react-router-dom'

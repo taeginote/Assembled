@@ -1,6 +1,7 @@
+import { listDataType } from '../../Types/dataType'
 import CurrentTime from '../../Utils/CurrentTime'
 
-let listData = {
+let listData: listDataType = {
 	success: true,
 	status: 200,
 	response: [],

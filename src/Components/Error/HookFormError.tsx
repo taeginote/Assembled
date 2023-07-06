@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import { childrenType } from '../../Types/type'
 
-function HookFormError(props) {
+function HookFormError(props: childrenType) {
 	const { children } = props
+
 	return (
 		<S.Message>
 			<div>{children}</div>

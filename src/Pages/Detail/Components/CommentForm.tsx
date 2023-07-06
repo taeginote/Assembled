@@ -4,8 +4,15 @@ import { useMutation } from '@tanstack/react-query'
 import { FlexAlignCSS } from '../../../Styles/common'
 import DetailApi from '../../../Apis/DetailApi'
 import Button from '../../../Components/Button/Button'
+import { CommentDataType } from '../../../Types/type'
+import { CommentFormPropsType } from '../../../Types/dataType'
 
-function CommentForm({ comments, refetch, postId, userImg }) {
+function CommentForm({
+	comments,
+	refetch,
+	postId,
+	userImg,
+}: CommentFormPropsType) {
 	const { mutate } = useMutation(data => DetailApi.Comments(data), {
 		onSuccess: () => {
 			refetch()
@@ -13,10 +20,10 @@ function CommentForm({ comments, refetch, postId, userImg }) {
 		onError: () => {},
 	})
 
-	const onSubmitComment = e => {
+	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		const commentContents = e.target.textarea.value
-		const data = {
+		const commentContents = e.currentTarget.textarea.value
+		const data: CommentDataType = {
 			commentContents,
 			userId: 1,
 			postId,

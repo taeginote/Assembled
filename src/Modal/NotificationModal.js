@@ -1,4 +1,4 @@
-import { Warning_Icon } from '../Icons/Icons'
+import { Warning_Icon } from '../Icons/Icons.js'
 import { useSetRecoilState } from 'recoil'
 
 import { useNavigate } from 'react-router-dom'

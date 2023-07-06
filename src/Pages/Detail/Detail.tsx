@@ -6,8 +6,10 @@ import CommentForm from './Components/CommentForm'
 import { useSearchParams } from 'react-router-dom'
 
 function Detail() {
+	//🔥Detail 여기 any를 사용하였음 더 좋은 방법 있는지 알아볼것
 	const [searchParams, setSearchParams] = useSearchParams()
-	let postId = searchParams.get('postId')
+	let postId: any = searchParams.get('postId')
+
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
 	return (

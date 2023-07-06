@@ -9,7 +9,7 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 
 import SwiperCore, { Pagination, Autoplay } from 'swiper'
-SwiperCore.use([Pagination, Autoplay]) // 추가
+SwiperCore.use([Pagination, Autoplay])
 
 function Banner() {
 	return (

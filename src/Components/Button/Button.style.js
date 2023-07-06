@@ -36,7 +36,6 @@ const shapeCSS = {
 	`,
 }
 
-//normal,big
 const sizeCSS = {
 	default: css`
 		width: 100%;
