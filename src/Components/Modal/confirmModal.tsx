@@ -1,33 +1,42 @@
+import { useSetRecoilState } from 'recoil'
+import { Question_Icon } from '../../Icons/Icons'
 import styled from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { Clap_Icon } from '../../Icons/Icons'
-import { useSetRecoilState } from 'recoil'
 import Button from '../Button/Button'
-import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
+import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom.js'
 import { useNavigate } from 'react-router-dom'
+import { modalTypeOneProps } from '../../Types/modalType'
 
-function SuccessModal({ text, url }) {
-	const setRecoilCounter = useSetRecoilState(modalViewSuccess)
+function ConfirmModal({ text }: modalTypeOneProps) {
+	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 	const navigate = useNavigate()
-	const onClickOkBtn = () => {
+	const onClickClose = () => {
 		setRecoilCounter(false)
-
-		if (url === undefined) return navigate('/')
-		navigate(`${url}`)
+		navigate('/')
 	}
 	return (
 		<S.Wrapper>
 			<S.Box>
-				<Clap_Icon size={'65'} />
+				<Question_Icon size={'65'} />
 				<S.Text>{text}</S.Text>
-				<Button size={'normal'} onClick={onClickOkBtn}>
-					확인
-				</Button>
+				<span>
+					<Button size={'normal'} onClick={onClickClose}>
+						확인
+					</Button>
+					<Button
+						size={'normal'}
+						variant={'default-white'}
+						onClick={() => setRecoilCounter(false)}
+					>
+						취소
+					</Button>
+				</span>
 			</S.Box>
 		</S.Wrapper>
 	)
 }
-export default SuccessModal
+
+export default ConfirmModal
 
 const Wrapper = styled.div`
 	position: fixed;
@@ -35,7 +44,7 @@ const Wrapper = styled.div`
 	left: 0;
 	height: 100vh;
 	width: 100%;
-	z-index: 999;
+	z-index: 9999;
 	background-color: rgba(0, 0, 0, 0.7);
 	${FlexCenterCSS}
 `
@@ -49,6 +58,10 @@ const Box = styled.div`
 	text-align: center;
 	border-radius: 0.5rem;
 	background-color: ${({ theme }) => theme.COLOR.common.white};
+	& > span {
+		* {
+			margin: 0 1rem;
+		}
+	}
 `
-
 const S = { Wrapper, Text, Box }

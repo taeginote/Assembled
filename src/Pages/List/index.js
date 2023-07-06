@@ -16,11 +16,14 @@ import { useState } from 'react'
 
 function List() {
 	const [searchParams, setSearchParams] = useSearchParams()
+	// let category: string = searchParams.get('category')!
 	let category = searchParams.get('category')
 	let filter = searchParams.get('filter')
-	const [page, setPage] = useState(searchParams.get('page'))
+	let page = searchParams.get('page')
+	const [currentPage, setCurrentPage] = useState(page)
+	//여기같은 부분은 page를 넣으면 아직 오류 해결하지 못하였음
 
-	const { data, isLoading } = useGetListData(page, category, filter)
+	const { data, isLoading } = useGetListData(currentPage, category, filter)
 
 	const totalPage = 3
 
@@ -46,7 +49,7 @@ function List() {
 				totalPage={totalPage}
 				limit={10}
 				scroll={765}
-				setPage={setPage}
+				setPage={setCurrentPage}
 			/>
 		</>
 	)

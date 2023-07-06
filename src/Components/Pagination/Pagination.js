@@ -20,6 +20,7 @@ import { FlexCenterCSS } from '../../Styles/common'
 function Pagination({ limit, totalPage, setPage, scroll }) {
 	const [searchParams, setSearchParams] = useSearchParams()
 
+	// const nowPage: number = parseInt(searchParams.get('page')) || 1 // 지금 페이지 number
 	const nowPage = parseInt(searchParams.get('page')) || 1 // 지금 페이지 number
 
 	const startPage = Math.floor((nowPage - 1) / limit) * limit + 1 // 시작 페이지 number. ex. 지금 14페이지라면 시작 페이지는 11입니다.

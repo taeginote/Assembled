@@ -1,34 +1,34 @@
 import styled from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { Warning_Icon } from '../../Icons/Icons'
+import { Clap_Icon } from '../../Icons/Icons'
 import { useSetRecoilState } from 'recoil'
 import Button from '../Button/Button'
-import { modalViewNotification } from '../../Atoms/modalView.atom'
+import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import { useNavigate } from 'react-router-dom'
+import { modalTypeTwoProps } from '../../Types/modalType'
 
-function NotificationModal({ text, url }) {
-	const setRecoilCounter = useSetRecoilState(modalViewNotification)
+function SuccessModal({ text, url }: modalTypeTwoProps) {
+	const setRecoilCounter = useSetRecoilState(modalViewSuccess)
 	const navigate = useNavigate()
-	const onClickBtn = () => {
-		setRecoilCounter(() => false)
-		if (url) {
-			navigate(url)
-		}
-	}
+	const onClickOkBtn = () => {
+		setRecoilCounter(false)
 
+		if (url === undefined) return navigate('/')
+		navigate(`${url}`)
+	}
 	return (
 		<S.Wrapper>
 			<S.Box>
-				<Warning_Icon size={'65'} />
+				<Clap_Icon />
 				<S.Text>{text}</S.Text>
-				<Button size={'normal'} onClick={onClickBtn}>
+				<Button size={'normal'} onClick={onClickOkBtn}>
 					확인
 				</Button>
 			</S.Box>
 		</S.Wrapper>
 	)
 }
-export default NotificationModal
+export default SuccessModal
 
 const Wrapper = styled.div`
 	position: fixed;
