@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-export const modalViewConfirm = atom({
+export const modalViewConfirm = atom<boolean>({
 	key: 'modalViewConfirm',
 	default: false,
 })

@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-export const modalViewNotification = atom({
+export const modalViewNotification = atom<boolean>({
 	key: 'modalViewNotification',
 	default: false,
 })

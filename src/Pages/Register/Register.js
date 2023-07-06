@@ -11,7 +11,7 @@ import { selectDataTeamMember } from '../Register/Components/SelectBox/SelectDat
 import { selectDataCategory } from '../Register/Components/SelectBox/SelectData'
 import { selectDataPeriod } from '../Register/Components/SelectBox/SelectData'
 import { useRecoilState } from 'recoil'
-import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom.js'
+
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import { Controller, useForm } from 'react-hook-form'
 import HookFormError from '../../Components/Error/HookFormError'
@@ -21,6 +21,7 @@ import { useMutation } from '@tanstack/react-query'
 import RegisterApi from '../../Apis/RegisterApi'
 import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../Components/Modal/successModal'
+import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
