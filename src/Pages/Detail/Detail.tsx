@@ -12,41 +12,44 @@ function Detail() {
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
+	console.log({ data })
 	return (
 		<S.Wrapper>
 			{isLoading ? (
 				<LoadingPage />
 			) : (
 				<S.Container>
-					<h1>{data.title}</h1>
+					<h1>{data?.title}</h1>
 					<S.Profile>
-						<S.UserImg src={data.profile.fileFullPath} />
-						<div>{data.writer}</div>
+						<S.UserImg src={data?.profile.fileFullPath} />
+						<div>{data?.writer}</div>
 						<span> | </span>
-						<span>{data.writeDate}</span>
+						<span>{data?.writeDate}</span>
 					</S.Profile>
 					<S.Info>
 						<div>
 							<div>활동 기간</div>
-							<span>{data.expectedPeriod}달</span>
+							<span>{data?.expectedPeriod}달</span>
 						</div>
 						<div>
 							<div>카테고리</div>
-							<span>{data.category}</span>
+							<span>{data?.category}</span>
 						</div>
 						<div>
 							<div>모집 인원</div>
-							<span>{data.personnelNumber}명</span>
+							<span>{data?.personnelNumber}명</span>
 						</div>
 					</S.Info>
 					<h3>프로젝트 설명</h3>
-					<S.Dec>{data.contents}</S.Dec>
-					<CommentForm
-						comments={data.comments}
-						userImg={data.profile.fileFullPath}
-						postId={postId}
-						refetch={refetch}
-					/>
+					<S.Dec>{data?.contents}</S.Dec>
+					{data && (
+						<CommentForm
+							comments={data?.comments}
+							userImg={data?.profile.fileFullPath}
+							postId={postId}
+							refetch={refetch}
+						/>
+					)}
 				</S.Container>
 			)}
 		</S.Wrapper>

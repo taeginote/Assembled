@@ -9,7 +9,7 @@ const DetailApi: DetailApiType = {
 		})
 	},
 	Comments({ data }) {
-		return axiosInstance.post('/Comments', { data })
+		return axiosInstance.post('/Comments', data)
 	},
 }
 

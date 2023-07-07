@@ -1,3 +1,4 @@
+//전체적인 list mock 데이터 통신 type
 type Comment = {
 	commentContents: string
 	commentCreator: string
@@ -33,6 +34,7 @@ export type listDataType = {
 	response: response[]
 }
 
+//userDataType은 msw 목데이터 만들때 넣는 type
 export type userDataType = {
 	birthDate: string
 	email: string
@@ -42,6 +44,7 @@ export type userDataType = {
 	phoneNumber: string
 }
 
+//CommentForm 즉, 디테일 안에 댓글 작성 props type
 export type CommentFormPropsType = {
 	comments: Comment[]
 	refetch: () => void

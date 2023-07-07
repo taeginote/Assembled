@@ -28,7 +28,7 @@ function CommentForm({
 			userId: 1,
 			postId,
 		}
-		mutate({ data })
+		// mutate({ data })
 	}
 	return (
 		<>
