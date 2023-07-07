@@ -26,3 +26,17 @@ type GetListData = {
 export type ListApiType = {
 	getList(params: GetListData): Promise<AxiosResponse<GetListData>>
 }
+
+//등록 페이지 api type
+type PostRegisterData = {
+	category: 'study' | 'project'
+	contents: string
+	expectedPeriod: '0' | '1' | '2' | '3' | '4' | '5' | '6'
+	personnelNumber: 0 | 2 | 3 | 4 | 5 | 10
+	title: string
+	writer: string
+}
+
+export type RegisterApiType = {
+	data: PostRegisterData
+}
