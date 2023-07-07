@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import Input from '../../../Components/Input/Input'
 import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
-import { Email_Icon, Lock_Icon } from '../../../Icons/Icons.js'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import { Link } from 'react-router-dom'
@@ -15,6 +14,7 @@ import { modalViewNotification } from '../../../Atoms/modalView.atom'
 import SuccessModal from '../../../Components/Modal/successModal'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
+import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
 
 function Login() {
 	const {

@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { Clap_Icon } from '../Icons/Icons.js'
 import { useSetRecoilState } from 'recoil'
 import Button from '../Button/Button'
 import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import { useNavigate } from 'react-router-dom'
+import { Clap_Icon } from '../Icons/Icons'
 
 function SuccessModal({ text, url }) {
 	const setRecoilCounter = useSetRecoilState(modalViewSuccess)

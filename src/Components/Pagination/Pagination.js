@@ -1,8 +1,8 @@
 import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { PaginationArrowSingle_Icon } from '../../Icons/Icons.js'
 import scrollToTop from '../../Utils/scrollToTop'
 import { FlexCenterCSS } from '../../Styles/common'
+import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
 
 /**
  * @param limit - 페이지네이션 몇 개씩 할 것인지

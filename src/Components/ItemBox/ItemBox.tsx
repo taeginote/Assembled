@@ -4,9 +4,9 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../Styles/common'
-import { Chat_Icon, Person_Icon } from '../../Icons/Icons.js'
 import { useNavigate } from 'react-router-dom'
 import { ItemDataType } from '../../Types/type'
+import { Chat_Icon, Person_Icon } from '../../Icons/Icons'
 
 function ItemBox({ data }: { data: ItemDataType }) {
 	const navigate = useNavigate()
@@ -39,7 +39,7 @@ function ItemBox({ data }: { data: ItemDataType }) {
 					<div>{writer}</div>
 				</div>
 				<span>
-					<Person_Icon size={'20'} />
+					<Person_Icon />
 					<span>{personnelNumber}인</span>
 					<Chat_Icon size={'20'} />
 					<div>4</div>

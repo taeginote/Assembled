@@ -37,3 +37,9 @@ export type CommentDataType = {
 	userId: number
 	postId?: number | null
 }
+
+//select Box
+export type SelectBoxType = {
+	name: string
+	url: 'recent' | 'popular' | 'like'
+}

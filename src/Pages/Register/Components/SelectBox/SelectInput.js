@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Down_Icon } from '../../../../Icons/Icons.js'
 import { FlexBetweenCSS } from '../../../../Styles/common'
+import { Down_Icon } from '../../../../Icons/Icons'
 
 function SelectInput(props) {
 	const { Data, errors, field, ...rest } = props

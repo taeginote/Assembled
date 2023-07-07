@@ -1,14 +1,7 @@
 import styled from 'styled-components'
 import Input from '../../../Components/Input/Input'
 import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
-import {
-	Date_Icon,
-	Email_Icon,
-	Lock_Icon,
-	Name_Icon,
-	Nickname_Icon,
-	Phone_Icon,
-} from '../../../Icons/Icons.js'
+
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import Notice from './Components/Notice'
@@ -22,6 +15,14 @@ import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../../Components/Modal/successModal'
+import {
+	Date_Icon,
+	Email_Icon,
+	Lock_Icon,
+	Name_Icon,
+	Nickname_Icon,
+	Phone_Icon,
+} from '../../../Icons/Icons'
 
 function SignUp() {
 	const {

@@ -19,27 +19,32 @@ import { FiBook } from 'react-icons/fi'
 import { FaQuestion } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
 
-export const Search_Icon = ({ color, position }) => (
-	<CiSearch color={color} position={position} />
-) // 검색
+type IconSize = {
+	size?: string
+}
 
-export const Person_Icon = ({ size }) => <BsFillPersonFill size={size} /> // 사람
+type IconRotate = {
+	rotate?: number
+}
+export const Person_Icon = ({ size }: IconSize) => (
+	<BsFillPersonFill size={size} />
+) // 사람
 
-export const Chat_Icon = ({ size }) => <BsChat size={size} /> // 채팅
+export const Chat_Icon = ({ size }: IconSize) => <BsChat size={size} /> // 채팅
 
-export const Email_Icon = ({ size }) => <AiOutlineMail size={size} /> //이메일
+export const Email_Icon = ({ size }: IconSize) => <AiOutlineMail size={size} /> //이메일
 
-export const Lock_Icon = ({ size }) => <AiOutlineLock size={size} /> //자물쇠
+export const Lock_Icon = ({ size }: IconSize) => <AiOutlineLock size={size} /> //자물쇠
 
-export const Name_Icon = ({ size }) => <BiUser size={size} /> //인간
+export const Name_Icon = ({ size }: IconSize) => <BiUser size={size} /> //인간
 
-export const Phone_Icon = ({ size }) => <BsPhone size={size} /> //핸드폰
+export const Phone_Icon = ({ size }: IconSize) => <BsPhone size={size} /> //핸드폰
 
-export const Date_Icon = ({ size }) => <MdOutlineToday size={size} /> //달력
+export const Date_Icon = ({ size }: IconSize) => <MdOutlineToday size={size} /> //달력
 
-export const Nickname_Icon = ({ size }) => <RiUser5Line size={size} /> //달력
+export const Nickname_Icon = ({ size }: IconSize) => <RiUser5Line size={size} /> //달력
 
-export const Warning_Icon = ({ size }) => (
+export const Warning_Icon = ({ size }: IconSize) => (
 	<CiWarning size={size} color="#FB9B00" />
 ) //경고
 
@@ -55,12 +60,12 @@ export const Club_Icon = () => <AiFillBank size={'30'} /> //동아리
 
 export const Travel_Icon = () => <IoIosAirplane size={'30'} /> //여행
 
-export const Question_Icon = ({ size }) => (
+export const Question_Icon = ({ size }: IconSize) => (
 	<FaQuestion size={size} color="#FB9B00" />
 ) //경고
 
 export const Clap_Icon = () => <BiHappy size={'65'} color="#FB9B00" />
 
-export const PaginationArrowSingle_Icon = ({ rotate }) => (
+export const PaginationArrowSingle_Icon = ({ rotate }: IconRotate) => (
 	<AiFillCaretRight style={{ transform: `rotate(${rotate}deg)` }} />
 ) // 페이지네이션화살표 (>)

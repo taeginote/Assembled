@@ -1,5 +1,4 @@
 import { useSetRecoilState } from 'recoil'
-import { Question_Icon } from '../../Icons/Icons.js'
 import styled from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
 import Button from '../Button/Button'
@@ -7,6 +6,7 @@ import Button from '../Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { modalTypeOneProps } from '../../Types/modalType'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
+import { Question_Icon } from '../../Icons/Icons'
 
 function ConfirmModal({ text }: modalTypeOneProps) {
 	const setRecoilCounter = useSetRecoilState(modalViewConfirm)

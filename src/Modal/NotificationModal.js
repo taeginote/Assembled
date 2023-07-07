@@ -1,4 +1,3 @@
-import { Warning_Icon } from '../Icons/Icons.js'
 import { useSetRecoilState } from 'recoil'
 
 import { useNavigate } from 'react-router-dom'
@@ -6,6 +5,7 @@ import Button from '../Components/Button/Button'
 import { modalViewNotification } from '../Atoms/modalView.atom'
 import { styled } from 'styled-components'
 import { FlexCenterCSS } from '../Styles/common'
+import { Warning_Icon } from '../Icons/Icons'
 
 function NotificationModal({ text, url }) {
 	const setRecoilCounter = useSetRecoilState(modalViewNotification)

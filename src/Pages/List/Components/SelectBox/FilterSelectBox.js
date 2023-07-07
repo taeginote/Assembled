@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Down_Icon } from '../../../../Icons/Icons.js'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Down_Icon } from '../../../../Icons/Icons'
 
 function FilterSelectBox() {
 	const navigate = useNavigate()
@@ -43,7 +43,7 @@ function FilterSelectBox() {
 		<SelectBox onClick={() => setShowOptions(prev => !prev)}>
 			<Button>{selectFilter}</Button>
 			<IconBox>
-				<Down_Icon size="25" />
+				<Down_Icon />
 			</IconBox>
 			{isShowOptions && (
 				<SelectOptions>

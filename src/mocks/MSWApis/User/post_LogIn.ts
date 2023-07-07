@@ -1,9 +1,10 @@
 import { rest } from 'msw'
 import userData from '../../Data/UserData'
+import { postLogInType } from '../../../Types/mswType'
 
 export const post_Login = [
 	rest.post('/assemble/user/authentication', (req, res, ctx) => {
-		const { data } = req.body
+		const { data } = req.body as postLogInType
 		const { email, password } = data
 
 		const userdata = userData.find(
@@ -11,7 +12,7 @@ export const post_Login = [
 		)
 
 		//로그인 실패
-		if (userdata.length === 0)
+		if (!userdata)
 			return res(
 				ctx.status(401),
 				ctx.json({ message: '로그인을 실패하였습니다.' }),
