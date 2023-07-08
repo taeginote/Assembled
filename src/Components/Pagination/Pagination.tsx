@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import scrollToTop from '../../Utils/scrollToTop'
 import { FlexCenterCSS } from '../../Styles/common'
 import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
+import { PaginationDisabled, PaginationType } from '../../Types/type'
 
 /**
  * @param limit - 페이지네이션 몇 개씩 할 것인지
@@ -17,41 +18,40 @@ import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
 	goPage는 쿼리 스트링만을 변경시키는 함수입니다.
 */
 
-function Pagination({ limit, totalPage, setPage, scroll }) {
+function Pagination({ limit, totalPage, setPage, scroll }: PaginationType) {
 	const [searchParams, setSearchParams] = useSearchParams()
 
-	// const nowPage: number = parseInt(searchParams.get('page')) || 1 // 지금 페이지 number
-	const nowPage = parseInt(searchParams.get('page')) || 1 // 지금 페이지 number
+	const nowPage: number | null = parseInt(searchParams.get('page') ?? '1') // 지금 페이지 number
 
 	const startPage = Math.floor((nowPage - 1) / limit) * limit + 1 // 시작 페이지 number. ex. 지금 14페이지라면 시작 페이지는 11입니다.
 	let endPage = startPage + limit - 1 // 끝 페이지 번호. ex. 지금 14페이지라면 끝 페이지는 20입니다.
 	if (endPage >= totalPage) endPage = totalPage // 끝 페이지 번호 수정용. ex. 최종 마지막 페이지가 19라면 20이 끝 페이지가 아니라 19가 됩니다.
 
-	const createArray = (start, end) => {
+	const createArray = (start: number, end: number) => {
 		return Array(end - start + 1)
-			.fill()
+			.fill(false)
 			.map((_, i) => start + i)
 	}
 
-	const goPage = number => {
+	const goPage = (number: number) => {
 		setPage(number)
 		// 기존 쿼리 스트링을 유지
-		const queryString = {}
+		const queryString = new URLSearchParams()
 		if (searchParams.toString()) {
 			searchParams
 				.toString()
 				.split('&')
-				.forEach(query => {
-					const [key, value] = query.split('=')
-					queryString[key] = value
+				.forEach((query: string) => {
+					const [key, value]: string[] = query.split('=')
+					queryString.set(key, value)
 				})
 		}
 
-		queryString['page'] = number // 쿼리 스트링 값 중 'page'만 변경
+		queryString.set('page', number.toString()) // 쿼리 스트링 값 중 'page'만 변경
 		setSearchParams(queryString)
 	}
 
-	const isDisabled = type => {
+	const isDisabled = (type: PaginationDisabled) => {
 		switch (type) {
 			case 'start':
 				return Math.floor((nowPage - 1) / limit) === 0
@@ -80,7 +80,7 @@ function Pagination({ limit, totalPage, setPage, scroll }) {
 						goPage(i + startPage)
 						scrollToTop(scroll)
 					}}
-					aria-current={nowPage === i + startPage ? 'page' : null}
+					aria-current={nowPage === i + startPage ? 'page' : undefined}
 				>
 					{i + startPage}
 				</S.NumBtn>
