@@ -1,11 +1,16 @@
 import { useContext, useState, createContext, useEffect } from 'react'
 import TokenService from '../Utils/TokenService'
+import { AuthContextType, childrenType } from '../Types/type'
 
-const AuthContext = createContext()
+const AuthContext = createContext<AuthContextType>({
+	accessToken: null,
+	login: () => {},
+	logout: () => {},
+})
 export const useAuth = () => useContext(AuthContext)
 
-function AuthProvider({ children }) {
-	const [accessToken, setAccessToken] = useState(null)
+function AuthProvider({ children }: childrenType) {
+	const [accessToken, setAccessToken] = useState<string | null>(null)
 
 	useEffect(() => {
 		const token = TokenService.getAccessToken()
@@ -13,7 +18,7 @@ function AuthProvider({ children }) {
 		setAccessToken(token)
 	}, [])
 
-	const login = token => {
+	const login = (token: string) => {
 		TokenService.setAccessToken(token)
 		setAccessToken(token)
 	}

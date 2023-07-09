@@ -9,3 +9,8 @@ type postLogInData = {
 export type postLogInType = {
 	data: postLogInData
 }
+
+//get_Detail
+export type ListDataItem = {
+	postId: string
+}

@@ -17,12 +17,23 @@ export type DetailApiType = {
 	Comments(data: any): Promise<AxiosResponse<CommentData>>
 }
 
+//디테일 페이지 post 댓글
+export type postComment = {
+	data: {
+		commentContents: string
+		userId: number
+		postId?: number | null
+	}
+}
+
 //리스트 페이지 api type
 type GetListData = {
 	page?: number
 	category?: 'study' | 'project'
 	filter?: 'total' | 'like' | 'popular'
+	response?: []
 }
+
 export type ListApiType = {
 	getList(params: GetListData): Promise<AxiosResponse<GetListData>>
 }
@@ -39,4 +50,24 @@ type PostRegisterData = {
 
 export type RegisterApiType = {
 	data: PostRegisterData
+}
+
+//User api type
+export type signUpData = {
+	email: string
+	name: string
+	nickname: string
+	password: string
+	birthDate: string
+	phoneNumber: string
+}
+export type LoginData = {
+	email?: string
+	password?: string
+	token?: string
+}
+
+export type UserApiType = {
+	SignUp(data: signUpData): Promise<AxiosResponse<signUpData>>
+	Login(data: LoginData): Promise<AxiosResponse<LoginData>>
 }
