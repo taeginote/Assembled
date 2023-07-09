@@ -18,7 +18,12 @@ import { PaginationDisabled, PaginationType } from '../../Types/type'
 	goPage는 쿼리 스트링만을 변경시키는 함수입니다.
 */
 
-function Pagination({ limit, totalPage, setPage, scroll }: PaginationType) {
+function Pagination({
+	limit,
+	totalPage,
+	setPage,
+	scroll,
+}: PaginationType): JSX.Element {
 	const [searchParams, setSearchParams] = useSearchParams()
 
 	const nowPage: number | null = parseInt(searchParams.get('page') ?? '1') // 지금 페이지 number
@@ -60,7 +65,7 @@ function Pagination({ limit, totalPage, setPage, scroll }: PaginationType) {
 		}
 	}
 
-	if (!endPage) return // endPage이 0으로 온 경우 아무 것도 return X
+	// if (!endPage) return undefined // endPage이 0으로 온 경우 아무 것도 return X
 
 	return (
 		<S.Nav>
