@@ -53,7 +53,8 @@ const Wrapper = styled.div`
 const Container = styled.div`
 	${FlexAlignCSS}
 `
-const NavBox = styled.div`
+//스타일 props
+const NavBox = styled.div<{ state: boolean }>`
 	margin-right: 4rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
 	font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};

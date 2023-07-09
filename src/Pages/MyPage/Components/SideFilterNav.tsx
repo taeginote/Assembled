@@ -48,7 +48,7 @@ export default SideFilterNav
 const Wrapper = styled.div`
 	${FlexColumnCSS}
 `
-const Box = styled.div`
+const Box = styled.div<{ state: boolean }>`
 	width: 120%;
 	cursor: pointer;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};

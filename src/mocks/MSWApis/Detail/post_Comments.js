@@ -5,7 +5,7 @@ import listData from '../../Data/ListData'
 export const post_CommentsData = [
 	rest.post('/Comments', (req, res, ctx) => {
 		const { data } = req.body
-
+		console.log(data)
 		let commentCreator = listData.response.map(el => {
 			if (el.postId == data.postId) {
 				return el.writer

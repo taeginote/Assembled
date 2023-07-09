@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import ListApi from '../../Apis/ListApi'
 
-type pageType = number
+type pageType = number | undefined
 type categoryType = 'study' | 'project'
 type filterType = 'total' | 'like' | 'popular'
 

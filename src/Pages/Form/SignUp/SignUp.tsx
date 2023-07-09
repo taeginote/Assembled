@@ -5,7 +5,7 @@ import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import Notice from './Components/Notice'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { HookFormRule } from '../../../Consts/HookFormRule'
 import HookFormError from '../../../Components/Error/HookFormError'
 import NotificationModal from '../../../Components/Modal/NotificationModal'
@@ -23,6 +23,8 @@ import {
 	Nickname_Icon,
 	Phone_Icon,
 } from '../../../Icons/Icons'
+import { signUpData } from '../../../Types/apiType'
+import { SignUpSubmitData } from '../../../Types/type'
 
 function SignUp() {
 	const {
@@ -37,23 +39,36 @@ function SignUp() {
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
-	const { mutate, isLoading } = useMutation(data => UserApi.SignUp(data), {
-		onSuccess: res => {
-			setRecoilSuccessModal(() => true)
+	const { mutate, isLoading } = useMutation(
+		(data: signUpData) => UserApi.SignUp(data),
+		{
+			onSuccess: res => {
+				setRecoilSuccessModal(() => true)
+			},
+			onError: err => {},
 		},
-		onError: err => {},
-	})
+	)
 
-	const onSubmit = e => {
-		const formData = new FormData()
+	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
+		// const formData = new FormData()
 
-		formData.append('email', e.SignUpEmail)
-		formData.append('name', e.SignUpName.trim())
-		formData.append('nickname', e.SignUpNickName.trim())
-		formData.append('password', e.SignUpPw)
-		formData.append('birthDate', e.SignUpBirthday)
-		formData.append('phoneNumber', e.SignUpPhone)
+		// formData.append('email', e.SignUpEmail)
+		// formData.append('name', e.SignUpName.trim())
+		// formData.append('nickname', e.SignUpNickName.trim())
+		// formData.append('password', e.SignUpPw)
+		// formData.append('birthDate', e.SignUpBirthday)
+		// formData.append('phoneNumber', e.SignUpPhone)
 
+		//보류
+		const formData = {
+			email: e.SignUpEmail || '',
+			name: e.SignUpName?.trim() || '',
+			nickname: e.SignUpNickName?.trim() || '',
+			password: e.SignUpPw || '',
+			birthDate: e.SignUpBirthday || '',
+			phoneNumber: e.SignUpPhone || '',
+		}
+		console.log(formData)
 		mutate(formData)
 	}
 
@@ -69,7 +84,9 @@ function SignUp() {
 					/>
 				</span>
 				{errors.SignUpEmail && (
-					<HookFormError>{errors.SignUpEmail.message}</HookFormError>
+					<HookFormError>
+						{errors.SignUpEmail?.message?.toString()}
+					</HookFormError>
 				)}
 				<span>
 					<Name_Icon size={'22'} />
@@ -79,7 +96,9 @@ function SignUp() {
 					/>
 				</span>
 				{errors.SignUpName && (
-					<HookFormError>{errors.SignUpName.message}</HookFormError>
+					<HookFormError>
+						{errors.SignUpName?.message?.toString()}
+					</HookFormError>
 				)}
 				<span>
 					<Nickname_Icon size={'22'} />
@@ -89,7 +108,9 @@ function SignUp() {
 					/>
 				</span>
 				{errors.SignUpNickName && (
-					<HookFormError>{errors.SignUpNickName.message}</HookFormError>
+					<HookFormError>
+						{errors.SignUpNickName?.message?.toString()}
+					</HookFormError>
 				)}
 				<span>
 					<Lock_Icon size={'22'} />
@@ -99,7 +120,7 @@ function SignUp() {
 					/>
 				</span>
 				{errors.SignUpPw && (
-					<HookFormError>{errors.SignUpPw.message}</HookFormError>
+					<HookFormError>{errors.SignUpPw?.message?.toString()}</HookFormError>
 				)}
 				<span>
 					<Lock_Icon size={'22'} />
@@ -111,7 +132,9 @@ function SignUp() {
 					/>
 				</span>
 				{errors.SignUpPwConfirm && (
-					<HookFormError>{errors.SignUpPwConfirm.message}</HookFormError>
+					<HookFormError>
+						{errors.SignUpPwConfirm?.message?.toString()}
+					</HookFormError>
 				)}
 				<span>
 					<Date_Icon size={'22'} />
@@ -121,7 +144,9 @@ function SignUp() {
 					/>
 				</span>
 				{errors.SignUpBirthday && (
-					<HookFormError>{errors.SignUpBirthday.message}</HookFormError>
+					<HookFormError>
+						{errors.SignUpBirthday?.message?.toString()}
+					</HookFormError>
 				)}
 				<span>
 					<Phone_Icon size={'22'} />
@@ -131,7 +156,9 @@ function SignUp() {
 					/>
 				</span>
 				{errors.SignUpPhone && (
-					<HookFormError>{errors.SignUpPhone.message}</HookFormError>
+					<HookFormError>
+						{errors.SignUpPhone?.message?.toString()}
+					</HookFormError>
 				)}
 				<Notice />
 				<S.SignUpButton>로그인</S.SignUpButton>

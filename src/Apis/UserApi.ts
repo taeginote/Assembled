@@ -1,7 +1,8 @@
+import { UserApiType } from '../Types/apiType'
 import axiosInstance from './@core'
 
 //User 관련 Apis
-const UserApi = {
+const UserApi: UserApiType = {
 	SignUp(data) {
 		return axiosInstance.post('/assemble/user/signup', data, {
 			headers: {

@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Down_Icon } from '../../../../Icons/Icons'
 
+type eventType = {
+	name: string
+	url: string
+}
 function FilterSelectBox() {
 	const navigate = useNavigate()
 	const [isShowOptions, setShowOptions] = useState(false)
@@ -34,7 +38,7 @@ function FilterSelectBox() {
 		},
 	]
 
-	const onClickSelectFilter = e => {
+	const onClickSelectFilter = (e: eventType) => {
 		setSelectFilter(() => e.name)
 		navigate(`?category=${category}&filter=${e.url}`)
 	}
@@ -97,7 +101,7 @@ const SelectOptions = styled.ul`
 	position: absolute;
 	background-color: #ffffff;
 `
-const Option = styled.li`
+const Option = styled.li<{ select: boolean }>`
 	border: none;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	line-height: 1.6rem;

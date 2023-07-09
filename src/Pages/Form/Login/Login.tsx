@@ -4,7 +4,7 @@ import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import { Link } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import HookFormError from '../../../Components/Error/HookFormError'
 import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
@@ -15,6 +15,8 @@ import SuccessModal from '../../../Components/Modal/successModal'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
 import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
+import { LoginData } from '../../../Types/apiType'
+import { LoginSubmitData } from '../../../Types/type'
 
 function Login() {
 	const {
@@ -31,17 +33,22 @@ function Login() {
 
 	const auth = useAuth()
 
-	const { mutate, isLoading } = useMutation(data => UserApi.Login(data), {
-		onSuccess: res => {
-			setRecoilSuccessModal(() => true)
-			auth.login(res.data.token)
+	const { mutate, isLoading } = useMutation(
+		(data: LoginData) => UserApi.Login(data),
+		{
+			onSuccess: res => {
+				setRecoilSuccessModal(() => true)
+				if (res.data.token) {
+					auth.login(res.data.token)
+				}
+			},
+			onError: err => {
+				setRecoilCounter(() => true)
+			},
 		},
-		onError: err => {
-			setRecoilCounter(() => true)
-		},
-	})
+	)
 
-	const onSubmit = e => {
+	const onSubmit: SubmitHandler<LoginSubmitData> = e => {
 		const logInData = {
 			email: e.LoginEmail,
 			password: e.LoginPW,
@@ -62,7 +69,9 @@ function Login() {
 					/>
 				</span>
 				{errors.LoginEmail && (
-					<HookFormError>{errors.LoginEmail.message}</HookFormError>
+					<HookFormError>
+						{errors.LoginEmail?.message?.toString()}
+					</HookFormError>
 				)}
 				<span>
 					<Lock_Icon size={'22'} />
@@ -72,7 +81,7 @@ function Login() {
 					/>
 				</span>
 				{errors.LoginPW && (
-					<HookFormError>{errors.LoginPW.message}</HookFormError>
+					<HookFormError>{errors.LoginPW?.message?.toString()}</HookFormError>
 				)}
 				<S.GoSignUp>
 					아직 어셈블 계정이 없나요?
