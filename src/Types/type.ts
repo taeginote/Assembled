@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes } from 'react'
+
 //children 있는 자식 type
 export type childrenType = {
 	children: React.ReactNode
@@ -60,3 +62,5 @@ export type SignUpSubmitData = {
 	SignUpBirthday?: string
 	SignUpPhone?: string
 }
+
+//공용 Button type

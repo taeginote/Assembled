@@ -1,5 +1,13 @@
 import styled, { css } from 'styled-components'
 
+type Props = {
+	variant: 'default-white' | 'default-reverse' | 'default'
+	shape: 'default'
+	size: 'normal' | 'big' | 'default'
+	fontSize: 'default'
+	disabled: boolean
+}
+
 const variantCSS = {
 	default: css`
 		background-color: ${({ theme }) => theme.COLOR.main};
@@ -57,7 +65,7 @@ const fontSizeCSS = {
 	`,
 }
 
-export const Button = styled.button`
+export const Button = styled.button<Props>`
 	color: white;
 	${({ variant }) => variantCSS[variant]}
 	${({ shape }) => shapeCSS[shape]}

@@ -1,6 +1,6 @@
 import * as S from './Button.style'
 
-function Button(props) {
+function Button(props: any) {
 	const {
 		variant = 'default',
 		shape = 'default',
