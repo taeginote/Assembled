@@ -20,8 +20,8 @@ export type ItemDataType = {
 }
 
 //onKey도 쓰이고 target도 쓰이는곳
-export type EventTargetType = React.ChangeEvent<HTMLInputElement> &
-	React.KeyboardEvent<HTMLInputElement>
+export type EventTargetType =
+	| React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>
 
 //select Box
 export type SelectBoxType = {

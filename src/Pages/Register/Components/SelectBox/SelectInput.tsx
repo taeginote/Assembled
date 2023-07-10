@@ -3,12 +3,24 @@ import styled from 'styled-components'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { Down_Icon } from '../../../../Icons/Icons'
 
-function SelectInput(props) {
+//보류
+interface SelectData {
+	value: string
+	text: any
+}
+interface SelectInputProps {
+	// Data: SelectData[]
+	Data: any[]
+	errors: any // errors의 타입을 정확히 지정해주어야 함
+	field: any // field의 타입을 정확히 지정해주어야 함
+}
+
+function SelectInput(props: SelectInputProps) {
 	const { Data, errors, field } = props
 	const [isView, setIsView] = useState(false)
 	const [selectVal, setSelectVal] = useState(null)
 
-	const onClickSelect = data => {
+	const onClickSelect = (data: SelectData) => {
 		field.onChange(data.value)
 		setSelectVal(data.text)
 	}
@@ -47,7 +59,7 @@ const Wrapper = styled.div`
 	position: relative;
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 `
-const Title = styled.div`
+const Title = styled.div<{ status: boolean; isView: boolean }>`
 	${FlexBetweenCSS}
 	margin-bottom: 0.5rem;
 	& > div {

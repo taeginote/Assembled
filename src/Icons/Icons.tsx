@@ -4,6 +4,7 @@ import {
 	AiOutlineLock,
 	AiFillBank,
 	AiFillCaretRight,
+	AiOutlineCamera,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -69,3 +70,5 @@ export const Clap_Icon = () => <BiHappy size={'65'} color="#FB9B00" />
 export const PaginationArrowSingle_Icon = ({ rotate }: IconRotate) => (
 	<AiFillCaretRight style={{ transform: `rotate(${rotate}deg)` }} />
 ) // 페이지네이션화살표 (>)
+
+export const Camera_Icon = () => <AiOutlineCamera size={'25'} /> // 이미지 추가
