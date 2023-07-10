@@ -3,9 +3,9 @@ import axiosInstance from './@core'
 
 //등록 관련 Apis
 const RegisterApi = {
-	Register({ data }: RegisterApiType) {
+	Register(data: RegisterApiType) {
 		console.log(data)
-		return axiosInstance.post('/register', { data })
+		return axiosInstance.post('/register', data)
 	},
 }
 

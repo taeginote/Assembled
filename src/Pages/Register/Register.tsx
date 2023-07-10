@@ -7,13 +7,18 @@ import {
 	WidthAutoCSS,
 } from '../../Styles/common'
 
-import { selectDataTeamMember } from '../Register/Components/SelectBox/SelectData'
-import { selectDataCategory } from '../Register/Components/SelectBox/SelectData'
-import { selectDataPeriod } from '../Register/Components/SelectBox/SelectData'
+import { selectDataTeamMember } from './Components/SelectBox/SelectData'
+import { selectDataCategory } from './Components/SelectBox/SelectData'
+import { selectDataPeriod } from './Components/SelectBox/SelectData'
 import { useRecoilState } from 'recoil'
 
 import ConfirmModal from '../../Components/Modal/confirmModal'
-import { Controller, useForm } from 'react-hook-form'
+import {
+	Controller,
+	FieldValues,
+	SubmitHandler,
+	useForm,
+} from 'react-hook-form'
 import HookFormError from '../../Components/Error/HookFormError'
 import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
@@ -22,6 +27,7 @@ import RegisterApi from '../../Apis/RegisterApi'
 import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
+import { PostRegister, PostRegisterData } from '../../Types/apiType'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -34,16 +40,20 @@ function Register() {
 		control,
 	} = useForm()
 
-	const { mutate } = useMutation(data => RegisterApi.Register(data), {
-		onSuccess: () => {
-			setRecoilSuccessModal(true)
+	const { mutate } = useMutation(
+		(data: PostRegisterData) => RegisterApi.Register({ data }),
+		{
+			onSuccess: () => {
+				setRecoilSuccessModal(true)
+			},
+			onError: () => {},
 		},
-		onError: () => {},
-	})
+	)
 
-	const onSubmit = e => {
+	const onSubmit: SubmitHandler<FieldValues> = e => {
 		//보낼데이터
-		const data = {
+		//이거 보류
+		const data: any = {
 			title: e.Title,
 			contents: e.Contents,
 			category: e.Category,
@@ -51,7 +61,8 @@ function Register() {
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
 		}
-		mutate({ data })
+
+		mutate(data)
 	}
 
 	return (
@@ -76,7 +87,9 @@ function Register() {
 					></Controller>
 					<span>
 						{errors.Category && (
-							<HookFormError>{errors.Category.message}</HookFormError>
+							<HookFormError>
+								{errors.Category?.message?.toString()}
+							</HookFormError>
 						)}
 					</span>
 				</S.Box>
@@ -99,7 +112,9 @@ function Register() {
 					></Controller>
 					<span>
 						{errors.TeamMember && (
-							<HookFormError>{errors.TeamMember.message}</HookFormError>
+							<HookFormError>
+								{errors.TeamMember?.message?.toString()}
+							</HookFormError>
 						)}
 					</span>
 				</S.Box>
@@ -121,7 +136,9 @@ function Register() {
 					></Controller>
 					<span>
 						{errors.Period && (
-							<HookFormError>{errors.Period.message}</HookFormError>
+							<HookFormError>
+								{errors.Period?.message?.toString()}
+							</HookFormError>
 						)}
 					</span>
 				</S.Box>
@@ -135,15 +152,19 @@ function Register() {
 						required: '제목을 입력해주세요',
 					}}
 					render={({ field }) => (
-						<input
+						<S.Input
 							placeholder="제목을 입력해 주세요"
 							status={field.value === undefined}
 							value={field.value}
-							onChange={e => field.onChange(e.target.value)}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+								field.onChange(e.target.value)
+							}
 						/>
 					)}
 				></Controller>
-				{errors.Title && <HookFormError>{errors.Title.message}</HookFormError>}
+				{errors.Title && (
+					<HookFormError>{errors.Title?.message?.toString()}</HookFormError>
+				)}
 			</S.Box>
 			<S.Box>
 				<div>모임에 대한 설명 *</div>
@@ -156,14 +177,14 @@ function Register() {
 					render={({ field }) => (
 						<textarea
 							placeholder="설명을 입력해 주세요"
-							status={field.value === undefined}
+							// status={field.value === undefined}
 							value={field.value}
 							onChange={e => field.onChange(e.target.value)}
 						/>
 					)}
 				></Controller>
 				{errors.Contents && (
-					<HookFormError>{errors.Contents.message}</HookFormError>
+					<HookFormError>{errors.Contents?.message?.toString()}</HookFormError>
 				)}
 			</S.Box>
 			<span>
@@ -227,19 +248,7 @@ const Box = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		margin-bottom: 1rem;
 	}
-	& > input {
-		font-size: ${({ theme }) => theme.FONT_SIZE.small};
-		width: 100%;
-		margin-bottom: 0.5rem;
-		padding: 1.3rem 1rem;
-		border-radius: 0.5rem;
-		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
-		color: ${({ theme, status }) =>
-			status ? theme.COLOR.common.gray[200] : 'black'};
-		:focus {
-			border: 1px solid ${({ theme }) => theme.COLOR.sub};
-		}
-	}
+
 	& > textarea {
 		width: 100%;
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
@@ -252,6 +261,19 @@ const Box = styled.div`
 		:focus {
 			border: 1.5px solid ${({ theme }) => theme.COLOR.sub};
 		}
+	}
+`
+const Input = styled.input<{ status: boolean }>`
+	font-size: ${({ theme }) => theme.FONT_SIZE.small};
+	width: 100%;
+	margin-bottom: 0.5rem;
+	padding: 1.3rem 1rem;
+	border-radius: 0.5rem;
+	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
+	color: ${({ theme, status }) =>
+		status ? theme.COLOR.common.gray[200] : 'black'};
+	:focus {
+		border: 1px solid ${({ theme }) => theme.COLOR.sub};
 	}
 `
 const DivBtn = styled.div`
@@ -293,4 +315,5 @@ const S = {
 	Box,
 	DivBtn,
 	DivBtn1,
+	Input,
 }

@@ -4,7 +4,6 @@ import { useMutation } from '@tanstack/react-query'
 import { FlexAlignCSS } from '../../../Styles/common'
 import DetailApi from '../../../Apis/DetailApi'
 import Button from '../../../Components/Button/Button'
-
 import { CommentFormPropsType } from '../../../Types/dataType'
 import { postComment } from '../../../Types/apiType'
 

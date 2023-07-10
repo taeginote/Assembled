@@ -12,14 +12,14 @@ export type response = {
 	postId: number
 	title: string
 	contents: string
-	category: string
+	category: 'study' | 'project' | string
 	writer: string
 	writeDate: string
 	postStatus: string
 	hits: string
 	likes: string
-	personnelNumber: string
-	expectedPeriod: string
+	personnelNumber: 0 | 2 | 3 | 4 | 5 | 10 | number
+	expectedPeriod: '0' | '1' | '2' | '3' | '4' | '5' | '6' | string
 	profile: {
 		fileFullPath: string
 		originalName: string

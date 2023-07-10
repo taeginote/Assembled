@@ -1,18 +1,19 @@
 import { rest } from 'msw'
 import CurrentTime from '../../../Utils/CurrentTime'
 import listData from '../../Data/ListData'
+import { Comments, postCommentsType } from '../../../Types/mswType'
 
 export const post_CommentsData = [
 	rest.post('/Comments', (req, res, ctx) => {
-		const { data } = req.body
+		const { data } = req.body as postCommentsType
 		console.log(data)
 		let commentCreator = listData.response.map(el => {
-			if (el.postId == data.postId) {
+			if (el.postId == Number(data.postId)) {
 				return el.writer
 			}
 		})
 
-		const realComments = {
+		const realComments: Comments = {
 			commentContents: data.commentContents,
 			commentCreator,
 			userProfile: {
@@ -23,11 +24,11 @@ export const post_CommentsData = [
 			commentCreatedDate: CurrentTime(),
 		}
 		listData.response.map(el => {
-			if (el.postId == data.postId) {
+			if (el.postId == Number(data.postId)) {
 				el.comments.unshift(realComments)
 			}
 		})
 
-		return res(ctx.status(200), ctx.json())
+		return res(ctx.status(200), ctx.json(realComments))
 	}),
 ]

@@ -21,7 +21,7 @@ export const get_ListData = [
 				success: true,
 				status: 200,
 				response: [
-					...listData.response.filter(el => el.category === '프로젝트'),
+					...listData.response.filter(el => el.category === 'project'),
 				],
 			}
 		}
@@ -29,7 +29,7 @@ export const get_ListData = [
 			real_ListData = {
 				success: true,
 				status: 200,
-				response: [...listData.response.filter(el => el.category === '스터디')],
+				response: [...listData.response.filter(el => el.category === 'study')],
 			}
 		}
 		if (filter === 'popular') {
@@ -37,7 +37,9 @@ export const get_ListData = [
 				success: true,
 				status: 200,
 				response: [
-					...listData.response.sort((a, b) => a.hits - b.hits).reverse(),
+					...listData.response
+						.sort((a, b) => Number(a.hits) - Number(b.hits))
+						.reverse(),
 				],
 			}
 		}
@@ -47,7 +49,9 @@ export const get_ListData = [
 				success: true,
 				status: 200,
 				response: [
-					...listData.response.sort((a, b) => a.likes - b.likes).reverse(),
+					...listData.response
+						.sort((a, b) => Number(a.likes) - Number(b.likes))
+						.reverse(),
 				],
 			}
 		}

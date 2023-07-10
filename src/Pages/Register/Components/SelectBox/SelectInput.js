@@ -4,7 +4,7 @@ import { FlexBetweenCSS } from '../../../../Styles/common'
 import { Down_Icon } from '../../../../Icons/Icons'
 
 function SelectInput(props) {
-	const { Data, errors, field, ...rest } = props
+	const { Data, errors, field } = props
 	const [isView, setIsView] = useState(false)
 	const [selectVal, setSelectVal] = useState(null)
 

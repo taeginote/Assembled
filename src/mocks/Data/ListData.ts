@@ -12,13 +12,13 @@ for (let i = 0; i < 10; i++) {
 			postId: i,
 			title: '인프런에서 스터디 구합니다.',
 			contents: '어셈블 프로젝트에서 디자이너 1명 구합니다.',
-			category: '프로젝트',
+			category: 'project',
 			writer: '아디다스',
 			writeDate: CurrentTime(),
 			postStatus: '모집중',
 			hits: '5',
 			likes: '3',
-			personnelNumber: '5',
+			personnelNumber: 5,
 			expectedPeriod: '3',
 			profile: {
 				fileFullPath:
@@ -44,13 +44,13 @@ for (let i = 0; i < 10; i++) {
 			postId: (i + 1) * 100,
 			title: '사이드프로젝트 같이 할 인원구합니다.',
 			contents: '우아한테크코스 지원할 예정인데 백3 프2로 진행할 예정입니다.',
-			category: '프로젝트',
+			category: 'project',
 			writer: '우아한테크코스',
 			writeDate: CurrentTime(),
 			postStatus: '모집중',
 			hits: '50',
 			likes: '10',
-			personnelNumber: '5',
+			personnelNumber: 5,
 			expectedPeriod: '5',
 			profile: {
 				fileFullPath:
@@ -76,13 +76,13 @@ for (let i = 0; i < 10; i++) {
 			title: '이번에 독서 스터디 같이하고싶은사람 (주 3회)',
 			contents:
 				'안녕하세요. 독서스터디 조장 신짱구 입니다. 이번 독서동아리는 1년동안 진행중에 있는 안정적인 동아리입니다. 주 2회 대면하고 1회 비대면으로 진행합니다. 가능하신분은 오픈톡으로 연락주시거나 댓글로 편하게 주세요',
-			category: '스터디',
+			category: 'study',
 			writer: '다읽어',
 			writeDate: CurrentTime(),
 			postStatus: '모집중',
 			hits: '4',
 			likes: '20',
-			personnelNumber: '10',
+			personnelNumber: 10,
 			expectedPeriod: '0',
 			profile: {
 				fileFullPath:
