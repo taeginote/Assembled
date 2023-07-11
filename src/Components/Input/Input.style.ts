@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const Input = styled.input`
+export const Input = styled.input<{ status: string }>`
 	border: none;
 	width: 100%;
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
