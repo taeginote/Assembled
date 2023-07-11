@@ -1,13 +1,4 @@
-import { ButtonHTMLAttributes } from 'react'
 import Button from './Button'
-import { Story } from '@storybook/react'
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	variant?: 'default' | 'default-reverse' | 'default-white'
-	shape?: 'default'
-	size?: 'default' | 'big' | 'normal'
-	fontSize?: 'default'
-}
 
 export default {
 	title: 'Components/Button',
@@ -32,12 +23,12 @@ export default {
 	},
 }
 
-const Template: Story<ButtonProps> = args => <Button {...args} />
-
-export const Default = Template.bind({})
-Default.args = {
-	variant: 'default',
-	shape: 'default',
-	size: 'default',
-	fontSize: 'default',
+export const Default = {
+	args: {
+		variant: 'default',
+		shape: 'default',
+		size: 'default',
+		fontSize: 'default',
+		children: 'Button Test',
+	},
 }
