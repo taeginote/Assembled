@@ -5,6 +5,7 @@ import {
 	AiFillBank,
 	AiFillCaretRight,
 	AiOutlineCamera,
+	AiOutlineCheckCircle,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -72,3 +73,7 @@ export const PaginationArrowSingle_Icon = ({ rotate }: IconRotate) => (
 ) // 페이지네이션화살표 (>)
 
 export const Camera_Icon = () => <AiOutlineCamera size={'25'} /> // 이미지 추가
+
+export const Check_Icon = () => (
+	<AiOutlineCheckCircle size={'100'} color="#FB9B00" />
+) //체크 버튼

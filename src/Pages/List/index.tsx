@@ -4,7 +4,7 @@ import {
 	GridCenterCSS,
 	WidthAutoCSS,
 } from '../../Styles/common'
-import ItemBox from '../../Components/ItemBox/ItemBox'
+
 import Banner from '../../Components/Banner'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
 import useGetListData from '../../Hooks/Queries/get-list'
@@ -14,6 +14,7 @@ import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 
 import { useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
+import ItemBox from '../../Components/ItemBox/ItemBox'
 
 function List() {
 	//searchParams 타입을 아직 모르겠음
@@ -26,7 +27,7 @@ function List() {
 	const { data, isLoading } = useGetListData(currentPage, category, filter)
 
 	const totalPage: number = 3
-
+	console.log(data)
 	return (
 		<>
 			<S.Wrapper>

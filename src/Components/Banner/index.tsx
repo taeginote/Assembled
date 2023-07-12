@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Banner1 from './Components/Banner1'
 import Banner2 from './Components/Banner2'
 import Banner3 from './Components/Banner3'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
