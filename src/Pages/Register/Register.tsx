@@ -61,7 +61,6 @@ function Register() {
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
 		}
-
 		mutate(data)
 	}
 
@@ -71,76 +70,30 @@ function Register() {
 			<S.Container>
 				<S.Box>
 					<div>카테고리 *</div>
-					<Controller
-						name={'Category'}
+					<SelectInput
+						name="Category"
+						Data={selectDataCategory}
 						control={control}
-						rules={{
-							required: '카테고리를 선택해주세요.',
-						}}
-						render={({ field }) => (
-							<SelectInput
-								Data={selectDataCategory}
-								errors={errors}
-								field={field}
-							/>
-						)}
-					></Controller>
-					<span>
-						{errors.Category && (
-							<HookFormError>
-								{errors.Category?.message?.toString()}
-							</HookFormError>
-						)}
-					</span>
+						errorMsg="카테고리를 선택해주세요."
+					/>
 				</S.Box>
-
 				<S.Box>
 					<div>인원 수 *</div>
-					<Controller
-						name={'TeamMember'}
+					<SelectInput
+						name="TeamMember"
+						Data={selectDataTeamMember}
 						control={control}
-						rules={{
-							required: '인원수를 선택해주세요.',
-						}}
-						render={({ field }) => (
-							<SelectInput
-								Data={selectDataTeamMember}
-								errors={errors}
-								field={field}
-							/>
-						)}
-					></Controller>
-					<span>
-						{errors.TeamMember && (
-							<HookFormError>
-								{errors.TeamMember?.message?.toString()}
-							</HookFormError>
-						)}
-					</span>
+						errorMsg="인원수를 선택해주세요."
+					/>
 				</S.Box>
 				<S.Box>
 					<div>총 진행 예정 달 *</div>
-					<Controller
-						name={'Period'}
+					<SelectInput
+						name="Period"
+						Data={selectDataPeriod}
 						control={control}
-						rules={{
-							required: '프로젝트 기간을 선택해주세요.',
-						}}
-						render={({ field }) => (
-							<SelectInput
-								Data={selectDataPeriod}
-								errors={errors}
-								field={field}
-							/>
-						)}
-					></Controller>
-					<span>
-						{errors.Period && (
-							<HookFormError>
-								{errors.Period?.message?.toString()}
-							</HookFormError>
-						)}
-					</span>
+						errorMsg="프로젝트 기간을 선택해주세요."
+					/>
 				</S.Box>
 			</S.Container>
 			<S.Box>
@@ -241,11 +194,11 @@ const Box = styled.div`
 		position: absolute;
 		top: 8.5rem;
 		* {
-			font-size: ${({ theme }) => theme.FONT_SIZE.small};
+			font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 		}
 	}
 	& > div {
-		font-size: ${({ theme }) => theme.FONT_SIZE.small};
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 		margin-bottom: 1rem;
 	}
 

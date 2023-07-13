@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Down_Icon } from '../../../../Icons/Icons'
+import { DownIcon } from '../../../../Icons/Icons'
 
 type eventType = {
 	name: string
@@ -47,7 +47,7 @@ function FilterSelectBox() {
 		<SelectBox onClick={() => setShowOptions(prev => !prev)}>
 			<Button>{selectFilter}</Button>
 			<IconBox>
-				<Down_Icon />
+				<DownIcon />
 			</IconBox>
 			{isShowOptions && (
 				<SelectOptions>

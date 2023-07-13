@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { FlexBetweenCSS } from '../../../../Styles/common'
-import { Down_Icon } from '../../../../Icons/Icons'
+import { DownIcon } from '../../../../Icons/Icons'
+import { Controller } from 'react-hook-form'
+import HookFormError from '../../../../Components/Error/HookFormError'
 
 //보류
 interface SelectData {
@@ -10,42 +12,56 @@ interface SelectData {
 }
 interface SelectInputProps {
 	// Data: SelectData[]
+	name: string
+	control: any
 	Data: any[]
-	errors: any // errors의 타입을 정확히 지정해주어야 함
-	field: any // field의 타입을 정확히 지정해주어야 함
+	errorMsg: string
 }
 
 function SelectInput(props: SelectInputProps) {
-	const { Data, errors, field } = props
+	const { name, Data, control, errorMsg } = props
 	const [isView, setIsView] = useState(false)
-	const [selectVal, setSelectVal] = useState(null)
 
-	const onClickSelect = (data: SelectData) => {
-		field.onChange(data.value)
-		setSelectVal(data.text)
-	}
 	return (
-		<S.Wrapper onClick={() => setIsView(!isView)}>
-			<S.Title isView={isView} status={field.value === undefined}>
-				<div>{selectVal === null ? '선택해 주세요' : selectVal}</div>
-				<span>
-					<Down_Icon />
-				</span>
-			</S.Title>
-			{isView && (
-				<S.Box>
-					{Data.map((data, idx) => (
-						<S.List
-							key={idx}
-							value={data.value}
-							onClick={() => onClickSelect(data)}
-						>
-							{data.text}
-						</S.List>
-					))}
-				</S.Box>
+		<Controller
+			name={name}
+			control={control}
+			rules={{
+				required: errorMsg,
+			}}
+			render={({ field, fieldState: { error } }) => (
+				<>
+					<S.Wrapper onClick={() => setIsView(!isView)}>
+						<S.Title isView={isView} status={field.value === undefined}>
+							<div>
+								{field.value === undefined ? '선택해 주세요' : field.value}
+							</div>
+							<span>
+								<DownIcon />
+							</span>
+						</S.Title>
+						{isView && (
+							<S.Box>
+								{Data.map((data, idx) => (
+									<S.List
+										key={idx}
+										value={data.value}
+										onClick={() => field.onChange(data.text)}
+									>
+										{data.text}
+									</S.List>
+								))}
+							</S.Box>
+						)}
+					</S.Wrapper>
+					<span>
+						{error && (
+							<HookFormError>{error.message?.toString()}</HookFormError>
+						)}
+					</span>
+				</>
 			)}
-		</S.Wrapper>
+		/>
 	)
 }
 export default SelectInput
@@ -55,7 +71,6 @@ const Wrapper = styled.div`
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 	padding-left: 1rem;
 	border-radius: 0.4rem;
-
 	position: relative;
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 `
@@ -78,11 +93,9 @@ const Box = styled.ul`
 	width: 100%;
 	z-index: 100000;
 	right: 0;
-
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 `
 const List = styled.li`
-	padding: 1rem 0 0.5rem 1rem;
 	:hover {
 		background-color: ${({ theme }) => theme.COLOR.sub};
 		transition: all linear 0.3s;

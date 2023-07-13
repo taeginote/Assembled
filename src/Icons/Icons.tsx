@@ -50,7 +50,7 @@ export const Warning_Icon = ({ size }: IconSize) => (
 	<CiWarning size={size} color="#FB9B00" />
 ) //경고
 
-export const Down_Icon = () => <BsCaretDownFill size={'30'} color="#FB9B00" />
+export const DownIcon = () => <BsCaretDownFill size={'30'} color="#FB9B00" />
 
 export const Computer_Icon = () => <RiComputerLine size={'30'} /> //컴퓨터
 
