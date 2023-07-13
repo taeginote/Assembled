@@ -18,7 +18,7 @@
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="https://github.com/taeginote"><img src="https://avatars.githubusercontent.com/u/103398790?v=4" width="100px;" alt=""/><br /><sub><b>프론트엔드 : 김태기 </b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/taeginote"><img src="https://avatars.githubusercontent.com/u/103398790?v=4" width="120px;" alt=""/><br /><sub><b>프론트엔드 : 김태기 </b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
