@@ -1,5 +1,5 @@
 <p align="middle" >
-<img width="200" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/460514cd-dd01-47e5-8bab-d95966010081">
+<img width="300" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/460514cd-dd01-47e5-8bab-d95966010081">
 </p>
 <br/>
  
