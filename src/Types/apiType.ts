@@ -79,8 +79,20 @@ export type LoginData = {
 	password?: string
 	token?: string
 }
+type EmailValidation = {
+	email?: string
+}
+type NicknameValidation = {
+	nickname?: string
+}
 
 export type UserApiType = {
 	SignUp(data: signUpData): Promise<AxiosResponse<signUpData>>
 	Login(data: LoginData): Promise<AxiosResponse<LoginData>>
+	getEmailValidation(
+		data: EmailValidation,
+	): Promise<AxiosResponse<EmailValidation>>
+	getNickNameValidation(
+		data: NicknameValidation,
+	): Promise<AxiosResponse<NicknameValidation>>
 }

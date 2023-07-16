@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import Input from '../../../Components/Input/Input'
-import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
+import {
+	FlexCenterCSS,
+	FlexColumnCSS,
+	TopPadding,
+} from '../../../Styles/common'
 
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
@@ -16,6 +20,7 @@ import UserApi from '../../../Apis/UserApi'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../../Components/Modal/successModal'
 import {
+	Camera_Icon,
 	Date_Icon,
 	Email_Icon,
 	Lock_Icon,
@@ -25,6 +30,7 @@ import {
 } from '../../../Icons/Icons'
 import { signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
+import { useState } from 'react'
 
 function SignUp() {
 	const {
@@ -32,6 +38,8 @@ function SignUp() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
+	const [preFile, setPreFile] = useState<string | null>('')
+	const [imgFile, setImgFile] = useState<File | null>()
 
 	const [recoilCounter, setRecoilCounter] = useRecoilState(
 		modalViewNotification,
@@ -39,7 +47,8 @@ function SignUp() {
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
-	const { mutate, isLoading } = useMutation(
+	//profileImage 추가해야함
+	const { mutate, isLoading, data } = useMutation(
 		(data: signUpData) => UserApi.SignUp(data),
 		{
 			onSuccess: res => {
@@ -49,9 +58,20 @@ function SignUp() {
 		},
 	)
 
+	const ChangePreFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files !== null) {
+			const file = e.target.files[0]
+			setImgFile(file)
+			const reader = new FileReader()
+			reader.readAsDataURL(file)
+			reader.onloadend = () => {
+				setPreFile(reader.result as string)
+			}
+		}
+	}
+
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
 		// const formData = new FormData()
-
 		// formData.append('email', e.SignUpEmail)
 		// formData.append('name', e.SignUpName.trim())
 		// formData.append('nickname', e.SignUpNickName.trim())
@@ -76,6 +96,24 @@ function SignUp() {
 		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.container>
 				<h3>회원가입</h3>
+				<S.InputBox>
+					<S.ProfileImg src={preFile as string} />
+					<S.ImgLabel htmlFor="profileImg">
+						<Camera_Icon />
+					</S.ImgLabel>
+					<Input
+						type="file"
+						id="profileImg"
+						accept="image/*"
+						style={{ display: 'none' }}
+						{...register('profile_img', {
+							onChange: (e: any) => {
+								ChangePreFile(e)
+							},
+						})}
+						s
+					/>
+				</S.InputBox>
 				<span>
 					<Email_Icon size={'22'} />
 					<Input
@@ -181,7 +219,7 @@ const container = styled.div`
 	min-width: 25%;
 	h3 {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
-		margin: 7rem 0 5rem 0;
+		margin: 3rem 0 2rem 0;
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 	}
 	span {
@@ -199,5 +237,33 @@ const container = styled.div`
 const SignUpButton = styled(Button)`
 	margin-top: 2rem;
 `
+const InputBox = styled.div`
+	${FlexAlignCSS}
+	padding-left: 5rem;
+	margin-bottom: 1.5rem;
+`
+const ImgLabel = styled.label`
+	cursor: pointer;
+	position: relative;
+	right: 5.5rem;
+	top: 6.4rem;
+	width: 3.8rem;
+	height: 3.8rem;
+	border-radius: 50%;
+	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[100]};
+	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 
-const S = { Wrapper, container, SignUpButton }
+	background: ${({ theme }) => theme.COLOR.common.white};
+	${FlexCenterCSS}
+`
+const ProfileImg = styled.img`
+	text-align: center;
+	border-radius: 50%;
+	width: 20.2rem;
+	height: 20.2rem;
+	margin-right: 2rem;
+	border: 1px solid ${({ theme }) => theme.COLOR.hover};
+	background: ${({ theme }) => theme.COLOR.common.white};
+`
+
+const S = { Wrapper, container, SignUpButton, InputBox, ImgLabel, ProfileImg }

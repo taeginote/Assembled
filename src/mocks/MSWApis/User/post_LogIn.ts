@@ -21,19 +21,26 @@ export const post_Login = [
 		const successData = {
 			success: true,
 			status: 200,
+			error: {
+				message: 'string',
+				status: 0,
+			},
 			token: 'token',
 			response: {
-				userId: '1',
 				email: 'taegi@naver.com',
-				phoneNumber: '01011112222',
-				role: 'USER',
-				nickname: 'taek	',
 				name: 'teak',
+				nickname: 'taek	',
+				phoneNumber: '01011112222',
 				profile: {
 					fileFullPath:
 						'https://img.suto.co.kr/data/file/free/562736188_c37uwHEJ_FB_IMG_1463665367004.jpg',
 					originalName: '파일 이름',
 				},
+				role: 'USER',
+				token: {
+					accessToken: 'string',
+				},
+				userId: 0,
 			},
 		}
 		return res(ctx.status(200), ctx.json(successData))

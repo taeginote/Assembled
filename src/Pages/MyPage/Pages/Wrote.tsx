@@ -55,6 +55,7 @@ const Wrapper = styled.div`
 	}
 `
 const Container = styled.div`
+	width: 100%;
 	${GridCenterCSS}
 	${ColumnNumberCSS(3)};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
