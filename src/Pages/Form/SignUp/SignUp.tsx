@@ -103,7 +103,6 @@ function SignUp() {
 								ChangePreFile(e)
 							},
 						})}
-						s
 					/>
 				</S.InputBox>
 				<span>

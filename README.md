@@ -26,4 +26,4 @@
 
 ## 프로젝트 기술스택 💡
 
-<img width="929" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/192a5544-c0fe-4678-b82f-db9bae1559be">
+<img width="600" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/192a5544-c0fe-4678-b82f-db9bae1559be">
