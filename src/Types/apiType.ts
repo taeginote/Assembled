@@ -67,13 +67,14 @@ export type RegisterApiType = {
 
 //User api type
 export type signUpData = {
-	email: string
-	name: string
-	nickname: string
-	password: string
-	birthDate: string
-	phoneNumber: string
+	email?: string
+	name?: string
+	nickname?: string
+	password?: string
+	birthDate?: string
+	phoneNumber?: string
 }
+
 export type LoginData = {
 	email?: string
 	password?: string
@@ -86,8 +87,24 @@ type NicknameValidation = {
 	nickname?: string
 }
 
+//보류
 export type UserApiType = {
-	SignUp(data: signUpData): Promise<AxiosResponse<signUpData>>
+	// SignUp(
+	// 	email?: string,
+	// 	name?: string | undefined,
+	// 	nickname?: string | undefined,
+	// 	password?: string,
+	// 	birthDate?: string,
+	// 	phoneNumber?: string,
+	// ): Promise<AxiosResponse<signUpData>>
+	SignUp(
+		email?: string,
+		name?: string | undefined,
+		nickname?: string | undefined,
+		password?: string,
+		birthDate?: string,
+		phoneNumber?: string,
+	): Promise<AxiosResponse<signUpData>>
 	Login(data: LoginData): Promise<AxiosResponse<LoginData>>
 	getEmailValidation(
 		data: EmailValidation,

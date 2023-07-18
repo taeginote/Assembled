@@ -31,6 +31,7 @@ import {
 import { signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useState } from 'react'
+import { compose } from 'msw'
 
 function SignUp() {
 	const {
@@ -38,8 +39,8 @@ function SignUp() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
-	const [preFile, setPreFile] = useState<string | null>('')
-	const [imgFile, setImgFile] = useState<File | null>()
+	const [preFile, setPreFile] = useState('')
+	const [imgFile, setImgFile] = useState()
 
 	const [recoilCounter, setRecoilCounter] = useRecoilState(
 		modalViewNotification,
@@ -48,29 +49,33 @@ function SignUp() {
 		useRecoilState(modalViewSuccess)
 
 	//profileImage 추가해야함
-	// const { mutate, isLoading, data } = useMutation(
-	// 	(data: signUpData) => UserApi.SignUp(),
-	// 	{
-	// 		onSuccess: res => {
-	// 			setRecoilSuccessModal(() => true)
-	// 		},
-	// 		onError: err => {},
-	// 	},
-	// )
+	const { mutate, isLoading, data } = useMutation(
+		data => UserApi.SignUp(data),
+		{
+			onSuccess: res => {
+				console.log(res)
+				setRecoilSuccessModal(() => true)
+			},
+			onError: err => {
+				console.log(err)
+			},
+		},
+	)
+	console.log('test')
 
-	const ChangePreFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const ChangePreFile = e => {
 		if (e.target.files !== null) {
 			const file = e.target.files[0]
 			setImgFile(file)
 			const reader = new FileReader()
 			reader.readAsDataURL(file)
 			reader.onloadend = () => {
-				setPreFile(reader.result as string)
+				setPreFile(reader.result)
 			}
 		}
 	}
 
-	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
+	const onSubmit = e => {
 		//보류
 		const data = {
 			email: e.SignUpEmail || '',
@@ -81,7 +86,7 @@ function SignUp() {
 			phoneNumber: e.SignUpPhone || '',
 		}
 
-		// mutate(data)
+		mutate(data)
 	}
 
 	return (
@@ -89,7 +94,7 @@ function SignUp() {
 			<S.container>
 				<h3>회원가입</h3>
 				<S.InputBox>
-					<S.ProfileImg src={preFile as string} />
+					<S.ProfileImg src={preFile} />
 					<S.ImgLabel htmlFor="profileImg">
 						<Camera_Icon />
 					</S.ImgLabel>
@@ -99,7 +104,7 @@ function SignUp() {
 						accept="image/*"
 						style={{ display: 'none' }}
 						{...register('profile_img', {
-							onChange: (e: any) => {
+							onChange: e => {
 								ChangePreFile(e)
 							},
 						})}
