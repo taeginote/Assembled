@@ -2,14 +2,13 @@ import { UserApiType } from '../Types/apiType'
 import axiosInstance from './@core'
 
 //User 관련 Apis
-const UserApi: UserApiType = {
+const UserApi = {
 	SignUp(data) {
-		console.log(data)
-		return axiosInstance.post('/assemble/user/signup', data, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		})
+		const { email, name, nickname, password, birthDate, phoneNumber } = data
+		return axiosInstance.post(
+			'/assemble/signup' +
+				`?email=${email}&name=${name}&nickname=${nickname}&password=${password}&birthDate=${birthDate}&phoneNumber=${phoneNumber}`,
+		)
 	},
 	Login(data) {
 		console.log(data)
