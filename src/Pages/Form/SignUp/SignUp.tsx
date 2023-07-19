@@ -31,6 +31,7 @@ import {
 import { signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useState } from 'react'
+import { compose } from 'msw'
 
 function SignUp() {
 	const {
@@ -48,15 +49,19 @@ function SignUp() {
 		useRecoilState(modalViewSuccess)
 
 	//profileImage 추가해야함
-	// const { mutate, isLoading, data } = useMutation(
-	// 	(data: signUpData) => UserApi.SignUp(),
-	// 	{
-	// 		onSuccess: res => {
-	// 			setRecoilSuccessModal(() => true)
-	// 		},
-	// 		onError: err => {},
-	// 	},
-	// )
+	const { mutate, isLoading, data } = useMutation(
+		(data: signUpData) => UserApi.SignUp(data),
+		{
+			onSuccess: res => {
+				console.log(res)
+				setRecoilSuccessModal(() => true)
+			},
+			onError: err => {
+				console.log(err)
+			},
+		},
+	)
+	console.log('test')
 
 	const ChangePreFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files !== null) {
@@ -81,7 +86,7 @@ function SignUp() {
 			phoneNumber: e.SignUpPhone || '',
 		}
 
-		// mutate(data)
+		mutate(data)
 	}
 
 	return (
@@ -99,10 +104,11 @@ function SignUp() {
 						accept="image/*"
 						style={{ display: 'none' }}
 						{...register('profile_img', {
-							onChange: (e: any) => {
+							onChange: e => {
 								ChangePreFile(e)
 							},
 						})}
+						s
 					/>
 				</S.InputBox>
 				<span>

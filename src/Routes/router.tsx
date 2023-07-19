@@ -10,8 +10,8 @@ import Haeder from '../Components/Layout/Header'
 import Error404 from '../Error/Error404'
 import Detail from '../Pages/\bDetail/Detail'
 import Login from '../Pages/Form/Login/Login'
-import SignUpTest from '../Pages/Form/SignUp/SignUpTest'
 import List from '../Pages/List'
+import SignUp from '../Pages/Form/SignUp/SignUp'
 
 const router = [
 	{
@@ -24,7 +24,7 @@ const router = [
 			},
 			{
 				path: '/signup',
-				element: <SignUpTest />,
+				element: <SignUp />,
 			},
 			{
 				path: '/',
