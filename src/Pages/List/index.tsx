@@ -22,9 +22,12 @@ function List() {
 	let category: any = searchParams.get('category')
 	let filter: any = searchParams.get('filter')
 	let page: any = searchParams.get('page')
-	const [currentPage, setCurrentPage] = useState(page)
+	const [pageNumber, setPageNumber] = useState(page || 1)
 
-	const { data, isLoading } = useGetListData(currentPage, category, filter)
+	// const { data, isLoading } = useGetListData(currentPage, category, filter)
+	const searchBy: string = 'title'
+	const searchQuery: string = '게시'
+	const { data, isLoading } = useGetListData(pageNumber, searchBy, searchQuery)
 
 	const totalPage: number = 3
 	console.log(data)
@@ -36,7 +39,7 @@ function List() {
 					<CategoryNav />
 					<FilterSelectBox />
 				</S.FilterWrapper>
-				{isLoading ? (
+				{/* {isLoading ? (
 					<LoadingPage />
 				) : (
 					<S.Container>
@@ -44,13 +47,13 @@ function List() {
 							<ItemBox data={data} key={idx} />
 						))}
 					</S.Container>
-				)}
+				)} */}
 			</S.Wrapper>
 			<Pagination
 				totalPage={totalPage}
 				limit={10}
 				scroll={765}
-				setPage={setCurrentPage}
+				setPage={setPageNumber}
 			/>
 		</>
 	)

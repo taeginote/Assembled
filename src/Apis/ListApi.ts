@@ -3,9 +3,10 @@ import axiosInstance from './@core'
 
 //리스트 관련 Apis
 const ListApi: ListApiType = {
-	getList({ page, category, filter }) {
-		return axiosInstance.get('/List', {
-			params: { page, category, filter },
+	getList({ pageNumber, searchBy, searchQuery }) {
+		console.log(typeof pageNumber)
+		return axiosInstance.get('/assemble/post', {
+			params: { pageNumber, searchBy, searchQuery },
 		})
 	},
 }

@@ -2,27 +2,40 @@ import { useQuery } from '@tanstack/react-query'
 import ListApi from '../../Apis/ListApi'
 
 type pageType = number | undefined
-type categoryType = 'study' | 'project'
-type filterType = 'total' | 'like' | 'popular'
+type searchByType = string | undefined
+type searchQuery = string | undefined
+
+// type categoryType = 'study' | 'project'
+// type filterType = 'total' | 'like' | 'popular'
 
 const getListData = async (
-	page: pageType,
-	category: categoryType,
-	filter: filterType,
+	pageNumber: pageType,
+	// category?: categoryType,
+	// filter?: filterType,
+	searchBy?: string,
+	searchQuery?: string,
 ) => {
-	const res = await ListApi.getList({ page, category, filter })
+	const res = await ListApi.getList({
+		pageNumber,
+		searchBy,
+		searchQuery,
+		// category,
+		// filter,
+	})
 
 	return res.data
 }
 
 const useGetListData = (
-	page: pageType,
-	category: categoryType,
-	filter: filterType,
+	pageNumber: pageType,
+	// category?: categoryType,
+	// filter?: filterType,
+	searchBy?: string,
+	searchQuery?: string,
 ) => {
 	const { data, isLoading } = useQuery(
-		['useGetListData', page, category, filter],
-		() => getListData(page, category, filter),
+		['useGetListData', pageNumber, searchBy, searchQuery],
+		() => getListData(pageNumber, searchBy, searchQuery),
 	)
 
 	return { data, isLoading }

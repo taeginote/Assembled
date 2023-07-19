@@ -28,9 +28,11 @@ export type postComment = {
 
 //리스트 페이지 api type
 type GetListData = {
-	page?: number
-	category?: 'study' | 'project'
-	filter?: 'total' | 'like' | 'popular'
+	pageNumber?: number
+	searchBy?: string
+	searchQuery?: string
+	// category?: 'study' | 'project'
+	// filter?: 'total' | 'like' | 'popular'
 	response?: []
 }
 
@@ -79,6 +81,8 @@ export type LoginData = {
 	email?: string
 	password?: string
 	token?: string
+	// 보류
+	response?: any
 }
 type EmailValidation = {
 	email?: string

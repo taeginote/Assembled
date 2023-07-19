@@ -32,7 +32,7 @@ function Login() {
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
-	// const auth = useAuth()
+	const auth = useAuth()
 
 	const { mutate, isLoading } = useMutation(
 		(data: LoginData) => UserApi.Login(data),
@@ -40,10 +40,10 @@ function Login() {
 			onSuccess: res => {
 				TokenService.setAccessToken(res.data.response.token.accessToken)
 				setRecoilSuccessModal(() => true)
-				console.log(res)
-				// if (res.data.token) {
-				// 	auth.login(res.data.token)
-				// }
+
+				if (res.data.response.token.accessToken) {
+					auth.login(res.data.response.token.accessToken)
+				}
 			},
 			onError: err => {
 				setRecoilCounter(() => true)
