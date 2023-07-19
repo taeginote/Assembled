@@ -32,9 +32,9 @@ function Wrote() {
 				</div>
 			) : (
 				<S.Container>
-					{testList.map(el => (
+					{/* {testList.map(el => (
 						<ItemBox data={data} />
-					))}
+					))} */}
 				</S.Container>
 			)}
 		</S.Wrapper>

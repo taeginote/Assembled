@@ -13,9 +13,9 @@ function ItemBox({ data }: { data: ItemDataType }) {
 	const {
 		postId,
 		title,
-		category,
+		categoryName,
 		profile,
-		writer,
+		writerNickname,
 		personnelNumber,
 		expectedPeriod,
 	} = data
@@ -31,12 +31,12 @@ function ItemBox({ data }: { data: ItemDataType }) {
 				<S.Title>
 					{title.length > 45 ? title.substr(0, 45) + '...' : title}
 				</S.Title>
-				<S.Category>{category}</S.Category>
+				<S.Category>{categoryName}</S.Category>
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={profile.fileFullPath} />
-					<div>{writer}</div>
+					{/* <S.UserImg src={profile.fileFullPath} /> */}
+					<div>{writerNickname}</div>
 				</div>
 				<span>
 					<Person_Icon />

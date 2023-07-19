@@ -26,6 +26,7 @@ const getListData = async (
 	return res.data
 }
 
+//보류
 const useGetListData = (
 	pageNumber: pageType,
 	// category?: categoryType,
@@ -33,7 +34,7 @@ const useGetListData = (
 	searchBy?: string,
 	searchQuery?: string,
 ) => {
-	const { data, isLoading } = useQuery(
+	const { data, isLoading }: any = useQuery(
 		['useGetListData', pageNumber, searchBy, searchQuery],
 		() => getListData(pageNumber, searchBy, searchQuery),
 	)

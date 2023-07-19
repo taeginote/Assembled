@@ -9,12 +9,12 @@ export type childrenType = {
 export type ItemDataType = {
 	postId: number
 	title: string
-	category: string
+	categoryName: string
 	profile: {
 		fileFullPath: string
 		originalName: string
 	}
-	writer: string
+	writerNickname: string
 	personnelNumber: string
 	expectedPeriod: string
 }
