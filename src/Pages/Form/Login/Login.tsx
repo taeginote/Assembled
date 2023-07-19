@@ -17,6 +17,7 @@ import { useAuth } from '../../../Contexts/auth'
 import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
 import { LoginData } from '../../../Types/apiType'
 import { LoginSubmitData } from '../../../Types/type'
+import TokenService from '../../../Utils/TokenService'
 
 function Login() {
 	const {
@@ -31,16 +32,18 @@ function Login() {
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
-	const auth = useAuth()
+	// const auth = useAuth()
 
 	const { mutate, isLoading } = useMutation(
 		(data: LoginData) => UserApi.Login(data),
 		{
 			onSuccess: res => {
+				TokenService.setAccessToken(res.data.response.token.accessToken)
 				setRecoilSuccessModal(() => true)
-				if (res.data.token) {
-					auth.login(res.data.token)
-				}
+				console.log(res)
+				// if (res.data.token) {
+				// 	auth.login(res.data.token)
+				// }
 			},
 			onError: err => {
 				setRecoilCounter(() => true)
@@ -88,7 +91,10 @@ function Login() {
 					<S.LinkDesign to={'/Signup'}> 회원가입하기</S.LinkDesign>
 				</S.GoSignUp>
 				<S.SignUpButton>로그인</S.SignUpButton>
-				{recoilSuccessModal && <SuccessModal text={'로그인 성공'} />}
+				{/* 보류 이거 로그인 페이지가 아니라 list로 가야함 테스트 때문에  */}
+				{recoilSuccessModal && (
+					<SuccessModal text={'로그인 성공'} url={'/login'} />
+				)}
 				{recoilCounter && <NotificationModal text={'로그인 실패'} />}
 			</S.container>
 		</S.Wrapper>

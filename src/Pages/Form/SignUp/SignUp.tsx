@@ -31,7 +31,6 @@ import {
 import { signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useState } from 'react'
-import { compose } from 'msw'
 
 function SignUp() {
 	const {

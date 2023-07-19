@@ -97,14 +97,7 @@ export type UserApiType = {
 	// 	birthDate?: string,
 	// 	phoneNumber?: string,
 	// ): Promise<AxiosResponse<signUpData>>
-	SignUp(
-		email?: string,
-		name?: string | undefined,
-		nickname?: string | undefined,
-		password?: string,
-		birthDate?: string,
-		phoneNumber?: string,
-	): Promise<AxiosResponse<signUpData>>
+	SignUp(data: signUpData): Promise<AxiosResponse<signUpData>>
 	Login(data: LoginData): Promise<AxiosResponse<LoginData>>
 	getEmailValidation(
 		data: EmailValidation,
