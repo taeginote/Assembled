@@ -12,8 +12,8 @@ export type response = {
 	postId: number
 	title: string
 	contents: string
-	category: 'study' | 'project' | string
-	writer: string
+	categoryName: 'study' | 'project' | string
+	writerNickname: string
 	writeDate: string
 	postStatus: string
 	hits: string

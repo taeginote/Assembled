@@ -9,20 +9,20 @@ export const post_Register = [
 		const { data } = req.body as postRegisterType
 		console.log(data)
 		const {
-			category,
+			categoryName,
 			contents,
 			expectedPeriod,
 			personnelNumber,
 			title,
-			writer,
+			writerNickname,
 		} = data
 
 		const realData: response = {
 			postId: Math.floor(Math.random() * 9999) + 1,
 			title,
 			contents,
-			category,
-			writer,
+			categoryName,
+			writerNickname,
 			writeDate: CurrentTime(),
 			postStatus: '모집중',
 			hits: '4',

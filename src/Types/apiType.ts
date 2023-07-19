@@ -42,12 +42,12 @@ export type ListApiType = {
 
 //등록 페이지 api type
 export type PostRegisterData = {
-	Category: 'study' | 'project' | string
+	categoryName: 'study' | 'project' | string
 	Contents: string
 	Period: '0' | '1' | '2' | '3' | '4' | '5' | '6' | string
 	TeamMember: 0 | 2 | 3 | 4 | 5 | 10 | number
 	Title: string
-	writer?: string
+	writerNickname?: string
 }
 export type PostRegister = {
 	category: 'study' | 'project' | string

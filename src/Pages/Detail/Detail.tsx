@@ -6,13 +6,14 @@ import CommentForm from './Components/CommentForm'
 import { useSearchParams } from 'react-router-dom'
 
 function Detail() {
+	//보류
 	//🔥Detail 여기 any를 사용하였음 더 좋은 방법 있는지 알아볼것
 	const [searchParams, setSearchParams] = useSearchParams()
 	let postId: any = searchParams.get('postId')
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
-	console.log({ data })
+	console.log(data)
 	return (
 		<S.Wrapper>
 			{isLoading ? (
@@ -21,8 +22,8 @@ function Detail() {
 				<S.Container>
 					<h1>{data?.title}</h1>
 					<S.Profile>
-						<S.UserImg src={data?.profile.fileFullPath} />
-						<div>{data?.writer}</div>
+						{/* <S.UserImg src={data?.profile.fileFullPath} /> */}
+						<div>{data?.writerNickname}</div>
 						<span> | </span>
 						<span>{data?.writeDate}</span>
 					</S.Profile>
@@ -33,7 +34,7 @@ function Detail() {
 						</div>
 						<div>
 							<div>카테고리</div>
-							<span>{data?.category}</span>
+							<span>{data?.categoryName}</span>
 						</div>
 						<div>
 							<div>모집 인원</div>
@@ -44,8 +45,8 @@ function Detail() {
 					<S.Dec>{data?.contents}</S.Dec>
 					{data && (
 						<CommentForm
-							comments={data?.comments}
-							userImg={data?.profile.fileFullPath}
+							comments={data?.response?.comments}
+							// userImg={data?.profile.fileFullPath}
 							postId={postId}
 							refetch={refetch}
 						/>

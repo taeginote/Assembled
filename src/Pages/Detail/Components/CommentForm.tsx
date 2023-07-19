@@ -22,7 +22,7 @@ function CommentForm({
 			onError: () => {},
 		},
 	)
-
+	console.log(comments)
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const commentContents = e.currentTarget.textarea.value

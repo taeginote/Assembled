@@ -9,7 +9,7 @@ export const post_CommentsData = [
 		console.log(data)
 		let commentCreator = listData.response.map(el => {
 			if (el.postId == Number(data.postId)) {
-				return el.writer
+				return el.writerNickname
 			}
 		})
 
