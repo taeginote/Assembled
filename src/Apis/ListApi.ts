@@ -8,6 +8,9 @@ const ListApi: ListApiType = {
 			params: { pageNumber, searchBy, searchQuery },
 		})
 	},
+	DeletePost(postId) {
+		return axiosInstance.delete(`/assemble/post/${postId}`)
+	},
 }
 
 export default ListApi

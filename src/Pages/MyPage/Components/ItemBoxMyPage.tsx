@@ -15,12 +15,12 @@ import {
 } from '../../../Icons/Icons'
 import { ItemDataType } from '../../../Types/type'
 import Ballon from '../../../Components/Ballon/Ballon'
-import ConfirmModal from '../../../Components/Modal/confirmModal'
-import { useRecoilState } from 'recoil'
-import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
+
+import { useMutation } from '@tanstack/react-query'
+import { DeletePost } from '../../../Types/apiType'
+import ListApi from '../../../Apis/ListApi'
 
 function ItemBoxMyPage({ data }: { data: ItemDataType }) {
-	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 	const navigate = useNavigate()
 	const {
 		postId,
@@ -33,32 +33,38 @@ function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 		commentCount,
 	} = data
 
-	console.log(perssonelNumber)
+	const { mutate } = useMutation(
+		(postId: DeletePost) => ListApi.DeletePost(postId),
+		{
+			onSuccess: () => {},
+			onError: () => {},
+		},
+	)
+
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
 
 	return (
 		<S.Wrapper>
-			<S.Container>
-				<S.TopWrap>
-					<S.Status>모집중</S.Status>
-
-					<p>
+			<S.TopWrap>
+				<S.Status>모집중</S.Status>
+				<p>
+					<button>
 						<div>
-							<div>
-								<Ballon text={'모임 수정'} />
-							</div>
-							<Pen_Icon />
+							<Ballon text={'모임 수정'} />
 						</div>
-						<div onClick={() => setRecoilCounter(true)}>
-							<div>
-								<Ballon text={'모임 삭제'} />
-							</div>
-							<Trash_Icon />
+						<Pen_Icon />
+					</button>
+					<button onClick={() => mutate({ postId })}>
+						<div>
+							<Ballon text={'모임 삭제'} />
 						</div>
-					</p>
-				</S.TopWrap>
+						<Trash_Icon />
+					</button>
+				</p>
+			</S.TopWrap>
 
+			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
 				<S.Period>마감일 | {period}</S.Period>
 				<S.Title>
 					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
@@ -73,12 +79,10 @@ function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 				<span>
 					<Person_Icon />
 					<span>{perssonelNumber}인</span>
-
 					<Chat_Icon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>
 			</S.UserBox>
-			{recoilCounter && <ConfirmModal text={'정말로 삭제하시겠습니까?'} />}
 		</S.Wrapper>
 	)
 }
@@ -144,9 +148,9 @@ const Status = styled.span`
 	border-radius: 1rem;
 `
 const Category = styled.span`
-	background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-	color: ${({ theme }) => theme.COLOR.common.gray[300]};
+	color: #fb9b00;
+	background-color: #fff3e0;
 	padding: 0.1rem 0.7rem;
 	text-align: center;
 	border-radius: 1rem;
@@ -172,13 +176,14 @@ const TopWrap = styled.div`
 	&>p {
 		width: 25%;
 		${FlexBetweenCSS}
-		&>div {
+		&>button {
+			background-color: white;
 			position: relative;
 			& > div {
 				display: none;
 			}
 		}
-		& > div:hover {
+		& > button:hover {
 			scale: 1.1;
 			& > div {
 				display: block;

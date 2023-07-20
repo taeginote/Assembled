@@ -12,7 +12,7 @@ function Detail() {
 	let postId: any = searchParams.get('postId')
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
-
+	console.log(data)
 	return (
 		<S.Wrapper>
 			{isLoading ? (

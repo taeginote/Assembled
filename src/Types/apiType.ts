@@ -35,9 +35,12 @@ type GetListData = {
 	// filter?: 'total' | 'like' | 'popular'
 	response?: []
 }
-
+export type DeletePost = {
+	postId?: number
+}
 export type ListApiType = {
 	getList(params: GetListData): Promise<AxiosResponse<GetListData>>
+	DeletePost(params: DeletePost): Promise<AxiosResponse<DeletePost>>
 }
 
 //등록 페이지 api type

@@ -8,7 +8,7 @@ function Ballon({ text }: BallonType) {
 export default Ballon
 
 const BallonText = styled.div`
-	top: -3.5rem;
+	top: -4.1rem;
 	left: -7rem;
 	position: absolute;
 	width: 10rem;
