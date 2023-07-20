@@ -6,6 +6,8 @@ import {
 	AiFillCaretRight,
 	AiOutlineCamera,
 	AiOutlineCheckCircle,
+	AiFillHeart,
+	AiOutlineHeart,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -29,6 +31,7 @@ type IconSize = {
 type IconRotate = {
 	rotate?: number
 }
+
 export const Person_Icon = ({ size }: IconSize) => (
 	<BsFillPersonFill size={size} />
 ) // 사람
@@ -81,3 +84,10 @@ export const Check_Icon = () => (
 export const Pen_Icon = () => <FaPen size={'17'} color="#777" /> //펜모양
 
 export const Trash_Icon = () => <BsTrash size={'17'} color="#777" /> //쓰레기통 버튼
+
+export const NotFillHeart_Icon = ({ onClick }: any) => (
+	<AiOutlineHeart size={'23'} onClick={onClick} color={'#f60004'} />
+) // 빈 하트
+export const FillHeart_Icon = ({ onClick }: any) => (
+	<AiFillHeart size={'23'} onClick={onClick} color={'#f60004'} />
+) // 찬 하트

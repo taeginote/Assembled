@@ -26,6 +26,11 @@ export type postComment = {
 	}
 }
 
+export type PostLike = {
+	postId?: number
+	userId?: number
+}
+
 //리스트 페이지 api type
 type GetListData = {
 	pageNumber?: number
@@ -38,9 +43,11 @@ type GetListData = {
 export type DeletePost = {
 	postId?: number
 }
+
 export type ListApiType = {
 	getList(params: GetListData): Promise<AxiosResponse<GetListData>>
 	DeletePost(params: DeletePost): Promise<AxiosResponse<DeletePost>>
+	PostLike(params: PostLike): Promise<AxiosResponse<PostLike>>
 }
 
 //등록 페이지 api type

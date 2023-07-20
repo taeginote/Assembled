@@ -12,36 +12,36 @@ function Detail() {
 	let postId: any = searchParams.get('postId')
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
-	console.log(data)
+
 	return (
 		<S.Wrapper>
 			{isLoading ? (
 				<LoadingPage />
 			) : (
 				<S.Container>
-					<h1>{data?.title}</h1>
+					<h1>{data?.response?.title}</h1>
 					<S.Profile>
 						{/* <S.UserImg src={data?.profile.fileFullPath} /> */}
-						<div>{data?.writerNickname}</div>
+						<div>{data?.response?.writerNickname}</div>
 						<span> | </span>
-						<span>{data?.writeDate}</span>
+						<span>{data?.response?.writeDate || '여기는 생성 날'}</span>
 					</S.Profile>
 					<S.Info>
 						<div>
 							<div>활동 기간</div>
-							<span>{data?.expectedPeriod}달</span>
+							<span>{data?.response?.expectedPeriod}달</span>
 						</div>
 						<div>
 							<div>카테고리</div>
-							<span>{data?.categoryName}</span>
+							<span>{data?.response?.categoryName}</span>
 						</div>
 						<div>
 							<div>모집 인원</div>
-							<span>{data?.personnelNumber}명</span>
+							<span>{data?.response?.personnelNumber}명</span>
 						</div>
 					</S.Info>
 					<h3>프로젝트 설명</h3>
-					<S.Dec>{data?.contents}</S.Dec>
+					<S.Dec>{data?.response?.contents}</S.Dec>
 					{data && (
 						<CommentForm
 							comments={data?.response?.comments}

@@ -16,6 +16,7 @@ export type ItemDataType = {
 	perssonelNumber?: string
 	expectedPeriod?: string
 	commentCount?: string
+	likes?: number
 }
 
 //onKey도 쓰이고 target도 쓰이는곳

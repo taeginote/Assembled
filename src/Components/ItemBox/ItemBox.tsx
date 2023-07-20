@@ -6,7 +6,15 @@ import {
 } from '../../Styles/common'
 import { useNavigate } from 'react-router-dom'
 import { ItemDataType } from '../../Types/type'
-import { Chat_Icon, Person_Icon } from '../../Icons/Icons'
+import {
+	Chat_Icon,
+	FillHeart_Icon,
+	NotFillHeart_Icon,
+	Person_Icon,
+} from '../../Icons/Icons'
+import { QueryClient, useMutation } from '@tanstack/react-query'
+import { PostLike } from '../../Types/apiType'
+import ListApi from '../../Apis/ListApi'
 
 function ItemBox({ data }: { data: ItemDataType }) {
 	const navigate = useNavigate()
@@ -19,16 +27,37 @@ function ItemBox({ data }: { data: ItemDataType }) {
 		perssonelNumber,
 		expectedPeriod,
 		commentCount,
+		likes,
 	} = data
 	console.log(perssonelNumber)
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
+	//userId: 10
+
+	const { mutate } = useMutation((data: PostLike) => ListApi.PostLike(data), {})
+
+	const likeData = {
+		postId,
+		userId: 10,
+	}
+	const onClickNotHeart = () => {
+		mutate(likeData)
+	}
+	const onClickFillHeart = () => {}
 
 	return (
-		<S.Wrapper onClick={() => navigate(`/Detail?postId=${postId}`)}>
-			<S.Container>
+		<S.Wrapper>
+			<S.TopWrap>
 				<S.Status>모집중</S.Status>
+				{likes === 0 ? (
+					<NotFillHeart_Icon onClick={onClickNotHeart} />
+				) : (
+					<FillHeart_Icon onClick={onClickFillHeart} />
+				)}
+			</S.TopWrap>
+			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
 				<S.Period>마감일 | {period}</S.Period>
+
 				<S.Title>
 					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
 				</S.Title>
@@ -133,6 +162,10 @@ const UserImg = styled.img`
 	height: 3.2rem;
 	margin-right: 0.5rem;
 `
+const TopWrap = styled.div`
+	width: 100%;
+	${FlexBetweenCSS}
+`
 
 const S = {
 	Wrapper,
@@ -144,4 +177,5 @@ const S = {
 	UserBox,
 	UserImg,
 	Title,
+	TopWrap,
 }

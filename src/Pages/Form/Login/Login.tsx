@@ -40,7 +40,7 @@ function Login() {
 			onSuccess: res => {
 				TokenService.setAccessToken(res.data.response.token.accessToken)
 				setRecoilSuccessModal(() => true)
-
+				console.log(res)
 				if (res.data.response.token.accessToken) {
 					auth.login(res.data.response.token.accessToken)
 				}
@@ -92,9 +92,7 @@ function Login() {
 				</S.GoSignUp>
 				<S.SignUpButton>로그인</S.SignUpButton>
 				{/* 보류 이거 로그인 페이지가 아니라 list로 가야함 테스트 때문에  */}
-				{recoilSuccessModal && (
-					<SuccessModal text={'로그인 성공'} url={'/login'} />
-				)}
+				{recoilSuccessModal && <SuccessModal text={'로그인 성공'} />}
 				{recoilCounter && <NotificationModal text={'로그인 실패'} />}
 			</S.container>
 		</S.Wrapper>
