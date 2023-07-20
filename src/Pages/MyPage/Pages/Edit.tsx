@@ -30,7 +30,6 @@ function Edit() {
 	const [preFile, setPreFile] = useState<string | null>('')
 
 	const onSubmit: SubmitHandler<any> = e => {}
-	console.log(preFile)
 
 	const ChangePreFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files !== null) {

@@ -15,7 +15,6 @@ import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 import { useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
-import { any } from 'prop-types'
 
 function List() {
 	//searchParams 타입을 아직 모르겠음
@@ -27,11 +26,11 @@ function List() {
 
 	// const { data, isLoading } = useGetListData(currentPage, category, filter)
 	const searchBy: string = 'title'
-	const searchQuery: string = '게시'
+	const searchQuery: string = 'test'
 	const { data, isLoading } = useGetListData(pageNumber, searchBy, searchQuery)
 
 	const totalPage: number = data?.response?.totalPages
-
+	console.log(data)
 	return (
 		<>
 			<S.Wrapper>

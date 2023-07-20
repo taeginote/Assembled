@@ -52,15 +52,11 @@ function SignUp() {
 		(data: signUpData) => UserApi.SignUp(data),
 		{
 			onSuccess: res => {
-				console.log(res)
 				setRecoilSuccessModal(() => true)
 			},
-			onError: err => {
-				console.log(err)
-			},
+			onError: err => {},
 		},
 	)
-	console.log('test')
 
 	const ChangePreFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files !== null) {

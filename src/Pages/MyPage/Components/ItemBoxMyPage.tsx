@@ -1,14 +1,26 @@
 import styled from 'styled-components'
+
+import { useNavigate } from 'react-router-dom'
+
 import {
 	FlexAlignCSS,
 	FlexBetweenCSS,
 	FlexColumnCSS,
-} from '../../Styles/common'
-import { useNavigate } from 'react-router-dom'
-import { ItemDataType } from '../../Types/type'
-import { Chat_Icon, Person_Icon } from '../../Icons/Icons'
+} from '../../../Styles/common'
+import {
+	Person_Icon,
+	Chat_Icon,
+	Pen_Icon,
+	Trash_Icon,
+} from '../../../Icons/Icons'
+import { ItemDataType } from '../../../Types/type'
+import Ballon from '../../../Components/Ballon/Ballon'
+import ConfirmModal from '../../../Components/Modal/confirmModal'
+import { useRecoilState } from 'recoil'
+import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 
-function ItemBox({ data }: { data: ItemDataType }) {
+function ItemBoxMyPage({ data }: { data: ItemDataType }) {
+	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 	const navigate = useNavigate()
 	const {
 		postId,
@@ -20,14 +32,33 @@ function ItemBox({ data }: { data: ItemDataType }) {
 		expectedPeriod,
 		commentCount,
 	} = data
+
 	console.log(perssonelNumber)
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
 
 	return (
-		<S.Wrapper onClick={() => navigate(`/Detail?postId=${postId}`)}>
+		<S.Wrapper>
 			<S.Container>
-				<S.Status>모집중</S.Status>
+				<S.TopWrap>
+					<S.Status>모집중</S.Status>
+
+					<p>
+						<div>
+							<div>
+								<Ballon text={'모임 수정'} />
+							</div>
+							<Pen_Icon />
+						</div>
+						<div onClick={() => setRecoilCounter(true)}>
+							<div>
+								<Ballon text={'모임 삭제'} />
+							</div>
+							<Trash_Icon />
+						</div>
+					</p>
+				</S.TopWrap>
+
 				<S.Period>마감일 | {period}</S.Period>
 				<S.Title>
 					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
@@ -42,14 +73,16 @@ function ItemBox({ data }: { data: ItemDataType }) {
 				<span>
 					<Person_Icon />
 					<span>{perssonelNumber}인</span>
+
 					<Chat_Icon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>
 			</S.UserBox>
+			{recoilCounter && <ConfirmModal text={'정말로 삭제하시겠습니까?'} />}
 		</S.Wrapper>
 	)
 }
-export default ItemBox
+export default ItemBoxMyPage
 
 const Wrapper = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
@@ -133,6 +166,26 @@ const UserImg = styled.img`
 	height: 3.2rem;
 	margin-right: 0.5rem;
 `
+const TopWrap = styled.div`
+	width: 100%;
+	${FlexBetweenCSS}
+	&>p {
+		width: 25%;
+		${FlexBetweenCSS}
+		&>div {
+			position: relative;
+			& > div {
+				display: none;
+			}
+		}
+		& > div:hover {
+			scale: 1.1;
+			& > div {
+				display: block;
+			}
+		}
+	}
+`
 
 const S = {
 	Wrapper,
@@ -144,4 +197,5 @@ const S = {
 	UserBox,
 	UserImg,
 	Title,
+	TopWrap,
 }

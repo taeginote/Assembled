@@ -1,5 +1,3 @@
-import { ButtonHTMLAttributes } from 'react'
-
 //children 있는 자식 type
 export type childrenType = {
 	children: React.ReactNode
@@ -7,16 +5,17 @@ export type childrenType = {
 
 //아이템 데이터 type
 export type ItemDataType = {
-	postId: number
-	title: string
-	categoryName: string
-	profile: {
-		fileFullPath: string
-		originalName: string
+	postId?: number
+	title?: string
+	categoryName?: string
+	profile?: {
+		fileFullPath?: string
+		originalName?: string
 	}
-	writerNickname: string
-	personnelNumber: string
-	expectedPeriod: string
+	writerNickname?: string
+	perssonelNumber?: string
+	expectedPeriod?: string
+	commentCount?: string
 }
 
 //onKey도 쓰이고 target도 쓰이는곳
@@ -64,3 +63,8 @@ export type SignUpSubmitData = {
 }
 
 //공용 Button type
+
+//말풍선
+export type BallonType = {
+	text?: string
+}

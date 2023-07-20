@@ -7,7 +7,7 @@ import { postRegisterType } from '../../../Types/mswType'
 export const post_Register = [
 	rest.post('/register', (req, res, ctx) => {
 		const { data } = req.body as postRegisterType
-		console.log(data)
+
 		const {
 			categoryName,
 			contents,

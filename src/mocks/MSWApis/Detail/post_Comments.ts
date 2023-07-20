@@ -6,7 +6,7 @@ import { Comments, postCommentsType } from '../../../Types/mswType'
 export const post_CommentsData = [
 	rest.post('/Comments', (req, res, ctx) => {
 		const { data } = req.body as postCommentsType
-		console.log(data)
+
 		let commentCreator = listData.response.map(el => {
 			if (el.postId == Number(data.postId)) {
 				return el.writerNickname

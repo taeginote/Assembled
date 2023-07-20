@@ -4,7 +4,7 @@ import {
 	FlexCenterCSS,
 	GridCenterCSS,
 } from '../../../Styles/common'
-import ItemBox from '../../../Components/ItemBox/ItemBox'
+import ItemBoxMyPage from '../Components/ItemBoxMyPage'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
@@ -12,15 +12,12 @@ function Wrote() {
 
 	const data = {
 		postId: 11,
-		title: 'string',
-		category: 'string',
-		profile: {
-			fileFullPath: 'string',
-			originalName: 'string',
-		},
-		writer: 'string',
-		personnelNumber: 'string',
-		expectedPeriod: 'string',
+		title: '테스트 제목',
+		categoryName: '스터디',
+		writerNickname: '안뇽',
+		perssonelNumber: '1',
+		expectedPeriod: '1',
+		commentCount: '2',
 	}
 
 	return (
@@ -32,9 +29,9 @@ function Wrote() {
 				</div>
 			) : (
 				<S.Container>
-					{/* {testList.map(el => (
-						<ItemBox data={data} />
-					))} */}
+					{testList.map(el => (
+						<ItemBoxMyPage data={data} />
+					))}
 				</S.Container>
 			)}
 		</S.Wrapper>
@@ -45,7 +42,6 @@ export default Wrote
 const Wrapper = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
-	color: ${({ theme }) => theme.COLOR.sub};
 	width: 80%;
 	border-radius: 0.7rem;
 	${FlexCenterCSS}
@@ -54,6 +50,10 @@ const Wrapper = styled.div`
 		line-height: 2.1;
 	}
 `
+const ButtonWrap = styled.div`
+	display: flex;
+	margin-bottom: 3rem;
+`
 const Container = styled.div`
 	width: 100%;
 	${GridCenterCSS}
@@ -61,5 +61,8 @@ const Container = styled.div`
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		${ColumnNumberCSS(2)};
 	}
+	& > div {
+		width: 100%;
+	}
 `
-const S = { Wrapper, Container }
+const S = { Wrapper, Container, ButtonWrap }

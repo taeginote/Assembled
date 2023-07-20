@@ -41,9 +41,10 @@ function Register() {
 	} = useForm()
 
 	const { mutate } = useMutation(
-		(data: PostRegisterData) => RegisterApi.Register({ data }),
+		(data: PostRegisterData) => RegisterApi.Register(data),
 		{
 			onSuccess: () => {
+				console.log('성공')
 				setRecoilSuccessModal(true)
 			},
 			onError: () => {},
@@ -51,16 +52,26 @@ function Register() {
 	)
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
+		let resultCategory: string = ''
+		console.log(e.Category)
+		if (e.Category === '프로젝트') {
+			resultCategory = 'category'
+		}
+		if (e.Category === '스터디') {
+			resultCategory = 'study'
+		}
+
 		//보낼데이터
 		//이거 보류
 		const data: any = {
 			title: e.Title,
 			contents: e.Contents,
-			category: e.Category,
+			categoryId: resultCategory,
 			writer: '태선컴퍼니',
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
 		}
+
 		mutate(data)
 	}
 

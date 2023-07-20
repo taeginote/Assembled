@@ -13,7 +13,6 @@ function Detail() {
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
-	console.log(data)
 	return (
 		<S.Wrapper>
 			{isLoading ? (
