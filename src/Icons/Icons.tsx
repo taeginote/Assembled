@@ -13,12 +13,13 @@ import {
 	BsPhone,
 	BsCaretDownFill,
 	BsFileEarmarkPerson,
+	BsTrash,
 } from 'react-icons/bs'
 import { BiUser, BiHappy } from 'react-icons/bi'
 import { MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
-import { FaQuestion } from 'react-icons/fa'
+import { FaQuestion, FaPen } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
 
 type IconSize = {
@@ -77,3 +78,6 @@ export const Camera_Icon = () => <AiOutlineCamera size={'25'} /> // 이미지 �
 export const Check_Icon = () => (
 	<AiOutlineCheckCircle size={'100'} color="#FB9B00" />
 ) //체크 버튼
+export const Pen_Icon = () => <FaPen size={'17'} color="#777" /> //펜모양
+
+export const Trash_Icon = () => <BsTrash size={'17'} color="#777" /> //쓰레기통 버튼
