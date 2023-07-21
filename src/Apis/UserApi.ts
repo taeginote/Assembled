@@ -17,8 +17,6 @@ const UserApi: UserApiType = {
 			password,
 		})
 	},
-	// 이메일 검증
-	// 닉네임 검증
 	getEmailValidation(email) {
 		return axiosInstance.get('/assemble/email/validation', {
 			params: { email },
