@@ -1,5 +1,4 @@
-//전체적인 list mock 데이터 통신 type
-type Comment = {
+interface Comment {
 	commentContents: string
 	commentCreator: string
 	commentCreatedDate: string
@@ -8,7 +7,7 @@ type Comment = {
 		originalName: string
 	}
 }
-export type response = {
+export interface response {
 	postId: number
 	title: string
 	contents: string
@@ -28,24 +27,8 @@ export type response = {
 	comments: Comment[]
 }
 
-export type listDataType = {
-	success: boolean
-	status: number
-	response: response[]
-}
-
-//userDataType은 msw 목데이터 만들때 넣는 type
-export type userDataType = {
-	birthDate: string
-	email: string
-	name: string
-	nickname: string
-	password: string
-	phoneNumber: string
-}
-
 //CommentForm 즉, 디테일 안에 댓글 작성 props type
-export type CommentFormPropsType = {
+export interface CommentFormPropsType {
 	comments: Comment[]
 	refetch: () => void
 	postId?: number

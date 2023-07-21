@@ -1,17 +1,17 @@
 //msw type
 
 //post_Login
-type postLogInData = {
+interface postLogInData {
 	email: string
 	password: string
 }
 
-export type postLogInType = {
+export interface postLogInType {
 	data: postLogInData
 }
 
 //post_Register
-type postRegisterData = {
+interface postRegisterData {
 	categoryName: string
 	contents: string
 	expectedPeriod: '0' | '1' | '2' | '3' | '4' | '5' | '6'
@@ -20,17 +20,17 @@ type postRegisterData = {
 	writerNickname: string
 }
 
-export type postRegisterType = {
+export interface postRegisterType {
 	data: postRegisterData
 }
 
 //post_Comments
 
-export type postCommentsType = {
+export interface postCommentsType {
 	data: { commentContents: string; postId: string }
 }
 
-export type Comments = {
+export interface Comments {
 	commentContents: string
 	commentCreator: any
 	userProfile: {

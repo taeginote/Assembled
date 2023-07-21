@@ -1,10 +1,10 @@
 //children 있는 자식 type
-export type childrenType = {
+export interface childrenType {
 	children: React.ReactNode
 }
 
 //아이템 데이터 type
-export type ItemDataType = {
+export interface ItemDataType {
 	postId?: number
 	title?: string
 	categoryName?: string
@@ -24,14 +24,10 @@ export type EventTargetType =
 	| React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>
 
 //select Box
-export type SelectBoxType = {
-	name: string
-	url: 'recent' | 'popular' | 'like'
-}
 
 //Pagination Type
 //props type
-export type PaginationType = {
+export interface PaginationType {
 	limit: number
 	totalPage: number
 	setPage: (page: number) => void
@@ -41,20 +37,20 @@ export type PaginationType = {
 export type PaginationDisabled = 'start' | 'end'
 
 //Auth type
-export type AuthContextType = {
+export interface AuthContextType {
 	accessToken: string | null
 	login: (token: string) => void
 	logout: () => void
 }
 
 //리액트 훅 폼 Login type
-export type LoginSubmitData = {
+export interface LoginSubmitData {
 	LoginEmail?: string
 	LoginPW?: string
 }
 
 //리액트 훅 폼 SignUp type
-export type SignUpSubmitData = {
+export interface SignUpSubmitData {
 	SignUpEmail?: string
 	SignUpName?: string
 	SignUpNickName?: string
@@ -63,9 +59,7 @@ export type SignUpSubmitData = {
 	SignUpPhone?: string
 }
 
-//공용 Button type
-
 //말풍선
-export type BallonType = {
+export interface BallonType {
 	text?: string
 }
