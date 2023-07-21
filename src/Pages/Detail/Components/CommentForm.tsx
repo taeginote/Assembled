@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useMutation } from '@tanstack/react-query'
 
 import { FlexAlignCSS } from '../../../Styles/common'
-import DetailApi from '../../../Apis/DetailApi'
+// import DetailApi from '../../../Apis/DetailApi'
 import Button from '../../../Components/Button/Button'
 import { CommentFormPropsType } from '../../../Types/dataType'
 import { postComment } from '../../../Types/apiType'
@@ -13,15 +13,15 @@ function CommentForm({
 	postId,
 	userImg,
 }: CommentFormPropsType) {
-	const { mutate } = useMutation(
-		(data: postComment) => DetailApi.Comments(data),
-		{
-			onSuccess: () => {
-				refetch()
-			},
-			onError: () => {},
-		},
-	)
+	// const { mutate } = useMutation(
+	// 	(data: postComment) => DetailApi.Comments(data),
+	// 	{
+	// 		onSuccess: () => {
+	// 			refetch()
+	// 		},
+	// 		onError: () => {},
+	// 	},
+	// )
 
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -31,7 +31,7 @@ function CommentForm({
 			userId: 1,
 			postId,
 		}
-		mutate({ data })
+		// mutate({ data })
 	}
 	return (
 		<>

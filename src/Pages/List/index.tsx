@@ -25,8 +25,8 @@ function List() {
 	const [pageNumber, setPageNumber] = useState(page || 1)
 
 	// const { data, isLoading } = useGetListData(currentPage, category, filter)
-	const searchBy: string = 'title'
-	const searchQuery: string = '게시'
+	const searchBy = undefined
+	const searchQuery = undefined
 	const { data, isLoading } = useGetListData(pageNumber, searchBy, searchQuery)
 
 	const totalPage: number = data?.response?.totalPages

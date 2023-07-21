@@ -14,7 +14,7 @@ import {
 } from '../../Icons/Icons'
 import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
 import { PostLike } from '../../Types/apiType'
-import ListApi from '../../Apis/ListApi'
+import PostLikeApi from '../../Apis/PostLikeApi'
 
 function ItemBox({ data }: { data: ItemDataType }) {
 	const navigate = useNavigate()
@@ -39,36 +39,39 @@ function ItemBox({ data }: { data: ItemDataType }) {
 	const searchQuery: string = 'test'
 	const pageNumber: number = 1
 
-	const { mutate } = useMutation((data: PostLike) => ListApi.PostLike(data), {
-		onMutate: async newData => {
-			const prevData = queryClient.getQueryData([
-				'useGetListData',
-				searchBy,
-				searchQuery,
-				pageNumber,
-			])
-			queryClient.setQueryData(
-				['useGetListData', searchBy, searchQuery, pageNumber],
-				newData,
-			)
-			console.log(newData)
-			return { prevData }
+	const { mutate } = useMutation(
+		(data: PostLike) => PostLikeApi.PostLike(data),
+		{
+			onMutate: async newData => {
+				const prevData = queryClient.getQueryData([
+					'useGetListData',
+					searchBy,
+					searchQuery,
+					pageNumber,
+				])
+				queryClient.setQueryData(
+					['useGetListData', searchBy, searchQuery, pageNumber],
+					newData,
+				)
+				console.log(newData)
+				return { prevData }
+			},
+			onError: async (error, newData, context) => {
+				// 에러가 발생한 경우, 이전 데이터로 롤백합니다.
+				if (context?.prevData) {
+					queryClient.setQueryData(['postLike', postId], context.prevData)
+				}
+			},
+			// onSettled 콜백은 mutate 함수가 성공적으로 실행되거나 에러가 발생한 뒤 실행됩니다.
+			onSettled: async () => {
+				// 이후 필요한 작업을 수행할 수 있습니다.
+				// 예: 로딩 상태를 초기화하거나 다른 비동기 작업 실행 등
+			},
 		},
-		onError: async (error, newData, context) => {
-			// 에러가 발생한 경우, 이전 데이터로 롤백합니다.
-			if (context?.prevData) {
-				queryClient.setQueryData(['postLike', postId], context.prevData)
-			}
-		},
-		// onSettled 콜백은 mutate 함수가 성공적으로 실행되거나 에러가 발생한 뒤 실행됩니다.
-		onSettled: async () => {
-			// 이후 필요한 작업을 수행할 수 있습니다.
-			// 예: 로딩 상태를 초기화하거나 다른 비동기 작업 실행 등
-		},
-	})
+	)
 
 	const { mutate: cancelMutate } = useMutation((data: PostLike) =>
-		ListApi.CancelLike(data),
+		PostLikeApi.CancelLike(data),
 	)
 
 	const likeData = {

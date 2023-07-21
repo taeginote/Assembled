@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import DetailApi from '../../Apis/DetailApi'
+
+import PostApi from '../../Apis/PostApi'
 
 const getDetailData = async (postId: number) => {
-	const res = await DetailApi.getDetail({ postId })
+	const res = await PostApi.getDetail({ postId })
 
 	return res.data
 }

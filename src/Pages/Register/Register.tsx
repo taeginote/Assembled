@@ -23,11 +23,14 @@ import HookFormError from '../../Components/Error/HookFormError'
 import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
 import { useMutation } from '@tanstack/react-query'
-import RegisterApi from '../../Apis/RegisterApi'
+// import RegisterApi from '../../Apis/RegisterApi'
 import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
-import { PostRegister, PostRegisterData } from '../../Types/apiType'
+import PostApi from '../../Apis/PostApi'
+import { PostRegisterData } from '../../Types/apiType'
+
+// import { PostRegister, PostRegisterData } from '../../Types/apiType'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -41,7 +44,7 @@ function Register() {
 	} = useForm()
 
 	const { mutate } = useMutation(
-		(data: PostRegisterData) => RegisterApi.Register(data),
+		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{
 			onSuccess: () => {
 				console.log('성공')

@@ -17,8 +17,9 @@ import { ItemDataType } from '../../../Types/type'
 import Ballon from '../../../Components/Ballon/Ballon'
 
 import { useMutation } from '@tanstack/react-query'
-import { DeletePost } from '../../../Types/apiType'
-import ListApi from '../../../Apis/ListApi'
+import { PostData } from '../../../Types/apiType'
+
+import PostApi from '../../../Apis/PostApi'
 
 function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 	const navigate = useNavigate()
@@ -34,7 +35,7 @@ function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 	} = data
 
 	const { mutate } = useMutation(
-		(postId: DeletePost) => ListApi.DeletePost(postId),
+		(postId: PostData) => PostApi.DeletePost(postId),
 		{
 			onSuccess: () => {},
 			onError: () => {},

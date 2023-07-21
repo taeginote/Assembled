@@ -1,5 +1,11 @@
-import { listDataType } from '../../Types/dataType'
+import { response } from '../../Types/dataType'
 import CurrentTime from '../../Utils/CurrentTime'
+
+interface listDataType {
+	success: boolean
+	status: number
+	response: response[]
+}
 
 let listData: listDataType = {
 	success: true,

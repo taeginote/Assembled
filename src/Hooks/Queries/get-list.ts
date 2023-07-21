@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import ListApi from '../../Apis/ListApi'
+import PostApi from '../../Apis/PostApi'
 
 type pageType = number | undefined
 type searchByType = string | undefined
@@ -15,7 +15,7 @@ const getListData = async (
 	searchBy?: string,
 	searchQuery?: string,
 ) => {
-	const res = await ListApi.getList({
+	const res = await PostApi.getList({
 		pageNumber,
 		searchBy,
 		searchQuery,
