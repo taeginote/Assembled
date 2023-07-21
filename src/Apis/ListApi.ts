@@ -15,6 +15,10 @@ const ListApi: ListApiType = {
 		console.log(data)
 		return axiosInstance.post('/assemble/post/like', data)
 	},
+	CancelLike(data) {
+		console.log(data)
+		return axiosInstance.delete('/assemble/post/like', data)
+	},
 }
 
 export default ListApi

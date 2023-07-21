@@ -26,7 +26,7 @@ function List() {
 
 	// const { data, isLoading } = useGetListData(currentPage, category, filter)
 	const searchBy: string = 'title'
-	const searchQuery: string = 'test'
+	const searchQuery: string = '게시'
 	const { data, isLoading } = useGetListData(pageNumber, searchBy, searchQuery)
 
 	const totalPage: number = data?.response?.totalPages
