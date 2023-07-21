@@ -3,8 +3,7 @@ import UserApi from './UserApi'
 import TokenService from '../Utils/TokenService'
 
 const axiosInstance = axios.create({
-	baseURL:
-		'https://port-0-assemble-deploy-temp-20zynm2mlk476ngf.sel4.cloudtype.app',
+	baseURL: process.env.REACT_APP_BACKEND_URL,
 	withCredentials: true,
 	headers: {
 		Authorization: `Bearer ${TokenService.getAccessToken()}`,
