@@ -35,7 +35,7 @@ function Haeder() {
 							src="/assets/img/Logo.png"
 							onClick={() => navigate('/')}
 						></S.Logo>
-						<SearchBar />
+						{/* <SearchBar /> */}
 					</div>
 					<S.HeaderRightBox>
 						{!auth.accessToken ? (

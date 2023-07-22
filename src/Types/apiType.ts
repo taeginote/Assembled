@@ -69,6 +69,7 @@ export interface signUpData {
 	password?: string
 	birthDate?: string
 	phoneNumber?: string
+	profileImg?: string
 }
 export interface LoginData {
 	email?: string

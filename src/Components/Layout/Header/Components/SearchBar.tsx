@@ -5,13 +5,33 @@ import { useState } from 'react'
 import { modalViewNotification } from '../../../../Atoms/modalView.atom'
 import { useRecoilState } from 'recoil'
 import NotificationModal from '../../../Modal/NotificationModal'
-import { EventTargetType } from '../../../../Types/type'
+import { EventTargetType, SearchType } from '../../../../Types/type'
+import { FlexBetweenCSS } from '../../../../Styles/common'
+import { DownIcon } from '../../../../Icons/Icons'
 
-function SearchBar() {
-	const [searchValue, setSearchValue] = useState<string>('')
+function SearchBar({
+	setSelectVal,
+	setSearchValue,
+	selectVal,
+	searchValue,
+}: // searchQuery,
+// searchBy,
+// refetch,
+SearchType) {
+	const Data = [
+		{ title: '제목', value: 'title' },
+		{ title: '내용', value: 'contents' },
+	]
+	// const [searchValue, setSearchValue] = useState<string>('')
+	// const [selectVal, setSelectVal] = useState(Data[0])
+	// searchQuery = selectVal.value
+	// searchBy = searchValue
+
+	const [isView, setIsView] = useState(false)
 	const [recoilCounter, setRecoilCounter] = useRecoilState<boolean>(
 		modalViewNotification,
 	)
+	console.log(selectVal?.value)
 
 	//Click
 	const onClickSearch = () => {
@@ -31,6 +51,23 @@ function SearchBar() {
 	return (
 		<>
 			<S.InputWrapper>
+				<S.Wrapper onClick={() => setIsView(!isView)}>
+					<S.Title isView={isView}>
+						<div>{selectVal.title}</div>
+						<span>
+							<DownIcon />
+						</span>
+					</S.Title>
+					{isView && (
+						<S.Box>
+							{Data.map((data, idx) => (
+								<S.List key={idx} onClick={() => setSelectVal(data)}>
+									{data.title}
+								</S.List>
+							))}
+						</S.Box>
+					)}
+				</S.Wrapper>
 				<S.SearchInput
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 						setSearchValue(e.target.value)
@@ -47,26 +84,65 @@ function SearchBar() {
 export default SearchBar
 
 const SearchInput = styled.input`
-	width: 40rem;
-	height: 50px;
-	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-	border: 0;
-	border-radius: 0.5rem;
-	outline: none;
+	border: none;
+	border-radius: 0.7rem;
+	width: 20rem;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	padding-left: 1rem;
-	border: 2px solid ${({ theme }) => theme.COLOR.main};
 `
 const InputWrapper = styled.div`
 	position: relative;
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		display: none;
-	}
+	margin-right: 2%;
+	display: flex;
+	align-items: center;
+	border: 1px solid ${({ theme }) => theme.COLOR.main};
+	border-radius: 0.7rem;
 `
 const SearchIcon = styled(CiSearch)`
 	position: absolute;
 	right: 0.7rem;
-	top: 1rem;
+	top: 0.4rem;
 	color: ${({ theme }) => theme.COLOR.main};
 	cursor: pointer;
 `
-const S = { SearchInput, InputWrapper, SearchIcon }
+
+const Wrapper = styled.div`
+	width: 9rem;
+	height: 4rem;
+	padding-left: 1rem;
+	margin-bottom: -0.2rem;
+	position: relative;
+	font-size: ${({ theme }) => theme.FONT_SIZE.small};
+`
+const Title = styled.div<{ isView: boolean }>`
+	${FlexBetweenCSS}
+	margin-bottom: 0.1rem;
+	& > div {
+		color: ${({ theme }) => theme.COLOR.common.gray[200]};
+		margin-left: 0.3rem;
+	}
+	& > span {
+		transform: ${({ isView }) => isView && 'rotate(180deg)'};
+		transition: all linear 0.2s;
+		margin: 0.2rem 0.5rem 0 0;
+	}
+`
+const Box = styled.ul`
+	position: absolute;
+	background-color: white;
+	width: 100%;
+	z-index: 100000;
+	right: 0;
+	background-color: transparent;
+	background-color: ${({ theme }) => theme.COLOR.orange};
+	border-radius: 0 0 0.5rem 0.5rem;
+`
+const List = styled.li`
+	padding-left: 1.3rem;
+	margin-bottom: 0.7rem;
+	&:hover {
+		background-color: ${({ theme }) => theme.COLOR.sub};
+		transition: all linear 0.3s;
+	}
+`
+const S = { SearchInput, InputWrapper, SearchIcon, Wrapper, Title, Box, List }

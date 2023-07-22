@@ -3,7 +3,6 @@ import UserApi from '../../Apis/UserApi'
 
 const getEmailValidation = async (email: string) => {
 	const res = await UserApi.getEmailValidation({ email })
-
 	return res.data
 }
 

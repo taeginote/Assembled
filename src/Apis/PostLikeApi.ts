@@ -3,14 +3,6 @@ import axiosInstance from './@core'
 
 //리스트 관련 Apis
 const PostLikeApi: PostLikeApiType = {
-	// getList({ pageNumber, searchBy, searchQuery }) {
-	// 	return axiosInstance.get('/assemble/post', {
-	// 		params: { pageNumber, searchBy, searchQuery },
-	// 	})
-	// },
-	// DeletePost(postId) {
-	// 	return axiosInstance.delete(`/assemble/post/${postId}`)
-	// },
 	PostLike(data) {
 		console.log(data)
 		return axiosInstance.post('/assemble/post/like', data)

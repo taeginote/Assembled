@@ -23,6 +23,8 @@ export interface ItemDataType {
 export type EventTargetType =
 	| React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>
 
+export type OnBlurType = React.FocusEvent<HTMLInputElement>
+
 //select Box
 
 //Pagination Type
@@ -32,6 +34,12 @@ export interface PaginationType {
 	totalPage: number
 	setPage: (page: number) => void
 	scroll: number
+}
+export interface SearchType {
+	setSearchValue: (page: any) => void
+	setSelectVal: (page: any) => void
+	selectVal: any
+	searchValue: any
 }
 
 export type PaginationDisabled = 'start' | 'end'
@@ -57,6 +65,7 @@ export interface SignUpSubmitData {
 	SignUpPw?: string
 	SignUpBirthday?: string
 	SignUpPhone?: string
+	profileImg?: string
 }
 
 //말풍선

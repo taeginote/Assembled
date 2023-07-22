@@ -15,28 +15,40 @@ import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 import { useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
+import SearchBar from '../../Components/Layout/Header/Components/SearchBar'
 
 function List() {
 	//searchParams 타입을 아직 모르겠음
 	const [searchParams, setSearchParams] = useSearchParams()
+
 	let category: any = searchParams.get('category')
 	let filter: any = searchParams.get('filter')
 	let page: any = searchParams.get('page')
 	const [pageNumber, setPageNumber] = useState(page || 1)
+	const [searchValue, setSearchValue] = useState<string>('')
+	const [selectVal, setSelectVal] = useState({
+		title: '제목',
+		value: 'title',
+	})
+	let searchBy = selectVal.value
+	let searchQuery = searchValue
 
-	// const { data, isLoading } = useGetListData(currentPage, category, filter)
-	const searchBy = undefined
-	const searchQuery = undefined
 	const { data, isLoading } = useGetListData(pageNumber, searchBy, searchQuery)
 
 	const totalPage: number = data?.response?.totalPages
-	console.log(data)
+
 	return (
 		<>
 			<S.Wrapper>
 				<Banner />
 				<S.FilterWrapper>
 					<CategoryNav />
+					<SearchBar
+						setSelectVal={setSelectVal}
+						selectVal={selectVal}
+						searchValue={searchValue}
+						setSearchValue={setSearchValue}
+					/>
 					<FilterSelectBox />
 				</S.FilterWrapper>
 				{isLoading ? (
@@ -73,6 +85,7 @@ const FilterWrapper = styled.div`
 	${WidthAutoCSS}
 	display:flex;
 	align-items: center;
+
 	padding: 2rem 0 3rem 0;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		flex-direction: column;

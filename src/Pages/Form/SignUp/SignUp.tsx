@@ -29,13 +29,15 @@ import {
 	Phone_Icon,
 } from '../../../Icons/Icons'
 import { signUpData } from '../../../Types/apiType'
-import { SignUpSubmitData } from '../../../Types/type'
+import { SignUpSubmitData, OnBlurType } from '../../../Types/type'
 import { useState } from 'react'
+import useGetEmailValidation from '../../../Hooks/Queries/get-emailvalidation'
 
 function SignUp() {
 	const {
 		register,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm()
 	const [preFile, setPreFile] = useState<string | null>('')
@@ -72,6 +74,11 @@ function SignUp() {
 
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
 		//보류
+		console.log(imgFile)
+		console.log(preFile)
+		let formData: any = new FormData()
+		formData.append('multipartFile', imgFile)
+
 		const data = {
 			email: e.SignUpEmail || '',
 			name: e.SignUpName?.trim() || '',
@@ -79,6 +86,7 @@ function SignUp() {
 			password: e.SignUpPw || '',
 			birthDate: e.SignUpBirthday || '',
 			phoneNumber: e.SignUpPhone || '',
+			multipartFile: formData,
 		}
 
 		mutate(data)
@@ -158,6 +166,9 @@ function SignUp() {
 						placeholder="위에 설정한 비밀번호를 입력해주세요"
 						{...register('SignUpPwConfirm', {
 							required: '비밀번호 확인을 입력해주세요',
+							validate: val =>
+								val === watch('SignUpPw') ||
+								'입력한 비밀번호와 일치하지 않습니다',
 						})}
 					/>
 				</span>
@@ -206,6 +217,7 @@ const Wrapper = styled.form`
 	${TopPadding}
 	display: flex;
 	justify-content: center;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
 const container = styled.div`
 	min-width: 25%;

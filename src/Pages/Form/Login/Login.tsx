@@ -103,6 +103,7 @@ export default Login
 const Wrapper = styled.form`
 	${TopPadding}
 	display: flex;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	justify-content: center;
 `
 const container = styled.div`

@@ -34,12 +34,12 @@ const useGetListData = (
 	searchBy?: string,
 	searchQuery?: string,
 ) => {
-	const { data, isLoading }: any = useQuery(
+	const { data, isLoading, refetch }: any = useQuery(
 		['useGetListData', pageNumber, searchBy, searchQuery],
 		() => getListData(pageNumber, searchBy, searchQuery),
 	)
 
-	return { data, isLoading }
+	return { data, isLoading, refetch }
 }
 
 export default useGetListData
