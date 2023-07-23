@@ -40,7 +40,7 @@ function Login() {
 			onSuccess: res => {
 				TokenService.setAccessToken(res.data.response.token.accessToken)
 				setRecoilSuccessModal(() => true)
-				console.log(res)
+
 				if (res.data.response.token.accessToken) {
 					auth.login(res.data.response.token.accessToken)
 				}

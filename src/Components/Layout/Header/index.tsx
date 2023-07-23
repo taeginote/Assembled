@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import SearchBar from './Components/SearchBar'
+import SearchBar from '../../../Pages/List/Components/SearchBar/SearchBar'
 import { Outlet, useNavigate } from 'react-router-dom'
 import {
 	FlexAlignCSS,

@@ -74,8 +74,7 @@ function SignUp() {
 
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
 		//보류
-		console.log(imgFile)
-		console.log(preFile)
+
 		let formData: any = new FormData()
 		formData.append('multipartFile', imgFile)
 

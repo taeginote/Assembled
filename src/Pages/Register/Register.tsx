@@ -47,7 +47,6 @@ function Register() {
 		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{
 			onSuccess: () => {
-				console.log('성공')
 				setRecoilSuccessModal(true)
 			},
 			onError: () => {},
@@ -56,7 +55,7 @@ function Register() {
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
 		let resultCategory: string = ''
-		console.log(e.Category)
+
 		if (e.Category === '프로젝트') {
 			resultCategory = 'category'
 		}

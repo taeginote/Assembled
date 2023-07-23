@@ -12,10 +12,11 @@ import LoadingPage from '../../Components/LoadingPage/Loading'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
-import SearchBar from '../../Components/Layout/Header/Components/SearchBar'
+import SearchBar from './Components/SearchBar/SearchBar'
+import ListNoData from '../../Error/ListNoData'
 
 function List() {
 	//searchParams 타입을 아직 모르겠음
@@ -33,7 +34,15 @@ function List() {
 	let searchBy = selectVal.value
 	let searchQuery = searchValue
 
-	const { data, isLoading } = useGetListData(pageNumber, searchBy, searchQuery)
+	const { data, isLoading, refetch } = useGetListData(
+		pageNumber,
+		searchBy,
+		searchQuery,
+	)
+	//이건 고민중
+	// useEffect(() => {
+	// 	// refetch()
+	// }, [])
 
 	const totalPage: number = data?.response?.totalPages
 
@@ -54,19 +63,27 @@ function List() {
 				{isLoading ? (
 					<LoadingPage />
 				) : (
-					<S.Container>
-						{data?.response?.content?.map((data: any, idx: any) => (
-							<ItemBox data={data} key={idx} />
-						))}
-					</S.Container>
+					<>
+						{data?.response?.totalElements === 0 ? (
+							<ListNoData refetch={refetch} setSearchValue={setSearchValue} />
+						) : (
+							<S.Container>
+								{data?.response?.content?.map((data: any, idx: any) => (
+									<ItemBox data={data} key={idx} />
+								))}
+							</S.Container>
+						)}
+					</>
 				)}
 			</S.Wrapper>
-			<Pagination
-				totalPage={totalPage}
-				limit={10}
-				scroll={765}
-				setPage={setPageNumber}
-			/>
+			{data?.response?.totalElements !== 0 && (
+				<Pagination
+					totalPage={totalPage}
+					limit={10}
+					scroll={765}
+					setPage={setPageNumber}
+				/>
+			)}
 		</>
 	)
 }
