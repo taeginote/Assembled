@@ -13,7 +13,7 @@ const UserApi: UserApiType = {
 			phoneNumber,
 			profileImg,
 		} = data
-		console.log(profileImg)
+
 		return axiosInstance.post(
 			'/assemble/signup' +
 				`?email=${email}&name=${name}&nickname=${nickname}&password=${password}&birthDate=${birthDate}&phoneNumber=${phoneNumber}`,
@@ -33,13 +33,11 @@ const UserApi: UserApiType = {
 		})
 	},
 	getEmailValidation(email) {
-		console.log(email)
 		return axiosInstance.get('/assemble/email/validation', {
 			params: { email },
 		})
 	},
 	getNickNameValidation(nickname) {
-		console.log(nickname)
 		return axiosInstance.get('/assemble/nickname/validation', {
 			params: { nickname },
 		})

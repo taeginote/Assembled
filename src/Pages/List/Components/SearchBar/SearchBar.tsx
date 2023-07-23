@@ -4,38 +4,32 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { modalViewNotification } from '../../../../Atoms/modalView.atom'
 import { useRecoilState } from 'recoil'
-import NotificationModal from '../../../Modal/NotificationModal'
+import NotificationModal from '../../../../Components/Modal/NotificationModal'
 import { EventTargetType, SearchType } from '../../../../Types/type'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
 
 function SearchBar({
-	setSelectVal,
-	setSearchValue,
-	selectVal,
 	searchValue,
-}: // searchQuery,
-// searchBy,
-// refetch,
-SearchType) {
+	setSearchValue,
+	setSelectVal,
+	selectVal,
+}: SearchType) {
 	const Data = [
 		{ title: '제목', value: 'title' },
 		{ title: '내용', value: 'contents' },
 	]
-	// const [searchValue, setSearchValue] = useState<string>('')
-	// const [selectVal, setSelectVal] = useState(Data[0])
-	// searchQuery = selectVal.value
-	// searchBy = searchValue
 
 	const [isView, setIsView] = useState(false)
 	const [recoilCounter, setRecoilCounter] = useRecoilState<boolean>(
 		modalViewNotification,
 	)
-	console.log(selectVal?.value)
 
-	//Click
-	const onClickSearch = () => {
-		if (searchValue.trim().length === 0) return setRecoilCounter(() => true)
+	const onClickSearch = (e: any) => {
+		e.preventDefault()
+		// if (e.target.text.value.trim().length === 0)
+		// 	return setRecoilCounter(() => true)
+		setSearchValue(e.target.text.value)
 	}
 
 	//Enter
@@ -43,14 +37,15 @@ SearchType) {
 		if (e.nativeEvent.isComposing) return
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			if (e.target.value.trim().length === 0)
-				return setRecoilCounter(() => true)
+			// if (e.target.value.trim().length === 0)
+			// 	return setRecoilCounter(() => true)
+			setSearchValue(e.target.value)
 		}
 	}
 
 	return (
 		<>
-			<S.InputWrapper>
+			<S.InputWrapper onSubmit={onClickSearch}>
 				<S.Wrapper onClick={() => setIsView(!isView)}>
 					<S.Title isView={isView}>
 						<div>{selectVal.title}</div>
@@ -68,14 +63,10 @@ SearchType) {
 						</S.Box>
 					)}
 				</S.Wrapper>
-				<S.SearchInput
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setSearchValue(e.target.value)
-					}
-					onKeyDown={onkeyDown}
-					value={searchValue}
-				/>
-				<S.SearchIcon size={'26'} onClick={onClickSearch} />
+				<S.SearchInput name="text" onKeyDown={onkeyDown} />
+				<button>
+					<S.SearchIcon size={'26'} />
+				</button>
 			</S.InputWrapper>
 			{recoilCounter && <NotificationModal text={'검색어를 입력해주세요'} />}
 		</>
@@ -90,7 +81,7 @@ const SearchInput = styled.input`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	padding-left: 1rem;
 `
-const InputWrapper = styled.div`
+const InputWrapper = styled.form`
 	position: relative;
 	margin-right: 2%;
 	display: flex;

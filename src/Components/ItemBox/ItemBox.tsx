@@ -30,7 +30,7 @@ function ItemBox({ data }: { data: ItemDataType }) {
 		commentCount,
 		likes,
 	} = data
-	console.log(perssonelNumber)
+
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
 	//userId: 10
@@ -53,7 +53,7 @@ function ItemBox({ data }: { data: ItemDataType }) {
 					['useGetListData', searchBy, searchQuery, pageNumber],
 					newData,
 				)
-				console.log(newData)
+
 				return { prevData }
 			},
 			onError: async (error, newData, context) => {
