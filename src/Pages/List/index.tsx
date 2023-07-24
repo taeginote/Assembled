@@ -17,6 +17,7 @@ import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import SearchBar from './Components/SearchBar/SearchBar'
 import ListNoData from '../../Error/ListNoData'
+import { FlexBetweenCSS } from '../../Styles/common'
 
 function List() {
 	//보류
@@ -53,13 +54,15 @@ function List() {
 				<Banner />
 				<S.FilterWrapper>
 					<CategoryNav />
-					<SearchBar
-						setSelectVal={setSelectVal}
-						selectVal={selectVal}
-						searchValue={searchValue}
-						setSearchValue={setSearchValue}
-					/>
-					<FilterSelectBox />
+					<div>
+						<SearchBar
+							setSelectVal={setSelectVal}
+							selectVal={selectVal}
+							searchValue={searchValue}
+							setSearchValue={setSearchValue}
+						/>
+						<FilterSelectBox />
+					</div>
 				</S.FilterWrapper>
 				{isLoading ? (
 					<LoadingPage />
@@ -95,22 +98,22 @@ const Container = styled.div`
 	${WidthAutoCSS}
 	${GridCenterCSS}
 	${ColumnNumberCSS(4)};
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		${ColumnNumberCSS(2)};
 	}
 `
 const FilterWrapper = styled.div`
 	${WidthAutoCSS}
 	display:flex;
-	align-items: center;
-
-	padding: 2rem 0 3rem 0;
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+	& > div {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1.5rem;
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		flex-direction: column;
-		align-items: start;
-
-		* {
-			margin-bottom: 1rem;
+		& > div {
+			justify-content: space-between;
 		}
 	}
 `

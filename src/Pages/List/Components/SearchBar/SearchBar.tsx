@@ -80,6 +80,9 @@ const SearchInput = styled.input`
 	width: 20rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	padding-left: 1rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 13rem;
+	}
 `
 const InputWrapper = styled.form`
 	position: relative;

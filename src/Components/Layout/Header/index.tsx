@@ -103,7 +103,7 @@ const HeaderRightBox = styled.div``
 const Select = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	}
 	:hover {
 		color: ${({ theme }) => theme.COLOR.hover};
@@ -130,6 +130,12 @@ const LogIn = styled.div`
 	${FlexAlignCSS}
 	* {
 		margin-left: 2rem;
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		* {
+			margin-left: 0.6rem;
+		}
+		padding: 0 2rem;
 	}
 `
 const S = {
