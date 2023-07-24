@@ -7,6 +7,7 @@ interface Comment {
 		originalName: string
 	}
 }
+
 export interface response {
 	postId: number
 	title: string

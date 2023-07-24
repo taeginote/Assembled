@@ -6,24 +6,24 @@ export interface PostData {
 }
 
 //이건 댓글 API 아직 백엔드 없어서 보류
-// interface CommentData {
-// 	commentContents: string
-// 	userId: number
-// 	postId?: number
-// }
+export interface CommentData {
+	contents?: string
+	userId?: string | null
+	postId?: number
+}
 
-// export type DetailApiType = {
-// 	Comments(data: any): Promise<AxiosResponse<CommentData>>
-// }
+export type CommentApiType = {
+	postComment(data: CommentData): Promise<AxiosResponse<CommentData>>
+}
 
 //디테일 페이지 post 댓글
-export interface postComment {
-	data: {
-		commentContents: string
-		userId: number
-		postId?: number | null
-	}
-}
+// export interface postComment {
+// 	data: {
+// 		commentContents: string
+// 		userId: number
+// 		postId?: number | null
+// 	}
+// }
 
 export interface PostLike {
 	postId?: number

@@ -2,10 +2,12 @@ import styled from 'styled-components'
 import { useMutation } from '@tanstack/react-query'
 
 import { FlexAlignCSS } from '../../../Styles/common'
-// import DetailApi from '../../../Apis/DetailApi'
+
 import Button from '../../../Components/Button/Button'
 import { CommentFormPropsType } from '../../../Types/dataType'
-import { postComment } from '../../../Types/apiType'
+import { CommentData } from '../../../Types/apiType'
+import CommentApi from '../../../Apis/CommentApi'
+import UserIdService from '../../../Utils/UserIdService'
 
 function CommentForm({
 	comments,
@@ -13,26 +15,29 @@ function CommentForm({
 	postId,
 	userImg,
 }: CommentFormPropsType) {
-	// const { mutate } = useMutation(
-	// 	(data: postComment) => DetailApi.Comments(data),
-	// 	{
-	// 		onSuccess: () => {
-	// 			refetch()
-	// 		},
-	// 		onError: () => {},
-	// 	},
-	// )
-
+	const { mutate } = useMutation(
+		(data: CommentData) => CommentApi.postComment(data),
+		{
+			onSuccess: () => {
+				refetch()
+			},
+			onError: () => {},
+		},
+	)
+	const userId = UserIdService.getUserId()
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		const commentContents = e.currentTarget.textarea.value
-		const data: postComment['data'] = {
-			commentContents,
-			userId: 1,
+		const contents = e.currentTarget.textarea.value.trim()
+		if (contents.length === 0) return
+
+		const data: CommentData = {
+			contents,
+			userId,
 			postId,
 		}
-		// mutate({ data })
+		mutate(data)
 	}
+
 	return (
 		<>
 			<S.Container onSubmit={onSubmitComment}>
@@ -49,16 +54,16 @@ function CommentForm({
 					</Button>
 				</span>
 			</S.Container>
-			{comments.map(comment => (
+			{comments.map((comment: any) => (
 				<S.CommentsList>
 					<S.CommentTop>
-						<img src={comment.userProfile.fileFullPath} />
+						{/* <img src={comment?.userProfile.fileFullPath} /> */}
 						<div>
-							<div>{comment.commentCreator}</div>
-							<span>{comment.commentCreatedDate}</span>
+							<div>{comment.writerNickname}</div>
+							<span>{comment.writeDate}</span>
 						</div>
 					</S.CommentTop>
-					<S.CommentBottom>{comment.commentContents}</S.CommentBottom>
+					<S.CommentBottom>{comment.contents}</S.CommentBottom>
 				</S.CommentsList>
 			))}
 		</>

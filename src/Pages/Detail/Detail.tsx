@@ -24,7 +24,7 @@ function Detail() {
 						{/* <S.UserImg src={data?.profile.fileFullPath} /> */}
 						<div>{data?.response?.writerNickname}</div>
 						<span> | </span>
-						<span>{data?.response?.writeDate || '여기는 생성 날'}</span>
+						<span>{data?.response?.createdTime.split('T')[0]}</span>
 					</S.Profile>
 					<S.Info>
 						<div>
@@ -37,7 +37,7 @@ function Detail() {
 						</div>
 						<div>
 							<div>모집 인원</div>
-							<span>{data?.response?.personnelNumber}명</span>
+							<span>{data?.response?.perssonelNumber}명</span>
 						</div>
 					</S.Info>
 					<h3>프로젝트 설명</h3>

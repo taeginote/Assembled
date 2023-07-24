@@ -52,7 +52,7 @@ function Pagination({
 					queryString.set(key, value)
 				})
 		}
-		typeof number.toString()
+
 		queryString.set('page', number.toString()) // 쿼리 스트링 값 중 'page'만 변경
 		setSearchParams(queryString)
 	}
