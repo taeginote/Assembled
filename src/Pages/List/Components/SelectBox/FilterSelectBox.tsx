@@ -10,11 +10,9 @@ type eventType = {
 function FilterSelectBox() {
 	const navigate = useNavigate()
 	const [isShowOptions, setShowOptions] = useState(false)
-	const [selectFilter, setSelectFilter] = useState('최신 순 정렬')
 
 	const [searchParams, setSearchParams] = useSearchParams()
-	let filter = searchParams.get('filter')
-	//보류 카테고리가 1만 존재 1은 개발/프로그래밍임 우리는 전체와 다른 것도 필요할듯해보임
+	let filter = searchParams.get('sort')
 	let category: string | number | null = searchParams.get('category')
 
 	if (category === null) {
@@ -38,15 +36,15 @@ function FilterSelectBox() {
 			url: 'like',
 		},
 	]
+	const text = FilterArr.find(el => el.url === filter)
 
 	const onClickSelectFilter = (e: eventType) => {
-		setSelectFilter(() => e.name)
 		navigate(`?category=${category}&sort=${e.url}`)
 	}
 
 	return (
 		<SelectBox onClick={() => setShowOptions(prev => !prev)}>
-			<Button>{selectFilter}</Button>
+			<Button>{text?.name}</Button>
 			<IconBox isShowOptions={isShowOptions}>
 				<DownIcon />
 			</IconBox>

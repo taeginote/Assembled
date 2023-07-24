@@ -22,7 +22,6 @@ import { FlexBetweenCSS } from '../../Styles/common'
 function List() {
 	//보류
 	const [searchParams, setSearchParams] = useSearchParams()
-
 	let categoryId: any = searchParams.get('category')
 	let sort: any = searchParams.get('sort')
 	let pageNumber: any = searchParams.get('page')
@@ -45,9 +44,7 @@ function List() {
 		sort,
 		categoryId,
 	)
-
 	const totalPage: number = data?.response?.totalPages
-
 	return (
 		<>
 			<S.Wrapper>
@@ -68,7 +65,7 @@ function List() {
 					<LoadingPage />
 				) : (
 					<>
-						{data?.response?.totalElements === 0 ? (
+						{data?.response?.content?.length === 0 ? (
 							<ListNoData refetch={refetch} setSearchValue={setSearchValue} />
 						) : (
 							<S.Container>
@@ -80,7 +77,7 @@ function List() {
 					</>
 				)}
 			</S.Wrapper>
-			{data?.response?.totalElements !== 0 && (
+			{data?.response?.content?.length !== 0 && (
 				<Pagination
 					totalPage={totalPage}
 					limit={10}

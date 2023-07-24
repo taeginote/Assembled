@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
 import SuccessModal from '../../Modal/successModal'
-import UserIdService from '../../../Utils/UserIdService'
+import { useQueryClient } from '@tanstack/react-query'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
@@ -26,6 +26,10 @@ function Haeder() {
 		auth.logout()
 	}
 
+	const goLogo = () => {
+		navigate('/')
+	}
+
 	//mobileFooter쓰면 useContext 오류 뜸
 
 	return (
@@ -33,11 +37,7 @@ function Haeder() {
 			<S.Wrapper>
 				<S.Container>
 					<div>
-						<S.Logo
-							src="/assets/img/Logo.png"
-							onClick={() => navigate('/')}
-						></S.Logo>
-						{/* <SearchBar /> */}
+						<S.Logo src="/assets/img/Logo.png" onClick={goLogo}></S.Logo>
 					</div>
 					<S.HeaderRightBox>
 						{!auth.accessToken ? (

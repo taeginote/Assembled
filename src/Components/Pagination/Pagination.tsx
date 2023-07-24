@@ -4,6 +4,7 @@ import scrollToTop from '../../Utils/scrollToTop'
 import { FlexCenterCSS } from '../../Styles/common'
 import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
 import { PaginationDisabled, PaginationType } from '../../Types/type'
+import { start } from 'repl'
 
 /**
  * @param limit - 페이지네이션 몇 개씩 할 것인지
@@ -28,7 +29,7 @@ function Pagination({
 
 	const nowPage: number | null = parseInt(searchParams.get('page') ?? '1') // 지금 페이지 number
 
-	const startPage = Math.floor((nowPage - 1) / limit) * limit + 1 // 시작 페이지 number. ex. 지금 14페이지라면 시작 페이지는 11입니다.
+	const startPage = Math.floor(nowPage / limit) * limit + 1 // 시작 페이지 number. ex. 지금 14페이지라면 시작 페이지는 11입니다.
 	let endPage = startPage + limit - 1 // 끝 페이지 번호. ex. 지금 14페이지라면 끝 페이지는 20입니다.
 	if (endPage >= totalPage) endPage = totalPage // 끝 페이지 번호 수정용. ex. 최종 마지막 페이지가 19라면 20이 끝 페이지가 아니라 19가 됩니다.
 
@@ -51,7 +52,7 @@ function Pagination({
 					queryString.set(key, value)
 				})
 		}
-
+		typeof number.toString()
 		queryString.set('page', number.toString()) // 쿼리 스트링 값 중 'page'만 변경
 		setSearchParams(queryString)
 	}
@@ -71,7 +72,7 @@ function Pagination({
 		<S.Nav>
 			<S.Button
 				onClick={() => {
-					goPage(Math.floor((nowPage - 1) / limit) * limit)
+					goPage(Math.floor(nowPage / limit) * limit)
 					scrollToTop(scroll)
 				}}
 				disabled={isDisabled('start')}
@@ -83,6 +84,7 @@ function Pagination({
 					key={i}
 					onClick={() => {
 						goPage(i + startPage)
+						// goPage(i)
 						scrollToTop(scroll)
 					}}
 					aria-current={nowPage === i + startPage ? 'page' : undefined}
