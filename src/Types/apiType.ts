@@ -27,7 +27,7 @@ export interface postComment {
 
 export interface PostLike {
 	postId?: number
-	userId?: number
+	userId?: string
 }
 export interface PostLikeApiType {
 	PostLike(params: PostLike): Promise<AxiosResponse<PostLike>>

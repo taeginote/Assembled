@@ -15,6 +15,8 @@ import {
 import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
 import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
+import UserInfoService from '../../Utils/UserIdService'
+import UserIdService from '../../Utils/UserIdService'
 
 function ItemBox({ data }: { data: ItemDataType }) {
 	const navigate = useNavigate()
@@ -73,10 +75,11 @@ function ItemBox({ data }: { data: ItemDataType }) {
 	const { mutate: cancelMutate } = useMutation((data: PostLike) =>
 		PostLikeApi.CancelLike(data),
 	)
+	const userId: any = UserIdService.getUserId()
 
 	const likeData = {
 		postId,
-		userId: 10,
+		userId,
 	}
 	const onClickNotHeart = () => {
 		mutate(likeData)
