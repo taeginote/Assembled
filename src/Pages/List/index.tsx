@@ -19,31 +19,32 @@ import SearchBar from './Components/SearchBar/SearchBar'
 import ListNoData from '../../Error/ListNoData'
 
 function List() {
-	//searchParams 타입을 아직 모르겠음
+	//보류
 	const [searchParams, setSearchParams] = useSearchParams()
 
-	let category: any = searchParams.get('category')
-	let filter: any = searchParams.get('filter')
-	let page: any = searchParams.get('page')
-	const [pageNumber, setPageNumber] = useState(page || 1)
+	let categoryId: any = searchParams.get('category')
+	let sort: any = searchParams.get('sort')
+	let pageNumber: any = searchParams.get('page')
+	const [page, setPage] = useState(pageNumber || 0)
 	const [searchValue, setSearchValue] = useState<string>('')
 	const [selectVal, setSelectVal] = useState({
 		title: '제목',
 		value: 'title',
 	})
-	let searchBy = selectVal.value
-	let searchQuery = searchValue
+	let searchBy: string = selectVal.value
+	let searchQuery: string = searchValue
 
+	if (categoryId === null) {
+		categoryId = 1
+	}
 	const { data, isLoading, refetch } = useGetListData(
-		pageNumber,
+		page,
 		searchBy,
 		searchQuery,
+		sort,
+		categoryId,
 	)
-	//이건 고민중
-	// useEffect(() => {
-	// 	// refetch()
-	// }, [])
-
+	console.log(data)
 	const totalPage: number = data?.response?.totalPages
 
 	return (
@@ -81,7 +82,7 @@ function List() {
 					totalPage={totalPage}
 					limit={10}
 					scroll={765}
-					setPage={setPageNumber}
+					setPage={setPage}
 				/>
 			)}
 		</>

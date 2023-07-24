@@ -2,43 +2,24 @@ import styled from 'styled-components'
 import { WidthAutoCSS } from '../../../../Styles/common'
 import { FlexAlignCSS } from '../../../../Styles/common'
 import { Link, useSearchParams } from 'react-router-dom'
+import useGetCategoryData from '../../../../Hooks/Queries/get-category'
 
 function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	let category = searchParams.get('category')
-	let filter = searchParams.get('filter')
+	let category: null | string | number = searchParams.get('category')
 
 	if (category === null) {
-		category = 'total'
-	}
-	if (filter === null) {
-		filter = 'recent'
+		category = 1
 	}
 
-	const categoryArr = [
-		{
-			id: 0,
-			name: '전체',
-			url: 'total',
-		},
-		{
-			id: 1,
-			name: '스터디',
-			url: 'study',
-		},
-		{
-			id: 2,
-			name: '프로젝트',
-			url: 'project',
-		},
-	]
-
+	const { data } = useGetCategoryData()
+	console.log(data?.response)
 	return (
 		<S.Wrapper>
 			<S.Container>
-				{categoryArr.map((el, idx) => (
-					<S.NavBox key={idx} state={el.url === category}>
-						<Link to={`?category=${el.url}&filter=${filter}`}>{el.name}</Link>
+				{data?.response?.map((el: any, idx: number) => (
+					<S.NavBox key={idx} state={el.categoryId === category}>
+						<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>
 					</S.NavBox>
 				))}
 			</S.Container>

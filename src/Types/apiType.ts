@@ -35,11 +35,11 @@ export interface PostLikeApiType {
 }
 
 interface GetListData {
-	pageNumber?: number
-	searchBy?: string
+	page?: number
+	searchBy?: any
 	searchQuery?: string
-	// category?: 'study' | 'project'
-	// filter?: 'total' | 'like' | 'popular'
+	categoryId?: null | 1
+	sort?: 'total' | 'like' | 'popular'
 	response?: []
 }
 export interface PostRegisterData {
@@ -59,6 +59,9 @@ export interface PostApiType {
 	getDetail(params: PostData): Promise<AxiosResponse<response>>
 	DeletePost(params: PostData): Promise<AxiosResponse<PostData>>
 	//여기는 모임 수정 (아직 구현 X)
+}
+export interface CategoryApiType {
+	getCategory(): Promise<AxiosResponse>
 }
 
 //User api type

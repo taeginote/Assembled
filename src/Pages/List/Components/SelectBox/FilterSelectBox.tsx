@@ -14,19 +14,20 @@ function FilterSelectBox() {
 
 	const [searchParams, setSearchParams] = useSearchParams()
 	let filter = searchParams.get('filter')
-	let category = searchParams.get('category')
+	//보류 카테고리가 1만 존재 1은 개발/프로그래밍임 우리는 전체와 다른 것도 필요할듯해보임
+	let category: string | number | null = searchParams.get('category')
 
 	if (category === null) {
-		category = 'total'
+		category = 1
 	}
 	if (filter === null) {
-		filter = 'recent'
+		filter = 'total'
 	}
 
 	const FilterArr = [
 		{
 			name: '최신 순 정렬',
-			url: 'recent',
+			url: 'total',
 		},
 		{
 			name: '인기 순 정렬 (조회 수)',
@@ -40,7 +41,7 @@ function FilterSelectBox() {
 
 	const onClickSelectFilter = (e: eventType) => {
 		setSelectFilter(() => e.name)
-		navigate(`?category=${category}&filter=${e.url}`)
+		navigate(`?category=${category}&sort=${e.url}`)
 	}
 
 	return (

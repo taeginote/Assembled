@@ -4,23 +4,22 @@ import PostApi from '../../Apis/PostApi'
 type pageType = number | undefined
 type searchByType = string | undefined
 type searchQuery = string | undefined
-
-// type categoryType = 'study' | 'project'
-// type filterType = 'total' | 'like' | 'popular'
+type filterType = 'total' | 'like' | 'popular'
+type categoryType = 1
 
 const getListData = async (
-	pageNumber: pageType,
-	// category?: categoryType,
-	// filter?: filterType,
-	searchBy?: string,
-	searchQuery?: string,
+	page: pageType,
+	searchBy: searchByType,
+	searchQuery?: searchQuery,
+	sort?: filterType,
+	categoryId?: categoryType,
 ) => {
 	const res = await PostApi.getList({
-		pageNumber,
+		page,
 		searchBy,
 		searchQuery,
-		// category,
-		// filter,
+		sort,
+		categoryId,
 	})
 
 	return res.data
@@ -28,15 +27,15 @@ const getListData = async (
 
 //보류
 const useGetListData = (
-	pageNumber: pageType,
-	// category?: categoryType,
-	// filter?: filterType,
-	searchBy?: string,
-	searchQuery?: string,
+	page: pageType,
+	searchBy?: searchByType,
+	searchQuery?: searchQuery,
+	sort?: filterType,
+	categoryId?: categoryType,
 ) => {
 	const { data, isLoading, refetch }: any = useQuery(
-		['useGetListData', pageNumber, searchBy, searchQuery],
-		() => getListData(pageNumber, searchBy, searchQuery),
+		['useGetListData', page, searchBy, searchQuery, sort, categoryId],
+		() => getListData(page, searchBy, searchQuery, sort, categoryId),
 	)
 
 	return { data, isLoading, refetch }

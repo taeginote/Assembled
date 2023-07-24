@@ -47,7 +47,7 @@ export type PaginationDisabled = 'start' | 'end'
 //Auth type
 export interface AuthContextType {
 	accessToken: string | null
-	login: (token: string) => void
+	login: (token: string, id: string) => void
 	logout: () => void
 }
 
