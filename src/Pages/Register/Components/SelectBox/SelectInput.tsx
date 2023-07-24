@@ -46,7 +46,7 @@ function SelectInput(props: SelectInputProps) {
 								{Data.map((data, idx) => (
 									<S.List
 										key={idx}
-										value={name === 'Category' ? data.categoryName : data.value}
+										value={data.value}
 										onClick={() =>
 											field.onChange(
 												name === 'Category' ? data.categoryName : data.value,
