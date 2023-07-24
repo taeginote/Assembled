@@ -45,7 +45,7 @@ function List() {
 		sort,
 		categoryId,
 	)
-	console.log(data)
+
 	const totalPage: number = data?.response?.totalPages
 
 	return (
@@ -105,6 +105,7 @@ const Container = styled.div`
 const FilterWrapper = styled.div`
 	${WidthAutoCSS}
 	display:flex;
+	padding: 1rem 0;
 	& > div {
 		display: flex;
 		align-items: center;

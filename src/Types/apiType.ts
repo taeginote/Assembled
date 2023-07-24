@@ -43,12 +43,12 @@ interface GetListData {
 	response?: []
 }
 export interface PostRegisterData {
-	categoryId?: 'study' | 'project' | string
+	categoryId?: 1
 	contents?: string
-	expectedPeriod?: '0' | '1' | '2' | '3' | '4' | '5' | '6' | string
-	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10 | number
+	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6
+	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10
 	title?: string
-	writer?: string
+	writer?: null | string
 }
 
 export interface PostApiType {

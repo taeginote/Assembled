@@ -113,7 +113,6 @@ const Select = styled.div`
 const FooterWrapper = styled.div`
 	display: none;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		/* z-index: 100000000; */
 		display: block;
 		position: fixed;
 		bottom: 0;

@@ -6,12 +6,6 @@ const PATH = '/assemble/post'
 
 const PostApi: PostApiType = {
 	getList({ page, searchBy, searchQuery, sort, categoryId }) {
-		console.log({ page })
-		console.log({ searchBy })
-		console.log({ searchQuery })
-		console.log({ sort })
-		console.log({ categoryId })
-
 		return axiosInstance.get(PATH, {
 			params: { page, searchBy, searchQuery, sort, categoryId },
 		})
@@ -25,7 +19,7 @@ const PostApi: PostApiType = {
 			title: 'ㅇㄴㅁㅇㅁㄴ',
 			writer: 1, //userId를 의미함
 		}
-		return axiosInstance.post(PATH, datas)
+		return axiosInstance.post(PATH, data)
 	},
 	getDetail({ postId }) {
 		return axiosInstance.get(`${PATH}/${postId}`)

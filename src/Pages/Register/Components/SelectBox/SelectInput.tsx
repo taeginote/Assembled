@@ -36,6 +36,7 @@ function SelectInput(props: SelectInputProps) {
 							<div>
 								{field.value === undefined ? '선택해 주세요' : field.value}
 							</div>
+
 							<span>
 								<DownIcon />
 							</span>
@@ -45,10 +46,10 @@ function SelectInput(props: SelectInputProps) {
 								{Data.map((data, idx) => (
 									<S.List
 										key={idx}
-										value={name == 'Category' ? data.categoryName : data.value}
+										value={name === 'Category' ? data.categoryName : data.value}
 										onClick={() =>
 											field.onChange(
-												name == 'Category' ? data.categoryId : data.value,
+												name === 'Category' ? data.categoryName : data.value,
 											)
 										}
 									>
@@ -100,7 +101,8 @@ const Box = styled.ul`
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 `
 const List = styled.li`
-	:hover {
+	padding: 0.3rem;
+	&:hover {
 		background-color: ${({ theme }) => theme.COLOR.sub};
 		transition: all linear 0.3s;
 	}

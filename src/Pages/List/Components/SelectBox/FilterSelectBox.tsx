@@ -47,7 +47,7 @@ function FilterSelectBox() {
 	return (
 		<SelectBox onClick={() => setShowOptions(prev => !prev)}>
 			<Button>{selectFilter}</Button>
-			<IconBox>
+			<IconBox isShowOptions={isShowOptions}>
 				<DownIcon />
 			</IconBox>
 			{isShowOptions && (
@@ -71,23 +71,25 @@ export default FilterSelectBox
 const SelectBox = styled.div`
 	position: relative;
 	width: 20rem;
+	margin-left: 1.5rem;
 `
 const Button = styled.button`
 	width: 20rem;
 	border: 1px solid #c4c4c4;
 	box-sizing: border-box;
-	border-radius: 10px;
-	padding: 12px 13px;
+	border-radius: 8px;
+
+	padding: 10.8px 13px;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 	line-height: 16px;
 	text-align: left;
 	background: #ffffff;
 	color: ${({ theme }) => theme.COLOR.common.gray[200]};
-	:focus {
+	&:focus {
 		border: 1px solid ${({ theme }) => theme.COLOR.hover};
 		border-radius: 10px;
-		outline: 3px solid ${({ theme }) => theme.COLOR.hover};
+		outline: 1px solid ${({ theme }) => theme.COLOR.hover};
 		border-radius: 10px;
 	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
@@ -109,7 +111,7 @@ const Option = styled.li<{ select: boolean }>`
 	border: none;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	line-height: 1.6rem;
-	padding: 0.7rem 1rem;
+	padding: 0.6rem 1rem;
 	margin: 0.5rem 0.7rem;
 	box-sizing: border-box;
 	color: ${({ theme, select }) => select && theme.COLOR.hover};
@@ -119,10 +121,14 @@ const Option = styled.li<{ select: boolean }>`
 		border-radius: 5px;
 	}
 `
-const IconBox = styled.div`
+const IconBox = styled.div<{ isShowOptions: boolean }>`
 	position: absolute;
 	right: 0.7rem;
-	top: 0.8rem;
+	top: 0.5rem;
+	transform: ${({ isShowOptions }) => isShowOptions && 'rotate(180deg)'};
+	top: ${({ isShowOptions }) => isShowOptions && '0.1rem'};
+	transition: all linear 0.2s;
+	margin: 0.2rem 0.5rem 0 0;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		top: 0.3rem;
 	}

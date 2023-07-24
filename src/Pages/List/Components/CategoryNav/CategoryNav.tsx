@@ -13,7 +13,7 @@ function CategoryNav() {
 	}
 
 	const { data } = useGetCategoryData()
-	console.log(data?.response)
+
 	return (
 		<S.Wrapper>
 			<S.Container>

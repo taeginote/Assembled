@@ -86,7 +86,7 @@ const SearchInput = styled.input`
 `
 const InputWrapper = styled.form`
 	position: relative;
-	margin-right: 2%;
+
 	display: flex;
 	align-items: center;
 	border: 1px solid ${({ theme }) => theme.COLOR.main};
@@ -95,7 +95,7 @@ const InputWrapper = styled.form`
 const SearchIcon = styled(CiSearch)`
 	position: absolute;
 	right: 0.7rem;
-	top: 0.4rem;
+	top: 0.6rem;
 	color: ${({ theme }) => theme.COLOR.main};
 	cursor: pointer;
 `
@@ -118,7 +118,7 @@ const Title = styled.div<{ isView: boolean }>`
 	& > span {
 		transform: ${({ isView }) => isView && 'rotate(180deg)'};
 		transition: all linear 0.2s;
-		margin: 0.2rem 0.5rem 0 0;
+		margin: 0.5rem 0.5rem 0 0;
 	}
 `
 const Box = styled.ul`

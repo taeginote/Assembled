@@ -6,12 +6,9 @@ import {
 	TopPadding,
 	WidthAutoCSS,
 } from '../../Styles/common'
-
 import { selectDataTeamMember } from './Components/SelectBox/SelectData'
-// import { selectDataCategory } from './Components/SelectBox/SelectData'
 import { selectDataPeriod } from './Components/SelectBox/SelectData'
 import { useRecoilState } from 'recoil'
-
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import {
 	Controller,
@@ -23,15 +20,13 @@ import HookFormError from '../../Components/Error/HookFormError'
 import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
 import { useMutation } from '@tanstack/react-query'
-// import RegisterApi from '../../Apis/RegisterApi'
 import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import PostApi from '../../Apis/PostApi'
 import { PostRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
-
-// import { PostRegister, PostRegisterData } from '../../Types/apiType'
+import UserIdService from '../../Utils/UserIdService'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -43,7 +38,7 @@ function Register() {
 		formState: { errors },
 		control,
 	} = useForm()
-	const { data } = useGetCategoryData()
+	const { data: GetCategoryData } = useGetCategoryData()
 
 	const { mutate } = useMutation(
 		(data: PostRegisterData) => PostApi.PostRegister(data),
@@ -56,25 +51,20 @@ function Register() {
 	)
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
-		let resultCategory: number | null = null
+		const writer = UserIdService.getUserId()
 
-		if (e.Category === '프로젝트') {
-			resultCategory = 1
-		}
-		if (e.Category === '스터디') {
-			resultCategory = 2
-		}
-		//보낼데이터
-		//이거 보류
-		const data: any = {
+		let categoryId = GetCategoryData?.response.find(
+			(el: any) => el.categoryName === e.Category,
+		)
+
+		const data: PostRegisterData = {
 			title: e.Title,
 			contents: e.Contents,
-			categoryId: resultCategory,
-			writer: '1',
+			categoryId: categoryId.categoryId,
+			writer,
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
 		}
-		console.log(data)
 		mutate(data)
 	}
 
@@ -86,7 +76,7 @@ function Register() {
 					<div>카테고리 *</div>
 					<SelectInput
 						name="Category"
-						Data={data?.response}
+						Data={GetCategoryData?.response}
 						control={control}
 						errorMsg="카테고리를 선택해주세요."
 					/>
