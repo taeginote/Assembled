@@ -5,24 +5,27 @@ import axiosInstance from './@core'
 const PATH = '/assemble/post'
 
 const PostApi: PostApiType = {
-	getList({ pageNumber, searchBy, searchQuery }) {
+	getList({ page, searchBy, searchQuery, sort, categoryId }) {
+		console.log({ page })
+		console.log({ searchBy })
+		console.log({ searchQuery })
+		console.log({ sort })
+		console.log({ categoryId })
+
 		return axiosInstance.get(PATH, {
-			params: { pageNumber, searchBy, searchQuery },
+			params: { page, searchBy, searchQuery, sort, categoryId },
 		})
 	},
 	PostRegister(data) {
-		const {
-			categoryId,
-			contents,
-			expectedPeriod,
-			personnelNumber,
-			title,
-			writer, //userId를 의미함
-		} = data
-		return axiosInstance.post(
-			PATH +
-				`?categoryId=${1}&contents=${contents}&expectedPeriod=${3}&personnelNumber=${3}&title=${title}&writer=${1}`,
-		)
+		const datas: any = {
+			categoryId: 1,
+			contents: 'ㅇㄴㅁㅇㄴ',
+			expectedPeriod: 0,
+			personnelNumber: 0,
+			title: 'ㅇㄴㅁㅇㅁㄴ',
+			writer: 1, //userId를 의미함
+		}
+		return axiosInstance.post(PATH, datas)
 	},
 	getDetail({ postId }) {
 		return axiosInstance.get(`${PATH}/${postId}`)

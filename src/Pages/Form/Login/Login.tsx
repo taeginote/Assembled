@@ -18,6 +18,7 @@ import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
 import { LoginData } from '../../../Types/apiType'
 import { LoginSubmitData } from '../../../Types/type'
 import TokenService from '../../../Utils/TokenService'
+import UserIdService from '../../../Utils/UserIdService'
 
 function Login() {
 	const {
@@ -38,11 +39,15 @@ function Login() {
 		(data: LoginData) => UserApi.Login(data),
 		{
 			onSuccess: res => {
-				TokenService.setAccessToken(res.data.response.token.accessToken)
+				// TokenService.setAccessToken(res.data.response.token.accessToken)
+				// UserIdService.setUserId(res.data.response.userId)
 				setRecoilSuccessModal(() => true)
 
 				if (res.data.response.token.accessToken) {
-					auth.login(res.data.response.token.accessToken)
+					auth.login(
+						res.data.response.token.accessToken,
+						res.data.response.userId,
+					)
 				}
 			},
 			onError: err => {

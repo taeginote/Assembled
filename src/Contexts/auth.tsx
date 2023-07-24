@@ -1,6 +1,7 @@
 import { useContext, useState, createContext, useEffect } from 'react'
 import TokenService from '../Utils/TokenService'
 import { AuthContextType, childrenType } from '../Types/type'
+import UserIdService from '../Utils/UserIdService'
 
 const AuthContext = createContext<AuthContextType>({
 	accessToken: null,
@@ -18,13 +19,15 @@ function AuthProvider({ children }: childrenType) {
 		setAccessToken(token)
 	}, [])
 
-	const login = (token: string) => {
+	const login = (token: string, id: string) => {
 		TokenService.setAccessToken(token)
+		UserIdService.setUserId(id)
 		setAccessToken(token)
 	}
 
 	const logout = () => {
 		TokenService.removeAccessToken()
+		UserIdService.removeUserId()
 		setAccessToken(null)
 	}
 

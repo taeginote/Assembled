@@ -10,6 +10,8 @@ import { useRecoilState } from 'recoil'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
 import SuccessModal from '../../Modal/successModal'
+import UserIdService from '../../../Utils/UserIdService'
+
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
 function Haeder() {

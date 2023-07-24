@@ -25,44 +25,44 @@ export const selectDataTeamMember = [
 	},
 ]
 
-export const selectDataCategory = [
-	{
-		text: '스터디',
-		value: 'study',
-	},
-	{
-		text: '프로젝트',
-		value: 'project',
-	},
-]
+// export const selectDataCategory = [
+// 	{
+// 		text: '스터디',
+// 		value: 'study',
+// 	},
+// 	{
+// 		text: '프로젝트',
+// 		value: 'project',
+// 	},
+// ]
 
 export const selectDataPeriod = [
 	{
 		text: '1달',
-		value: '1',
+		value: 1,
 	},
 	{
 		text: '2달',
-		value: '2',
+		value: 2,
 	},
 	{
 		text: '3달',
-		value: '3',
+		value: 3,
 	},
 	{
 		text: '4달',
-		value: '4',
+		value: 4,
 	},
 	{
 		text: '5달',
-		value: '5',
+		value: 5,
 	},
 	{
 		text: '6달',
-		value: '6',
+		value: 6,
 	},
 	{
 		text: '제한 없음',
-		value: '0',
+		value: 0,
 	},
 ]

@@ -8,7 +8,7 @@ import {
 } from '../../Styles/common'
 
 import { selectDataTeamMember } from './Components/SelectBox/SelectData'
-import { selectDataCategory } from './Components/SelectBox/SelectData'
+// import { selectDataCategory } from './Components/SelectBox/SelectData'
 import { selectDataPeriod } from './Components/SelectBox/SelectData'
 import { useRecoilState } from 'recoil'
 
@@ -29,6 +29,7 @@ import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import PostApi from '../../Apis/PostApi'
 import { PostRegisterData } from '../../Types/apiType'
+import useGetCategoryData from '../../Hooks/Queries/get-category'
 
 // import { PostRegister, PostRegisterData } from '../../Types/apiType'
 
@@ -42,6 +43,7 @@ function Register() {
 		formState: { errors },
 		control,
 	} = useForm()
+	const { data } = useGetCategoryData()
 
 	const { mutate } = useMutation(
 		(data: PostRegisterData) => PostApi.PostRegister(data),
@@ -54,26 +56,25 @@ function Register() {
 	)
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
-		let resultCategory: string = ''
+		let resultCategory: number | null = null
 
 		if (e.Category === '프로젝트') {
-			resultCategory = 'category'
+			resultCategory = 1
 		}
 		if (e.Category === '스터디') {
-			resultCategory = 'study'
+			resultCategory = 2
 		}
-
 		//보낼데이터
 		//이거 보류
 		const data: any = {
 			title: e.Title,
 			contents: e.Contents,
 			categoryId: resultCategory,
-			writer: '태선컴퍼니',
+			writer: '1',
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
 		}
-
+		console.log(data)
 		mutate(data)
 	}
 
@@ -85,7 +86,7 @@ function Register() {
 					<div>카테고리 *</div>
 					<SelectInput
 						name="Category"
-						Data={selectDataCategory}
+						Data={data?.response}
 						control={control}
 						errorMsg="카테고리를 선택해주세요."
 					/>

@@ -45,10 +45,14 @@ function SelectInput(props: SelectInputProps) {
 								{Data.map((data, idx) => (
 									<S.List
 										key={idx}
-										value={data.value}
-										onClick={() => field.onChange(data.text)}
+										value={name == 'Category' ? data.categoryName : data.value}
+										onClick={() =>
+											field.onChange(
+												name == 'Category' ? data.categoryId : data.value,
+											)
+										}
 									>
-										{data.text}
+										{name == 'Category' ? data.categoryName : data.text}
 									</S.List>
 								))}
 							</S.Box>
