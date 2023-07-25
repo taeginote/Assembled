@@ -4,8 +4,8 @@ import PostApi from '../../Apis/PostApi'
 type pageType = number | undefined
 type searchByType = string | undefined
 type searchQuery = string | undefined
-type filterType = 'total' | 'like' | 'popular'
-type categoryType = 1
+export type filterType = null | string
+export type categoryType = 1 | null | string
 
 const getListData = async (
 	page: pageType,

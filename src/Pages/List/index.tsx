@@ -7,23 +7,25 @@ import {
 
 import Banner from '../../Components/Banner'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
-import useGetListData from '../../Hooks/Queries/get-list'
+import useGetListData, {
+	categoryType,
+	filterType,
+} from '../../Hooks/Queries/get-list'
 import LoadingPage from '../../Components/LoadingPage/Loading'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import SearchBar from './Components/SearchBar/SearchBar'
 import ListNoData from '../../Error/ListNoData'
-import { FlexBetweenCSS } from '../../Styles/common'
 
 function List() {
 	//보류
 	const [searchParams, setSearchParams] = useSearchParams()
-	let categoryId: any = searchParams.get('category')
-	let sort: any = searchParams.get('sort')
+	let categoryId: categoryType = searchParams.get('category')
+	let sort: filterType = searchParams.get('sort')
 	let pageNumber: any = searchParams.get('page')
 	const [page, setPage] = useState(pageNumber || 0)
 	const [searchValue, setSearchValue] = useState<string>('')
@@ -70,7 +72,7 @@ function List() {
 						) : (
 							<S.Container>
 								{data?.response?.content?.map((data: any, idx: any) => (
-									<ItemBox data={data} key={idx} />
+									<ItemBox data={data} key={idx} refetch={refetch} />
 								))}
 							</S.Container>
 						)}

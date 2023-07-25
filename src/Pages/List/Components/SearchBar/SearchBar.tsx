@@ -18,6 +18,7 @@ function SearchBar({
 	const Data = [
 		{ title: '제목', value: 'title' },
 		{ title: '내용', value: 'contents' },
+		// { title: '작성자', value: 'writer' },
 	]
 
 	const [isView, setIsView] = useState(false)

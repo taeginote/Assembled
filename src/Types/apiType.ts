@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { response } from './dataType'
+import { categoryType, filterType } from '../Hooks/Queries/get-list'
 
 export interface PostData {
 	postId?: number
@@ -38,12 +39,12 @@ interface GetListData {
 	page?: number
 	searchBy?: any
 	searchQuery?: string
-	categoryId?: null | 1
-	sort?: 'total' | 'like' | 'popular'
+	categoryId?: categoryType
+	sort?: filterType
 	response?: []
 }
 export interface PostRegisterData {
-	categoryId?: 1
+	categoryId?: 1 | null | string
 	contents?: string
 	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6
 	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10
@@ -87,6 +88,17 @@ interface EmailValidation {
 interface NicknameValidation {
 	nickname?: string
 }
+interface resType1 {
+	error: {
+		message: 'string'
+		status: number
+	}
+	response: {
+		accessToken: 'string'
+	}
+	status: number
+	success: true
+}
 
 export type UserApiType = {
 	SignUp(data: signUpData): Promise<AxiosResponse<signUpData>>
@@ -97,4 +109,5 @@ export type UserApiType = {
 	getNickNameValidation(
 		data: NicknameValidation,
 	): Promise<AxiosResponse<NicknameValidation>>
+	getToken(): Promise<AxiosResponse>
 }
