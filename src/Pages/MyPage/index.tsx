@@ -30,5 +30,9 @@ const Container = styled.div`
 		display: flex;
 		justify-content: center;
 	}
+	/* background-color: red; */
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		/* flex-direction: column; */
+	}
 `
 const S = { Wrapper, Container }

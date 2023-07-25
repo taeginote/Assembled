@@ -11,6 +11,7 @@ import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
 import SuccessModal from '../../Modal/successModal'
 import { useQueryClient } from '@tanstack/react-query'
+import Hamburger from './MobileHamburger/Hamburger'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
@@ -41,13 +42,14 @@ function Haeder() {
 					</div>
 					<S.HeaderRightBox>
 						{!auth.accessToken ? (
-							<S.NotLogIn>
-								<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
-								<div>|</div>
-								<S.Select onClick={() => navigate('/signUp')}>
-									회원가입
-								</S.Select>
-							</S.NotLogIn>
+							// <S.NotLogIn>
+							// 	<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
+							// 	<div>|</div>
+							// 	<S.Select onClick={() => navigate('/signUp')}>
+							// 		회원가입
+							// 	</S.Select>
+							// </S.NotLogIn>
+							<Hamburger />
 						) : (
 							<S.LogIn>
 								<div>

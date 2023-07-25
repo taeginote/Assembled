@@ -13,7 +13,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
 	config => {
 		const access_token = TokenService.getAccessToken()
-
 		if (access_token) {
 			config.headers['Authorization'] = `Bearer ${access_token}`
 		}
@@ -40,13 +39,16 @@ axiosInstance.interceptors.response.use(
 			// await UserApi.logout()
 			TokenService.removeAccessToken()
 		}
-
-		if (error.response.status === 417 && !originalRequest._retry) {
+		console.log(error.response.status)
+		if (error.response.status === 401 && !originalRequest._retry) {
+			console.log('dd')
 			originalRequest._retry = true
-
-			// const res = await UserApi.refreshToken()
-			// TokenService.setAccessToken(res.data.token)
-			return axiosInstance(originalRequest)
+			const res: any = await UserApi.getToken()
+			console.log(res)
+			if (res.status === 200) {
+				TokenService.setAccessToken(res?.response?.accessToken)
+				return axiosInstance(originalRequest)
+			}
 		}
 		return Promise.reject(error)
 	},

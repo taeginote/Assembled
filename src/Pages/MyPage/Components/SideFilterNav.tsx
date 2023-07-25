@@ -47,6 +47,10 @@ export default SideFilterNav
 
 const Wrapper = styled.div`
 	${FlexColumnCSS}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		/* flex-direction: row; */
+		display: none;
+	}
 `
 const Box = styled.div<{ state: boolean }>`
 	width: 120%;

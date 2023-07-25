@@ -23,7 +23,7 @@ import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
 import { FaQuestion, FaPen } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
-
+import { GiHamburgerMenu } from 'react-icons/gi'
 type IconSize = {
 	size?: string
 }
@@ -91,3 +91,6 @@ export const NotFillHeart_Icon = ({ onClick }: any) => (
 export const FillHeart_Icon = ({ onClick }: any) => (
 	<AiFillHeart size={'23'} onClick={onClick} color={'#f60004'} />
 ) // 찬 하트
+export const Hamburger_Icon = ({ onClick }: any) => (
+	<GiHamburgerMenu size={'23'} onClick={onClick} color="#FB9B00" />
+) // 햄버거

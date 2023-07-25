@@ -42,6 +42,9 @@ const UserApi: UserApiType = {
 			params: { nickname },
 		})
 	},
+	getToken() {
+		return axiosInstance.post('/assemble/auth/token')
+	},
 }
 
 export default UserApi

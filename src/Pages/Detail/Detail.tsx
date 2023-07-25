@@ -24,12 +24,16 @@ function Detail() {
 						{/* <S.UserImg src={data?.profile.fileFullPath} /> */}
 						<div>{data?.response?.writerNickname}</div>
 						<span> | </span>
-						<span>{data?.response?.createdTime.split('T')[0]}</span>
+						<span>{data?.response?.createdTime?.split('T')[0]}</span>
 					</S.Profile>
 					<S.Info>
 						<div>
 							<div>활동 기간</div>
-							<span>{data?.response?.expectedPeriod}달</span>
+							<span>
+								{data?.response?.expectedPeriod === 0
+									? '제한없음'
+									: data?.response?.expectedPeriod + '달'}
+							</span>
 						</div>
 						<div>
 							<div>카테고리</div>
@@ -37,7 +41,12 @@ function Detail() {
 						</div>
 						<div>
 							<div>모집 인원</div>
-							<span>{data?.response?.perssonelNumber}명</span>
+
+							<span>
+								{data?.response?.expectedPeriod === 0
+									? '제한없음'
+									: data?.response?.perssonelNumber + '명'}
+							</span>
 						</div>
 					</S.Info>
 					<h3>프로젝트 설명</h3>
