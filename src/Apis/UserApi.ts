@@ -45,6 +45,9 @@ const UserApi: UserApiType = {
 	getToken() {
 		return axiosInstance.post('/assemble/auth/token')
 	},
+	postLogout() {
+		return axiosInstance.post('/assemble/')
+	},
 }
 
 export default UserApi

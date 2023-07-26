@@ -39,15 +39,17 @@ axiosInstance.interceptors.response.use(
 			// await UserApi.logout()
 			TokenService.removeAccessToken()
 		}
-		console.log(error.response.status)
+
 		if (error.response.status === 401 && !originalRequest._retry) {
-			console.log('dd')
 			originalRequest._retry = true
 			const res: any = await UserApi.getToken()
-			console.log(res)
+
+			console.log('token' + res)
+
 			if (res.status === 200) {
-				TokenService.setAccessToken(res?.response?.accessToken)
-				return axiosInstance(originalRequest)
+				console.log('토큰 재요청 성공했다는거임')
+				// TokenService.setAccessToken(res?.response?.accessToken)
+				// return axiosInstance(originalRequest)
 			}
 		}
 		return Promise.reject(error)

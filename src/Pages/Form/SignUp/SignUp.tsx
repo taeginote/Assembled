@@ -77,7 +77,7 @@ function SignUp() {
 
 		let formData: any = new FormData()
 		formData.append('multipartFile', imgFile)
-
+		console.log(typeof e.SignUpBirthday)
 		const data = {
 			email: e.SignUpEmail || '',
 			name: e.SignUpName?.trim() || '',

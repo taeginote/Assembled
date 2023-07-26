@@ -27,9 +27,9 @@ export type CommentApiType = {
 // }
 
 export interface PostLike {
-	postId?: number
-	userId?: string
+	postId?: number | undefined | null | string
 }
+
 export interface PostLikeApiType {
 	PostLike(params: PostLike): Promise<AxiosResponse<PostLike>>
 	CancelLike(params: any): Promise<AxiosResponse<any>>
@@ -110,4 +110,5 @@ export type UserApiType = {
 		data: NicknameValidation,
 	): Promise<AxiosResponse<NicknameValidation>>
 	getToken(): Promise<AxiosResponse>
+	postLogout(): Promise<AxiosResponse>
 }

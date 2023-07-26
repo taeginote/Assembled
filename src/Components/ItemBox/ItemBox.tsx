@@ -12,15 +12,13 @@ import {
 	NotFillHeart_Icon,
 	Person_Icon,
 } from '../../Icons/Icons'
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
-import UserInfoService from '../../Utils/UserIdService'
-import UserIdService from '../../Utils/UserIdService'
 
 function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	const navigate = useNavigate()
-	const queryClient = useQueryClient()
+
 	const {
 		postId,
 		title,
@@ -31,57 +29,45 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		expectedPeriod,
 		commentCount,
 		likes,
+		likeStatus,
 	} = data
 
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
 
-	const searchBy: string = 'title'
-	const searchQuery: string = 'test'
-	const pageNumber: number = 1
-
 	const { mutate } = useMutation(
-		(data: PostLike) => PostLikeApi.PostLike(data),
+		(likeData: PostLike) => PostLikeApi.PostLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
 			},
 		},
 	)
-
+	console.log(data)
 	const { mutate: cancelMutate } = useMutation(
-		(data: PostLike) => PostLikeApi.CancelLike(data),
+		(likeData: PostLike) => PostLikeApi.CancelLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
 			},
 		},
 	)
-	const userId: any = UserIdService.getUserId()
 
-	console.log(postId)
-	const likeData = {
-		postId,
-		userId,
-	}
-	console.log(likeData)
 	const onClickNotHeart = () => {
-		console.log(likeData)
-		mutate(likeData)
+		mutate({ postId })
 	}
-	const onClickFillHeart = (idx: number) => {
-		console.log('idx')
-		cancelMutate(likeData)
+	const onClickFillHeart = () => {
+		cancelMutate({ postId })
 	}
 
 	return (
 		<S.Wrapper>
 			<S.TopWrap>
 				<S.Status>모집중</S.Status>
-				{likes === 0 ? (
+				{!likeStatus ? (
 					<NotFillHeart_Icon onClick={onClickNotHeart} />
 				) : (
-					<FillHeart_Icon onClick={() => onClickFillHeart} />
+					<FillHeart_Icon onClick={onClickFillHeart} />
 				)}
 			</S.TopWrap>
 			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>

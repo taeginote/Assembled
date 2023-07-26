@@ -38,6 +38,7 @@ function Hamburger() {
 			url: '/myPage/withdrawal',
 		},
 	]
+
 	useEffect(() => {
 		setIsView(false)
 	}, [location.pathname])
@@ -65,6 +66,10 @@ export default Hamburger
 
 const Wrapper = styled.div`
 	position: relative;
+	display: none;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		display: block;
+	}
 `
 const ListBox = styled.ul`
 	position: absolute;

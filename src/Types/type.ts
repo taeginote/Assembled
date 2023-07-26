@@ -17,6 +17,7 @@ export interface ItemDataType {
 	expectedPeriod?: string
 	commentCount?: string
 	likes?: number
+	likeStatus?: boolean
 }
 
 //onKey도 쓰이고 target도 쓰이는곳

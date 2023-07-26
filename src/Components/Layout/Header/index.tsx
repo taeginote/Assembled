@@ -10,8 +10,9 @@ import { useRecoilState } from 'recoil'
 import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
 import SuccessModal from '../../Modal/successModal'
-import { useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Hamburger from './MobileHamburger/Hamburger'
+import UserApi from '../../../Apis/UserApi'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
@@ -22,9 +23,15 @@ function Haeder() {
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
+	const { mutate } = useMutation(() => UserApi.postLogout(), {
+		onSuccess: () => {
+			setRecoilSuccessModal(() => true)
+			auth.logout()
+		},
+	})
+
 	const onClickLogOut = () => {
-		setRecoilSuccessModal(() => true)
-		auth.logout()
+		mutate()
 	}
 
 	const goLogo = () => {
@@ -42,28 +49,30 @@ function Haeder() {
 					</div>
 					<S.HeaderRightBox>
 						{!auth.accessToken ? (
-							// <S.NotLogIn>
-							// 	<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
-							// 	<div>|</div>
-							// 	<S.Select onClick={() => navigate('/signUp')}>
-							// 		회원가입
-							// 	</S.Select>
-							// </S.NotLogIn>
-							<Hamburger />
-						) : (
-							<S.LogIn>
-								<div>
-									<S.Select onClick={() => navigate('/register')}>
-										새 글 쓰기
-									</S.Select>
-								</div>
+							<S.NotLogIn>
+								<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
 								<div>|</div>
-								<S.Select onClick={() => navigate('/myPage')}>
-									마이페이지
+								<S.Select onClick={() => navigate('/signUp')}>
+									회원가입
 								</S.Select>
-								<div>|</div>
-								<S.Select onClick={onClickLogOut}>로그아웃</S.Select>
-							</S.LogIn>
+							</S.NotLogIn>
+						) : (
+							<div>
+								<S.LogIn>
+									<div>
+										<S.Select onClick={() => navigate('/register')}>
+											새 글 쓰기
+										</S.Select>
+									</div>
+									<div>|</div>
+									<S.Select onClick={() => navigate('/myPage')}>
+										마이페이지
+									</S.Select>
+									<div>|</div>
+									<S.Select onClick={onClickLogOut}>로그아웃</S.Select>
+								</S.LogIn>
+								<Hamburger />
+							</div>
 						)}
 					</S.HeaderRightBox>
 				</S.Container>
@@ -137,8 +146,10 @@ const LogIn = styled.div`
 			margin-left: 0.6rem;
 		}
 		padding: 0 2rem;
+		display: none;
 	}
 `
+
 const S = {
 	Wrapper,
 	Container,
