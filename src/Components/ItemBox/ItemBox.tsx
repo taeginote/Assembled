@@ -43,7 +43,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 			},
 		},
 	)
-	console.log(data)
+
 	const { mutate: cancelMutate } = useMutation(
 		(likeData: PostLike) => PostLikeApi.CancelLike(likeData),
 		{

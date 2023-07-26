@@ -27,11 +27,11 @@ import PostApi from '../../Apis/PostApi'
 import { PostRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
+import { useState } from 'react'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
-	const [recoilSuccessModal, setRecoilSuccessModal] =
-		useRecoilState(modalViewSuccess)
+	const [logout, setLogout] = useState(false)
 
 	const {
 		handleSubmit,
@@ -44,7 +44,7 @@ function Register() {
 		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{
 			onSuccess: () => {
-				setRecoilSuccessModal(true)
+				setLogout(true)
 			},
 			onError: () => {},
 		},
@@ -156,8 +156,8 @@ function Register() {
 					취소
 				</Button>
 			</span>
-			{recoilSuccessModal && <SuccessModal text={'등록 성공'} />}
 			{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
+			{logout && <SuccessModal text={'등록 성공'} />}
 		</S.Wrapper>
 	)
 }
