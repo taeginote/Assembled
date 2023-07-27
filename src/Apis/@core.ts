@@ -6,7 +6,9 @@ const axiosInstance = axios.create({
 	baseURL: process.env.REACT_APP_BACKEND_URL,
 	withCredentials: true,
 	headers: {
-		Authorization: `Bearer ${TokenService.getAccessToken()}`,
+		Authorization:
+			TokenService.getAccessToken() &&
+			`Bearer ${TokenService.getAccessToken()}`,
 	},
 })
 
@@ -18,6 +20,7 @@ axiosInstance.interceptors.request.use(
 		}
 		return config
 	},
+
 	error => {
 		return Promise.reject(error)
 	},
@@ -31,7 +34,7 @@ axiosInstance.interceptors.response.use(
 		if (error.message === 'Network Error') {
 			return Promise.reject(error)
 		}
-
+		console.log('token')
 		const originalRequest = error.config
 
 		if (error.response.status === 403) {
@@ -40,16 +43,16 @@ axiosInstance.interceptors.response.use(
 			TokenService.removeAccessToken()
 		}
 
-		if (error.response.status === 401 && !originalRequest._retry) {
+		if (error.response.status === 401) {
+			console.log('401')
+			// 	console.log('token')
 			originalRequest._retry = true
 			const res: any = await UserApi.getToken()
-
-			console.log('token' + res)
-
+			console.log(res)
 			if (res.status === 200) {
 				console.log('토큰 재요청 성공했다는거임')
-				// TokenService.setAccessToken(res?.response?.accessToken)
-				// return axiosInstance(originalRequest)
+				TokenService.setAccessToken(res?.response?.accessToken)
+				return axiosInstance(originalRequest)
 			}
 		}
 		return Promise.reject(error)

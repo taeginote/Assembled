@@ -31,17 +31,21 @@ import {
 import { signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData, OnBlurType } from '../../../Types/type'
 import { useState } from 'react'
-import useGetEmailValidation from '../../../Hooks/Queries/get-emailvalidation'
 
 function SignUp() {
 	const {
 		register,
 		handleSubmit,
 		watch,
+		getValues,
 		formState: { errors },
 	} = useForm()
 	const [preFile, setPreFile] = useState<string | null>('')
 	const [imgFile, setImgFile] = useState<File | null>()
+	const [validationMsg, setValidationMsg] = useState({
+		email: { status: null, message: '' },
+		nickname: { status: null, message: '' },
+	})
 
 	const [recoilCounter, setRecoilCounter] = useRecoilState(
 		modalViewNotification,
@@ -72,6 +76,47 @@ function SignUp() {
 		}
 	}
 
+	const onValidation = async (target: string) => {
+		//SignUpEmail
+		//SignUpNickName
+		const value = getValues(target)
+		if (value.trim().length === 0) return
+
+		if (target === 'SignUpEmail') {
+			try {
+				const res = await UserApi.getEmailValidation(value)
+				setValidationMsg((prev: any) => ({
+					...prev,
+					email: { status: true, message: '사용 가능한 이메일입니다.' },
+				}))
+				console.log(res)
+			} catch (err: any) {
+				// setValidationMsg(res.err.error.message)
+				console.log(err)
+
+				const { message } = err?.response.data.error
+				console.log(message)
+				if (message === 'invalid form email') {
+					// setValidationMsg(prev => ({
+					// 	...prev,
+					// 	email: { status: true, message: '이메일 형식이 아니에요' },
+					// }))
+					setValidationMsg((prev: any) => ({
+						...prev,
+						email: { status: false, message: '이메일 형식이 아니에요' },
+					}))
+				}
+				//보류 에러처리하는 함수도 만들어야할까? 생각중
+			}
+		}
+		if (target === 'SignUpNickName') {
+			try {
+				const res = await UserApi.getNickNameValidation(value)
+				console.log(res)
+			} catch (err) {}
+		}
+	}
+
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
 		//보류
 
@@ -79,13 +124,13 @@ function SignUp() {
 		formData.append('multipartFile', imgFile)
 		console.log(typeof e.SignUpBirthday)
 		const data = {
-			email: e.SignUpEmail || '',
+			email: e.SignUpEmail?.trim() || '',
 			name: e.SignUpName?.trim() || '',
 			nickname: e.SignUpNickName?.trim() || '',
-			password: e.SignUpPw || '',
-			birthDate: e.SignUpBirthday || '',
-			phoneNumber: e.SignUpPhone || '',
-			multipartFile: formData,
+			password: e.SignUpPw?.trim() || '',
+			birthDate: e.SignUpBirthday?.trim() || '',
+			phoneNumber: e.SignUpPhone?.trim() || '',
+			multipartFile: formData?.trim(),
 		}
 
 		mutate(data)
@@ -113,11 +158,17 @@ function SignUp() {
 						s
 					/>
 				</S.InputBox>
+				{/* 이메일 검증 */}
 				<span>
 					<Email_Icon size={'22'} />
 					<Input
 						placeholder="example@assembled.com"
 						{...register('SignUpEmail', HookFormRule.SignUpEmail)}
+					/>
+					<S.ValidationBtn
+						type="button"
+						value="중복확인"
+						onClick={() => onValidation('SignUpEmail')}
 					/>
 				</span>
 				{errors.SignUpEmail && (
@@ -125,6 +176,7 @@ function SignUp() {
 						{errors.SignUpEmail?.message?.toString()}
 					</HookFormError>
 				)}
+				{validationMsg.email.message}
 				<span>
 					<Name_Icon size={'22'} />
 					<Input
@@ -137,11 +189,17 @@ function SignUp() {
 						{errors.SignUpName?.message?.toString()}
 					</HookFormError>
 				)}
+				{/* 닉네임 검증 */}
 				<span>
 					<Nickname_Icon size={'22'} />
 					<Input
 						placeholder="닉네임을 입력해주세요"
 						{...register('SignUpNickName', HookFormRule.SignUpNickName)}
+					/>
+					<S.ValidationBtn
+						type="button"
+						value="중복확인"
+						onClick={() => onValidation('SignUpNickName')}
 					/>
 				</span>
 				{errors.SignUpNickName && (
@@ -201,7 +259,7 @@ function SignUp() {
 					</HookFormError>
 				)}
 				<Notice />
-				<S.SignUpButton>로그인</S.SignUpButton>
+				<S.SignUpButton disabled={true}>회원가입</S.SignUpButton>
 				{recoilSuccessModal && (
 					<SuccessModal text={'회원가입 성공'} url={'/login'} />
 				)}
@@ -268,5 +326,25 @@ const ProfileImg = styled.img`
 	border: 1px solid ${({ theme }) => theme.COLOR.hover};
 	background: ${({ theme }) => theme.COLOR.common.white};
 `
+const ValidationBtn = styled.input`
+	width: 10rem;
+	height: 80%;
+	border: none;
+	border-radius: 0.4rem;
+	background: ${({ theme }) => theme.COLOR.sub};
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	color: ${({ theme }) => theme.COLOR.common.white};
+	&:hover {
+		background: ${({ theme }) => theme.COLOR.hover};
+	}
+`
 
-const S = { Wrapper, container, SignUpButton, InputBox, ImgLabel, ProfileImg }
+const S = {
+	Wrapper,
+	container,
+	SignUpButton,
+	InputBox,
+	ImgLabel,
+	ProfileImg,
+	ValidationBtn,
+}

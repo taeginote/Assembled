@@ -16,7 +16,7 @@ const variantCSS = {
 			transition: all 0.3s ease-in-out;
 		}
 		&:disabled {
-			background-color: ${({ theme }) => theme.COLOR.common.gray[200]};
+			background-color: ${({ theme }) => theme.COLOR.common.gray[400]};
 		}
 	`,
 	'default-reverse': css`
