@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
 		if (error.message === 'Network Error') {
 			return Promise.reject(error)
 		}
-		console.log('token')
+
 		const originalRequest = error.config
 
 		if (error.response.status === 403) {
@@ -44,13 +44,10 @@ axiosInstance.interceptors.response.use(
 		}
 
 		if (error.response.status === 401) {
-			console.log('401')
-			// 	console.log('token')
 			originalRequest._retry = true
 			const res: any = await UserApi.getToken()
-			console.log(res)
+
 			if (res.status === 200) {
-				console.log('토큰 재요청 성공했다는거임')
 				TokenService.setAccessToken(res?.response?.accessToken)
 				return axiosInstance(originalRequest)
 			}

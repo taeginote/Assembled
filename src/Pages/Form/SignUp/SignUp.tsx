@@ -5,7 +5,6 @@ import {
 	FlexColumnCSS,
 	TopPadding,
 } from '../../../Styles/common'
-
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import Notice from './Components/Notice'
@@ -29,8 +28,9 @@ import {
 	Phone_Icon,
 } from '../../../Icons/Icons'
 import { signUpData } from '../../../Types/apiType'
-import { SignUpSubmitData, OnBlurType } from '../../../Types/type'
+import { SignUpSubmitData } from '../../../Types/type'
 import { useState } from 'react'
+import SignUpInput from './Components/SignUpInput'
 
 function SignUp() {
 	const {
@@ -38,6 +38,7 @@ function SignUp() {
 		handleSubmit,
 		watch,
 		getValues,
+		control,
 		formState: { errors },
 	} = useForm()
 	const [preFile, setPreFile] = useState<string | null>('')
@@ -53,7 +54,7 @@ function SignUp() {
 	const [recoilSuccessModal, setRecoilSuccessModal] =
 		useRecoilState(modalViewSuccess)
 
-	//profileImage 추가해야함
+	// profileImage 추가해야함
 	const { mutate, isLoading, data } = useMutation(
 		(data: signUpData) => UserApi.SignUp(data),
 		{
@@ -87,23 +88,15 @@ function SignUp() {
 				const res = await UserApi.getEmailValidation(value)
 				setValidationMsg((prev: any) => ({
 					...prev,
-					email: { status: true, message: '사용 가능한 이메일입니다.' },
+					email: { status: 'success', message: '사용 가능한 이메일입니다.' },
 				}))
-				console.log(res)
 			} catch (err: any) {
-				// setValidationMsg(res.err.error.message)
-				console.log(err)
-
 				const { message } = err?.response.data.error
-				console.log(message)
+
 				if (message === 'invalid form email') {
-					// setValidationMsg(prev => ({
-					// 	...prev,
-					// 	email: { status: true, message: '이메일 형식이 아니에요' },
-					// }))
 					setValidationMsg((prev: any) => ({
 						...prev,
-						email: { status: false, message: '이메일 형식이 아니에요' },
+						email: { status: 'error', message: '이메일 형식이 아니에요' },
 					}))
 				}
 				//보류 에러처리하는 함수도 만들어야할까? 생각중
@@ -112,17 +105,18 @@ function SignUp() {
 		if (target === 'SignUpNickName') {
 			try {
 				const res = await UserApi.getNickNameValidation(value)
-				console.log(res)
+				setValidationMsg((prev: any) => ({
+					...prev,
+					nickname: { status: 'success', message: '사용 가능한 닉네임입니다.' },
+				}))
 			} catch (err) {}
 		}
 	}
 
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
-		//보류
-
 		let formData: any = new FormData()
-		formData.append('multipartFile', imgFile)
-		console.log(typeof e.SignUpBirthday)
+		formData.append('profileImage', imgFile)
+
 		const data = {
 			email: e.SignUpEmail?.trim() || '',
 			name: e.SignUpName?.trim() || '',
@@ -130,7 +124,7 @@ function SignUp() {
 			password: e.SignUpPw?.trim() || '',
 			birthDate: e.SignUpBirthday?.trim() || '',
 			phoneNumber: e.SignUpPhone?.trim() || '',
-			multipartFile: formData?.trim(),
+			profileImage: formData,
 		}
 
 		mutate(data)
@@ -155,70 +149,43 @@ function SignUp() {
 								ChangePreFile(e)
 							},
 						})}
-						s
 					/>
 				</S.InputBox>
-				{/* 이메일 검증 */}
-				<span>
-					<Email_Icon size={'22'} />
-					<Input
-						placeholder="example@assembled.com"
-						{...register('SignUpEmail', HookFormRule.SignUpEmail)}
-					/>
-					<S.ValidationBtn
-						type="button"
-						value="중복확인"
-						onClick={() => onValidation('SignUpEmail')}
-					/>
-				</span>
-				{errors.SignUpEmail && (
-					<HookFormError>
-						{errors.SignUpEmail?.message?.toString()}
+				<SignUpInput
+					name="SignUpEmail"
+					control={control}
+					errorRules={HookFormRule.SignUpEmail}
+					Icon={<Email_Icon />}
+					placeholder="example@assembled.com"
+				/>
+				{validationMsg.email.status && (
+					<HookFormError status={validationMsg.email.status}>
+						{validationMsg.email.message}
 					</HookFormError>
 				)}
-				{validationMsg.email.message}
+				<SignUpInput
+					name="SignUpName"
+					control={control}
+					errorRules={HookFormRule.SignUpName}
+					Icon={<Name_Icon />}
+					placeholder="이름을 입력해주세요"
+				/>
+				<SignUpInput
+					name="SignUpNickName"
+					control={control}
+					errorRules={HookFormRule.SignUpNickName}
+					Icon={<Nickname_Icon />}
+					placeholder="닉네임을 입력해주세요"
+				/>
+				<SignUpInput
+					name="SignUpPw"
+					control={control}
+					errorRules={HookFormRule.SignUpPw}
+					Icon={<Lock_Icon />}
+					placeholder="비밀번호를 입력해주세요"
+				/>
 				<span>
-					<Name_Icon size={'22'} />
-					<Input
-						placeholder="이름을 입력해주세요"
-						{...register('SignUpName', HookFormRule.SignUpName)}
-					/>
-				</span>
-				{errors.SignUpName && (
-					<HookFormError>
-						{errors.SignUpName?.message?.toString()}
-					</HookFormError>
-				)}
-				{/* 닉네임 검증 */}
-				<span>
-					<Nickname_Icon size={'22'} />
-					<Input
-						placeholder="닉네임을 입력해주세요"
-						{...register('SignUpNickName', HookFormRule.SignUpNickName)}
-					/>
-					<S.ValidationBtn
-						type="button"
-						value="중복확인"
-						onClick={() => onValidation('SignUpNickName')}
-					/>
-				</span>
-				{errors.SignUpNickName && (
-					<HookFormError>
-						{errors.SignUpNickName?.message?.toString()}
-					</HookFormError>
-				)}
-				<span>
-					<Lock_Icon size={'22'} />
-					<Input
-						placeholder="비밀번호를 입력해주세요"
-						{...register('SignUpPw', HookFormRule.SignUpPw)}
-					/>
-				</span>
-				{errors.SignUpPw && (
-					<HookFormError>{errors.SignUpPw?.message?.toString()}</HookFormError>
-				)}
-				<span>
-					<Lock_Icon size={'22'} />
+					<Lock_Icon />
 					<Input
 						placeholder="위에 설정한 비밀번호를 입력해주세요"
 						{...register('SignUpPwConfirm', {
@@ -234,32 +201,23 @@ function SignUp() {
 						{errors.SignUpPwConfirm?.message?.toString()}
 					</HookFormError>
 				)}
-				<span>
-					<Date_Icon size={'22'} />
-					<Input
-						placeholder="생년월일(8자리) ex) 19980505"
-						{...register('SignUpBirthday', HookFormRule.SignUpBirthday)}
-					/>
-				</span>
-				{errors.SignUpBirthday && (
-					<HookFormError>
-						{errors.SignUpBirthday?.message?.toString()}
-					</HookFormError>
-				)}
-				<span>
-					<Phone_Icon size={'22'} />
-					<Input
-						placeholder="휴대폰 번호를 -없이 입력해주세요"
-						{...register('SignUpPhone', HookFormRule.SignUpPhone)}
-					/>
-				</span>
-				{errors.SignUpPhone && (
-					<HookFormError>
-						{errors.SignUpPhone?.message?.toString()}
-					</HookFormError>
-				)}
+				<SignUpInput
+					name="SignUpBirthday"
+					control={control}
+					errorRules={HookFormRule.SignUpBirthday}
+					Icon={<Date_Icon />}
+					placeholder="생년월일(8자리) ex) 19980505"
+				/>
+				<SignUpInput
+					name="SignUpPhone"
+					control={control}
+					errorRules={HookFormRule.SignUpPhone}
+					Icon={<Phone_Icon />}
+					placeholder="휴대폰 번호를 -없이 입력해주세요"
+				/>
+
 				<Notice />
-				<S.SignUpButton disabled={true}>회원가입</S.SignUpButton>
+				<S.SignUpButton>회원가입</S.SignUpButton>
 				{recoilSuccessModal && (
 					<SuccessModal text={'회원가입 성공'} url={'/login'} />
 				)}
