@@ -44,7 +44,6 @@ function Hamburger() {
 	}, [location.pathname])
 
 	const onClickList = (el: string) => {
-		console.log(el)
 		if (el === 'logout') return setRecoilSuccessModal(true)
 		navigate(el)
 	}

@@ -24,8 +24,6 @@ export interface ItemDataType {
 export type EventTargetType =
 	| React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>
 
-export type OnBlurType = React.FocusEvent<HTMLInputElement>
-
 //select Box
 
 //Pagination Type

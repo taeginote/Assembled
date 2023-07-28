@@ -5,10 +5,14 @@ import {
 	GridCenterCSS,
 } from '../../../Styles/common'
 import ItemBoxMyPage from '../Components/ItemBoxMyPage'
+import useGetWroteData from '../../../Hooks/Queries/get-wrote'
+import UserIdService from '../../../Utils/UserIdService'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
 	const testList = [1, 2, 3, 4, 5, 6, 6, 7]
+
+	const userId = UserIdService.getUserId()
 
 	const data = {
 		postId: 11,
@@ -19,7 +23,7 @@ function Wrote() {
 		expectedPeriod: '1',
 		commentCount: '2',
 	}
-
+	useGetWroteData(userId)
 	return (
 		<S.Wrapper>
 			{testList.length === 0 ? (

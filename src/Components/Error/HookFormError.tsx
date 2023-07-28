@@ -1,19 +1,20 @@
 import styled from 'styled-components'
 import { childrenType } from '../../Types/type'
 
-function HookFormError(props: childrenType) {
-	const { children } = props
+function HookFormError(props: any) {
+	const { children, status = 'error' } = props
 
 	return (
-		<S.Message>
+		<S.Message status={status === 'error'}>
 			<div>{children}</div>
 		</S.Message>
 	)
 }
 export default HookFormError
 
-const Message = styled.div`
-	color: ${({ theme }) => theme.COLOR.error};
+const Message = styled.div<{ status: boolean }>`
+	color: ${({ theme, status }) =>
+		status ? theme.COLOR.error : theme.COLOR.success};
 
 	text-align: start;
 	width: 100%;

@@ -38,17 +38,17 @@ export const Person_Icon = ({ size }: IconSize) => (
 
 export const Chat_Icon = ({ size }: IconSize) => <BsChat size={size} /> // 채팅
 
-export const Email_Icon = ({ size }: IconSize) => <AiOutlineMail size={size} /> //이메일
+export const Email_Icon = () => <AiOutlineMail size={'22'} /> //이메일
 
-export const Lock_Icon = ({ size }: IconSize) => <AiOutlineLock size={size} /> //자물쇠
+export const Lock_Icon = () => <AiOutlineLock size={'22'} /> //자물쇠
 
-export const Name_Icon = ({ size }: IconSize) => <BiUser size={size} /> //인간
+export const Name_Icon = () => <BiUser size={'22'} /> //인간
 
-export const Phone_Icon = ({ size }: IconSize) => <BsPhone size={size} /> //핸드폰
+export const Phone_Icon = () => <BsPhone size={'22'} /> //핸드폰
 
-export const Date_Icon = ({ size }: IconSize) => <MdOutlineToday size={size} /> //달력
+export const Date_Icon = () => <MdOutlineToday size={'22'} /> //달력
 
-export const Nickname_Icon = ({ size }: IconSize) => <RiUser5Line size={size} /> //달력
+export const Nickname_Icon = () => <RiUser5Line size={'22'} /> //달력
 
 export const Warning_Icon = ({ size }: IconSize) => (
 	<CiWarning size={size} color="#FB9B00" />

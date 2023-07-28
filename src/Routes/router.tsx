@@ -1,7 +1,6 @@
 import Register from '../Pages/Register/Register'
 import Mypage from '../Pages/MyPage'
-import Active from '../Pages/MyPage/Pages/Active'
-import Edit from '../Pages/MyPage/Pages/Edit'
+
 import Wrote from '../Pages/MyPage/Pages/Wrote'
 import Comment from '../Pages/MyPage/Pages/Comment'
 import Withdrawal from '../Pages/MyPage/Pages/Withdrawal'
@@ -46,15 +45,7 @@ const router = [
 						element: <Mypage />,
 						children: [
 							{
-								path: '',
-								element: <Active />,
-							},
-							{
-								path: '/myPage/edit',
-								element: <Edit />,
-							},
-							{
-								path: '/myPage/wrote',
+								path: '/myPage',
 								element: <Wrote />,
 							},
 							{

@@ -27,6 +27,9 @@ const PostApi: PostApiType = {
 	DeletePost(postId) {
 		return axiosInstance.delete(`${PATH}/${postId}`)
 	},
+	getUserWrote({ postId }) {
+		return axiosInstance.get(`${PATH}/user/${postId}`)
+	},
 }
 
 export default PostApi

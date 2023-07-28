@@ -59,6 +59,7 @@ export interface PostApiType {
 	): Promise<AxiosResponse<PostRegisterData>>
 	getDetail(params: PostData): Promise<AxiosResponse<response>>
 	DeletePost(params: PostData): Promise<AxiosResponse<PostData>>
+	getUserWrote(params: any): Promise<AxiosResponse<any>>
 	//여기는 모임 수정 (아직 구현 X)
 }
 export interface CategoryApiType {
@@ -73,7 +74,7 @@ export interface signUpData {
 	password?: string
 	birthDate?: string
 	phoneNumber?: string
-	profileImg?: string
+	profileImage?: any
 }
 export interface LoginData {
 	email?: string

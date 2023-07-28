@@ -70,7 +70,7 @@ function Login() {
 				<h3>로그인</h3>
 
 				<span>
-					<Email_Icon size={'22'} />
+					<Email_Icon />
 					<Input
 						placeholder="example@assembled.com"
 						{...register('LoginEmail', { required: '이메일을 입력해주세요' })}
@@ -82,7 +82,7 @@ function Login() {
 					</HookFormError>
 				)}
 				<span>
-					<Lock_Icon size={'22'} />
+					<Lock_Icon />
 					<Input
 						placeholder="비밀번호를 입력해주세요"
 						{...register('LoginPW', { required: '비밀번호를 입력해주세요' })}
