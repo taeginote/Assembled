@@ -15,7 +15,7 @@ function Wrote() {
 	const userId = UserIdService.getUserId()
 
 	const { data, isLoading } = useGetWroteData(userId)
-
+	//페이지네이션 추가 예정
 	return (
 		<S.Wrapper>
 			{testList.length === 0 ? (

@@ -15,6 +15,7 @@ export interface CommentData {
 
 export type CommentApiType = {
 	postComment(data: CommentData): Promise<AxiosResponse<CommentData>>
+	getUserComment(params: any): Promise<AxiosResponse<any>>
 }
 
 //디테일 페이지 post 댓글

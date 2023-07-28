@@ -8,6 +8,9 @@ const CommentApi: CommentApiType = {
 	postComment(data) {
 		return axiosInstance.post(PATH, data)
 	},
+	getUserComment({ postId }) {
+		return axiosInstance.get(`${PATH}/user/${postId}`)
+	},
 }
 
 export default CommentApi
