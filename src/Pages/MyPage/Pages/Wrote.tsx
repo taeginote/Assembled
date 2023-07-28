@@ -14,16 +14,8 @@ function Wrote() {
 
 	const userId = UserIdService.getUserId()
 
-	const data = {
-		postId: 11,
-		title: '테스트 제목',
-		categoryName: '스터디',
-		writerNickname: '안뇽',
-		perssonelNumber: '1',
-		expectedPeriod: '1',
-		commentCount: '2',
-	}
-	useGetWroteData(userId)
+	const { data, isLoading } = useGetWroteData(userId)
+
 	return (
 		<S.Wrapper>
 			{testList.length === 0 ? (
@@ -32,11 +24,17 @@ function Wrote() {
 					<br /> 새 글 쓰기를 통해 게시글을 작성해보세요
 				</div>
 			) : (
-				<S.Container>
-					{testList.map(el => (
-						<ItemBoxMyPage data={data} />
-					))}
-				</S.Container>
+				<>
+					{isLoading ? (
+						<div>로딩중</div>
+					) : (
+						<S.Container>
+							{data?.response?.content.map((el: any) => (
+								<ItemBoxMyPage data={el} />
+							))}
+						</S.Container>
+					)}
+				</>
 			)}
 		</S.Wrapper>
 	)
