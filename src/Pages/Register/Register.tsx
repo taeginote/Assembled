@@ -20,7 +20,7 @@ import HookFormError from '../../Components/Error/HookFormError'
 import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
 import { useMutation } from '@tanstack/react-query'
-import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
+
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import PostApi from '../../Apis/PostApi'
@@ -31,7 +31,7 @@ import { useState } from 'react'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
-	const [logout, setLogout] = useState(false)
+	const [modalView, setModalView] = useState(false)
 
 	const {
 		handleSubmit,
@@ -44,7 +44,7 @@ function Register() {
 		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{
 			onSuccess: () => {
-				setLogout(true)
+				setModalView(true)
 			},
 			onError: () => {},
 		},
@@ -157,7 +157,7 @@ function Register() {
 				</Button>
 			</span>
 			{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
-			{logout && <SuccessModal text={'등록 성공'} />}
+			{modalView && <SuccessModal text={'등록 성공'} setState={setModalView} />}
 		</S.Wrapper>
 	)
 }

@@ -1,18 +1,16 @@
 import styled from 'styled-components'
-import SearchBar from '../../../Pages/List/Components/SearchBar/SearchBar'
 import { Outlet, useNavigate } from 'react-router-dom'
 import {
 	FlexAlignCSS,
 	FlexBetweenCSS,
 	WidthAutoCSS,
 } from '../../../Styles/common'
-import { useRecoilState } from 'recoil'
-import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
 import SuccessModal from '../../Modal/successModal'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import Hamburger from './MobileHamburger/Hamburger'
 import UserApi from '../../../Apis/UserApi'
+import { useState } from 'react'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
@@ -20,12 +18,10 @@ function Haeder() {
 	const navigate = useNavigate()
 	const auth = useAuth()
 
-	const [recoilSuccessModal, setRecoilSuccessModal] =
-		useRecoilState(modalViewSuccess)
-
+	const [successModal, setSuccessModal] = useState(false)
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
 		onSuccess: () => {
-			setRecoilSuccessModal(() => true)
+			setSuccessModal(() => true)
 			auth.logout()
 		},
 	})
@@ -78,7 +74,12 @@ function Haeder() {
 				</S.Container>
 			</S.Wrapper>
 			<S.FooterWrapper>{/* <MobileFooter /> */}</S.FooterWrapper>
-			{recoilSuccessModal && <SuccessModal text={'로그아웃 되었습니다.'} />}
+			{successModal && (
+				<SuccessModal
+					text={'로그아웃 되었습니다.'}
+					setState={setSuccessModal}
+				/>
+			)}
 			<Outlet />
 		</>
 	)

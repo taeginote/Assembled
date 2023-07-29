@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import TokenService from '../Utils/TokenService'
-import NotificationModal from '../Modal/NotificationModal'
+import NotificationModal from '../Components/Modal/NotificationModal'
 
 const PrivateRoute = () => {
 	const access_token = TokenService.getAccessToken()

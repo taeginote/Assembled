@@ -2,6 +2,7 @@
 export interface modalTypeTwoProps {
 	text?: string
 	url?: string
+	setState?: any
 }
 
 //모달에서 props 한개

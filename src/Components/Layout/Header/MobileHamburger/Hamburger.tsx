@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../../Contexts/auth'
 import SuccessModal from '../../../Modal/successModal'
-import { useRecoilState } from 'recoil'
-import { modalViewSuccess } from '../../../../Atoms/modalViewSuccess.atom'
 
 function Hamburger() {
 	const [isView, setIsView] = useState<boolean>(false)
@@ -13,8 +11,7 @@ function Hamburger() {
 	const auth = useAuth()
 	const navigate = useNavigate()
 
-	const [recoilSuccessModal, setRecoilSuccessModal] =
-		useRecoilState(modalViewSuccess)
+	const [successModal, setSuccessModal] = useState(false)
 
 	const list = [
 		{
@@ -44,7 +41,7 @@ function Hamburger() {
 	}, [location.pathname])
 
 	const onClickList = (el: string) => {
-		if (el === 'logout') return setRecoilSuccessModal(true)
+		if (el === 'logout') return setSuccessModal(true)
 		navigate(el)
 	}
 	return (
@@ -57,7 +54,12 @@ function Hamburger() {
 					))}
 				</S.ListBox>
 			)}
-			{recoilSuccessModal && <SuccessModal text={'로그아웃 되었습니다.'} />}
+			{successModal && (
+				<SuccessModal
+					text={'로그아웃 되었습니다.'}
+					setState={setSuccessModal}
+				/>
+			)}
 		</S.Wrapper>
 	)
 }

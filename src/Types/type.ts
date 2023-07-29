@@ -38,7 +38,6 @@ export interface SearchType {
 	setSearchValue: (page: any) => void
 	setSelectVal: (page: any) => void
 	selectVal: any
-	searchValue: any
 }
 
 export type PaginationDisabled = 'start' | 'end'

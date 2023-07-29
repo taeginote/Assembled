@@ -1,19 +1,17 @@
 import styled from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { useSetRecoilState } from 'recoil'
 import Button from '../Button/Button'
-import { modalViewSuccess } from '../../Atoms/modalViewSuccess.atom'
 import { useNavigate } from 'react-router-dom'
 import { modalTypeTwoProps } from '../../Types/modalType'
 import { Clap_Icon } from '../../Icons/Icons'
 
-function SuccessModal({ text, url }: modalTypeTwoProps) {
-	const setRecoilCounter = useSetRecoilState(modalViewSuccess)
+function SuccessModal({ text, url, setState }: modalTypeTwoProps) {
 	const navigate = useNavigate()
-	const onClickOkBtn = () => {
-		setRecoilCounter(false)
 
+	const onClickOkBtn = () => {
+		setState(false)
 		if (url === undefined) return navigate('/')
+
 		navigate(`${url}`)
 	}
 	return (
