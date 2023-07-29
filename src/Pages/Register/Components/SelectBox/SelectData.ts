@@ -25,17 +25,6 @@ export const selectDataTeamMember = [
 	},
 ]
 
-// export const selectDataCategory = [
-// 	{
-// 		text: '스터디',
-// 		value: 'study',
-// 	},
-// 	{
-// 		text: '프로젝트',
-// 		value: 'project',
-// 	},
-// ]
-
 export const selectDataPeriod = [
 	{
 		text: '1달',
