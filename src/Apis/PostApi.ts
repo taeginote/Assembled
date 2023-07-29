@@ -25,10 +25,15 @@ const PostApi: PostApiType = {
 		return axiosInstance.get(`${PATH}/${postId}`)
 	},
 	DeletePost(postId) {
+		console.log(postId)
 		return axiosInstance.delete(`${PATH}/${postId}`)
 	},
-	getUserWrote({ postId }) {
-		return axiosInstance.get(`${PATH}/user/${postId}`)
+	getUserWrote({ postId, page }) {
+		console.log(page)
+
+		return axiosInstance.get(`${PATH}/user/${postId}`, {
+			params: { page, size: 9 },
+		})
 	},
 }
 
