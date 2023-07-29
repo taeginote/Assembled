@@ -1,25 +1,25 @@
 import styled from 'styled-components'
-import { FlexColumnCSS } from '../../../Styles/common'
+
 import UserIdService from '../../../Utils/UserIdService'
-import useGetCommentData from '../../../Hooks/Queries/get-comment'
+// import useGetCommentData from '../../../Hooks/Queries/get-comment'
 
 function Comment() {
 	const list: number[] = [1, 2, 3, 4, 1]
 
 	const userId = UserIdService.getUserId()
+	console.log({ userId })
+	// const { data, isLoading } = useGetCommentData(userId)
 
-	const { data, isLoading } = useGetCommentData(userId)
-	console.log(data)
 	return (
 		<S.Wrapper>
 			<h1>작성한 댓글</h1>
-			{data?.response?.content.map((el: any) => (
+			{/* {data?.response?.content.map((el: any) => (
 				<S.container>
 					<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 					<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
 					<S.Text>{el.contents}</S.Text>
 				</S.container>
-			))}
+			))} */}
 		</S.Wrapper>
 	)
 }

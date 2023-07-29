@@ -59,7 +59,9 @@ export interface PostApiType {
 		params: PostRegisterData,
 	): Promise<AxiosResponse<PostRegisterData>>
 	getDetail(params: PostData): Promise<AxiosResponse<response>>
-	DeletePost(params: PostData): Promise<AxiosResponse<PostData>>
+	DeletePost(
+		params: number | undefined,
+	): Promise<AxiosResponse<number | undefined>>
 	getUserWrote(params: any): Promise<AxiosResponse<any>>
 	//여기는 모임 수정 (아직 구현 X)
 }
@@ -113,4 +115,5 @@ export type UserApiType = {
 	): Promise<AxiosResponse<NicknameValidation>>
 	getToken(): Promise<AxiosResponse>
 	postLogout(): Promise<AxiosResponse>
+	deletewithdrawal(): Promise<AxiosResponse>
 }

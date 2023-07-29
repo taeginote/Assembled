@@ -2,8 +2,27 @@ import styled from 'styled-components'
 import { FlexColumnCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import { Warning_Icon } from '../../../Icons/Icons'
+import { useState } from 'react'
+import SuccessModal from '../../../Components/Modal/successModal'
+import { useMutation } from '@tanstack/react-query'
+import UserApi from '../../../Apis/UserApi'
+import { useAuth } from '../../../Contexts/auth'
 
 function Withdrawal() {
+	const [modalView, setModalView] = useState(false)
+	const auth = useAuth()
+
+	const { mutate } = useMutation(() => UserApi.deletewithdrawal(), {
+		onSuccess: () => {
+			setModalView(true)
+			auth.logout()
+		},
+		onError: () => {},
+	})
+
+	const onWithdrawal = () => {
+		mutate()
+	}
 	return (
 		<S.Wrapper>
 			<Warning_Icon size={'80'} />
@@ -13,8 +32,16 @@ function Withdrawal() {
 				회원탈퇴 버튼을 눌러주세요
 			</div>
 			<span>
-				<Button>회원탈퇴</Button>
+				<Button onClick={onWithdrawal}>회원탈퇴</Button>
 			</span>
+
+			{modalView && (
+				<SuccessModal
+					text={'회원탈퇴 성공'}
+					url={'/myPage/withdrawal'}
+					setState={setModalView}
+				/>
+			)}
 		</S.Wrapper>
 	)
 }
@@ -28,6 +55,7 @@ const Wrapper = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
 	margin-top: 5rem;
 	align-items: center;
+	margin-left: 20%;
 	& > div {
 		margin-top: 3rem;
 		& > span {
