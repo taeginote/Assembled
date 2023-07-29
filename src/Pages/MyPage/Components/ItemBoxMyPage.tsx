@@ -15,10 +15,7 @@ import {
 } from '../../../Icons/Icons'
 import { ItemDataType } from '../../../Types/type'
 import Ballon from '../../../Components/Ballon/Ballon'
-
-import { useMutation } from '@tanstack/react-query'
-import { PostData } from '../../../Types/apiType'
-
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PostApi from '../../../Apis/PostApi'
 
 function ItemBoxMyPage({ data }: { data: ItemDataType }) {
@@ -34,10 +31,14 @@ function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 		commentCount,
 	} = data
 
+	const queryClient = useQueryClient()
+
 	const { mutate } = useMutation(
-		(postId: PostData) => PostApi.DeletePost(postId),
+		(postId: number | undefined) => PostApi.DeletePost(postId),
 		{
-			onSuccess: () => {},
+			onSuccess: () => {
+				queryClient.invalidateQueries(['useGetWroteData'])
+			},
 			onError: () => {},
 		},
 	)
@@ -56,7 +57,7 @@ function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 						</div>
 						<Pen_Icon />
 					</button>
-					<button onClick={() => mutate({ postId })}>
+					<button onClick={() => mutate(postId)}>
 						<div>
 							<Ballon text={'모임 삭제'} />
 						</div>

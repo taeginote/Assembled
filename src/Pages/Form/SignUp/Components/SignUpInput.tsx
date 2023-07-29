@@ -13,10 +13,11 @@ interface SingUpInputProps {
 	errorRules: any
 	Icon?: React.ReactNode
 	placeholder: string
+	onValidation?: any
 }
 
 function SignUpInput(props: SingUpInputProps) {
-	const { name, control, errorRules, Icon, placeholder } = props
+	const { name, control, errorRules, Icon, placeholder, onValidation } = props
 
 	return (
 		<Controller
@@ -33,6 +34,14 @@ function SignUpInput(props: SingUpInputProps) {
 								field.onChange(e.target.value)
 							}
 						/>
+
+						{(name === 'SignUpEmail' || name === 'SignUpNickName') && (
+							<S.ValidationBtn
+								type="button"
+								value="중복확인"
+								onClick={() => onValidation(name)}
+							/>
+						)}
 					</span>
 					{error && <HookFormError>{error.message?.toString()}</HookFormError>}
 				</S.Wrapper>
@@ -51,7 +60,19 @@ const Wrapper = styled.div`
 		border-bottom: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 	}
 `
-
+const ValidationBtn = styled.input`
+	width: 10rem;
+	padding: 0.6rem 0;
+	border: none;
+	border-radius: 0.4rem;
+	background: ${({ theme }) => theme.COLOR.sub};
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	color: ${({ theme }) => theme.COLOR.common.white};
+	&:hover {
+		background: ${({ theme }) => theme.COLOR.hover};
+	}
+`
 const S = {
 	Wrapper,
+	ValidationBtn,
 }

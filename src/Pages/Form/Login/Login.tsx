@@ -12,13 +12,11 @@ import NotificationModal from '../../../Components/Modal/NotificationModal'
 import { useRecoilState } from 'recoil'
 import { modalViewNotification } from '../../../Atoms/modalView.atom'
 import SuccessModal from '../../../Components/Modal/successModal'
-import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import { useAuth } from '../../../Contexts/auth'
 import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
 import { LoginData } from '../../../Types/apiType'
 import { LoginSubmitData } from '../../../Types/type'
-import TokenService from '../../../Utils/TokenService'
-import UserIdService from '../../../Utils/UserIdService'
+import { useState } from 'react'
 
 function Login() {
 	const {
@@ -30,8 +28,7 @@ function Login() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(
 		modalViewNotification,
 	)
-	const [recoilSuccessModal, setRecoilSuccessModal] =
-		useRecoilState(modalViewSuccess)
+	const [successModal, setSuccessModal] = useState(false)
 
 	const auth = useAuth()
 
@@ -39,9 +36,7 @@ function Login() {
 		(data: LoginData) => UserApi.Login(data),
 		{
 			onSuccess: res => {
-				// TokenService.setAccessToken(res.data.response.token.accessToken)
-				// UserIdService.setUserId(res.data.response.userId)
-				setRecoilSuccessModal(() => true)
+				setSuccessModal(() => true)
 
 				if (res.data.response.token.accessToken) {
 					auth.login(
@@ -97,7 +92,9 @@ function Login() {
 				</S.GoSignUp>
 				<S.SignUpButton>로그인</S.SignUpButton>
 				{/* 보류 이거 로그인 페이지가 아니라 list로 가야함 테스트 때문에  */}
-				{recoilSuccessModal && <SuccessModal text={'로그인 성공'} />}
+				{successModal && (
+					<SuccessModal text={'로그인 성공'} setState={setSuccessModal} />
+				)}
 				{recoilCounter && <NotificationModal text={'로그인 실패'} />}
 			</S.container>
 		</S.Wrapper>

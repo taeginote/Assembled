@@ -9,12 +9,7 @@ import { EventTargetType, SearchType } from '../../../../Types/type'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
 
-function SearchBar({
-	searchValue,
-	setSearchValue,
-	setSelectVal,
-	selectVal,
-}: SearchType) {
+function SearchBar({ setSearchValue, setSelectVal, selectVal }: SearchType) {
 	const Data = [
 		{ title: '제목', value: 'title' },
 		{ title: '내용', value: 'contents' },

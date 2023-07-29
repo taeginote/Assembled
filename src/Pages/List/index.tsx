@@ -57,7 +57,6 @@ function List() {
 						<SearchBar
 							setSelectVal={setSelectVal}
 							selectVal={selectVal}
-							searchValue={searchValue}
 							setSearchValue={setSearchValue}
 						/>
 						<FilterSelectBox />

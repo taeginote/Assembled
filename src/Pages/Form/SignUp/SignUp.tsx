@@ -16,7 +16,6 @@ import { useRecoilState } from 'recoil'
 import { modalViewNotification } from '../../../Atoms/modalView.atom'
 import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
-import { modalViewSuccess } from '../../../Atoms/modalViewSuccess.atom'
 import SuccessModal from '../../../Components/Modal/successModal'
 import {
 	Camera_Icon,
@@ -29,7 +28,7 @@ import {
 } from '../../../Icons/Icons'
 import { signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SignUpInput from './Components/SignUpInput'
 
 function SignUp() {
@@ -44,22 +43,36 @@ function SignUp() {
 	const [preFile, setPreFile] = useState<string | null>('')
 	const [imgFile, setImgFile] = useState<File | null>()
 	const [validationMsg, setValidationMsg] = useState({
-		email: { status: null, message: '' },
-		nickname: { status: null, message: '' },
+		email: { status: false, message: '' },
+		nickname: { status: false, message: '' },
 	})
+	const watchEmail = watch('SignUpEmail')
+	const watchNickName = watch('SignUpNickName')
+
+	useEffect(() => {
+		setValidationMsg((prev: any) => ({
+			...prev,
+			email: { status: false, message: '' },
+		}))
+	}, [watchEmail])
+	useEffect(() => {
+		setValidationMsg((prev: any) => ({
+			...prev,
+			nickname: { status: false, message: '' },
+		}))
+	}, [watchNickName])
 
 	const [recoilCounter, setRecoilCounter] = useRecoilState(
 		modalViewNotification,
 	)
-	const [recoilSuccessModal, setRecoilSuccessModal] =
-		useRecoilState(modalViewSuccess)
+	const [successModal, setSuccessModal] = useState(false)
 
 	// profileImage 추가해야함
 	const { mutate, isLoading, data } = useMutation(
 		(data: signUpData) => UserApi.SignUp(data),
 		{
 			onSuccess: res => {
-				setRecoilSuccessModal(() => true)
+				setSuccessModal(() => true)
 			},
 			onError: err => {},
 		},
@@ -78,10 +91,9 @@ function SignUp() {
 	}
 
 	const onValidation = async (target: string) => {
-		//SignUpEmail
-		//SignUpNickName
 		const value = getValues(target)
-		if (value.trim().length === 0) return
+
+		if (value?.trim().length === 0 || value === undefined) return
 
 		if (target === 'SignUpEmail') {
 			try {
@@ -157,6 +169,7 @@ function SignUp() {
 					errorRules={HookFormRule.SignUpEmail}
 					Icon={<Email_Icon />}
 					placeholder="example@assembled.com"
+					onValidation={onValidation}
 				/>
 				{validationMsg.email.status && (
 					<HookFormError status={validationMsg.email.status}>
@@ -176,7 +189,13 @@ function SignUp() {
 					errorRules={HookFormRule.SignUpNickName}
 					Icon={<Nickname_Icon />}
 					placeholder="닉네임을 입력해주세요"
+					onValidation={onValidation}
 				/>
+				{validationMsg.nickname.status && (
+					<HookFormError status={validationMsg.nickname.status}>
+						{validationMsg.nickname.message}
+					</HookFormError>
+				)}
 				<SignUpInput
 					name="SignUpPw"
 					control={control}
@@ -217,11 +236,23 @@ function SignUp() {
 				/>
 
 				<Notice />
-				<S.SignUpButton>회원가입</S.SignUpButton>
-				{recoilSuccessModal && (
-					<SuccessModal text={'회원가입 성공'} url={'/login'} />
+				<S.SignUpButton
+					disabled={
+						!validationMsg.email.status || !validationMsg.nickname.status
+					}
+				>
+					회원가입
+				</S.SignUpButton>
+
+				{successModal && (
+					<SuccessModal
+						text={'회원가입 성공'}
+						url={'/login'}
+						setState={setSuccessModal}
+					/>
 				)}
 				{recoilCounter && <NotificationModal text={'실패'} />}
+				{recoilCounter && <NotificationModal text={'중복검사 해주세요'} />}
 			</S.container>
 		</S.Wrapper>
 	)
@@ -284,18 +315,6 @@ const ProfileImg = styled.img`
 	border: 1px solid ${({ theme }) => theme.COLOR.hover};
 	background: ${({ theme }) => theme.COLOR.common.white};
 `
-const ValidationBtn = styled.input`
-	width: 10rem;
-	height: 80%;
-	border: none;
-	border-radius: 0.4rem;
-	background: ${({ theme }) => theme.COLOR.sub};
-	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-	color: ${({ theme }) => theme.COLOR.common.white};
-	&:hover {
-		background: ${({ theme }) => theme.COLOR.hover};
-	}
-`
 
 const S = {
 	Wrapper,
@@ -304,5 +323,4 @@ const S = {
 	InputBox,
 	ImgLabel,
 	ProfileImg,
-	ValidationBtn,
 }
