@@ -10,9 +10,12 @@ const getDetailData = async (postId: number) => {
 
 const useGetDetailData = (postId: number) => {
 	//보류
-	const { data, isLoading, refetch }: any = useQuery(
+	const { data, isLoading, refetch } = useQuery<any>(
 		['useGetDetailData', postId],
 		() => getDetailData(postId),
+		{
+			enabled: !!postId,
+		},
 	)
 	return { data, isLoading, refetch }
 }

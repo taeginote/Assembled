@@ -16,57 +16,65 @@ interface SelectInputProps {
 	control: any
 	Data: any[]
 	errorMsg: string
+	datailData?: string | number
+	postId?: string
 }
 
 function SelectInput(props: SelectInputProps) {
-	const { name, Data, control, errorMsg } = props
+	const { name, Data, control, errorMsg, datailData, postId } = props
 	const [isView, setIsView] = useState(false)
-
+	const initialValue = datailData ? datailData : undefined
+	console.log(initialValue)
 	return (
-		<Controller
-			name={name}
-			control={control}
-			rules={{
-				required: errorMsg,
-			}}
-			render={({ field, fieldState: { error } }) => (
-				<>
-					<S.Wrapper onClick={() => setIsView(!isView)}>
-						<S.Title isView={isView} status={field.value === undefined}>
-							<div>
-								{field.value === undefined ? '선택해 주세요' : field.value}
-							</div>
+		<>
+			{/* {postId && initialValue !== undefined && ( */}
+			<Controller
+				name={name}
+				control={control}
+				defaultValue={initialValue}
+				rules={{
+					required: errorMsg,
+				}}
+				render={({ field, fieldState: { error } }) => (
+					<>
+						<S.Wrapper onClick={() => setIsView(!isView)}>
+							<S.Title isView={isView} status={field.value === undefined}>
+								<div>
+									{field.value === undefined ? '선택해 주세요' : field.value}
+								</div>
 
-							<span>
-								<DownIcon />
-							</span>
-						</S.Title>
-						{isView && (
-							<S.Box>
-								{Data.map((data, idx) => (
-									<S.List
-										key={idx}
-										value={data.value}
-										onClick={() =>
-											field.onChange(
-												name === 'Category' ? data.categoryName : data.value,
-											)
-										}
-									>
-										{name == 'Category' ? data.categoryName : data.text}
-									</S.List>
-								))}
-							</S.Box>
-						)}
-					</S.Wrapper>
-					<span>
-						{error && (
-							<HookFormError>{error.message?.toString()}</HookFormError>
-						)}
-					</span>
-				</>
-			)}
-		/>
+								<span>
+									<DownIcon />
+								</span>
+							</S.Title>
+							{isView && (
+								<S.Box>
+									{Data.map((data, idx) => (
+										<S.List
+											key={idx}
+											value={data.value}
+											onClick={() =>
+												field.onChange(
+													name === 'Category' ? data.categoryName : data.value,
+												)
+											}
+										>
+											{name == 'Category' ? data.categoryName : data.text}
+										</S.List>
+									))}
+								</S.Box>
+							)}
+						</S.Wrapper>
+						<span>
+							{error && (
+								<HookFormError>{error.message?.toString()}</HookFormError>
+							)}
+						</span>
+					</>
+				)}
+			/>
+			{/* )} */}
+		</>
 	)
 }
 export default SelectInput

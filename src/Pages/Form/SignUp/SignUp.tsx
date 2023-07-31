@@ -98,6 +98,7 @@ function SignUp() {
 		if (target === 'SignUpEmail') {
 			try {
 				const res = await UserApi.getEmailValidation(value)
+				console.log(res)
 				setValidationMsg((prev: any) => ({
 					...prev,
 					email: { status: 'success', message: '사용 가능한 이메일입니다.' },

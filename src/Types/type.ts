@@ -1,3 +1,5 @@
+import { DataType } from '../Pages/List/Components/SearchBar/SearchBar'
+
 //children 있는 자식 type
 export interface childrenType {
 	children: React.ReactNode
@@ -34,10 +36,14 @@ export interface PaginationType {
 	setPage: (page: number) => void
 	scroll: number
 }
+type selectValType = {
+	title: '제목' | '내용' | string //의문임 왜 string이 있어야할까?
+	value: 'title' | 'contents' | string
+}
 export interface SearchType {
-	setSearchValue: (page: any) => void
-	setSelectVal: (page: any) => void
-	selectVal: any
+	setSelectVal: (props: DataType) => void
+	selectVal: selectValType
+	setSearchValue: (page: string) => void
 }
 
 export type PaginationDisabled = 'start' | 'end'

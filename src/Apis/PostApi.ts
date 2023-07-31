@@ -11,14 +11,6 @@ const PostApi: PostApiType = {
 		})
 	},
 	PostRegister(data) {
-		const datas: any = {
-			categoryId: 1,
-			contents: 'ㅇㄴㅁㅇㄴ',
-			expectedPeriod: 0,
-			personnelNumber: 0,
-			title: 'ㅇㄴㅁㅇㅁㄴ',
-			writer: 1, //userId를 의미함
-		}
 		return axiosInstance.post(PATH, data)
 	},
 	getDetail({ postId }) {

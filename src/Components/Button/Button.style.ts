@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components'
 
 type Props = {
 	variant: 'default-white' | 'default-reverse' | 'default'
-	shape: 'default'
+	shape: 'default' | 'round'
 	size: 'normal' | 'big' | 'default'
 	fontSize: 'default'
-	disabled: boolean
+	// disabled: boolean
 }
 
 const variantCSS = {
@@ -41,6 +41,9 @@ const variantCSS = {
 const shapeCSS = {
 	default: css`
 		border-radius: 0.4rem;
+	`,
+	round: css`
+		border-radius: 0.6rem;
 	`,
 }
 

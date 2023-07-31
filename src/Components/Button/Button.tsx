@@ -1,6 +1,17 @@
 import * as S from './Button.style'
 
-function Button(props: any) {
+interface ButtonProps {
+	variant?: 'default-white' | 'default-reverse' | 'default'
+	shape?: 'default' | 'round'
+	size?: 'normal' | 'big' | 'default'
+	fontSize?: 'default'
+	type?: 'submit'
+	disabled?: boolean
+	children?: React.ReactNode
+	onClick?: any
+}
+
+function Button(props: ButtonProps) {
 	const {
 		variant = 'default',
 		shape = 'default',

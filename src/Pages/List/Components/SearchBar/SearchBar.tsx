@@ -9,22 +9,29 @@ import { EventTargetType, SearchType } from '../../../../Types/type'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
 
-function SearchBar({ setSearchValue, setSelectVal, selectVal }: SearchType) {
-	const Data = [
+export type DataType = {
+	title: '제목' | '내용'
+	value: 'title' | 'contents'
+	//작성자 들어오면
+	// title: '제목' | '내용' | '작성자'
+	// value: 'title' | 'contents' |'writer'
+}
+
+function SearchBar({ setSelectVal, selectVal, setSearchValue }: SearchType) {
+	const Data: DataType[] = [
 		{ title: '제목', value: 'title' },
 		{ title: '내용', value: 'contents' },
 		// { title: '작성자', value: 'writer' },
 	]
 
-	const [isView, setIsView] = useState(false)
+	const [isView, setIsView] = useState<boolean>(false)
 	const [recoilCounter, setRecoilCounter] = useRecoilState<boolean>(
 		modalViewNotification,
 	)
 
 	const onClickSearch = (e: any) => {
 		e.preventDefault()
-		// if (e.target.text.value.trim().length === 0)
-		// 	return setRecoilCounter(() => true)
+		if (e.target.text.value.trim().length === 0) return
 		setSearchValue(e.target.text.value)
 	}
 
@@ -33,8 +40,7 @@ function SearchBar({ setSearchValue, setSelectVal, selectVal }: SearchType) {
 		if (e.nativeEvent.isComposing) return
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			// if (e.target.value.trim().length === 0)
-			// 	return setRecoilCounter(() => true)
+			if (e.target.value.trim().length === 0) return
 			setSearchValue(e.target.value)
 		}
 	}

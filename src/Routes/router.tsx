@@ -41,6 +41,10 @@ const router = [
 						element: <Register />,
 					},
 					{
+						path: '/register/:postId',
+						element: <Register />,
+					},
+					{
 						path: '/myPage',
 						element: <Mypage />,
 						children: [

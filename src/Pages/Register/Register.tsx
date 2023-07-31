@@ -27,11 +27,14 @@ import PostApi from '../../Apis/PostApi'
 import { PostRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import useGetDetailData from '../../Hooks/Queries/get-detail'
+// import useGetDetailData from '../../Hooks/Queries/get-detail'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
-
+	const { postId } = useParams()
 	const [modalView, setModalView] = useState(false)
 
 	const {
@@ -41,6 +44,10 @@ function Register() {
 	} = useForm()
 	const { data: GetCategoryData } = useGetCategoryData()
 
+	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
+	// const { categoryName, expectedPeriod, perssonelNumber, title, contents } =
+	// 	data?.response
+	// console.log(categoryName, expectedPeriod, perssonelNumber, title, contents)
 	const { mutate } = useMutation(
 		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{
@@ -50,6 +57,7 @@ function Register() {
 			onError: () => {},
 		},
 	)
+	console.log('데이터 존재')
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
 		const writer = UserIdService.getUserId()
@@ -68,7 +76,7 @@ function Register() {
 		}
 		mutate(data)
 	}
-
+	console.log(isLoading)
 	return (
 		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.Title>여러분이 원하는 모임 혹은 동아리를 만드세요</S.Title>
@@ -80,6 +88,8 @@ function Register() {
 						Data={GetCategoryData?.response}
 						control={control}
 						errorMsg="카테고리를 선택해주세요."
+						datailData={data?.response?.categoryName}
+						postId={postId}
 					/>
 				</S.Box>
 				<S.Box>
@@ -89,6 +99,8 @@ function Register() {
 						Data={selectDataTeamMember}
 						control={control}
 						errorMsg="인원수를 선택해주세요."
+						datailData={data?.response?.perssonelNumber}
+						postId={postId}
 					/>
 				</S.Box>
 				<S.Box>
@@ -98,9 +110,12 @@ function Register() {
 						Data={selectDataPeriod}
 						control={control}
 						errorMsg="프로젝트 기간을 선택해주세요."
+						datailData={data?.response?.expectedPeriod}
+						postId={postId}
 					/>
 				</S.Box>
 			</S.Container>
+
 			<S.Box>
 				<div>제목 *</div>
 				<Controller
@@ -132,6 +147,7 @@ function Register() {
 					rules={{
 						required: '설명을 입력해 주세요',
 					}}
+					defaultValue={data && data?.response?.contents}
 					render={({ field }) => (
 						<textarea
 							placeholder="설명을 입력해 주세요"
@@ -145,6 +161,7 @@ function Register() {
 					<HookFormError>{errors.Contents?.message?.toString()}</HookFormError>
 				)}
 			</S.Box>
+
 			<span>
 				<Button type="submit" size={'normal'}>
 					확인
@@ -162,6 +179,7 @@ function Register() {
 		</S.Wrapper>
 	)
 }
+
 export default Register
 
 const Wrapper = styled.form`

@@ -24,7 +24,7 @@ function Comment() {
 	const [page, setPage] = useState(pageNumber || 0)
 	const [commentId, setCommentId] = useState(null)
 	const [changeViewNum, setChangeViewNum] = useState(null)
-	const [changeVal, setChangeVal] = useState(null)
+	const [changeVal, setChangeVal] = useState('')
 
 	const { data, isLoading } = useGetCommentData(userId, page)
 	const { mutate } = useMutation(
@@ -57,24 +57,26 @@ function Comment() {
 	}
 
 	const onChangeBtn = () => {
+		if (changeVal.trim().length === 0) return
 		const data = {
 			commentId: changeViewNum,
 			contents: changeVal,
 		}
 		changeMutate(data)
 	}
+	// onClick={() => navigate(`/Detail?postId=${el.postId}`)} 이거 해당 게시글 가는거 icon 넣어서 추가해야할듯함
 	return (
 		<S.Wrapper>
 			<h1>작성한 댓글</h1>
 			{data?.response?.content.map((el: any) => (
 				<S.container state={changeViewNum === el.commentId}>
-					<S.Left onClick={() => navigate(`/Detail?postId=${el.postId}`)}>
+					<S.Left>
 						<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 						<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
 						{changeViewNum === el.commentId ? (
 							<S.InputWrap>
 								<S.Input
-									value={changeVal || el.contents}
+									value={changeVal === null ? el.contents : changeVal}
 									onChange={(e: any) => setChangeVal(e.target.value)}
 								/>
 								<button type="button" onClick={onChangeBtn}>
@@ -185,9 +187,10 @@ const Right = styled.div`
 const Input = styled.input`
 	margin-top: 2rem;
 	border: none;
-	padding: 1rem 20rem 1rem 1rem;
+	padding: 1rem 6rem 1rem 1rem;
 	border: 2px solid ${({ theme }) => theme.COLOR.orange};
 	border-radius: 3px;
+	width: 100%;
 `
 const InputWrap = styled.div`
 	position: relative;
@@ -199,6 +202,8 @@ const InputWrap = styled.div`
 		top: 2.5rem;
 		cursor: pointer;
 	}
+	width: 100%;
+	z-index: 10000;
 `
 const S = {
 	Wrapper,

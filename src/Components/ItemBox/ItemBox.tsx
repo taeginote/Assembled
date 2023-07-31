@@ -53,10 +53,10 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		},
 	)
 
-	const onClickNotHeart = () => {
+	const onClickNotHeart = (): void => {
 		mutate({ postId })
 	}
-	const onClickFillHeart = () => {
+	const onClickFillHeart = (): void => {
 		cancelMutate({ postId })
 	}
 

@@ -5,6 +5,11 @@ import TokenService from '../Utils/TokenService'
 const axiosInstance = axios.create({
 	baseURL: process.env.REACT_APP_BACKEND_URL,
 	withCredentials: true,
+	// headers: {
+	// 	Authorization:
+	// 		TokenService.getAccessToken() &&
+	// 		`Bearer ${TokenService.getAccessToken()}`,
+	// },
 	headers: {
 		Authorization:
 			TokenService.getAccessToken() &&
@@ -44,9 +49,10 @@ axiosInstance.interceptors.response.use(
 		}
 
 		if (error.response.status === 401) {
-			originalRequest._retry = true
+			TokenService.removeAccessToken()
+			// originalRequest._retry = true
 			const res: any = await UserApi.getToken()
-
+			console.log(res)
 			if (res.status === 200) {
 				TokenService.setAccessToken(res?.response?.accessToken)
 				return axiosInstance(originalRequest)
