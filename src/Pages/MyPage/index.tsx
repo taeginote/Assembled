@@ -25,11 +25,12 @@ const Container = styled.div`
 	margin-top: 10rem;
 	display: flex;
 	justify-content: space-between;
+
 	& > span {
 		width: 100%;
 		display: flex;
 	}
-	/* background-color: red; */
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		/* flex-direction: column; */
 	}

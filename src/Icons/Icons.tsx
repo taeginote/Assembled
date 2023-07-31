@@ -18,7 +18,7 @@ import {
 	BsTrash,
 } from 'react-icons/bs'
 import { BiUser, BiHappy } from 'react-icons/bi'
-import { MdOutlineToday } from 'react-icons/md'
+import { MdOutlineCancel, MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
 import { FaQuestion, FaPen } from 'react-icons/fa'
@@ -94,3 +94,4 @@ export const FillHeart_Icon = ({ onClick }: any) => (
 export const Hamburger_Icon = ({ onClick }: any) => (
 	<GiHamburgerMenu size={'23'} onClick={onClick} color="#FB9B00" />
 ) // 햄버거
+export const Cancel_Icon = () => <MdOutlineCancel size={'17'} color="#777" /> //취소 버튼

@@ -31,6 +31,7 @@ import { useState } from 'react'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
+
 	const [modalView, setModalView] = useState(false)
 
 	const {

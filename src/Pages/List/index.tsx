@@ -47,6 +47,7 @@ function List() {
 		categoryId,
 	)
 	const totalPage: number = data?.response?.totalPages
+
 	return (
 		<>
 			<S.Wrapper>

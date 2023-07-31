@@ -10,6 +10,11 @@ import UserIdService from '../../../Utils/UserIdService'
 import Pagination from '../../../Components/Pagination/Pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
+import ConfirmModal from '../../../Components/Modal/confirmModal'
+import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
+import { useRecoilState } from 'recoil'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import PostApi from '../../../Apis/PostApi'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
@@ -17,11 +22,22 @@ function Wrote() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let pageNumber: any = searchParams.get('page')
 	const [page, setPage] = useState(pageNumber || 0)
+	const [postId, setPostId] = useState()
 	const userId = UserIdService.getUserId()
-
+	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 	const { data, isLoading } = useGetWroteData(userId, page)
 	//페이지네이션 추가 예정
-	console.log(data?.response?.totalPages)
+
+	const queryClient = useQueryClient()
+	const { mutate } = useMutation(
+		(postId: number | undefined) => PostApi.DeletePost(postId),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(['useGetWroteData'])
+			},
+			onError: () => {},
+		},
+	)
 	return (
 		<S.Wrapper>
 			{testList.length === 0 ? (
@@ -37,7 +53,7 @@ function Wrote() {
 						<S.ListWrap>
 							<S.Container>
 								{data?.response?.content.map((el: any) => (
-									<ItemBoxMyPage data={el} />
+									<ItemBoxMyPage data={el} setPostId={setPostId} />
 								))}
 							</S.Container>
 							{data?.response?.content?.length !== 0 && (
@@ -46,6 +62,14 @@ function Wrote() {
 									limit={10}
 									scroll={765}
 									setPage={setPage}
+								/>
+							)}
+							{recoilCounter && (
+								<ConfirmModal
+									text={'정말로 삭제하시겠습니까?'}
+									url={'/myPage'}
+									mutate={mutate}
+									postId={postId}
 								/>
 							)}
 						</S.ListWrap>

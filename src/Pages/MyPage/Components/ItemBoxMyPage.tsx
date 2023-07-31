@@ -1,7 +1,5 @@
 import styled from 'styled-components'
-
 import { useNavigate } from 'react-router-dom'
-
 import {
 	FlexAlignCSS,
 	FlexBetweenCSS,
@@ -15,10 +13,16 @@ import {
 } from '../../../Icons/Icons'
 import { ItemDataType } from '../../../Types/type'
 import Ballon from '../../../Components/Ballon/Ballon'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import PostApi from '../../../Apis/PostApi'
+import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
+import { useSetRecoilState } from 'recoil'
 
-function ItemBoxMyPage({ data }: { data: ItemDataType }) {
+function ItemBoxMyPage({
+	data,
+	setPostId,
+}: {
+	data: ItemDataType
+	setPostId: any
+}) {
 	const navigate = useNavigate()
 	const {
 		postId,
@@ -31,18 +35,12 @@ function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 		commentCount,
 	} = data
 
-	const queryClient = useQueryClient()
+	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 
-	const { mutate } = useMutation(
-		(postId: number | undefined) => PostApi.DeletePost(postId),
-		{
-			onSuccess: () => {
-				queryClient.invalidateQueries(['useGetWroteData'])
-			},
-			onError: () => {},
-		},
-	)
-
+	const onDeleteClub = (e?: number) => {
+		setRecoilCounter(true)
+		setPostId(e)
+	}
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
 
@@ -57,7 +55,9 @@ function ItemBoxMyPage({ data }: { data: ItemDataType }) {
 						</div>
 						<Pen_Icon />
 					</button>
-					<button onClick={() => mutate(postId)}>
+					{/* <button onClick={() => mutate(postId)}> */}
+					{/* <button onClick={() => setRecoilCounter(true)}> */}
+					<button onClick={() => onDeleteClub(postId)}>
 						<div>
 							<Ballon text={'모임 삭제'} />
 						</div>
