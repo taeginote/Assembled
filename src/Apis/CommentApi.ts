@@ -8,8 +8,20 @@ const CommentApi: CommentApiType = {
 	postComment(data) {
 		return axiosInstance.post(PATH, data)
 	},
-	getUserComment({ userId }) {
-		return axiosInstance.get(`${PATH}/user/${userId}`)
+	getUserComment({ userId, page }) {
+		return axiosInstance.get(`${PATH}/user/${userId}`, {
+			params: { page, size: 4 },
+		})
+	},
+	deleteComment(commentId) {
+		return axiosInstance.delete(`${PATH}/${commentId}`)
+	},
+	patchComment(data) {
+		const { commentId, contents } = data
+
+		return axiosInstance.patch(
+			PATH + `?commentId=${commentId}&contents=${contents}`,
+		)
 	},
 }
 

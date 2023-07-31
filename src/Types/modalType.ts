@@ -8,4 +8,7 @@ export interface modalTypeTwoProps {
 //모달에서 props 한개
 export interface modalTypeOneProps {
 	text?: string
+	url?: string
+	mutate?: any
+	postId?: any
 }
