@@ -20,17 +20,8 @@ export type CommentApiType = {
 	patchComment(data: any): Promise<AxiosResponse<any>>
 }
 
-//디테일 페이지 post 댓글
-// export interface postComment {
-// 	data: {
-// 		commentContents: string
-// 		userId: number
-// 		postId?: number | null
-// 	}
-// }
-
 export interface PostLike {
-	postId?: number | undefined | null | string
+	postId?: number
 }
 
 export interface PostLikeApiType {
@@ -40,7 +31,7 @@ export interface PostLikeApiType {
 
 interface GetListData {
 	page?: number
-	searchBy?: any
+	searchBy?: string
 	searchQuery?: string
 	categoryId?: categoryType
 	sort?: filterType
@@ -79,15 +70,17 @@ export interface signUpData {
 	password?: string
 	birthDate?: string
 	phoneNumber?: string
-	profileImage?: any
+	profileImage?: string[]
 }
+
 export interface LoginData {
 	email?: string
 	password?: string
-	token?: string
+
 	// 보류
 	response?: any
 }
+
 interface EmailValidation {
 	email?: string
 }

@@ -5,10 +5,10 @@ interface ButtonProps {
 	shape?: 'default' | 'round'
 	size?: 'normal' | 'big' | 'default'
 	fontSize?: 'default'
-	type?: 'submit'
+	type?: 'submit' | 'button'
 	disabled?: boolean
 	children?: React.ReactNode
-	onClick?: any
+	onClick?: any //보류
 }
 
 function Button(props: ButtonProps) {

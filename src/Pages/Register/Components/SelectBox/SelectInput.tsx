@@ -2,19 +2,21 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
-import { Controller } from 'react-hook-form'
+import { Control, Controller, FieldValues } from 'react-hook-form'
 import HookFormError from '../../../../Components/Error/HookFormError'
 
-//보류
-interface SelectData {
-	value: string
-	text: any
+interface Option {
+	value?: number
+	text?: string
+}
+interface CategoryOption extends Option {
+	categoryId?: number
+	categoryName?: string
 }
 interface SelectInputProps {
-	// Data: SelectData[]
 	name: string
-	control: any
-	Data: any[]
+	control: Control<FieldValues>
+	Data: CategoryOption[]
 	errorMsg: string
 	datailData?: string | number
 	postId?: string
@@ -22,6 +24,7 @@ interface SelectInputProps {
 
 function SelectInput(props: SelectInputProps) {
 	const { name, Data, control, errorMsg, datailData, postId } = props
+	console.log(Data)
 	const [isView, setIsView] = useState(false)
 	const initialValue = datailData ? datailData : undefined
 	console.log(initialValue)

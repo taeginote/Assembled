@@ -24,8 +24,6 @@ export interface postRegisterType {
 	data: postRegisterData
 }
 
-//post_Comments
-
 export interface postCommentsType {
 	data: { commentContents: string; postId: string }
 }

@@ -27,10 +27,11 @@ import PostApi from '../../Apis/PostApi'
 import { PostRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useGetDetailData from '../../Hooks/Queries/get-detail'
-// import useGetDetailData from '../../Hooks/Queries/get-detail'
+
+type CategoryName = { categoryName: 'string' }
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -45,9 +46,7 @@ function Register() {
 	const { data: GetCategoryData } = useGetCategoryData()
 
 	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
-	// const { categoryName, expectedPeriod, perssonelNumber, title, contents } =
-	// 	data?.response
-	// console.log(categoryName, expectedPeriod, perssonelNumber, title, contents)
+
 	const { mutate } = useMutation(
 		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{
@@ -63,7 +62,7 @@ function Register() {
 		const writer = UserIdService.getUserId()
 
 		let categoryId = GetCategoryData?.response.find(
-			(el: any) => el.categoryName === e.Category,
+			(el: CategoryName) => el.categoryName === e.Category,
 		)
 
 		const data: PostRegisterData = {
@@ -76,7 +75,7 @@ function Register() {
 		}
 		mutate(data)
 	}
-	console.log(isLoading)
+
 	return (
 		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.Title>여러분이 원하는 모임 혹은 동아리를 만드세요</S.Title>
@@ -167,6 +166,7 @@ function Register() {
 					확인
 				</Button>
 				<Button
+					type="button"
 					size={'normal'}
 					variant={'default-white'}
 					onClick={() => setRecoilCounter(true)}

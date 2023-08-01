@@ -15,12 +15,13 @@ import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import { useRecoilState } from 'recoil'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PostApi from '../../../Apis/PostApi'
+import { ItemDataType } from '../../../Types/type'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
 	const testList = [1, 2, 3, 4, 5, 6, 6, 7]
 	const [searchParams, setSearchParams] = useSearchParams()
-	let pageNumber: any = searchParams.get('page')
+	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState(pageNumber || 0)
 	const [postId, setPostId] = useState()
 	const userId = UserIdService.getUserId()
@@ -52,7 +53,7 @@ function Wrote() {
 					) : (
 						<S.ListWrap>
 							<S.Container>
-								{data?.response?.content.map((el: any) => (
+								{data?.response?.content.map((el: ItemDataType) => (
 									<ItemBoxMyPage data={el} setPostId={setPostId} />
 								))}
 							</S.Container>

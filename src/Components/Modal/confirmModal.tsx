@@ -2,18 +2,19 @@ import styled from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
 import Button from '../Button/Button'
 import { useNavigate } from 'react-router-dom'
-import { modalTypeOneProps } from '../../Types/modalType'
+import { modalTypeFourProps } from '../../Types/modalType'
 import { Question_Icon } from '../../Icons/Icons'
 import { useSetRecoilState } from 'recoil'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 
-function ConfirmModal({ text, url, mutate, postId }: modalTypeOneProps) {
+function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
 	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 	const navigate = useNavigate()
 
 	const onClickClose = () => {
 		if (url === '/myPage' || url === '/myPage/comment') {
 			mutate(postId)
+
 			navigate(url)
 		} else {
 			navigate('/')

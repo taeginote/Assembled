@@ -12,7 +12,7 @@ import {
 	NotFillHeart_Icon,
 	Person_Icon,
 } from '../../Icons/Icons'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 

@@ -6,10 +6,8 @@ import CommentForm from './Components/CommentForm'
 import { useSearchParams } from 'react-router-dom'
 
 function Detail() {
-	//보류
-	//🔥Detail 여기 any를 사용하였음 더 좋은 방법 있는지 알아볼것
 	const [searchParams, setSearchParams] = useSearchParams()
-	let postId: any = searchParams.get('postId')
+	let postId: number | null = Number(searchParams.get('postId'))
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
@@ -54,7 +52,6 @@ function Detail() {
 					{data && (
 						<CommentForm
 							comments={data?.response?.comments}
-							// userImg={data?.profile.fileFullPath}
 							postId={postId}
 							refetch={refetch}
 						/>

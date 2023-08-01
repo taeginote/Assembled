@@ -9,7 +9,10 @@ function SuccessModal({ text, url, setState }: modalTypeTwoProps) {
 	const navigate = useNavigate()
 
 	const onClickOkBtn = () => {
-		setState(false)
+		if (setState) {
+			setState(false)
+		}
+
 		if (url === undefined) return navigate('/')
 
 		navigate(`${url}`)

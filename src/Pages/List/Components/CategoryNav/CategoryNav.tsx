@@ -4,20 +4,20 @@ import { FlexAlignCSS } from '../../../../Styles/common'
 import { Link, useSearchParams } from 'react-router-dom'
 import useGetCategoryData from '../../../../Hooks/Queries/get-category'
 
+type Category = {
+	categoryId: number
+	categoryName: string
+}
 function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	let category: null | string | number = searchParams.get('category')
-
-	if (category === null) {
-		category = 1
-	}
+	let category: number = Number(searchParams.get('category')) | 1
 
 	const { data } = useGetCategoryData()
 
 	return (
 		<S.Wrapper>
 			<S.Container>
-				{data?.response?.map((el: any, idx: number) => (
+				{data?.response?.map((el: Category, idx: number) => (
 					<S.NavBox key={idx} state={el.categoryId === category}>
 						<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>
 					</S.NavBox>

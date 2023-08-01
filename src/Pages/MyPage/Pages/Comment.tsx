@@ -13,18 +13,21 @@ import { useRecoilState } from 'recoil'
 import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import ConfirmModal from '../../../Components/Modal/confirmModal'
 
+type CommentId = { commentId: any }
+
 function Comment() {
 	const queryClient = useQueryClient()
 	const [searchParams, setSearchParams] = useSearchParams()
 	const navigate = useNavigate()
 
-	let pageNumber: any = searchParams.get('page')
+	let pageNumber: number | null = Number(searchParams.get('page'))
 	const userId = UserIdService.getUserId()
-	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
-	const [page, setPage] = useState(pageNumber || 0)
-	const [commentId, setCommentId] = useState(null)
-	const [changeViewNum, setChangeViewNum] = useState(null)
-	const [changeVal, setChangeVal] = useState('')
+	const [recoilCounter, setRecoilCounter] =
+		useRecoilState<boolean>(modalViewConfirm)
+	const [page, setPage] = useState<number>(pageNumber || 0)
+	const [commentId, setCommentId] = useState<null | number>(null)
+	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
+	const [changeVal, setChangeVal] = useState<null | string>(null)
 
 	const { data, isLoading } = useGetCommentData(userId, page)
 	const { mutate } = useMutation(
@@ -38,7 +41,7 @@ function Comment() {
 		},
 	)
 	const { mutate: changeMutate } = useMutation(
-		(data: any) => CommentApi.patchComment(data),
+		data => CommentApi.patchComment(data),
 		{
 			onSuccess: () => {
 				setChangeViewNum(null)
@@ -48,17 +51,17 @@ function Comment() {
 		},
 	)
 
-	const onDeleteComment = (e: any) => {
+	const onDeleteComment = (e: CommentId) => {
 		setRecoilCounter(true)
 		setCommentId(e.commentId)
 	}
-	const onChangeComment = (e: any) => {
+	const onChangeComment = (e: CommentId) => {
 		setChangeViewNum(e.commentId)
 	}
 
 	const onChangeBtn = () => {
-		if (changeVal.trim().length === 0) return
-		const data = {
+		if (changeVal?.trim().length === 0) return
+		const data: any = {
 			commentId: changeViewNum,
 			contents: changeVal,
 		}
@@ -77,7 +80,9 @@ function Comment() {
 							<S.InputWrap>
 								<S.Input
 									value={changeVal === null ? el.contents : changeVal}
-									onChange={(e: any) => setChangeVal(e.target.value)}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+										setChangeVal(e.target.value)
+									}
 								/>
 								<button type="button" onClick={onChangeBtn}>
 									수정

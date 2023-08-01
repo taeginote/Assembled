@@ -3,6 +3,7 @@ import axiosInstance from './@core'
 
 const PATH = '/assemble/post/like'
 //리스트 관련 Apis
+
 const PostLikeApi: PostLikeApiType = {
 	PostLike(data) {
 		return axiosInstance.post(PATH, data)

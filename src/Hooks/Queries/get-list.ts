@@ -5,7 +5,7 @@ type pageType = number | undefined
 type searchByType = string | undefined
 type searchQuery = string | undefined
 export type filterType = null | string
-export type categoryType = 1 | null | string
+export type categoryType = 1 | null | number
 
 const getListData = async (
 	page: pageType,

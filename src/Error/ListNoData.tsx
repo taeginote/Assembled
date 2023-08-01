@@ -3,6 +3,7 @@ import Button from '../Components/Button/Button'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
+//보류
 function ListNoData({ setSearchValue }: any) {
 	const queryClient = useQueryClient()
 	const navigate = useNavigate()

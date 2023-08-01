@@ -31,6 +31,17 @@ import { SignUpSubmitData } from '../../../Types/type'
 import { useEffect, useState } from 'react'
 import SignUpInput from './Components/SignUpInput'
 
+interface ValidationMsg {
+	email: {
+		status: any
+		message: string
+	}
+	nickname: {
+		status: any
+		message: string
+	}
+}
+
 function SignUp() {
 	const {
 		register,
@@ -42,7 +53,7 @@ function SignUp() {
 	} = useForm()
 	const [preFile, setPreFile] = useState<string | null>('')
 	const [imgFile, setImgFile] = useState<File | null>()
-	const [validationMsg, setValidationMsg] = useState({
+	const [validationMsg, setValidationMsg] = useState<ValidationMsg>({
 		email: { status: false, message: '' },
 		nickname: { status: false, message: '' },
 	})
@@ -50,33 +61,30 @@ function SignUp() {
 	const watchNickName = watch('SignUpNickName')
 
 	useEffect(() => {
-		setValidationMsg((prev: any) => ({
+		setValidationMsg((prev: ValidationMsg) => ({
 			...prev,
 			email: { status: false, message: '' },
 		}))
 	}, [watchEmail])
 	useEffect(() => {
-		setValidationMsg((prev: any) => ({
+		setValidationMsg((prev: ValidationMsg) => ({
 			...prev,
 			nickname: { status: false, message: '' },
 		}))
 	}, [watchNickName])
 
-	const [recoilCounter, setRecoilCounter] = useRecoilState(
+	const [recoilCounter, setRecoilCounter] = useRecoilState<boolean>(
 		modalViewNotification,
 	)
 	const [successModal, setSuccessModal] = useState(false)
 
 	// profileImage 추가해야함
-	const { mutate, isLoading, data } = useMutation(
-		(data: signUpData) => UserApi.SignUp(data),
-		{
-			onSuccess: res => {
-				setSuccessModal(() => true)
-			},
-			onError: err => {},
+	const { mutate } = useMutation((data: signUpData) => UserApi.SignUp(data), {
+		onSuccess: () => {
+			setSuccessModal(() => true)
 		},
-	)
+		onError: () => {},
+	})
 
 	const ChangePreFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files !== null) {
@@ -99,7 +107,7 @@ function SignUp() {
 			try {
 				const res = await UserApi.getEmailValidation(value)
 				console.log(res)
-				setValidationMsg((prev: any) => ({
+				setValidationMsg((prev: ValidationMsg) => ({
 					...prev,
 					email: { status: 'success', message: '사용 가능한 이메일입니다.' },
 				}))

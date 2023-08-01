@@ -9,12 +9,13 @@ import { CommentData } from '../../../Types/apiType'
 import CommentApi from '../../../Apis/CommentApi'
 import UserIdService from '../../../Utils/UserIdService'
 
-function CommentForm({
-	comments,
-	refetch,
-	postId,
-	userImg,
-}: CommentFormPropsType) {
+interface CommentType {
+	writerNickname: string
+	writeDate: string
+	contents: string
+}
+
+function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 	const { mutate } = useMutation(
 		(data: CommentData) => CommentApi.postComment(data),
 		{

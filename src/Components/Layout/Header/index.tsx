@@ -18,7 +18,7 @@ function Haeder() {
 	const navigate = useNavigate()
 	const auth = useAuth()
 
-	const [successModal, setSuccessModal] = useState(false)
+	const [successModal, setSuccessModal] = useState<boolean>(false)
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
 		onSuccess: () => {
 			setSuccessModal(() => true)

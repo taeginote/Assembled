@@ -7,8 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import { modalTypeTwoProps } from '../../Types/modalType'
 import { Warning_Icon } from '../../Icons/Icons'
 
-function NotificationModal({ text, url }: modalTypeTwoProps) {
-	const setRecoilCounter = useSetRecoilState(modalViewNotification)
+type NotificationProps = Omit<modalTypeTwoProps, 'setState'>
+
+function NotificationModal({ text, url }: NotificationProps) {
+	const setRecoilCounter = useSetRecoilState<boolean>(modalViewNotification)
 	const navigate = useNavigate()
 	const onClickBtn = () => {
 		setRecoilCounter(() => false)

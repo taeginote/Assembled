@@ -27,7 +27,7 @@ function Pagination({
 }: PaginationType): JSX.Element {
 	const [searchParams, setSearchParams] = useSearchParams()
 
-	const nowPage: number | null = parseInt(searchParams.get('page') ?? '1') // 지금 페이지 number
+	const nowPage: number | null = Number(searchParams.get('page') || 1) // 지금 페이지 number
 
 	const startPage = Math.floor(nowPage / limit) * limit + 1 // 시작 페이지 number. ex. 지금 14페이지라면 시작 페이지는 11입니다.
 	let endPage = startPage + limit - 1 // 끝 페이지 번호. ex. 지금 14페이지라면 끝 페이지는 20입니다.

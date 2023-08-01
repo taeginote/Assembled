@@ -2,13 +2,13 @@
 export interface modalTypeTwoProps {
 	text?: string
 	url?: string
-	setState?: any
+	setState: (state: boolean) => void | undefined
 }
 
 //모달에서 props 한개
-export interface modalTypeOneProps {
-	text?: string
+export interface modalTypeFourProps {
+	text: string
 	url?: string
-	mutate?: any
-	postId?: any
+	mutate?: any //보류
+	postId?: number | null
 }

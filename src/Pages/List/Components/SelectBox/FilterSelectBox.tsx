@@ -9,11 +9,11 @@ type eventType = {
 }
 function FilterSelectBox() {
 	const navigate = useNavigate()
-	const [isShowOptions, setShowOptions] = useState(false)
+	const [isShowOptions, setShowOptions] = useState<boolean>(false)
 
 	const [searchParams, setSearchParams] = useSearchParams()
-	let filter = searchParams.get('sort')
-	let category: string | number | null = searchParams.get('category')
+	let filter: string | null = searchParams.get('sort')
+	let category: number | null = Number(searchParams.get('category'))
 
 	if (category === null) {
 		category = 1
@@ -22,7 +22,7 @@ function FilterSelectBox() {
 		filter = 'total'
 	}
 
-	const FilterArr = [
+	const FilterArr: eventType[] = [
 		{
 			name: '최신 순 정렬',
 			url: 'total',
@@ -50,7 +50,7 @@ function FilterSelectBox() {
 			</IconBox>
 			{isShowOptions && (
 				<SelectOptions>
-					{FilterArr.map((el, idx) => (
+					{FilterArr.map((el: eventType, idx: number) => (
 						<Option
 							onClick={() => onClickSelectFilter(el)}
 							select={el.url === filter}
