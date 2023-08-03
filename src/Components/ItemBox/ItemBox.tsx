@@ -15,9 +15,12 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
+import TokenService from '../../Utils/TokenService'
 
 function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	const navigate = useNavigate()
+
+	const token = TokenService.getAccessToken()
 
 	const {
 		postId,
@@ -54,9 +57,11 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	)
 
 	const onClickNotHeart = (): void => {
+		if (token === null) return
 		mutate({ postId })
 	}
 	const onClickFillHeart = (): void => {
+		if (token === null) return
 		cancelMutate({ postId })
 	}
 

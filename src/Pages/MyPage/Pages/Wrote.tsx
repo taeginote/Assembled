@@ -22,12 +22,12 @@ function Wrote() {
 	const testList = [1, 2, 3, 4, 5, 6, 6, 7]
 	const [searchParams, setSearchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
-	const [page, setPage] = useState(pageNumber || 0)
-	const [postId, setPostId] = useState()
+	const [page, setPage] = useState<number>(pageNumber || 0)
+	const [postId, setPostId] = useState<number>(1)
 	const userId = UserIdService.getUserId()
-	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
+	const [recoilCounter, setRecoilCounter] =
+		useRecoilState<boolean>(modalViewConfirm)
 	const { data, isLoading } = useGetWroteData(userId, page)
-	//페이지네이션 추가 예정
 
 	const queryClient = useQueryClient()
 	const { mutate } = useMutation(

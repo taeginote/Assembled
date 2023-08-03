@@ -21,7 +21,7 @@ function ItemBoxMyPage({
 	setPostId,
 }: {
 	data: ItemDataType
-	setPostId: any
+	setPostId: React.Dispatch<React.SetStateAction<number>>
 }) {
 	const navigate = useNavigate()
 	const {
@@ -39,7 +39,7 @@ function ItemBoxMyPage({
 
 	const onDeleteClub = (e?: number) => {
 		setRecoilCounter(true)
-		setPostId(e)
+		setPostId(e!)
 	}
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'

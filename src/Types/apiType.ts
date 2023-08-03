@@ -112,3 +112,13 @@ export type UserApiType = {
 	postLogout(): Promise<AxiosResponse>
 	deletewithdrawal(): Promise<AxiosResponse>
 }
+
+export interface ApiError {
+	response: {
+		data: {
+			error: {
+				message: string
+			}
+		}
+	}
+}

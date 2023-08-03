@@ -47,6 +47,7 @@ function Register() {
 
 	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
 
+	console.log(data)
 	const { mutate } = useMutation(
 		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{

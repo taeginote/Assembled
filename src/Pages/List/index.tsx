@@ -69,7 +69,7 @@ function List() {
 				) : (
 					<>
 						{data?.response?.content?.length === 0 ? (
-							<ListNoData refetch={refetch} setSearchValue={setSearchValue} />
+							<ListNoData setSearchValue={setSearchValue} />
 						) : (
 							<S.Container>
 								{data?.response?.content?.map(

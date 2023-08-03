@@ -26,12 +26,13 @@ import {
 	Nickname_Icon,
 	Phone_Icon,
 } from '../../../Icons/Icons'
-import { signUpData } from '../../../Types/apiType'
+import { ApiError, signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useEffect, useState } from 'react'
 import SignUpInput from './Components/SignUpInput'
 
 interface ValidationMsg {
+	//이거 status가 string, boolean 왔다갔다 거림 리팩토링때 수정 예정
 	email: {
 		status: any
 		message: string
@@ -111,11 +112,11 @@ function SignUp() {
 					...prev,
 					email: { status: 'success', message: '사용 가능한 이메일입니다.' },
 				}))
-			} catch (err: any) {
+			} catch (err: ApiError | any) {
 				const { message } = err?.response.data.error
 
 				if (message === 'invalid form email') {
-					setValidationMsg((prev: any) => ({
+					setValidationMsg((prev: ValidationMsg) => ({
 						...prev,
 						email: { status: 'error', message: '이메일 형식이 아니에요' },
 					}))
@@ -126,7 +127,7 @@ function SignUp() {
 		if (target === 'SignUpNickName') {
 			try {
 				const res = await UserApi.getNickNameValidation(value)
-				setValidationMsg((prev: any) => ({
+				setValidationMsg((prev: ValidationMsg) => ({
 					...prev,
 					nickname: { status: 'success', message: '사용 가능한 닉네임입니다.' },
 				}))
