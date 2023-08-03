@@ -33,9 +33,9 @@ export default SuccessModal
 
 const Wrapper = styled.div`
 	position: fixed;
-	top: 0;
+	top: -5rem;
 	left: 0;
-	height: 100vh;
+	height: 110vh;
 	width: 100%;
 	z-index: 999;
 	background-color: rgba(0, 0, 0, 0.7);
