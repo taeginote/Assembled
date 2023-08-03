@@ -56,6 +56,11 @@ const Wrapper = styled.div`
 	margin-top: 5rem;
 	align-items: center;
 	margin-left: 20%;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 90%;
+		text-align: center;
+		margin-left: 2rem;
+	}
 	& > div {
 		margin-top: 3rem;
 		& > span {

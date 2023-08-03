@@ -9,6 +9,7 @@ import { CommentData } from '../../../Types/apiType'
 import CommentApi from '../../../Apis/CommentApi'
 import UserIdService from '../../../Utils/UserIdService'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
+import TokenService from '../../../Utils/TokenService'
 
 interface CommentType {
 	writerNickname: string
@@ -27,10 +28,12 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 		},
 	)
 	const userId = UserIdService.getUserId()
+	const AccessToken = TokenService.getAccessToken()
 
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const contents = e.currentTarget.textarea.value.trim()
+		if (AccessToken === null) return
 		if (contents.length === 0) return
 
 		const data: CommentData = {

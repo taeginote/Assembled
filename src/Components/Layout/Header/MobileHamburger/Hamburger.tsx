@@ -20,7 +20,7 @@ function Hamburger() {
 		},
 		{
 			name: '내가 작성한 글',
-			url: '/myPage/wrote',
+			url: '/myPage',
 		},
 		{
 			name: '내가 작성한 댓글',

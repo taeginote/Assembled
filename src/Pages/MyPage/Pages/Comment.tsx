@@ -144,6 +144,9 @@ const Wrapper = styled.div`
 	& > h1 {
 		margin-bottom: 5rem;
 	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		margin: 0 2rem;
+	}
 `
 const container = styled.div<{ state: boolean }>`
 	border-left: 5px solid ${({ theme }) => theme.COLOR.hover};
@@ -153,6 +156,10 @@ const container = styled.div<{ state: boolean }>`
 	&:hover {
 		background-color: ${({ theme }) => theme.COLOR.orange};
 		transition: all 1s;
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		background-color: ${({ theme }) => theme.COLOR.orange};
+		padding: 1rem 1rem;
 	}
 	display: flex;
 	justify-content: space-between;

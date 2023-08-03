@@ -92,6 +92,9 @@ const Wrapper = styled.div`
 		text-align: center;
 		line-height: 2.1;
 	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 85%;
+	}
 `
 const ButtonWrap = styled.div`
 	display: flex;
@@ -114,5 +117,8 @@ const ListWrap = styled.div`
 	flex-direction: column;
 	align-items: center;
 	margin-left: 20rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		margin-left: 7rem;
+	}
 `
 const S = { Wrapper, Container, ButtonWrap, ListWrap }

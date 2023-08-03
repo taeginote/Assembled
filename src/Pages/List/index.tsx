@@ -100,11 +100,11 @@ const Container = styled.div`
 	${WidthAutoCSS}
 	${GridCenterCSS}
 	${ColumnNumberCSS(4)};
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		${ColumnNumberCSS(2)};
-	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		${ColumnNumberCSS(3)};
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		${ColumnNumberCSS(2)};
 	}
 `
 const FilterWrapper = styled.div`

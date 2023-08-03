@@ -90,9 +90,6 @@ const Button = styled.button`
 		outline: 1px solid ${({ theme }) => theme.COLOR.hover};
 		border-radius: 10px;
 	}
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		padding: 7px 13px;
-	}
 `
 const SelectOptions = styled.ul`
 	width: 20rem;

@@ -184,6 +184,9 @@ const TopWrap = styled.div`
 			& > div {
 				display: none;
 			}
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+				margin-right: 1.3rem;
+			}
 		}
 		& > button:hover {
 			scale: 1.1;
