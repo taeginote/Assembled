@@ -16,6 +16,7 @@ import { useMutation } from '@tanstack/react-query'
 import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import TokenService from '../../Utils/TokenService'
+import ProfileImgReturn from '../../Utils/ProfileImgReturn'
 
 function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	const navigate = useNavigate()
@@ -34,6 +35,8 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		likes,
 		likeStatus,
 	} = data
+
+	const profileImg = ProfileImgReturn(profile?.fileFullPath)
 
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
@@ -85,7 +88,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 			</S.Container>
 			<S.UserBox>
 				<div>
-					{/* <S.UserImg src={profile.fileFullPath} /> */}
+					<S.UserImg src={profileImg} />
 					<div>{writerNickname}</div>
 				</div>
 				<span>

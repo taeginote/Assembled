@@ -53,7 +53,7 @@ axiosInstance.interceptors.response.use(
 			// originalRequest._retry = true
 			//보류 로직 처리후 타입 지정
 			const res: any = await UserApi.getToken()
-			console.log(res)
+
 			if (res.status === 200) {
 				TokenService.setAccessToken(res?.response?.accessToken)
 				return axiosInstance(originalRequest)

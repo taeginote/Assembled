@@ -24,13 +24,12 @@ interface SelectInputProps {
 
 function SelectInput(props: SelectInputProps) {
 	const { name, Data, control, errorMsg, datailData, postId } = props
-	console.log(Data)
-	const [isView, setIsView] = useState(false)
+
+	const [isView, setIsView] = useState<boolean>(false)
 	const initialValue = datailData ? datailData : undefined
-	console.log(initialValue)
+
 	return (
 		<>
-			{/* {postId && initialValue !== undefined && ( */}
 			<Controller
 				name={name}
 				control={control}

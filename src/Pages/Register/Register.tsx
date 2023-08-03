@@ -47,7 +47,6 @@ function Register() {
 
 	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
 
-	console.log(data)
 	const { mutate } = useMutation(
 		(data: PostRegisterData) => PostApi.PostRegister(data),
 		{
@@ -57,7 +56,6 @@ function Register() {
 			onError: () => {},
 		},
 	)
-	console.log('데이터 존재')
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
 		const writer = UserIdService.getUserId()

@@ -4,12 +4,15 @@ import useGetDetailData from '../../Hooks/Queries/get-detail'
 import LoadingPage from '../../Components/LoadingPage/Loading'
 import CommentForm from './Components/CommentForm'
 import { useSearchParams } from 'react-router-dom'
+import ProfileImgReturn from '../../Utils/ProfileImgReturn'
 
 function Detail() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let postId: number | null = Number(searchParams.get('postId'))
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
+
+	const profileImg = ProfileImgReturn(data?.profile?.fileFullPath)
 
 	return (
 		<S.Wrapper>
@@ -19,7 +22,7 @@ function Detail() {
 				<S.Container>
 					<h1>{data?.response?.title}</h1>
 					<S.Profile>
-						{/* <S.UserImg src={data?.profile.fileFullPath} /> */}
+						<S.UserImg src={profileImg} />
 						<div>{data?.response?.writerNickname}</div>
 						<span> | </span>
 						<span>{data?.response?.createdTime?.split('T')[0]}</span>

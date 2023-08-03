@@ -15,6 +15,7 @@ import { ItemDataType } from '../../../Types/type'
 import Ballon from '../../../Components/Ballon/Ballon'
 import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import { useSetRecoilState } from 'recoil'
+import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 
 function ItemBoxMyPage({
 	data,
@@ -34,6 +35,7 @@ function ItemBoxMyPage({
 		expectedPeriod,
 		commentCount,
 	} = data
+	const profileImg = ProfileImgReturn(profile?.fileFullPath)
 
 	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 
@@ -73,7 +75,7 @@ function ItemBoxMyPage({
 			</S.Container>
 			<S.UserBox>
 				<div>
-					{/* <S.UserImg src={profile.fileFullPath} /> */}
+					<S.UserImg src={profileImg} />
 					<div>{writerNickname}</div>
 				</div>
 				<span>
