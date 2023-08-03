@@ -103,6 +103,9 @@ const Container = styled.div`
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		${ColumnNumberCSS(2)};
 	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+		${ColumnNumberCSS(3)};
+	}
 `
 const FilterWrapper = styled.div`
 	${WidthAutoCSS}

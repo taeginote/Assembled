@@ -8,6 +8,7 @@ import { CommentFormPropsType } from '../../../Types/dataType'
 import { CommentData } from '../../../Types/apiType'
 import CommentApi from '../../../Apis/CommentApi'
 import UserIdService from '../../../Utils/UserIdService'
+import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 
 interface CommentType {
 	writerNickname: string
@@ -26,6 +27,7 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 		},
 	)
 	const userId = UserIdService.getUserId()
+
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const contents = e.currentTarget.textarea.value.trim()
@@ -58,7 +60,7 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 			{comments.map((comment: any) => (
 				<S.CommentsList>
 					<S.CommentTop>
-						{/* <img src={comment?.userProfile.fileFullPath} /> */}
+						<S.UserImg src={ProfileImgReturn(comment?.profile?.fileFullPath)} />
 						<div>
 							<div>{comment.writerNickname}</div>
 							<span>{comment.writeDate}</span>
@@ -114,12 +116,6 @@ const CommentsList = styled.div`
 	margin-bottom: 2rem;
 `
 const CommentTop = styled.div`
-	& > img {
-		border-radius: 50%;
-		width: 4rem;
-		height: 4rem;
-		margin-right: 2.5rem;
-	}
 	${FlexAlignCSS}
 	&>div {
 		& > div {
@@ -132,7 +128,20 @@ const CommentTop = styled.div`
 	}
 `
 const CommentBottom = styled.div`
-	padding: 3rem 0;
+	padding: 3rem 1rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
-const S = { Container, CommentInput, CommentsList, CommentTop, CommentBottom }
+const UserImg = styled.img`
+	border-radius: 50%;
+	width: 4rem;
+	height: 4rem;
+	margin-right: 1rem;
+`
+const S = {
+	Container,
+	CommentInput,
+	CommentsList,
+	CommentTop,
+	CommentBottom,
+	UserImg,
+}

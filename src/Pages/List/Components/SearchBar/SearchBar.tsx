@@ -31,16 +31,15 @@ function SearchBar({ setSelectVal, selectVal, setSearchValue }: SearchType) {
 
 	const onClickSearch = (e: any) => {
 		e.preventDefault()
-		if (e.target.text.value.trim().length === 0) return
+		setIsView(false)
 		setSearchValue(e.target.text.value)
 	}
 
 	//Enter
 	const onkeyDown = (e: EventTargetType) => {
-		if (e.nativeEvent.isComposing) return
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			if (e.target.value.trim().length === 0) return
+
 			setSearchValue(e.target.value)
 		}
 	}

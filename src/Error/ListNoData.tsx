@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import Button from '../Components/Button/Button'
-import { useQueryClient } from '@tanstack/react-query'
+
 import { useNavigate } from 'react-router-dom'
 
 type SetStateType = {
@@ -8,12 +8,10 @@ type SetStateType = {
 }
 
 function ListNoData({ setSearchValue }: SetStateType) {
-	const queryClient = useQueryClient()
 	const navigate = useNavigate()
 	const reGet = () => {
 		navigate('/')
 		setSearchValue('')
-		queryClient.invalidateQueries(['useGetListData'])
 	}
 	return (
 		<S.Wrapper>
