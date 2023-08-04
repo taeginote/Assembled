@@ -30,6 +30,9 @@ function Comment() {
 	const [changeVal, setChangeVal] = useState<null | string>(null)
 
 	const { data, isLoading } = useGetCommentData(userId, page)
+
+	console.log(data)
+
 	const { mutate } = useMutation(
 		(commentId: number | undefined) => CommentApi.deleteComment(commentId),
 		{
