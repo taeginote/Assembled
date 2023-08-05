@@ -20,6 +20,17 @@ const axiosInstance = axios.create({
 	// 		`Bearer ${TokenService.getAccessToken()}`,
 	// },
 })
+const getCookieValue = (cookieName: any) => {
+	const cookies = document.cookie
+	const [cookie] = cookies
+		.split(';')
+		.map(cookie => cookie.trim())
+		.filter(cookie => cookie.startsWith(`${cookieName}=`))
+	if (cookie) {
+		return decodeURIComponent(cookie.split('=')[1])
+	}
+	return null
+}
 
 axiosInstance.interceptors.request.use(
 	(config: any) => {
@@ -29,7 +40,6 @@ axiosInstance.interceptors.request.use(
 		if (access_token) {
 			config.headers['Authorization'] = `Bearer ${access_token}`
 		}
-
 		return config
 	},
 
