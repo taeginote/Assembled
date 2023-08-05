@@ -16,6 +16,7 @@ import { useRecoilState } from 'recoil'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PostApi from '../../../Apis/PostApi'
 import { ItemDataType } from '../../../Types/type'
+import LoadingPage from '../../../Components/LoadingPage/Loading'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
@@ -49,7 +50,7 @@ function Wrote() {
 			) : (
 				<>
 					{isLoading ? (
-						<div>로딩중</div>
+						<LoadingPage />
 					) : (
 						<S.ListWrap>
 							<S.Container>

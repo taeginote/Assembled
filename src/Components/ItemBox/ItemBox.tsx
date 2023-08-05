@@ -80,7 +80,6 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 			</S.TopWrap>
 			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
 				<S.Period>마감일 | {period}</S.Period>
-
 				<S.Title>
 					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
 				</S.Title>
@@ -110,8 +109,8 @@ const Wrapper = styled.div`
 	padding: 3rem;
 	border-radius: 2rem;
 	cursor: pointer;
-	width: 100%; */
-	/* min-width: 25rem;
+	width: 100%;
+	min-width: 25rem;
 	&:hover {
 		transform: scale(1.01);
 		transition: transform 0.2s;

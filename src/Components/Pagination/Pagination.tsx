@@ -4,7 +4,6 @@ import scrollToTop from '../../Utils/scrollToTop'
 import { FlexCenterCSS } from '../../Styles/common'
 import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
 import { PaginationDisabled, PaginationType } from '../../Types/type'
-import { start } from 'repl'
 
 /**
  * @param limit - 페이지네이션 몇 개씩 할 것인지
@@ -13,7 +12,6 @@ import { start } from 'repl'
  * @param scroll - 페이지네이션 클릭 시 이동될 위치
  * @사용예시 - `<Pagination total={300} page={2} />`
  */
-
 /*
 	setPage는 page의 state를 변경시키는 함수이고,
 	goPage는 쿼리 스트링만을 변경시키는 함수입니다.

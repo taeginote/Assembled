@@ -1,6 +1,5 @@
 import Register from '../Pages/Register/Register'
 import Mypage from '../Pages/MyPage'
-
 import Wrote from '../Pages/MyPage/Pages/Wrote'
 import Comment from '../Pages/MyPage/Pages/Comment'
 import Withdrawal from '../Pages/MyPage/Pages/Withdrawal'
