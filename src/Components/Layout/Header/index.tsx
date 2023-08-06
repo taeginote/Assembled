@@ -45,7 +45,7 @@ function Haeder() {
 						<S.Logo src="/assets/img/Logo.png" onClick={goLogo}></S.Logo>
 					</div>
 					<S.HeaderRightBox>
-						{!auth.accessToken ? (
+						{auth.accessToken == null ? (
 							<S.NotLogIn>
 								<S.Select onClick={() => navigate('/login')}>로그인</S.Select>
 								<div>|</div>

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../../Contexts/auth'
 import SuccessModal from '../../../Modal/successModal'
+import { useMutation } from '@tanstack/react-query'
+import UserApi from '../../../../Apis/UserApi'
 
 function Hamburger() {
 	const [isView, setIsView] = useState<boolean>(false)
@@ -35,32 +37,41 @@ function Hamburger() {
 			url: '/myPage/withdrawal',
 		},
 	]
+	const { mutate } = useMutation(() => UserApi.postLogout(), {
+		onSuccess: () => {
+			console.log('successModal')
+			setSuccessModal(() => true)
+			auth.logout()
+		},
+	})
 
 	useEffect(() => {
 		setIsView(false)
 	}, [location.pathname])
 
 	const onClickList = (el: string) => {
-		if (el === 'logout') return setSuccessModal(true)
+		if (el === 'logout') return mutate()
 		navigate(el)
 	}
 	return (
-		<S.Wrapper>
-			<Hamburger_Icon onClick={() => setIsView(!isView)} />
-			{isView && (
-				<S.ListBox>
-					{list.map(el => (
-						<S.List onClick={() => onClickList(el.url)}>{el.name}</S.List>
-					))}
-				</S.ListBox>
-			)}
-			{successModal && (
-				<SuccessModal
-					text={'로그아웃 되었습니다.'}
-					setState={setSuccessModal}
-				/>
-			)}
-		</S.Wrapper>
+		<>
+			<S.Wrapper>
+				<Hamburger_Icon onClick={() => setIsView(!isView)} />
+				{isView && (
+					<S.ListBox>
+						{list.map(el => (
+							<S.List onClick={() => onClickList(el.url)}>{el.name}</S.List>
+						))}
+					</S.ListBox>
+				)}
+				{successModal && (
+					<SuccessModal
+						text={'로그아웃 되었습니다.'}
+						setState={setSuccessModal}
+					/>
+				)}
+			</S.Wrapper>
+		</>
 	)
 }
 export default Hamburger

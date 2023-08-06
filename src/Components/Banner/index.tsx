@@ -46,5 +46,6 @@ export default Banner
 
 const Wrapper = styled.div`
 	margin-bottom: 2rem;
+	width: 100%;
 `
 const S = { Wrapper }

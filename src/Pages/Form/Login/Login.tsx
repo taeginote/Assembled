@@ -18,6 +18,11 @@ import { LoginData } from '../../../Types/apiType'
 import { LoginSubmitData } from '../../../Types/type'
 import { useState } from 'react'
 
+export interface UserInfoType {
+	nickname: string
+	profile?: string | any
+}
+
 function Login() {
 	const {
 		register,
@@ -36,12 +41,20 @@ function Login() {
 		(data: LoginData) => UserApi.Login(data),
 		{
 			onSuccess: res => {
+				const { nickname, profile } = res?.data?.response
+				console.log(res?.data?.response)
+				const userInfo: UserInfoType = {
+					nickname,
+					profile: profile[0]?.fileFullPath,
+				}
+				console.log(userInfo)
 				setSuccessModal(() => true)
 
 				if (res.data.response.token.accessToken) {
 					auth.login(
 						res.data.response.token.accessToken,
 						res.data.response.userId,
+						userInfo,
 					)
 				}
 			},

@@ -1,3 +1,4 @@
+import { UserInfoType } from '../Pages/Form/Login/Login'
 import { DataType } from '../Pages/List/Components/SearchBar/SearchBar'
 
 //children 있는 자식 type
@@ -51,7 +52,7 @@ export type PaginationDisabled = 'start' | 'end'
 //Auth type
 export interface AuthContextType {
 	accessToken: string | null
-	login: (token: string, id: string) => void
+	login: (token: string, id: string, userInfo: UserInfoType) => void
 	logout: () => void
 }
 

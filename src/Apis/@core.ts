@@ -1,29 +1,24 @@
 import axios from 'axios'
 import UserApi from './UserApi'
 import TokenService from '../Utils/TokenService'
-import UserIdService from '../Utils/UserIdService'
 
-console.log(TokenService.getAccessToken())
+interface resDataType {
+	status: number
+	data: {
+		response: {
+			accessToken: string
+		}
+	}
+}
+
 const axiosInstance = axios.create({
 	baseURL: process.env.REACT_APP_BACKEND_URL,
 	withCredentials: true,
-	// headers: {
-	// 	Authorization:
-	// 		TokenService.getAccessToken() &&
-	// 		`Bearer ${TokenService.getAccessToken()}`,
-	// },
-	// headers: {
-	// 	Authorization:
-	// 		TokenService.getAccessToken() &&
-	// 		TokenService.getAccessToken()?.length !== 0 &&
-	// 		`Bearer ${TokenService.getAccessToken()}`,
-	// },
 })
 
 axiosInstance.interceptors.request.use(
 	(config: any) => {
 		const access_token = TokenService.getAccessToken()
-		console.log(access_token)
 		if (access_token === null) return config
 		if (access_token) {
 			config.headers['Authorization'] = `Bearer ${access_token}`
@@ -41,35 +36,24 @@ axiosInstance.interceptors.response.use(
 		return response
 	},
 	async error => {
-		TokenService.setAccessToken('')
-		TokenService.removeAccessToken()
-		UserIdService.removeUserId()
-		console.log(error.response.status)
 		if (error.message === 'Network Error') {
 			return Promise.reject(error)
 		}
 
-		// const originalRequest = error.config
-
-		// 	if (error.response.status === 403) {
-		// 		//아직 로그아웃이 없음
-		// 		// await UserApi.logout()
-		// 		TokenService.removeAccessToken()
-		// 	}
+		const originalRequest = error.config
+		console.log(originalRequest)
+		//AccessToken 재발급
 		if (error.response.status === 401) {
-			// originalRequest._retry = true
-			console.log('dd')
-			const res: any = await UserApi.getToken()
-			console.log(res)
-			if (res.status === 200) {
-				TokenService.setAccessToken(res?.data?.response?.accessToken)
-			}
+			originalRequest._retry = true //재요청
+			TokenService.setAccessToken('') //이걸로 length 0으로하고 header 제외
+			const res: resDataType = await UserApi.getToken() //RefreshToken 재발급
 
-			// return console.log(res)
-			// // 		// if (res.status === 200) {
-			// TokenService.setAccessToken(res?.response?.accessToken)
-			// // 		return axiosInstance(originalRequest)
-			// // 		// }
+			if (res.status === 200) {
+				TokenService.setAccessToken(res?.data?.response?.accessToken) //성공하면 로컬스토리지 setToken
+				return axiosInstance(originalRequest)
+			} else {
+				return axiosInstance(originalRequest)
+			}
 		}
 
 		return Promise.reject(error)
