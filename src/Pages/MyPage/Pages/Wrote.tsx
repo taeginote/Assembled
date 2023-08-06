@@ -53,6 +53,7 @@ function Wrote() {
 						<LoadingPage />
 					) : (
 						<S.ListWrap>
+							<p>작성한 모임</p>
 							<S.Container>
 								{data?.response?.content.map((el: ItemDataType) => (
 									<ItemBoxMyPage data={el} setPostId={setPostId} />
@@ -103,7 +104,6 @@ const ButtonWrap = styled.div`
 `
 const Container = styled.div`
 	width: 140%;
-	/* background-color: red; */
 	${GridCenterCSS}
 	${ColumnNumberCSS(3)};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
@@ -120,6 +120,13 @@ const ListWrap = styled.div`
 	margin-left: 20rem;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 7rem;
+	}
+	& > p {
+		width: 140%;
+		text-align: start;
+		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
+		margin-bottom: 2rem;
 	}
 `
 const S = { Wrapper, Container, ButtonWrap, ListWrap }

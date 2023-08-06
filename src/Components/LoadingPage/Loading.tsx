@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 	justify-content: center;
 	background-color: white;
 	& > img {
-		width: 40rem;
+		width: 28rem;
 		-webkit-animation: spin 2s linear infinite;
 		animation: spin 2s linear infinite;
 		@-webkit-keyframes spin {

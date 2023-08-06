@@ -18,8 +18,12 @@ function Mypage() {
 export default Mypage
 
 const Wrapper = styled.div`
-	${WidthAutoCSS}
+	${WidthAutoCSS};
+
 	${TopPadding}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		padding-top: 0.1rem;
+	}
 `
 const Container = styled.div`
 	margin-top: 10rem;

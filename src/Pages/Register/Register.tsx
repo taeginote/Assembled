@@ -200,6 +200,9 @@ const Wrapper = styled.form`
 			margin-left: 1rem;
 		}
 	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		padding-top: 10rem;
+	}
 `
 const Container = styled.div`
 	${GridCenterCSS}

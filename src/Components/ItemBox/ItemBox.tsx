@@ -115,6 +115,9 @@ const Wrapper = styled.div`
 		transform: scale(1.01);
 		transition: transform 0.2s;
 	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		min-width: 100%;
+	}
 `
 const Container = styled.div`
 	${FlexColumnCSS}

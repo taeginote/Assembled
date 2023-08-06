@@ -32,8 +32,6 @@ function Comment() {
 
 	const { data, isLoading } = useGetCommentData(userId, page)
 
-	console.log(data)
-
 	const { mutate } = useMutation(
 		(commentId: number | undefined) => CommentApi.deleteComment(commentId),
 		{
@@ -78,7 +76,7 @@ function Comment() {
 				<LoadingPage />
 			) : (
 				<S.Wrapper>
-					<h1>작성한 댓글</h1>
+					<p>작성한 댓글</p>
 					{data?.response?.content.map((el: any) => (
 						<S.container state={changeViewNum === el.commentId}>
 							<S.Left>
@@ -151,8 +149,9 @@ export default Comment
 const Wrapper = styled.div`
 	width: 100%;
 	margin: 0 10rem;
-	& > h1 {
-		margin-bottom: 5rem;
+	& > p {
+		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+		margin-bottom: 2rem;
 	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin: 0 2rem;
@@ -223,6 +222,10 @@ const InputWrap = styled.div`
 		right: 0.5rem;
 		top: 2.5rem;
 		cursor: pointer;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			padding: 0.5rem;
+			top: 2.7rem;
+		}
 	}
 	width: 100%;
 	z-index: 10000;
