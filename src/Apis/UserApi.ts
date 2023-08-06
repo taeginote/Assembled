@@ -46,7 +46,7 @@ const UserApi: UserApiType = {
 		return axiosInstance.post('/assemble/auth/token')
 	},
 	postLogout() {
-		return axiosInstance.post('/assemble/')
+		return axiosInstance.post('/assemble/logout')
 	},
 	deletewithdrawal() {
 		return axiosInstance.delete(`/assemble/user/withdrawal`)
