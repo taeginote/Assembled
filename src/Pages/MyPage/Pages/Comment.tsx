@@ -12,7 +12,7 @@ import CommentApi from '../../../Apis/CommentApi'
 import { useRecoilState } from 'recoil'
 import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import ConfirmModal from '../../../Components/Modal/confirmModal'
-import LoadingPage from '../../../Components/LoadingPage/Loading'
+import CommentSkeleton from '../../../Components/Skeleton/CommentSkeleton'
 
 type CommentId = { commentId: any }
 
@@ -29,6 +29,7 @@ function Comment() {
 	const [commentId, setCommentId] = useState<null | number>(null)
 	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
 	const [changeVal, setChangeVal] = useState<null | string>(null)
+	const loadingArr: 0[] = Array(4).fill(0)
 
 	const { data, isLoading } = useGetCommentData(userId, page)
 
@@ -73,7 +74,11 @@ function Comment() {
 	return (
 		<>
 			{isLoading ? (
-				<LoadingPage />
+				<S.Wrapper>
+					{loadingArr.map((el: 0, idx: number) => (
+						<CommentSkeleton key={idx} />
+					))}
+				</S.Wrapper>
 			) : (
 				<S.Wrapper>
 					<p>작성한 댓글</p>
