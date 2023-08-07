@@ -9,7 +9,11 @@ function Error404() {
 		<S.Wrapper>
 			<div>
 				<S.ErrorTitle>페이지를 찾지 못했습니다.</S.ErrorTitle>
-				<Button onClick={() => navigate('/')}>다시 어셈블로 가볼까요?</Button>
+				<div>
+					<S.StyledButton onClick={() => navigate('/')}>
+						다시 어셈블로 가볼까요?
+					</S.StyledButton>
+				</div>
 			</div>
 		</S.Wrapper>
 	)
@@ -19,14 +23,23 @@ const Wrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
 	${FlexCenterCSS}
+	&>div {
+		margin-bottom: 7rem;
 
-	& > div {
+		& > div {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 	}
 `
 const ErrorTitle = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.huge};
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 	color: ${({ theme }) => theme.COLOR.hover};
-	margin-bottom: 3rem;
+	margin-bottom: 5rem;
 `
-const S = { Wrapper, ErrorTitle }
+const StyledButton = styled(Button)`
+	width: 80%;
+`
+const S = { Wrapper, ErrorTitle, StyledButton }

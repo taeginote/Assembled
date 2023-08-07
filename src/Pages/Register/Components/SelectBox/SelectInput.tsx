@@ -112,6 +112,7 @@ const Box = styled.ul`
 `
 const List = styled.li`
 	padding: 0.3rem;
+	z-index: 0;
 	&:hover {
 		background-color: ${({ theme }) => theme.COLOR.sub};
 		transition: all linear 0.3s;

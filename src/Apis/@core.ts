@@ -40,9 +40,13 @@ axiosInstance.interceptors.response.use(
 			return Promise.reject(error)
 		}
 
+		// RefreshToken 재발급
+		if (error.response.status === 403) {
+		}
+
 		const originalRequest = error.config
-		console.log(originalRequest)
-		//AccessToken 재발급
+
+		// AccessToken 재발급
 		if (error.response.status === 401) {
 			originalRequest._retry = true //재요청
 			TokenService.setAccessToken('') //이걸로 length 0으로하고 header 제외

@@ -30,8 +30,9 @@ import { ApiError, signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useEffect, useState } from 'react'
 import SignUpInput from './Components/SignUpInput'
+import SignUpValidationError from '../../../Error/SignUpValidationError'
 
-interface ValidationMsg {
+export interface ValidationMsg {
 	//이거 status가 string, boolean 왔다갔다 거림 리팩토링때 수정 예정
 	email: {
 		status: any
@@ -101,37 +102,27 @@ function SignUp() {
 
 	const onValidation = async (target: string) => {
 		const value = getValues(target)
-
 		if (value?.trim().length === 0 || value === undefined) return
 
 		if (target === 'SignUpEmail') {
 			try {
 				const res = await UserApi.getEmailValidation(value)
-
-				setValidationMsg((prev: ValidationMsg) => ({
-					...prev,
-					email: { status: 'success', message: '사용 가능한 이메일입니다.' },
-				}))
+				const { response }: any = res?.data
+				SignUpValidationError('SignUpEmail', setValidationMsg, response)
 			} catch (err: ApiError | any) {
-				const { message } = err?.response.data.error
-
-				if (message === 'invalid form email') {
-					setValidationMsg((prev: ValidationMsg) => ({
-						...prev,
-						email: { status: 'error', message: '이메일 형식이 아니에요' },
-					}))
-				}
-				//보류 에러처리하는 함수도 만들어야할까? 생각중
+				const response = err?.response.data.status
+				SignUpValidationError('SignUpEmail', setValidationMsg, response)
 			}
 		}
 		if (target === 'SignUpNickName') {
 			try {
 				const res = await UserApi.getNickNameValidation(value)
-				setValidationMsg((prev: ValidationMsg) => ({
-					...prev,
-					nickname: { status: 'success', message: '사용 가능한 닉네임입니다.' },
-				}))
-			} catch (err) {}
+				const { response }: any = res?.data
+				SignUpValidationError('SignUpNickName', setValidationMsg, response)
+			} catch (err: ApiError | any) {
+				const response = err?.response.data.status
+				SignUpValidationError('SignUpNickName', setValidationMsg, response)
+			}
 		}
 	}
 
