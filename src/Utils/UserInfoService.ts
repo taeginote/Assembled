@@ -1,5 +1,3 @@
-import { UserInfoType } from '../Pages/Form/Login/Login'
-
 const TOKEN_KEY = 'userInfo'
 
 const UserInfoService = {

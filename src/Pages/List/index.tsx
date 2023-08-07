@@ -21,6 +21,7 @@ import ItemBox from '../../Components/ItemBox/ItemBox'
 import SearchBar from './Components/SearchBar/SearchBar'
 import ListNoData from '../../Error/ListNoData'
 import { ItemDataType } from '../../Types/type'
+import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
 
 function List() {
 	//보류
@@ -36,6 +37,8 @@ function List() {
 	})
 	let searchBy: string = selectVal.value
 	let searchQuery: string = searchValue
+
+	const loadingArr: 0[] = Array(12).fill(0)
 
 	if (categoryId === null) {
 		categoryId = 1
@@ -65,7 +68,11 @@ function List() {
 					</div>
 				</S.FilterWrapper>
 				{isLoading ? (
-					<LoadingPage />
+					<S.Container>
+						{loadingArr.map((el: 0, idx: number) => (
+							<CardSkeleton key={idx} />
+						))}
+					</S.Container>
 				) : (
 					<>
 						{data?.response?.content?.length === 0 ? (
