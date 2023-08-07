@@ -16,11 +16,10 @@ import { useRecoilState } from 'recoil'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PostApi from '../../../Apis/PostApi'
 import { ItemDataType } from '../../../Types/type'
-import LoadingPage from '../../../Components/LoadingPage/Loading'
+import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
-	const testList = [1, 2, 3, 4, 5, 6, 6, 7]
 	const [searchParams, setSearchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 0)
@@ -29,7 +28,7 @@ function Wrote() {
 	const [recoilCounter, setRecoilCounter] =
 		useRecoilState<boolean>(modalViewConfirm)
 	const { data, isLoading } = useGetWroteData(userId, page)
-
+	const loadingArr: 0[] = Array(12).fill(0)
 	const queryClient = useQueryClient()
 	const { mutate } = useMutation(
 		(postId: number | undefined) => PostApi.DeletePost(postId),
@@ -40,9 +39,10 @@ function Wrote() {
 			onError: () => {},
 		},
 	)
+
 	return (
 		<S.Wrapper>
-			{testList.length === 0 ? (
+			{data?.response?.content?.length === 0 ? (
 				<div>
 					작성한 글이 없습니다.
 					<br /> 새 글 쓰기를 통해 게시글을 작성해보세요
@@ -50,7 +50,14 @@ function Wrote() {
 			) : (
 				<>
 					{isLoading ? (
-						<LoadingPage />
+						<S.ListWrap>
+							<p>작성한 모임</p>
+							<S.Container>
+								{loadingArr.map((el: 0, idx: number) => (
+									<CardSkeleton key={idx} />
+								))}
+							</S.Container>
+						</S.ListWrap>
 					) : (
 						<S.ListWrap>
 							<p>작성한 모임</p>
@@ -118,6 +125,7 @@ const ListWrap = styled.div`
 	flex-direction: column;
 	align-items: center;
 	margin-left: 20rem;
+	width: 100%;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 7rem;
 	}

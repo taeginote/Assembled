@@ -14,7 +14,6 @@ export default CardSkeleton
 
 const Wrapper = styled.div`
 	background: #f2f2f2;
-	min-width: 22vw;
 	min-height: 30vh;
 	width: 100%;
 	height: 100%;
