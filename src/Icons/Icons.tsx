@@ -24,6 +24,7 @@ import { FiBook } from 'react-icons/fi'
 import { FaQuestion, FaPen } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { RxCross2 } from 'react-icons/rx'
 type IconSize = {
 	size?: string
 }
@@ -95,3 +96,6 @@ export const Hamburger_Icon = ({ onClick }: any) => (
 	<GiHamburgerMenu size={'23'} onClick={onClick} color="#FB9B00" />
 ) // 햄버거
 export const Cancel_Icon = () => <MdOutlineCancel size={'17'} color="#777" /> //취소 버튼
+export const Cancel_big_Icon = ({ onClick }: any) => (
+	<RxCross2 size={'35'} color="#FB9B00" onClick={onClick} />
+) //취소 버튼

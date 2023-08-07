@@ -1,5 +1,9 @@
 import { styled } from 'styled-components'
-import { Hamburger_Icon } from '../../../../Icons/Icons'
+import {
+	Cancel_Icon,
+	Cancel_big_Icon,
+	Hamburger_Icon,
+} from '../../../../Icons/Icons'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../../Contexts/auth'
@@ -16,6 +20,10 @@ function Hamburger() {
 	const [successModal, setSuccessModal] = useState(false)
 
 	const list = [
+		{
+			name: '홈',
+			url: '/',
+		},
 		{
 			name: '새 글 작성',
 			url: '/register',
@@ -59,8 +67,16 @@ function Hamburger() {
 				<Hamburger_Icon onClick={() => setIsView(!isView)} />
 				{isView && (
 					<S.ListBox>
+						<div>
+							<Cancel_big_Icon onClick={() => setIsView(!isView)} />
+						</div>
 						{list.map(el => (
-							<S.List onClick={() => onClickList(el.url)}>{el.name}</S.List>
+							<S.List
+								onClick={() => onClickList(el.url)}
+								status={location.pathname === el.url}
+							>
+								{el.name}
+							</S.List>
 						))}
 					</S.ListBox>
 				)}
@@ -85,14 +101,35 @@ const Wrapper = styled.div`
 `
 const ListBox = styled.ul`
 	position: absolute;
-	width: 14rem;
-	top: 3rem;
-	left: -11rem;
+	width: 50vw;
+	height: 100vh;
+	top: -1.5rem;
+	right: -3rem;
 	background-color: ${({ theme }) => theme.COLOR.orange};
-	font-size: ${({ theme }) => theme.FONT_SIZE.small};
+	padding-top: 3rem;
+	opacity: 0.9;
+	animation: hamburger 1s ease;
+	animation-duration: 0.4s;
+	animation-timing-function: ease;
+	@keyframes hamburger {
+		0% {
+			transform: translateX(60%);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+	& > div {
+		text-align: end;
+		padding-right: 3rem;
+	}
 `
-const List = styled.ul`
+const List = styled.ul<{ status: boolean }>`
+	margin: 1.2rem 0;
 	padding: 1rem;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
+	background-color: ${({ theme, status }) =>
+		status ? theme.COLOR.sub : 'none'};
 `
 
 const S = { Wrapper, ListBox, List }

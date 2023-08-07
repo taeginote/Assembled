@@ -25,7 +25,6 @@ const Wrapper = styled.div`
 	${FlexCenterCSS}
 	&>div {
 		margin-bottom: 7rem;
-
 		& > div {
 			display: flex;
 			flex-direction: column;
@@ -38,6 +37,9 @@ const ErrorTitle = styled.div`
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 	color: ${({ theme }) => theme.COLOR.hover};
 	margin-bottom: 5rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.big};
+	}
 `
 const StyledButton = styled(Button)`
 	width: 80%;
