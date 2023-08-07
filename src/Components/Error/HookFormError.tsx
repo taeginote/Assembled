@@ -5,16 +5,16 @@ function HookFormError(props: childrenType & { status?: boolean }) {
 	const { children, status = 'error' } = props
 
 	return (
-		<S.Message status={status === 'error'}>
+		<S.Message $status={status === 'error'}>
 			<div>{children}</div>
 		</S.Message>
 	)
 }
 export default HookFormError
 
-const Message = styled.div<{ status: boolean }>`
-	color: ${({ theme, status }) =>
-		status ? theme.COLOR.error : theme.COLOR.success};
+const Message = styled.div<{ $status: boolean }>`
+	color: ${({ theme, $status }) =>
+		$status ? theme.COLOR.error : theme.COLOR.success};
 
 	text-align: start;
 	width: 100%;

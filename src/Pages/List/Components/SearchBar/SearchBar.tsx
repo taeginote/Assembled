@@ -47,7 +47,7 @@ function SearchBar({ setSelectVal, selectVal, setSearchValue }: SearchType) {
 		<>
 			<S.InputWrapper onSubmit={onClickSearch}>
 				<S.Wrapper onClick={() => setIsView(!isView)}>
-					<S.Title isView={isView}>
+					<S.Title $isView={isView}>
 						<div>{selectVal.title}</div>
 						<span>
 							<DownIcon />
@@ -86,7 +86,6 @@ const SearchInput = styled.input`
 `
 const InputWrapper = styled.form`
 	position: relative;
-
 	display: flex;
 	align-items: center;
 	border: 1px solid ${({ theme }) => theme.COLOR.main};
@@ -108,7 +107,7 @@ const Wrapper = styled.div`
 	position: relative;
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 `
-const Title = styled.div<{ isView: boolean }>`
+const Title = styled.div<{ $isView: boolean }>`
 	${FlexBetweenCSS}
 	margin-bottom: 0.1rem;
 	& > div {
@@ -116,7 +115,7 @@ const Title = styled.div<{ isView: boolean }>`
 		margin-left: 0.3rem;
 	}
 	& > span {
-		transform: ${({ isView }) => isView && 'rotate(180deg)'};
+		transform: ${({ $isView }) => $isView && 'rotate(180deg)'};
 		transition: all linear 0.2s;
 		margin: 0.5rem 0.5rem 0 0;
 	}

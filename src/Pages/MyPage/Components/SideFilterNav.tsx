@@ -26,7 +26,7 @@ function SideFilterNav() {
 			{myPageFilterList.map((el, idx) => (
 				<S.Box
 					key={idx}
-					state={`/myPage${el.url}` === pathname}
+					$state={`/myPage${el.url}` === pathname}
 					onClick={() => navigate(`/myPage${el.url}`)}
 				>
 					{el.name}
@@ -44,14 +44,14 @@ const Wrapper = styled.div`
 		display: none;
 	}
 `
-const Box = styled.div<{ state: boolean }>`
+const Box = styled.div<{ $state: boolean }>`
 	width: 120%;
 	cursor: pointer;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	padding: 0.7rem 0;
 	margin-bottom: 0.5rem;
 	border-bottom: 3px solid
-		${({ theme, state }) => (state ? theme.COLOR.hover : 'none')};
+		${({ theme, $state }) => ($state ? theme.COLOR.hover : 'none')};
 	:hover {
 		background-color: ${({ theme }) => theme.COLOR.sub};
 		transition: all 0.5s;

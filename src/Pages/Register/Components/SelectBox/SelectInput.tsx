@@ -39,7 +39,7 @@ function SelectInput(props: SelectInputProps) {
 				render={({ field, fieldState: { error } }) => (
 					<>
 						<S.Wrapper onClick={() => setIsView(!isView)}>
-							<S.Title isView={isView} status={field.value === undefined}>
+							<S.Title $isView={isView} $status={field.value === undefined}>
 								<div>
 									{field.value === undefined ? '선택해 주세요' : field.value}
 								</div>
@@ -88,15 +88,15 @@ const Wrapper = styled.div`
 	position: relative;
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 `
-const Title = styled.div<{ status: boolean; isView: boolean }>`
+const Title = styled.div<{ $status: boolean; $isView: boolean }>`
 	${FlexBetweenCSS}
 	margin-bottom: 0.5rem;
 	& > div {
-		color: ${({ theme, status }) =>
-			status ? theme.COLOR.common.gray[200] : 'black'};
+		color: ${({ theme, $status }) =>
+			$status ? theme.COLOR.common.gray[200] : 'black'};
 	}
 	& > span {
-		transform: ${({ isView }) => isView && 'rotate(180deg)'};
+		transform: ${({ $isView }) => $isView && 'rotate(180deg)'};
 		transition: all linear 0.2s;
 		margin: 0.5rem 0.5rem 0 0;
 	}

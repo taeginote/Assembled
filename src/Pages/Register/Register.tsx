@@ -117,7 +117,7 @@ function Register() {
 					render={({ field }) => (
 						<S.Input
 							placeholder="제목을 입력해 주세요"
-							status={field.value === undefined}
+							$status={field.value === undefined}
 							value={field.value}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 								field.onChange(e.target.value)
@@ -232,15 +232,15 @@ const Box = styled.div`
 		}
 	}
 `
-const Input = styled.input<{ status: boolean }>`
+const Input = styled.input<{ $status: boolean }>`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	width: 100%;
 	margin-bottom: 0.5rem;
 	padding: 1.3rem 1rem;
 	border-radius: 0.5rem;
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
-	color: ${({ theme, status }) =>
-		status ? theme.COLOR.common.gray[200] : 'black'};
+	color: ${({ theme, $status }) =>
+		$status ? theme.COLOR.common.gray[200] : 'black'};
 	:focus {
 		border: 1px solid ${({ theme }) => theme.COLOR.sub};
 	}

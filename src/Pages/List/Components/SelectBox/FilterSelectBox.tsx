@@ -45,7 +45,7 @@ function FilterSelectBox() {
 	return (
 		<SelectBox onClick={() => setShowOptions(prev => !prev)}>
 			<Button>{text?.name}</Button>
-			<IconBox isShowOptions={isShowOptions}>
+			<IconBox $isShowOptions={isShowOptions}>
 				<DownIcon />
 			</IconBox>
 			{isShowOptions && (
@@ -53,7 +53,7 @@ function FilterSelectBox() {
 					{FilterArr.map((el: eventType, idx: number) => (
 						<Option
 							onClick={() => onClickSelectFilter(el)}
-							select={el.url === filter}
+							$select={el.url === filter}
 							key={idx}
 						>
 							{el.name}
@@ -102,26 +102,26 @@ const SelectOptions = styled.ul`
 	position: absolute;
 	background-color: #ffffff;
 `
-const Option = styled.li<{ select: boolean }>`
+const Option = styled.li<{ $select: boolean }>`
 	border: none;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	line-height: 1.6rem;
 	padding: 0.6rem 1rem;
 	margin: 0.5rem 0.7rem;
 	box-sizing: border-box;
-	color: ${({ theme, select }) => select && theme.COLOR.hover};
-	font-family: ${({ theme, select }) => select && theme.FONT_WEIGHT.bold};
+	color: ${({ theme, $select }) => $select && theme.COLOR.hover};
+	font-family: ${({ theme, $select }) => $select && theme.FONT_WEIGHT.bold};
 	:hover {
 		background-color: ${({ theme }) => theme.COLOR.orange};
 		border-radius: 5px;
 	}
 `
-const IconBox = styled.div<{ isShowOptions: boolean }>`
+const IconBox = styled.div<{ $isShowOptions: boolean }>`
 	position: absolute;
 	right: 0.7rem;
 	top: 0.5rem;
-	transform: ${({ isShowOptions }) => isShowOptions && 'rotate(180deg)'};
-	top: ${({ isShowOptions }) => isShowOptions && '0.1rem'};
+	transform: ${({ $isShowOptions }) => $isShowOptions && 'rotate(180deg)'};
+	top: ${({ $isShowOptions }) => $isShowOptions && '0.1rem'};
 	transition: all linear 0.2s;
 	margin: 0.2rem 0.5rem 0 0;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {

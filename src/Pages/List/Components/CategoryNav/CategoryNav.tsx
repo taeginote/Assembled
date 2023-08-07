@@ -23,7 +23,7 @@ function CategoryNav() {
 				) : (
 					<>
 						{data?.response?.map((el: Category, idx: number) => (
-							<S.NavBox key={idx} state={el.categoryId === category}>
+							<S.NavBox key={idx} $state={el.categoryId === category}>
 								<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>
 							</S.NavBox>
 						))}
@@ -42,7 +42,7 @@ const Container = styled.div`
 	${FlexAlignCSS}
 `
 //스타일 props
-const NavBox = styled.div<{ state: boolean }>`
+const NavBox = styled.div<{ $state: boolean }>`
 	margin-right: 4rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
 	font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
@@ -52,11 +52,11 @@ const NavBox = styled.div<{ state: boolean }>`
 	}
 	cursor: pointer;
 	border-bottom: 3px solid
-		${({ theme, state }) => (state ? theme.COLOR.hover : 'none')};
+		${({ theme, $state }) => ($state ? theme.COLOR.hover : 'none')};
 	& > a {
 		text-decoration: none;
-		color: ${({ theme, state }) =>
-			state ? 'black' : theme.COLOR.common.gray[200]};
+		color: ${({ theme, $state }) =>
+			$state ? 'black' : theme.COLOR.common.gray[200]};
 	}
 `
 const S = { Wrapper, Container, NavBox }

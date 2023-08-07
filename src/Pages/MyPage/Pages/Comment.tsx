@@ -90,7 +90,7 @@ function Comment() {
 						<S.Wrapper>
 							<p>작성한 댓글</p>
 							{data?.response?.content.map((el: any) => (
-								<S.container state={changeViewNum === el.commentId}>
+								<S.container $state={changeViewNum === el.commentId}>
 									<S.Left>
 										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
@@ -172,11 +172,11 @@ const Wrapper = styled.div`
 		margin: 0 2rem;
 	}
 `
-const container = styled.div<{ state: boolean }>`
+const container = styled.div<{ $state: boolean }>`
 	border-left: 5px solid ${({ theme }) => theme.COLOR.hover};
 	margin-bottom: 5rem;
 	padding: 1rem 2rem;
-	background-color: ${({ theme, state }) => state && theme.COLOR.orange};
+	background-color: ${({ theme, $state }) => $state && theme.COLOR.orange};
 	&:hover {
 		background-color: ${({ theme }) => theme.COLOR.orange};
 		transition: all 1s;
