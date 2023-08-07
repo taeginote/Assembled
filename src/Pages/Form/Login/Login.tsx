@@ -20,7 +20,7 @@ import { useState } from 'react'
 
 export interface UserInfoType {
 	nickname: string
-	profile?: string | any
+	profile?: string
 }
 
 function Login() {

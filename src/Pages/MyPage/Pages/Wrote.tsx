@@ -17,6 +17,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PostApi from '../../../Apis/PostApi'
 import { ItemDataType } from '../../../Types/type'
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
+import MyPageListNoData from '../../../Error/MypageListNoData'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
@@ -43,10 +44,9 @@ function Wrote() {
 	return (
 		<S.Wrapper>
 			{data?.response?.content?.length === 0 ? (
-				<div>
-					작성한 글이 없습니다.
-					<br /> 새 글 쓰기를 통해 게시글을 작성해보세요
-				</div>
+				<S.ListWrap>
+					<MyPageListNoData comment={'작성한 모임이 없습니다.'} />
+				</S.ListWrap>
 			) : (
 				<>
 					{isLoading ? (

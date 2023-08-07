@@ -93,7 +93,7 @@ function List() {
 				<Pagination
 					totalPage={totalPage}
 					limit={10}
-					scroll={765}
+					scroll={0}
 					setPage={setPage}
 				/>
 			)}

@@ -82,7 +82,6 @@ function Pagination({
 					key={i}
 					onClick={() => {
 						goPage(i + startPage)
-						// goPage(i)
 						scrollToTop(scroll)
 					}}
 					aria-current={nowPage === i + startPage ? 'page' : undefined}

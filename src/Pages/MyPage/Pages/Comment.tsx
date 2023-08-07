@@ -13,6 +13,7 @@ import { useRecoilState } from 'recoil'
 import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import ConfirmModal from '../../../Components/Modal/confirmModal'
 import CommentSkeleton from '../../../Components/Skeleton/CommentSkeleton'
+import MyPageListNoData from '../../../Error/MypageListNoData'
 
 type CommentId = { commentId: any }
 
@@ -80,71 +81,80 @@ function Comment() {
 					))}
 				</S.Wrapper>
 			) : (
-				<S.Wrapper>
-					<p>작성한 댓글</p>
-					{data?.response?.content.map((el: any) => (
-						<S.container state={changeViewNum === el.commentId}>
-							<S.Left>
-								<S.Time> {el.writeDate.split('T')[0]}</S.Time>
-								<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
-								{changeViewNum === el.commentId ? (
-									<S.InputWrap>
-										<S.Input
-											value={changeVal === null ? el.contents : changeVal}
-											onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-												setChangeVal(e.target.value)
-											}
-										/>
-										<button type="button" onClick={onChangeBtn}>
-											수정
+				<>
+					{data?.response?.content?.length === 0 ? (
+						<S.Wrapper>
+							<MyPageListNoData comment={'작성한 댓글이 없습니다.'} />
+						</S.Wrapper>
+					) : (
+						<S.Wrapper>
+							<p>작성한 댓글</p>
+							{data?.response?.content.map((el: any) => (
+								<S.container state={changeViewNum === el.commentId}>
+									<S.Left>
+										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
+										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
+										{changeViewNum === el.commentId ? (
+											<S.InputWrap>
+												<S.Input
+													value={changeVal === null ? el.contents : changeVal}
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														setChangeVal(e.target.value)
+													}
+												/>
+												<button type="button" onClick={onChangeBtn}>
+													수정
+												</button>
+											</S.InputWrap>
+										) : (
+											<S.Text>{el.contents}</S.Text>
+										)}
+									</S.Left>
+									<S.Right>
+										{changeViewNum !== el.commentId ? (
+											<button onClick={() => onChangeComment(el)}>
+												<div>
+													<Ballon text={'모임 수정'} />
+												</div>
+												<Pen_Icon />
+											</button>
+										) : (
+											<button onClick={() => setChangeViewNum(null)}>
+												<div>
+													<Ballon text={'수정 취소'} />
+												</div>
+												<Cancel_Icon />
+											</button>
+										)}
+										<button onClick={() => onDeleteComment(el)}>
+											<div>
+												<Ballon text={'모임 삭제'} />
+											</div>
+											<Trash_Icon />
 										</button>
-									</S.InputWrap>
-								) : (
-									<S.Text>{el.contents}</S.Text>
-								)}
-							</S.Left>
-							<S.Right>
-								{changeViewNum !== el.commentId ? (
-									<button onClick={() => onChangeComment(el)}>
-										<div>
-											<Ballon text={'모임 수정'} />
-										</div>
-										<Pen_Icon />
-									</button>
-								) : (
-									<button onClick={() => setChangeViewNum(null)}>
-										<div>
-											<Ballon text={'수정 취소'} />
-										</div>
-										<Cancel_Icon />
-									</button>
-								)}
-								<button onClick={() => onDeleteComment(el)}>
-									<div>
-										<Ballon text={'모임 삭제'} />
-									</div>
-									<Trash_Icon />
-								</button>
-							</S.Right>
-						</S.container>
-					))}
-					{data?.response?.content?.length !== 0 && (
-						<Pagination
-							totalPage={data?.response?.totalPages}
-							limit={10}
-							scroll={765}
-							setPage={setPage}
-						/>
+									</S.Right>
+								</S.container>
+							))}
+
+							{data?.response?.content?.length !== 0 && (
+								<Pagination
+									totalPage={data?.response?.totalPages}
+									limit={10}
+									scroll={765}
+									setPage={setPage}
+								/>
+							)}
+							{recoilCounter && (
+								<ConfirmModal
+									text={'정말로 삭제하시겠습니까?'}
+									url={'/myPage/comment'}
+									mutate={mutate}
+									postId={commentId}
+								/>
+							)}
+						</S.Wrapper>
 					)}
-					{recoilCounter && (
-						<ConfirmModal
-							text={'정말로 삭제하시겠습니까?'}
-							url={'/myPage/comment'}
-							mutate={mutate}
-							postId={commentId}
-						/>
-					)}
-				</S.Wrapper>
+				</>
 			)}
 		</>
 	)

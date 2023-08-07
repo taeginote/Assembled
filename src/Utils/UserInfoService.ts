@@ -2,7 +2,8 @@ const TOKEN_KEY = 'userInfo'
 
 const UserInfoService = {
 	getUserInfo() {
-		return localStorage.getItem(TOKEN_KEY)
+		const userInfoString = localStorage.getItem(TOKEN_KEY)
+		return userInfoString ? JSON.parse(userInfoString) : null
 	},
 	removeUserInfo() {
 		localStorage.removeItem(TOKEN_KEY)

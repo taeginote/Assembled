@@ -39,7 +39,6 @@ function SearchBar({ setSelectVal, selectVal, setSearchValue }: SearchType) {
 	const onkeyDown = (e: EventTargetType) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
-
 			setSearchValue(e.target.value)
 		}
 	}

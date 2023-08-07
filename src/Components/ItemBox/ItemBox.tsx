@@ -17,6 +17,7 @@ import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import TokenService from '../../Utils/TokenService'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
+import UserInfoService from '../../Utils/UserInfoService'
 
 function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	const navigate = useNavigate()
@@ -67,6 +68,8 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		if (token === null) return
 		cancelMutate({ postId })
 	}
+	let userInfo = UserInfoService.getUserInfo()
+	console.log(userInfo?.profile)
 
 	return (
 		<S.Wrapper>
