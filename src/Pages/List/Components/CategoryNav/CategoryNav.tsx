@@ -3,6 +3,7 @@ import { WidthAutoCSS } from '../../../../Styles/common'
 import { FlexAlignCSS } from '../../../../Styles/common'
 import { Link, useSearchParams } from 'react-router-dom'
 import useGetCategoryData from '../../../../Hooks/Queries/get-category'
+import Categorykeleton from '../../../../Components/Skeleton/CategorySkeleton'
 
 type Category = {
 	categoryId: number
@@ -12,16 +13,22 @@ function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let category: number = Number(searchParams.get('category')) | 1
 
-	const { data } = useGetCategoryData()
+	const { data, isLoading } = useGetCategoryData()
 
 	return (
 		<S.Wrapper>
 			<S.Container>
-				{data?.response?.map((el: Category, idx: number) => (
-					<S.NavBox key={idx} state={el.categoryId === category}>
-						<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>
-					</S.NavBox>
-				))}
+				{isLoading ? (
+					<Categorykeleton />
+				) : (
+					<>
+						{data?.response?.map((el: Category, idx: number) => (
+							<S.NavBox key={idx} state={el.categoryId === category}>
+								<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>
+							</S.NavBox>
+						))}
+					</>
+				)}
 			</S.Container>
 		</S.Wrapper>
 	)
