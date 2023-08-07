@@ -19,11 +19,10 @@ interface SelectInputProps {
 	Data: CategoryOption[]
 	errorMsg: string
 	datailData?: string | number
-	postId?: string
 }
 
 function SelectInput(props: SelectInputProps) {
-	const { name, Data, control, errorMsg, datailData, postId } = props
+	const { name, Data, control, errorMsg, datailData } = props
 
 	const [isView, setIsView] = useState<boolean>(false)
 	const initialValue = datailData ? datailData : undefined

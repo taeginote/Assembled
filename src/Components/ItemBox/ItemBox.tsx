@@ -69,7 +69,6 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		cancelMutate({ postId })
 	}
 	let userInfo = UserInfoService.getUserInfo()
-	console.log(userInfo?.profile)
 
 	return (
 		<S.Wrapper>

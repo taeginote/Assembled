@@ -8,7 +8,6 @@ const TokenService = {
 		localStorage.removeItem(TOKEN_KEY)
 	},
 	setAccessToken(token: string) {
-		console.log(token)
 		localStorage.setItem(TOKEN_KEY, token)
 	},
 }

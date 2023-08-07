@@ -47,7 +47,6 @@ function Hamburger() {
 	]
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
 		onSuccess: () => {
-			console.log('successModal')
 			setSuccessModal(() => true)
 			auth.logout()
 		},

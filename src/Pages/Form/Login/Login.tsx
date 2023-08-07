@@ -42,12 +42,12 @@ function Login() {
 		{
 			onSuccess: res => {
 				const { nickname, profile } = res?.data?.response
-				console.log(res?.data?.response)
+
 				const userInfo: UserInfoType = {
 					nickname,
 					profile: profile[0]?.fileFullPath,
 				}
-				console.log(userInfo)
+
 				setSuccessModal(() => true)
 
 				if (res.data.response.token.accessToken) {

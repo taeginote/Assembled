@@ -33,9 +33,9 @@ import useGetDetailData from '../../Hooks/Queries/get-detail'
 
 type CategoryName = { categoryName: 'string' }
 
-function Register() {
+function ChangeRegister() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
-
+	const { postId } = useParams()
 	const [modalView, setModalView] = useState(false)
 
 	const {
@@ -44,6 +44,8 @@ function Register() {
 		control,
 	} = useForm()
 	const { data: GetCategoryData } = useGetCategoryData()
+
+	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
 
 	const { mutate } = useMutation(
 		(data: PostRegisterData) => PostApi.PostRegister(data),
@@ -74,103 +76,114 @@ function Register() {
 	}
 
 	return (
-		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
-			<S.Title>여러분이 원하는 모임 혹은 동아리를 만드세요</S.Title>
-			<S.Container>
-				<S.Box>
-					<div>카테고리 *</div>
-					<SelectInput
-						name="Category"
-						Data={GetCategoryData?.response}
-						control={control}
-						errorMsg="카테고리를 선택해주세요."
-					/>
-				</S.Box>
-				<S.Box>
-					<div>인원 수 *</div>
-					<SelectInput
-						name="TeamMember"
-						Data={selectDataTeamMember}
-						control={control}
-						errorMsg="인원수를 선택해주세요."
-					/>
-				</S.Box>
-				<S.Box>
-					<div>총 진행 예정 달 *</div>
-					<SelectInput
-						name="Period"
-						Data={selectDataPeriod}
-						control={control}
-						errorMsg="프로젝트 기간을 선택해주세요."
-					/>
-				</S.Box>
-			</S.Container>
+		<>
+			{data !== undefined && (
+				<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
+					<S.Title>여러분이 원하는 모임 혹은 동아리를 만드세요</S.Title>
+					<S.Container>
+						<S.Box>
+							<div>카테고리 *</div>
+							<SelectInput
+								name="Category"
+								Data={GetCategoryData?.response}
+								control={control}
+								errorMsg="카테고리를 선택해주세요."
+								datailData={data?.response?.categoryName}
+							/>
+						</S.Box>
+						<S.Box>
+							<div>인원 수 *</div>
+							<SelectInput
+								name="TeamMember"
+								Data={selectDataTeamMember}
+								control={control}
+								errorMsg="인원수를 선택해주세요."
+								datailData={data?.response?.perssonelNumber}
+							/>
+						</S.Box>
+						<S.Box>
+							<div>총 진행 예정 달 *</div>
+							<SelectInput
+								name="Period"
+								Data={selectDataPeriod}
+								control={control}
+								errorMsg="프로젝트 기간을 선택해주세요."
+								datailData={data?.response?.expectedPeriod}
+							/>
+						</S.Box>
+					</S.Container>
 
-			<S.Box>
-				<div>제목 *</div>
-				<Controller
-					name={'Title'}
-					control={control}
-					rules={{
-						required: '제목을 입력해주세요',
-					}}
-					render={({ field }) => (
-						<S.Input
-							placeholder="제목을 입력해 주세요"
-							status={field.value === undefined}
-							value={field.value}
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-								field.onChange(e.target.value)
-							}
-						/>
-					)}
-				></Controller>
-				{errors.Title && (
-					<HookFormError>{errors.Title?.message?.toString()}</HookFormError>
-				)}
-			</S.Box>
-			<S.Box>
-				<div>모임에 대한 설명 *</div>
-				<Controller
-					name={'Contents'}
-					control={control}
-					rules={{
-						required: '설명을 입력해 주세요',
-					}}
-					render={({ field }) => (
-						<textarea
-							placeholder="설명을 입력해 주세요"
-							// status={field.value === undefined}
-							value={field.value}
-							onChange={e => field.onChange(e.target.value)}
-						/>
-					)}
-				></Controller>
-				{errors.Contents && (
-					<HookFormError>{errors.Contents?.message?.toString()}</HookFormError>
-				)}
-			</S.Box>
+					<S.Box>
+						<div>제목 *</div>
+						<Controller
+							name={'Title'}
+							control={control}
+							rules={{
+								required: '제목을 입력해주세요',
+							}}
+							defaultValue={data?.response?.title}
+							render={({ field }) => (
+								<S.Input
+									placeholder="제목을 입력해 주세요"
+									value={field.value}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+										field.onChange(e.target.value)
+									}
+								/>
+							)}
+						></Controller>
+						{errors.Title && (
+							<HookFormError>{errors.Title?.message?.toString()}</HookFormError>
+						)}
+					</S.Box>
+					<S.Box>
+						<div>모임에 대한 설명 *</div>
+						<Controller
+							name={'Contents'}
+							control={control}
+							rules={{
+								required: '설명을 입력해 주세요',
+							}}
+							defaultValue={data && data?.response?.contents}
+							render={({ field }) => (
+								<textarea
+									placeholder="설명을 입력해 주세요"
+									value={field.value}
+									onChange={e => field.onChange(e.target.value)}
+								/>
+							)}
+						></Controller>
+						{errors.Contents && (
+							<HookFormError>
+								{errors.Contents?.message?.toString()}
+							</HookFormError>
+						)}
+					</S.Box>
 
-			<span>
-				<Button type="submit" size={'normal'}>
-					확인
-				</Button>
-				<Button
-					type="button"
-					size={'normal'}
-					variant={'default-white'}
-					onClick={() => setRecoilCounter(true)}
-				>
-					취소
-				</Button>
-			</span>
-			{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
-			{modalView && <SuccessModal text={'등록 성공'} setState={setModalView} />}
-		</S.Wrapper>
+					<span>
+						<Button type="submit" size={'normal'}>
+							확인
+						</Button>
+						<Button
+							type="button"
+							size={'normal'}
+							variant={'default-white'}
+							onClick={() => setRecoilCounter(true)}
+						>
+							취소
+						</Button>
+					</span>
+					{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
+					{modalView && (
+						<SuccessModal text={'등록 성공'} setState={setModalView} />
+					)}
+				</S.Wrapper>
+			)}
+		</>
 	)
 }
 
-export default Register
+export default ChangeRegister
 
 const Wrapper = styled.form`
 	${TopPadding}
@@ -232,15 +245,13 @@ const Box = styled.div`
 		}
 	}
 `
-const Input = styled.input<{ status: boolean }>`
+const Input = styled.input`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	width: 100%;
 	margin-bottom: 0.5rem;
 	padding: 1.3rem 1rem;
 	border-radius: 0.5rem;
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
-	color: ${({ theme, status }) =>
-		status ? theme.COLOR.common.gray[200] : 'black'};
 	:focus {
 		border: 1px solid ${({ theme }) => theme.COLOR.sub};
 	}
