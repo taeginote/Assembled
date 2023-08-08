@@ -52,7 +52,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	)
 
 	const { mutate: cancelMutate } = useMutation(
-		(likeData: PostLike) => PostLikeApi.CancelLike(likeData),
+		(likeData?: number) => PostLikeApi.CancelLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -66,7 +66,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	}
 	const onClickFillHeart = (): void => {
 		if (token === null) return
-		cancelMutate({ postId })
+		cancelMutate(postId)
 	}
 	let userInfo = UserInfoService.getUserInfo()
 

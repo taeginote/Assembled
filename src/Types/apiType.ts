@@ -26,7 +26,7 @@ export interface PostLike {
 
 export interface PostLikeApiType {
 	PostLike(params: PostLike): Promise<AxiosResponse<PostLike>>
-	CancelLike(params: any): Promise<AxiosResponse<any>>
+	CancelLike(params?: number): Promise<AxiosResponse<number | undefined>>
 }
 
 interface GetListData {

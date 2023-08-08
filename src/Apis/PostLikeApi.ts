@@ -9,7 +9,7 @@ const PostLikeApi: PostLikeApiType = {
 		return axiosInstance.post(PATH, data)
 	},
 	CancelLike(data) {
-		return axiosInstance.delete(PATH, data)
+		return axiosInstance.delete(PATH + '/' + data)
 	},
 }
 
