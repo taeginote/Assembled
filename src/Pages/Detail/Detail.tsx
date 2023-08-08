@@ -3,16 +3,48 @@ import { ColumnNumberCSS, FlexAlignCSS, TopPadding } from '../../Styles/common'
 import useGetDetailData from '../../Hooks/Queries/get-detail'
 import LoadingPage from '../../Components/LoadingPage/Loading'
 import CommentForm from './Components/CommentForm'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
+import {
+	FillHeart_Icon,
+	NotFillHeart_Icon,
+	Pen_Icon,
+	Trash_Icon,
+} from '../../Icons/Icons'
+import Ballon from '../../Components/Ballon/Ballon'
+import PostApi from '../../Apis/PostApi'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import ConfirmModal from '../../Components/Modal/confirmModal'
+import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
+import { useRecoilState } from 'recoil'
 
 function Detail() {
 	const [searchParams, setSearchParams] = useSearchParams()
+	const [recoilCounter, setRecoilCounter] =
+		useRecoilState<boolean>(modalViewConfirm)
+
+	const navigate = useNavigate()
+	const queryClient = useQueryClient()
+
 	let postId: number | null = Number(searchParams.get('postId'))
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
 	const profileImg = ProfileImgReturn(data?.profile?.fileFullPath)
+	console.log(data?.response?.likeStatus)
+	const { mutate } = useMutation(
+		(postId: number | undefined) => PostApi.DeletePost(postId),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(['useGetListData'])
+			},
+			onError: () => {},
+		},
+	)
+
+	const onDeleteClub = () => {
+		setRecoilCounter(true)
+	}
 
 	return (
 		<S.Wrapper>
@@ -20,13 +52,38 @@ function Detail() {
 				<LoadingPage />
 			) : (
 				<S.Container>
-					<h1>{data?.response?.title}</h1>
-					<S.Profile>
-						<S.UserImg src={profileImg} />
-						<div>{data?.response?.writerNickname}</div>
-						<span> | </span>
-						<span>{data?.response?.createdTime?.split('T')[0]}</span>
-					</S.Profile>
+					<S.Top>
+						<span>
+							<h1>{data?.response?.title}</h1>
+							<S.Profile>
+								<S.UserImg src={profileImg} />
+								<div>{data?.response?.writerNickname}</div>
+								<span> | </span>
+								<span>{data?.response?.createdTime?.split('T')[0]}</span>
+							</S.Profile>
+						</span>
+						<S.TopRight>
+							<p>
+								<button onClick={() => navigate(`/register/${postId}`)}>
+									<div>
+										<Ballon text={'모임 수정'} />
+									</div>
+									<Pen_Icon />
+								</button>
+								<button onClick={onDeleteClub}>
+									<div>
+										<Ballon text={'모임 삭제'} />
+									</div>
+									<Trash_Icon />
+								</button>
+							</p>
+							{!data?.response?.likeStatus ? (
+								<NotFillHeart_Icon />
+							) : (
+								<FillHeart_Icon />
+							)}
+						</S.TopRight>
+					</S.Top>
 					<S.Info>
 						<div>
 							<div>활동 기간</div>
@@ -60,6 +117,14 @@ function Detail() {
 						/>
 					)}
 				</S.Container>
+			)}
+			{recoilCounter && (
+				<ConfirmModal
+					text={'정말로 삭제하시겠습니까?'}
+					url={'/'}
+					mutate={mutate}
+					postId={postId}
+				/>
 			)}
 		</S.Wrapper>
 	)
@@ -102,8 +167,40 @@ const Profile = styled.div`
 	span {
 		margin-left: 2rem;
 	}
+	padding: 4rem 0;
+`
+const Top = styled.div`
+	display: flex;
+	justify-content: space-between;
 	border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
-	padding-bottom: 4rem;
+	& > span {
+	}
+`
+const TopRight = styled.div`
+	margin-right: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	& > p {
+		margin: 2rem 0 5rem 0;
+		& > button {
+			background-color: white;
+			position: relative;
+			& > div {
+				display: none;
+			}
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+				margin-right: 1.3rem;
+			}
+			margin-left: 2rem;
+		}
+		& > button:hover {
+			scale: 1.1;
+			& > div {
+				display: block;
+			}
+		}
+	}
 `
 const UserImg = styled.img`
 	border-radius: 50%;
@@ -139,4 +236,4 @@ const Dec = styled.div`
 	margin: 3rem 0 10rem 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 `
-const S = { Wrapper, Container, Profile, UserImg, Info, Dec }
+const S = { Wrapper, Container, Profile, UserImg, Info, Dec, Top, TopRight }

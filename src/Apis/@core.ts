@@ -22,6 +22,7 @@ axiosInstance.interceptors.request.use(
 		if (access_token === null) return config
 		if (access_token) {
 			config.headers['Authorization'] = `Bearer ${access_token}`
+			// config.headers['Cookie'] = 'RefreshToken=test'
 		}
 		return config
 	},
@@ -41,6 +42,7 @@ axiosInstance.interceptors.response.use(
 		}
 
 		// RefreshToken 재발급
+		// 403 내려줄때 로그아웃 //AccessToken
 		if (error.response.status === 403) {
 		}
 
@@ -59,7 +61,6 @@ axiosInstance.interceptors.response.use(
 				return axiosInstance(originalRequest)
 			}
 		}
-
 		return Promise.reject(error)
 	},
 )

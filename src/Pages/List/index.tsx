@@ -11,7 +11,6 @@ import useGetListData, {
 	categoryType,
 	filterType,
 } from '../../Hooks/Queries/get-list'
-import LoadingPage from '../../Components/LoadingPage/Loading'
 import { useSearchParams } from 'react-router-dom'
 import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
 

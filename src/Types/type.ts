@@ -47,8 +47,6 @@ export interface SearchType {
 	setSearchValue: (page: string) => void
 }
 
-export type PaginationDisabled = 'start' | 'end'
-
 //Auth type
 export interface AuthContextType {
 	accessToken: string | null

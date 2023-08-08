@@ -10,9 +10,9 @@ import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
 	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 	const navigate = useNavigate()
-
+	console.log(postId)
 	const onClickClose = () => {
-		if (url === '/myPage' || url === '/myPage/comment') {
+		if (url === '/myPage' || url === '/myPage/comment' || url === '/') {
 			mutate(postId)
 			navigate(url)
 		} else {
