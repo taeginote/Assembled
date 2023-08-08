@@ -56,7 +56,7 @@ function ChangeRegister() {
 			onError: () => {},
 		},
 	)
-
+	console.log(data?.response)
 	const onSubmit: SubmitHandler<FieldValues> = e => {
 		const writer = UserIdService.getUserId()
 
@@ -69,8 +69,8 @@ function ChangeRegister() {
 			contents: e.Contents,
 			categoryId: categoryId.categoryId,
 			writer,
-			personnelNumber: e.TeamMember,
-			expectedPeriod: e.Period,
+			personnelNumber: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
+			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,
 		}
 		mutate(data)
 	}

@@ -25,7 +25,13 @@ function SelectInput(props: SelectInputProps) {
 	const { name, Data, control, errorMsg, datailData } = props
 
 	const [isView, setIsView] = useState<boolean>(false)
-	const initialValue = datailData ? datailData : undefined
+
+	const initialValue = datailData
+		? datailData
+		: datailData === 0
+		? '제한 없음'
+		: undefined
+	console.log(initialValue)
 
 	return (
 		<>

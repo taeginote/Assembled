@@ -40,8 +40,8 @@ interface GetListData {
 export interface PostRegisterData {
 	categoryId?: 1 | null | string
 	contents?: string
-	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6
-	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10
+	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | '제한 없음'
+	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
 	title?: string
 	writer?: null | string
 }
