@@ -69,10 +69,11 @@ function Hamburger() {
 						<div>
 							<Cancel_big_Icon onClick={() => setIsView(!isView)} />
 						</div>
-						{list.map(el => (
+						{list.map((el, idx: number) => (
 							<S.List
 								onClick={() => onClickList(el.url)}
 								status={location.pathname === el.url}
+								key={idx}
 							>
 								{el.name}
 							</S.List>

@@ -89,8 +89,8 @@ function Comment() {
 					) : (
 						<S.Wrapper>
 							<p>작성한 댓글</p>
-							{data?.response?.content.map((el: any) => (
-								<S.container $state={changeViewNum === el.commentId}>
+							{data?.response?.content.map((el: any, idx: number) => (
+								<S.container $state={changeViewNum === el.commentId} key={idx}>
 									<S.Left>
 										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>

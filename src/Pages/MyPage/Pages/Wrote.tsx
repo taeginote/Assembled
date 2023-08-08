@@ -62,9 +62,11 @@ function Wrote() {
 						<S.ListWrap>
 							<p>작성한 모임</p>
 							<S.Container>
-								{data?.response?.content.map((el: ItemDataType) => (
-									<ItemBoxMyPage data={el} setPostId={setPostId} />
-								))}
+								{data?.response?.content.map(
+									(el: ItemDataType, idx: number) => (
+										<ItemBoxMyPage data={el} setPostId={setPostId} key={idx} />
+									),
+								)}
 							</S.Container>
 							{data?.response?.content?.length !== 0 && (
 								<Pagination
