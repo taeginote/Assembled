@@ -21,7 +21,7 @@ export type CommentApiType = {
 }
 
 export interface PostLike {
-	postId?: number
+	postId?: number | null
 }
 
 export interface PostLikeApiType {

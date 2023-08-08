@@ -17,6 +17,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import { useRecoilState } from 'recoil'
+import { PostLike } from '../../Types/apiType'
+import PostLikeApi from '../../Apis/PostLikeApi'
+import UserIdService from '../../Utils/UserIdService'
 
 function Detail() {
 	const [searchParams, setSearchParams] = useSearchParams()
@@ -25,13 +28,16 @@ function Detail() {
 
 	const navigate = useNavigate()
 	const queryClient = useQueryClient()
+	const UserId = UserIdService.getUserId()
 
 	let postId: number | null = Number(searchParams.get('postId'))
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
 	const profileImg = ProfileImgReturn(data?.profile?.fileFullPath)
-	console.log(data?.response?.likeStatus)
+
+	const IsMinePage = data?.response.writerId == UserId ? true : false
+
 	const { mutate } = useMutation(
 		(postId: number | undefined) => PostApi.DeletePost(postId),
 		{
@@ -39,6 +45,23 @@ function Detail() {
 				queryClient.invalidateQueries(['useGetListData'])
 			},
 			onError: () => {},
+		},
+	)
+	const { mutate: heartMutate } = useMutation(
+		(likeData: PostLike) => PostLikeApi.PostLike(likeData),
+		{
+			onSuccess: () => {
+				refetch()
+			},
+		},
+	)
+
+	const { mutate: cancelMutate } = useMutation(
+		(likeData?: number) => PostLikeApi.CancelLike(likeData),
+		{
+			onSuccess: () => {
+				refetch()
+			},
 		},
 	)
 
@@ -62,27 +85,34 @@ function Detail() {
 								<span>{data?.response?.createdTime?.split('T')[0]}</span>
 							</S.Profile>
 						</span>
-						<S.TopRight>
-							<p>
-								<button onClick={() => navigate(`/register/${postId}`)}>
-									<div>
-										<Ballon text={'모임 수정'} />
-									</div>
-									<Pen_Icon />
-								</button>
-								<button onClick={onDeleteClub}>
-									<div>
-										<Ballon text={'모임 삭제'} />
-									</div>
-									<Trash_Icon />
-								</button>
-							</p>
-							{!data?.response?.likeStatus ? (
-								<NotFillHeart_Icon />
-							) : (
-								<FillHeart_Icon />
+						<>
+							{IsMinePage && (
+								<S.TopRight>
+									<p>
+										<button onClick={() => navigate(`/register/${postId}`)}>
+											<div>
+												<Ballon text={'모임 수정'} />
+											</div>
+											<Pen_Icon />
+										</button>
+										<button onClick={onDeleteClub}>
+											<div>
+												<Ballon text={'모임 삭제'} />
+											</div>
+											<Trash_Icon />
+										</button>
+									</p>
+
+									{!data?.response?.likeStatus ? (
+										<NotFillHeart_Icon
+											onClick={() => heartMutate({ postId })}
+										/>
+									) : (
+										<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
+									)}
+								</S.TopRight>
 							)}
-						</S.TopRight>
+						</>
 					</S.Top>
 					<S.Info>
 						<div>
