@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import scrollToTop from '../../Utils/scrollToTop'
 import { FlexCenterCSS } from '../../Styles/common'
 import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
-import { PaginationDisabled, PaginationType } from '../../Types/type'
+import { PaginationType } from '../../Types/type'
 
 /**
  * @param limit - 페이지네이션 몇 개씩 할 것인지
@@ -50,30 +50,18 @@ function Pagination({
 					queryString.set(key, value)
 				})
 		}
-
 		queryString.set('page', number.toString()) // 쿼리 스트링 값 중 'page'만 변경
 		setSearchParams(queryString)
 	}
-
-	const isDisabled = (type: PaginationDisabled) => {
-		switch (type) {
-			case 'start':
-				return Math.floor((nowPage - 1) / limit) === 0
-			case 'end':
-				return Math.ceil(nowPage / limit) === Math.ceil(totalPage / limit)
-		}
-	}
-
-	// if (!endPage) return undefined // endPage이 0으로 온 경우 아무 것도 return X
 
 	return (
 		<S.Nav>
 			<S.Button
 				onClick={() => {
-					goPage(Math.floor(nowPage / limit) * limit)
+					goPage(1)
 					scrollToTop(scroll)
 				}}
-				disabled={isDisabled('start')}
+				disabled={nowPage === 1}
 			>
 				<PaginationArrowSingle_Icon rotate={180} />
 			</S.Button>
@@ -91,10 +79,10 @@ function Pagination({
 			))}
 			<S.Button
 				onClick={() => {
-					goPage(Math.ceil(nowPage / limit) * limit + 1)
+					goPage(totalPage)
 					scrollToTop(scroll)
 				}}
-				disabled={isDisabled('end')}
+				disabled={nowPage === totalPage}
 			>
 				<PaginationArrowSingle_Icon />
 			</S.Button>
@@ -108,13 +96,12 @@ const Nav = styled.nav`
 	margin: 6rem 0;
 `
 
-const Button = styled.button`
-	padding: 0.4rem;
+const Button = styled.button<{ disabled: boolean }>`
+	padding: 0.6rem;
+	border-radius: 0.5rem;
 	margin: 0 0.2rem;
-	font-size: 1.2rem;
-	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
-	background-color: ${({ theme }) => theme.COLOR.common.white};
-
+	font-size: 1.5rem;
+	background-color: ${({ theme }) => theme.COLOR.main};
 	&:hover {
 		background-color: ${({ theme }) => theme.COLOR.hover};
 		transition: all 0.2s ease-in-out;
@@ -122,7 +109,7 @@ const Button = styled.button`
 	}
 
 	&[disabled] {
-		background-color: ${({ theme }) => theme.COLOR.common.gray[400]};
+		background-color: ${({ theme }) => theme.COLOR.main};
 		cursor: revert;
 		transform: revert;
 	}
