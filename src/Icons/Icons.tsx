@@ -1,4 +1,4 @@
-import { CiSearch, CiWarning } from 'react-icons/ci'
+import { CiWarning } from 'react-icons/ci'
 import {
 	AiOutlineMail,
 	AiOutlineLock,
