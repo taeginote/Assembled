@@ -69,5 +69,18 @@ const Box = styled.div`
 			margin: 0 1rem;
 		}
 	}
+	animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	position: fixed;
+	@keyframes fadeIn {
+		0% {
+			/* background-color: transparent; */
+			top: -20rem;
+		}
+
+		100% {
+			/* background-color: rgba(0, 0, 0, 0.7); */
+			top: 30%;
+		}
+	}
 `
 const S = { Wrapper, Text, Box }
