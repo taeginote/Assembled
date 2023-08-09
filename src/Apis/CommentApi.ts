@@ -6,6 +6,7 @@ const PATH = '/assemble/comment'
 
 const CommentApi: CommentApiType = {
 	postComment(data) {
+		console.log(data)
 		return axiosInstance.post(PATH, data)
 	},
 	getUserComment({ userId, page }) {

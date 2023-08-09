@@ -21,11 +21,11 @@ function Comment() {
 	const queryClient = useQueryClient()
 	const [searchParams, setSearchParams] = useSearchParams()
 	const navigate = useNavigate()
-
-	let pageNumber: number | null = Number(searchParams.get('page'))
-	const userId = UserIdService.getUserId()
 	const [recoilCounter, setRecoilCounter] =
 		useRecoilState<boolean>(modalViewConfirm)
+	let pageNumber: number | null = Number(searchParams.get('page'))
+	const userId = UserIdService.getUserId()
+
 	const [page, setPage] = useState<number>(pageNumber || 0)
 	const [commentId, setCommentId] = useState<null | number>(null)
 	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
@@ -114,7 +114,7 @@ function Comment() {
 										{changeViewNum !== el.commentId ? (
 											<button onClick={() => onChangeComment(el)}>
 												<div>
-													<Ballon text={'모임 수정'} />
+													<Ballon text={'댓글 수정'} />
 												</div>
 												<Pen_Icon />
 											</button>
@@ -128,7 +128,7 @@ function Comment() {
 										)}
 										<button onClick={() => onDeleteComment(el)}>
 											<div>
-												<Ballon text={'모임 삭제'} />
+												<Ballon text={'댓글 삭제'} />
 											</div>
 											<Trash_Icon />
 										</button>

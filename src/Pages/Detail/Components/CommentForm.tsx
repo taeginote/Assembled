@@ -10,38 +10,89 @@ import CommentApi from '../../../Apis/CommentApi'
 import UserIdService from '../../../Utils/UserIdService'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import TokenService from '../../../Utils/TokenService'
+import { TextareaEventTargetType } from '../../../Types/type'
+import { useState } from 'react'
+import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
+import Ballon from '../../../Components/Ballon/Ballon'
 
 interface CommentType {
 	writerNickname: string
 	writeDate: string
 	contents: string
 }
-
+type CommentId = { commentId: any }
 function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
+	const [commentsInput, SetCommentsInput] = useState<string>('')
+	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
+	const [commentId, setCommentId] = useState<null | number>(null)
+
 	const { mutate } = useMutation(
 		(data: CommentData) => CommentApi.postComment(data),
 		{
 			onSuccess: () => {
 				refetch()
+				SetCommentsInput('')
 			},
 			onError: () => {},
 		},
 	)
+	const { mutate: changeMutate } = useMutation(
+		data => CommentApi.patchComment(data),
+		{
+			onSuccess: () => {
+				setChangeViewNum(null)
+				refetch()
+			},
+			onError: () => {},
+		},
+	)
+	const { mutate: deleteMutate } = useMutation(
+		(commentId: number | undefined) => CommentApi.deleteComment(commentId),
+		{
+			onSuccess: () => {
+				refetch()
+				setCommentId(null)
+			},
+			onError: () => {},
+		},
+	)
+
+	const onDeleteComment = (e: CommentId) => {
+		deleteMutate(e.commentId)
+	}
+	const onChangeComment = (e: CommentId) => {
+		setChangeViewNum(e.commentId)
+	}
+
 	const userId = UserIdService.getUserId()
 	const AccessToken = TokenService.getAccessToken()
 
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		const contents = e.currentTarget.textarea.value.trim()
+		SetCommentsInput(e.currentTarget.textarea.value.trim())
 		if (AccessToken === null) return
-		if (contents.length === 0) return
+		if (commentsInput.length === 0) return
 
 		const data: CommentData = {
-			contents,
-			userId,
+			contents: commentsInput,
 			postId,
 		}
 		mutate(data)
+	}
+	const onkeyDown = (e: TextareaEventTargetType) => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			SetCommentsInput(commentsInput.trim())
+
+			if (AccessToken === null) return
+			if (commentsInput.length === 0) return
+
+			const data: CommentData = {
+				contents: commentsInput,
+				postId,
+			}
+			mutate(data)
+		}
 	}
 
 	return (
@@ -52,7 +103,15 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 					{comments.length}
 				</div>
 				<S.CommentInput>
-					<textarea placeholder="댓글을 작성하세요" name="textarea" />
+					<textarea
+						placeholder="댓글을 작성하세요"
+						name="textarea"
+						onKeyDown={onkeyDown}
+						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+							SetCommentsInput(e.target.value)
+						}
+						value={commentsInput}
+					/>
 				</S.CommentInput>
 				<span>
 					<Button size={'big'} variant={'default-reverse'} shape={'round'}>
@@ -60,14 +119,45 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 					</Button>
 				</span>
 			</S.Container>
-			{comments.map((comment: any) => (
-				<S.CommentsList>
+			{comments.map((comment: any, idx: number) => (
+				<S.CommentsList key={idx}>
 					<S.CommentTop>
-						<S.UserImg src={ProfileImgReturn(comment?.profile?.fileFullPath)} />
-						<div>
-							<div>{comment.writerNickname}</div>
-							<span>{comment.writeDate}</span>
-						</div>
+						<span>
+							<S.UserImg
+								src={ProfileImgReturn(comment?.profile?.fileFullPath)}
+							/>
+							<div>
+								<div>{comment.writerNickname}</div>
+								<span>{comment.writeDate}</span>
+							</div>
+						</span>
+						<S.Right>
+							{comment?.userId == userId && (
+								<>
+									{changeViewNum !== comment.commentId ? (
+										<button onClick={() => onChangeComment(comment)}>
+											<div>
+												<Ballon text={'댓글 수정'} />
+											</div>
+											<Pen_Icon />
+										</button>
+									) : (
+										<button onClick={() => setChangeViewNum(null)}>
+											<div>
+												<Ballon text={'수정 취소'} />
+											</div>
+											<Cancel_Icon />
+										</button>
+									)}
+									<button onClick={() => onDeleteComment(comment)}>
+										<div>
+											<Ballon text={'댓글 삭제'} />
+										</div>
+										<Trash_Icon />
+									</button>
+								</>
+							)}
+						</S.Right>
 					</S.CommentTop>
 					<S.CommentBottom>{comment.contents}</S.CommentBottom>
 				</S.CommentsList>
@@ -89,9 +179,11 @@ const Container = styled.form`
 		}
 		margin-bottom: 2.5rem;
 	}
+
 	& > span {
 		display: flex;
 		justify-content: end;
+		margin-bottom: 2rem;
 	}
 `
 const CommentInput = styled.div`
@@ -120,13 +212,17 @@ const CommentsList = styled.div`
 `
 const CommentTop = styled.div`
 	${FlexAlignCSS}
-	&>div {
+	justify-content: space-between;
+	& > span {
+		display: flex;
 		& > div {
-			font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-		}
-		& > span {
-			font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-			color: ${({ theme }) => theme.COLOR.common.gray[300]};
+			& > div {
+				font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+			}
+			& > span {
+				font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+				color: ${({ theme }) => theme.COLOR.common.gray[300]};
+			}
 		}
 	}
 `
@@ -140,6 +236,22 @@ const UserImg = styled.img`
 	height: 4rem;
 	margin-right: 1rem;
 `
+const Right = styled.div`
+	& > button {
+		background-color: transparent;
+		position: relative;
+		margin-left: 2rem;
+		& > div {
+			display: none;
+		}
+	}
+	& > button:hover {
+		scale: 1.1;
+		& > div {
+			display: block;
+		}
+	}
+`
 const S = {
 	Container,
 	CommentInput,
@@ -147,4 +259,5 @@ const S = {
 	CommentTop,
 	CommentBottom,
 	UserImg,
+	Right,
 }

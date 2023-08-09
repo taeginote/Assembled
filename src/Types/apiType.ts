@@ -9,7 +9,6 @@ export interface PostData {
 //이건 댓글 API 아직 백엔드 없어서 보류
 export interface CommentData {
 	contents?: string
-	userId?: string | null
 	postId?: number
 }
 

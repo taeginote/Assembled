@@ -27,6 +27,10 @@ export interface ItemDataType {
 export type EventTargetType =
 	| React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>
 
+export type TextareaEventTargetType =
+	| React.ChangeEvent<HTMLTextAreaElement> &
+			React.KeyboardEvent<HTMLTextAreaElement>
+
 //select Box
 
 //Pagination Type
