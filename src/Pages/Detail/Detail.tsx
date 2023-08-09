@@ -102,14 +102,15 @@ function Detail() {
 											<Trash_Icon />
 										</button>
 									</p>
-
-									{!data?.response?.likeStatus ? (
-										<NotFillHeart_Icon
-											onClick={() => heartMutate({ postId })}
-										/>
-									) : (
-										<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
-									)}
+									<div>
+										{!data?.response?.likeStatus ? (
+											<NotFillHeart_Icon
+												onClick={() => heartMutate({ postId })}
+											/>
+										) : (
+											<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
+										)}
+									</div>
 								</S.TopRight>
 							)}
 						</>
@@ -230,6 +231,9 @@ const TopRight = styled.div`
 				display: block;
 			}
 		}
+	}
+	& > div {
+		cursor: pointer;
 	}
 `
 const UserImg = styled.img`
