@@ -56,7 +56,7 @@ function ChangeRegister() {
 			onError: () => {},
 		},
 	)
-	console.log(data?.response)
+
 	const onSubmit: SubmitHandler<FieldValues> = e => {
 		const writer = UserIdService.getUserId()
 

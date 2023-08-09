@@ -16,17 +16,19 @@ import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
 import Ballon from '../../../Components/Ballon/Ballon'
 
 interface CommentType {
-	writerNickname: string
-	writeDate: string
-	contents: string
+	commentId: null | number
+	contents: null | string
 }
-type CommentId = { commentId: any }
+
 function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 	const [commentsInput, SetCommentsInput] = useState<string | undefined>(
 		undefined,
 	)
+	const [changeCommentVal, setChangeCommentVal] = useState<null | string>(null)
 	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
-	const [commentId, setCommentId] = useState<null | number>(null)
+
+	const userId = UserIdService.getUserId()
+	const AccessToken = TokenService.getAccessToken()
 
 	const { mutate } = useMutation(
 		(data: CommentData) => CommentApi.postComment(data),
@@ -39,7 +41,7 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 		},
 	)
 	const { mutate: changeMutate } = useMutation(
-		data => CommentApi.patchComment(data),
+		(data: CommentType) => CommentApi.patchComment(data),
 		{
 			onSuccess: () => {
 				setChangeViewNum(null)
@@ -53,21 +55,10 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 		{
 			onSuccess: () => {
 				refetch()
-				setCommentId(null)
 			},
 			onError: () => {},
 		},
 	)
-
-	const onDeleteComment = (e: CommentId) => {
-		deleteMutate(e.commentId)
-	}
-	const onChangeComment = (e: CommentId) => {
-		setChangeViewNum(e.commentId)
-	}
-
-	const userId = UserIdService.getUserId()
-	const AccessToken = TokenService.getAccessToken()
 
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -84,6 +75,7 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 	const onkeyDown = (e: TextareaEventTargetType) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
+
 			SetCommentsInput(commentsInput)
 
 			if (AccessToken === null) return
@@ -95,6 +87,22 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 			}
 			mutate(data)
 		}
+	}
+	const onKeyDownComment = (e: TextareaEventTargetType) => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+
+			if (changeCommentVal?.trim().length === 0) return
+			const data: CommentType = {
+				commentId: changeViewNum,
+				contents: changeCommentVal,
+			}
+			changeMutate(data)
+		}
+	}
+	const onCancelComment = () => {
+		setChangeViewNum(null)
+		setChangeCommentVal(null)
 	}
 
 	return (
@@ -137,21 +145,21 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 							{comment?.userId == userId && (
 								<>
 									{changeViewNum !== comment.commentId ? (
-										<button onClick={() => onChangeComment(comment)}>
+										<button onClick={() => setChangeViewNum(comment.commentId)}>
 											<div>
 												<Ballon text={'댓글 수정'} />
 											</div>
 											<Pen_Icon />
 										</button>
 									) : (
-										<button onClick={() => setChangeViewNum(null)}>
+										<button onClick={onCancelComment}>
 											<div>
 												<Ballon text={'수정 취소'} />
 											</div>
 											<Cancel_Icon />
 										</button>
 									)}
-									<button onClick={() => onDeleteComment(comment)}>
+									<button onClick={() => deleteMutate(comment.commentId)}>
 										<div>
 											<Ballon text={'댓글 삭제'} />
 										</div>
@@ -161,7 +169,19 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 							)}
 						</S.Right>
 					</S.CommentTop>
-					<S.CommentBottom>{comment.contents}</S.CommentBottom>
+					{changeViewNum === comment.commentId ? (
+						<S.ChageCommentTxt
+							value={
+								changeCommentVal === null ? comment.contents : changeCommentVal
+							}
+							onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+								setChangeCommentVal(e.target.value)
+							}
+							onKeyDown={onKeyDownComment}
+						/>
+					) : (
+						<S.CommentBottom>{comment.contents}</S.CommentBottom>
+					)}
 				</S.CommentsList>
 			))}
 		</>
@@ -254,6 +274,17 @@ const Right = styled.div`
 		}
 	}
 `
+const ChageCommentTxt = styled.textarea`
+	width: 100%;
+	height: 10rem;
+	margin: 1rem 0;
+	padding: 2rem;
+	border-radius: 2rem;
+	outline: none;
+	border: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	resize: none;
+`
 const S = {
 	Container,
 	CommentInput,
@@ -262,4 +293,5 @@ const S = {
 	CommentBottom,
 	UserImg,
 	Right,
+	ChageCommentTxt,
 }

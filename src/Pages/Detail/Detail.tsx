@@ -22,20 +22,19 @@ import PostLikeApi from '../../Apis/PostLikeApi'
 import UserIdService from '../../Utils/UserIdService'
 
 function Detail() {
+	const navigate = useNavigate()
+	const queryClient = useQueryClient()
+
 	const [searchParams, setSearchParams] = useSearchParams()
 	const [recoilCounter, setRecoilCounter] =
 		useRecoilState<boolean>(modalViewConfirm)
 
-	const navigate = useNavigate()
-	const queryClient = useQueryClient()
 	const UserId = UserIdService.getUserId()
-
 	let postId: number | null = Number(searchParams.get('postId'))
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
 	const profileImg = ProfileImgReturn(data?.profile?.fileFullPath)
-
 	const IsMinePage = data?.response.writerId == UserId ? true : false
 
 	const { mutate } = useMutation(

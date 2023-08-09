@@ -13,7 +13,6 @@ function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
 
 	const onClickClose = () => {
 		if (url === '/myPage' || url === '/') {
-			console.log('dd')
 			mutate(postId)
 			navigate(url)
 		} else if (url === '/myPage/comment') {
