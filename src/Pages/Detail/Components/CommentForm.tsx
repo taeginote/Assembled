@@ -22,7 +22,9 @@ interface CommentType {
 }
 type CommentId = { commentId: any }
 function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
-	const [commentsInput, SetCommentsInput] = useState<string>('')
+	const [commentsInput, SetCommentsInput] = useState<string | undefined>(
+		undefined,
+	)
 	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
 	const [commentId, setCommentId] = useState<null | number>(null)
 
@@ -31,7 +33,7 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 		{
 			onSuccess: () => {
 				refetch()
-				SetCommentsInput('')
+				SetCommentsInput(undefined)
 			},
 			onError: () => {},
 		},
@@ -69,9 +71,9 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		SetCommentsInput(e.currentTarget.textarea.value.trim())
+		SetCommentsInput(e.currentTarget.textarea.value)
 		if (AccessToken === null) return
-		if (commentsInput.length === 0) return
+		if (commentsInput?.trim().length === 0) return
 
 		const data: CommentData = {
 			contents: commentsInput,
@@ -82,10 +84,10 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 	const onkeyDown = (e: TextareaEventTargetType) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			SetCommentsInput(commentsInput.trim())
+			SetCommentsInput(commentsInput)
 
 			if (AccessToken === null) return
-			if (commentsInput.length === 0) return
+			if (commentsInput?.trim().length === 0) return
 
 			const data: CommentData = {
 				contents: commentsInput,
