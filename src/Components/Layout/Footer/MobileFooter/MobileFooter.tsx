@@ -83,3 +83,5 @@
 // 	)
 // }
 // export default MobileFooter
+const MobileFooter = () => {}
+export default MobileFooter
