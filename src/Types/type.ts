@@ -49,6 +49,7 @@ export interface SearchType {
 	setSelectVal: (props: DataType) => void
 	selectVal: selectValType
 	setSearchValue: (page: string) => void
+	setPage: (page: number) => void
 }
 
 //Auth type

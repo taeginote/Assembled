@@ -4,7 +4,6 @@ import {
 	GridCenterCSS,
 	WidthAutoCSS,
 } from '../../Styles/common'
-
 import Banner from '../../Components/Banner'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
 import useGetListData, {
@@ -13,7 +12,6 @@ import useGetListData, {
 } from '../../Hooks/Queries/get-list'
 import { useSearchParams } from 'react-router-dom'
 import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
-
 import { useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
@@ -28,7 +26,7 @@ function List() {
 	let categoryId: categoryType = Number(searchParams.get('category')) | 1
 	let sort: filterType = searchParams.get('sort')
 	let pageNumber: number | null = Number(searchParams.get('page'))
-	const [page, setPage] = useState(pageNumber || 0)
+	const [page, setPage] = useState(pageNumber || 1)
 	const [searchValue, setSearchValue] = useState<string>('')
 	const [selectVal, setSelectVal] = useState({
 		title: '제목',
@@ -42,6 +40,7 @@ function List() {
 	if (categoryId === null) {
 		categoryId = 1
 	}
+	console.log(page)
 	const { data, isLoading, refetch } = useGetListData(
 		page,
 		searchBy,
@@ -62,6 +61,7 @@ function List() {
 							setSelectVal={setSelectVal}
 							selectVal={selectVal}
 							setSearchValue={setSearchValue}
+							setPage={setPage}
 						/>
 						<FilterSelectBox />
 					</div>

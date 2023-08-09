@@ -2,37 +2,34 @@ import { CiSearch } from 'react-icons/ci'
 import styled from 'styled-components'
 
 import { useState } from 'react'
-import { modalViewNotification } from '../../../../Atoms/modalView.atom'
-import { useRecoilState } from 'recoil'
-import NotificationModal from '../../../../Components/Modal/NotificationModal'
 import { EventTargetType, SearchType } from '../../../../Types/type'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
 
 export type DataType = {
-	title: '제목' | '내용'
-	value: 'title' | 'contents'
-	//작성자 들어오면
-	// title: '제목' | '내용' | '작성자'
-	// value: 'title' | 'contents' |'writer'
+	title: '제목' | '내용' | '작성자'
+	value: 'title' | 'contents' | 'writer'
 }
 
-function SearchBar({ setSelectVal, selectVal, setSearchValue }: SearchType) {
+function SearchBar({
+	setSelectVal,
+	selectVal,
+	setSearchValue,
+	setPage,
+}: SearchType) {
 	const Data: DataType[] = [
 		{ title: '제목', value: 'title' },
 		{ title: '내용', value: 'contents' },
-		// { title: '작성자', value: 'writer' },
+		{ title: '작성자', value: 'writer' },
 	]
 
 	const [isView, setIsView] = useState<boolean>(false)
-	const [recoilCounter, setRecoilCounter] = useRecoilState<boolean>(
-		modalViewNotification,
-	)
 
 	const onClickSearch = (e: any) => {
 		e.preventDefault()
 		setIsView(false)
 		setSearchValue(e.target.text.value)
+		setPage(1)
 	}
 
 	//Enter
@@ -40,6 +37,7 @@ function SearchBar({ setSelectVal, selectVal, setSearchValue }: SearchType) {
 		if (e.key === 'Enter') {
 			e.preventDefault()
 			setSearchValue(e.target.value)
+			setPage(1)
 		}
 	}
 
@@ -68,7 +66,6 @@ function SearchBar({ setSelectVal, selectVal, setSearchValue }: SearchType) {
 					<S.SearchIcon size={'26'} />
 				</button>
 			</S.InputWrapper>
-			{recoilCounter && <NotificationModal text={'검색어를 입력해주세요'} />}
 		</>
 	)
 }
@@ -100,7 +97,7 @@ const SearchIcon = styled(CiSearch)`
 `
 
 const Wrapper = styled.div`
-	width: 9rem;
+	width: 11rem;
 	height: 4rem;
 	padding-left: 1rem;
 	margin-bottom: -0.2rem;
