@@ -72,7 +72,7 @@ function Hamburger() {
 						{list.map((el, idx: number) => (
 							<S.List
 								onClick={() => onClickList(el.url)}
-								status={location.pathname === el.url}
+								$status={location.pathname === el.url}
 								key={idx}
 							>
 								{el.name}
@@ -124,12 +124,12 @@ const ListBox = styled.ul`
 		padding-right: 3rem;
 	}
 `
-const List = styled.ul<{ status: boolean }>`
+const List = styled.ul<{ $status: boolean }>`
 	margin: 1.2rem 0;
 	padding: 1rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
-	background-color: ${({ theme, status }) =>
-		status ? theme.COLOR.sub : 'none'};
+	background-color: ${({ theme, $status }) =>
+		$status ? theme.COLOR.sub : 'none'};
 `
 
 const S = { Wrapper, ListBox, List }

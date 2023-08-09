@@ -248,7 +248,10 @@ const Info = styled.div`
 	display: grid;
 	align-items: center;
 	${ColumnNumberCSS(2)}
-	&>div {
+	@media screen and (max-width: 1240px) {
+		${ColumnNumberCSS(1)}
+	}
+	& > div {
 		display: grid;
 		align-items: center;
 		${ColumnNumberCSS(10)}

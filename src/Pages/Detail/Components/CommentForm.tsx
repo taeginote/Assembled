@@ -34,8 +34,8 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 		(data: CommentData) => CommentApi.postComment(data),
 		{
 			onSuccess: () => {
+				SetCommentsInput('')
 				refetch()
-				SetCommentsInput(undefined)
 			},
 			onError: () => {},
 		},
@@ -51,7 +51,7 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 		},
 	)
 	const { mutate: deleteMutate } = useMutation(
-		(commentId: number | undefined) => CommentApi.deleteComment(commentId),
+		(commentId?: number) => CommentApi.deleteComment(commentId),
 		{
 			onSuccess: () => {
 				refetch()
@@ -120,6 +120,7 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 							SetCommentsInput(e.target.value)
 						}
+						// value={commentsInput !== undefined && commentsInput}
 						value={commentsInput}
 					/>
 				</S.CommentInput>
