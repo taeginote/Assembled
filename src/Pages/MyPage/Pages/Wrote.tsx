@@ -115,7 +115,7 @@ const Container = styled.div`
 	width: 140%;
 	${GridCenterCSS}
 	${ColumnNumberCSS(3)};
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		${ColumnNumberCSS(2)};
 	}
 	& > div {

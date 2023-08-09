@@ -61,7 +61,7 @@ const Box = styled.div`
 		}
 
 		100% {
-			top: 30%;
+			top: 40%;
 		}
 	}
 `

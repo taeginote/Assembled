@@ -15,12 +15,15 @@ function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
 		if (url === '/myPage' || url === '/') {
 			mutate(postId)
 			navigate(url)
-		} else if (url === '/myPage/comment') {
+		}
+		if (url === '/myPage/comment') {
 			const commentId = postId
 			mutate(commentId)
-		} else {
+		}
+		if (url === undefined) {
 			navigate('/')
 		}
+
 		setRecoilCounter(false)
 	}
 	return (
@@ -49,9 +52,9 @@ export default ConfirmModal
 
 const Wrapper = styled.div`
 	position: fixed;
-	top: 0;
+	top: -3rem;
 	left: 0;
-	height: 100vh;
+	height: 200vh;
 	width: 100%;
 	z-index: 9999;
 	background-color: rgba(0, 0, 0, 0.7);
@@ -80,7 +83,7 @@ const Box = styled.div`
 		}
 
 		100% {
-			top: 30%;
+			top: 40%;
 		}
 	}
 `

@@ -25,11 +25,11 @@ function Pagination({
 }: PaginationType): JSX.Element {
 	const [searchParams, setSearchParams] = useSearchParams()
 
-	const nowPage: number | null = Number(searchParams.get('page') || 1) // 지금 페이지 number
+	const nowPage: number | null = Number(searchParams.get('page') || 1)
 
-	const startPage = Math.floor(nowPage / limit) * limit + 1 // 시작 페이지 number. ex. 지금 14페이지라면 시작 페이지는 11입니다.
-	let endPage = startPage + limit - 1 // 끝 페이지 번호. ex. 지금 14페이지라면 끝 페이지는 20입니다.
-	if (endPage >= totalPage) endPage = totalPage // 끝 페이지 번호 수정용. ex. 최종 마지막 페이지가 19라면 20이 끝 페이지가 아니라 19가 됩니다.
+	const startPage = Math.floor(nowPage / limit) * limit + 1
+	let endPage = startPage + limit - 1
+	if (endPage >= totalPage) endPage = totalPage
 
 	const createArray = (start: number, end: number) => {
 		return Array(end - start + 1)
@@ -50,7 +50,7 @@ function Pagination({
 					queryString.set(key, value)
 				})
 		}
-		queryString.set('page', number.toString()) // 쿼리 스트링 값 중 'page'만 변경
+		queryString.set('page', number.toString())
 		setSearchParams(queryString)
 	}
 
@@ -98,18 +98,18 @@ const Nav = styled.nav`
 
 const Button = styled.button<{ disabled: boolean }>`
 	padding: 0.6rem;
-	border-radius: 0.5rem;
+	border-radius: 0.6rem;
 	margin: 0 0.2rem;
 	font-size: 1.5rem;
-	background-color: ${({ theme }) => theme.COLOR.main};
+	background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
 	&:hover {
-		background-color: ${({ theme }) => theme.COLOR.hover};
+		background-color: ${({ theme }) => theme.COLOR.common.gray[400]};
 		transition: all 0.2s ease-in-out;
 		cursor: pointer;
 	}
 
 	&[disabled] {
-		background-color: ${({ theme }) => theme.COLOR.main};
+		background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
 		cursor: revert;
 		transform: revert;
 	}

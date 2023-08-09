@@ -1,6 +1,6 @@
 const MEDIA = {
 	mobile: '414px',
-	tablet: '820px',
+	tablet: '900px',
 	laptop: '1440px',
 }
 

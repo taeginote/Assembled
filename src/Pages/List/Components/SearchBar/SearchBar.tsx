@@ -79,6 +79,7 @@ const SearchInput = styled.input`
 	padding-left: 1rem;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		width: 13rem;
+		height: 4.8rem;
 	}
 `
 const InputWrapper = styled.form`
@@ -87,6 +88,9 @@ const InputWrapper = styled.form`
 	align-items: center;
 	border: 1px solid ${({ theme }) => theme.COLOR.main};
 	border-radius: 0.7rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		border-radius: 0.9rem;
+	}
 `
 const SearchIcon = styled(CiSearch)`
 	position: absolute;
@@ -107,14 +111,23 @@ const Wrapper = styled.div`
 const Title = styled.div<{ $isView: boolean }>`
 	${FlexBetweenCSS}
 	margin-bottom: 0.1rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		margin-bottom: -0.5rem;
+	}
 	& > div {
 		color: ${({ theme }) => theme.COLOR.common.gray[200]};
 		margin-left: 0.3rem;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			margin-bottom: 0.5rem;
+		}
 	}
 	& > span {
 		transform: ${({ $isView }) => $isView && 'rotate(180deg)'};
 		transition: all linear 0.2s;
 		margin: 0.5rem 0.5rem 0 0;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			margin-bottom: 0.5rem;
+		}
 	}
 `
 const Box = styled.ul`

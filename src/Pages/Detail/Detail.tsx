@@ -20,6 +20,7 @@ import { useRecoilState } from 'recoil'
 import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import UserIdService from '../../Utils/UserIdService'
+import { FlexCenterCSS } from '../../Styles/common'
 
 function Detail() {
 	const navigate = useNavigate()
@@ -85,8 +86,8 @@ function Detail() {
 							</S.Profile>
 						</span>
 						<>
-							{IsMinePage && (
-								<S.TopRight>
+							<S.TopRight>
+								{IsMinePage && (
 									<p>
 										<button onClick={() => navigate(`/register/${postId}`)}>
 											<div>
@@ -101,17 +102,18 @@ function Detail() {
 											<Trash_Icon />
 										</button>
 									</p>
-									<div>
-										{!data?.response?.likeStatus ? (
-											<NotFillHeart_Icon
-												onClick={() => heartMutate({ postId })}
-											/>
-										) : (
-											<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
-										)}
-									</div>
-								</S.TopRight>
-							)}
+								)}
+								<div>
+									{!data?.response?.likeStatus ? (
+										<NotFillHeart_Icon
+											onClick={() => heartMutate({ postId })}
+										/>
+									) : (
+										<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
+									)}
+									<div>{data?.response?.likes}</div>
+								</div>
+							</S.TopRight>
 						</>
 					</S.Top>
 					<S.Info>
@@ -146,6 +148,14 @@ function Detail() {
 							refetch={refetch}
 						/>
 					)}
+					<S.HeartBox>
+						{!data?.response?.likeStatus ? (
+							<NotFillHeart_Icon onClick={() => heartMutate({ postId })} />
+						) : (
+							<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
+						)}
+						<div>{data?.response?.likes}</div>
+					</S.HeartBox>
 				</S.Container>
 			)}
 			{recoilCounter && (
@@ -170,6 +180,7 @@ const Container = styled.div`
 	margin: 0 auto;
 	margin-top: 7rem;
 	margin-bottom: 10rem;
+	position: relative;
 	& > h1 {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
 		margin-bottom: 3rem;
@@ -180,8 +191,30 @@ const Container = styled.div`
 
 		border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+		width: 60%;
+	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		width: 90%;
+	}
+`
+const HeartBox = styled.div`
+	position: fixed;
+	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[300]};
+	border-radius: 1rem;
+	width: 7rem;
+	height: 5rem;
+	top: 45%;
+	right: 17%;
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+	${FlexCenterCSS}
+	& > div {
+		margin-left: 0.5rem;
+		font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+		color: ${({ theme }) => theme.COLOR.common.gray[200]};
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+		display: none;
 	}
 `
 const Profile = styled.div`
@@ -210,6 +243,8 @@ const TopRight = styled.div`
 	margin-right: 1rem;
 	display: flex;
 	flex-direction: column;
+	justify-content: end;
+	margin-bottom: 4.8rem;
 	align-items: end;
 	& > p {
 		margin: 2rem 0 5rem 0;
@@ -218,9 +253,6 @@ const TopRight = styled.div`
 			position: relative;
 			& > div {
 				display: none;
-			}
-			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-				margin-right: 1.3rem;
 			}
 			margin-left: 2rem;
 		}
@@ -232,6 +264,15 @@ const TopRight = styled.div`
 		}
 	}
 	& > div {
+		display: none;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+			${FlexCenterCSS}
+			&>div {
+				margin-left: 0.5rem;
+				font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+				color: ${({ theme }) => theme.COLOR.common.gray[200]};
+			}
+		}
 		cursor: pointer;
 	}
 `
@@ -272,4 +313,14 @@ const Dec = styled.div`
 	margin: 3rem 0 10rem 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 `
-const S = { Wrapper, Container, Profile, UserImg, Info, Dec, Top, TopRight }
+const S = {
+	Wrapper,
+	Container,
+	Profile,
+	UserImg,
+	Info,
+	Dec,
+	Top,
+	TopRight,
+	HeartBox,
+}

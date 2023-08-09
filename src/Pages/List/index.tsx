@@ -40,7 +40,7 @@ function List() {
 	if (categoryId === null) {
 		categoryId = 1
 	}
-	console.log(page)
+
 	const { data, isLoading, refetch } = useGetListData(
 		page,
 		searchBy,
