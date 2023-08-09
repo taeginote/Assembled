@@ -57,12 +57,10 @@ const Box = styled.div`
 	position: fixed;
 	@keyframes fadeIn {
 		0% {
-			/* background-color: transparent; */
 			top: -20rem;
 		}
 
 		100% {
-			/* background-color: rgba(0, 0, 0, 0.7); */
 			top: 30%;
 		}
 	}
