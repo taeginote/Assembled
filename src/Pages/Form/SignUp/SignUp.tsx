@@ -127,6 +127,19 @@ function SignUp() {
 	}
 
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
+		if (validationMsg.email.status !== 'success') {
+			return setValidationMsg((prev: ValidationMsg) => ({
+				...prev,
+				email: { status: 'error', message: '이메일 중복확인 해주세요' },
+			}))
+		}
+		if (validationMsg.nickname.status !== 'success') {
+			return setValidationMsg((prev: ValidationMsg) => ({
+				...prev,
+				nickname: { status: 'error', message: '이메일 중복확인 해주세요' },
+			}))
+		}
+
 		let formData: any = new FormData()
 		formData.append('profileImage', imgFile)
 
