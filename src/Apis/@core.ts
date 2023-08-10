@@ -1,6 +1,9 @@
 import axios from 'axios'
 import UserApi from './UserApi'
 import TokenService from '../Utils/TokenService'
+import UserInfoService from '../Utils/UserInfoService'
+import { useSetRecoilState } from 'recoil'
+import { modalViewToken } from '../Atoms/modalViewToken'
 
 interface resDataType {
 	status: number
@@ -40,20 +43,20 @@ axiosInstance.interceptors.response.use(
 		if (error.message === 'Network Error') {
 			return Promise.reject(error)
 		}
-
-		// RefreshToken 재발급
-		// 403 내려줄때 로그아웃 //AccessToken
 		if (error.response.status === 403) {
+			TokenService.removeAccessToken()
+			UserInfoService.removeUserInfo()
+			return Promise.reject(error)
 		}
 
 		const originalRequest = error.config
 
 		// AccessToken 재발급
 		if (error.response.status === 401) {
+			console.log('401에러 ')
 			originalRequest._retry = true //재요청
 			TokenService.setAccessToken('') //이걸로 length 0으로하고 header 제외
 			const res: resDataType = await UserApi.getToken() //RefreshToken 재발급
-
 			if (res.status === 200) {
 				TokenService.setAccessToken(res?.data?.response?.accessToken) //성공하면 로컬스토리지 setToken
 				return axiosInstance(originalRequest)

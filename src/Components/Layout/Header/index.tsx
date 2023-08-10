@@ -11,6 +11,9 @@ import { useMutation } from '@tanstack/react-query'
 import Hamburger from './MobileHamburger/Hamburger'
 import UserApi from '../../../Apis/UserApi'
 import { useState } from 'react'
+import TokenModal from '../../Modal/tokenModal'
+import { modalViewToken } from '../../../Atoms/modalViewToken'
+import { useRecoilState } from 'recoil'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
@@ -19,6 +22,9 @@ function Haeder() {
 	const auth = useAuth()
 
 	const [successModal, setSuccessModal] = useState<boolean>(false)
+	const [recoilCounter, setRecoilCounter] =
+		useRecoilState<boolean>(modalViewToken)
+
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
 		onSuccess: () => {
 			setSuccessModal(() => true)
@@ -36,7 +42,7 @@ function Haeder() {
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
-
+	console.log(recoilCounter)
 	return (
 		<>
 			<S.Wrapper>
@@ -81,6 +87,7 @@ function Haeder() {
 					setState={setSuccessModal}
 				/>
 			)}
+			{recoilCounter && <TokenModal />}
 			<Outlet />
 		</>
 	)
