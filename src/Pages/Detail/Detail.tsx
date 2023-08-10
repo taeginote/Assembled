@@ -21,10 +21,12 @@ import { PostLike } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import UserIdService from '../../Utils/UserIdService'
 import { FlexCenterCSS } from '../../Styles/common'
+import TokenService from '../../Utils/TokenService'
 
 function Detail() {
 	const navigate = useNavigate()
 	const queryClient = useQueryClient()
+	const token = TokenService.getAccessToken()
 
 	const [searchParams, setSearchParams] = useSearchParams()
 	const [recoilCounter, setRecoilCounter] =
@@ -64,6 +66,11 @@ function Detail() {
 			},
 		},
 	)
+	console.log(token)
+	const onHeart = () => {
+		if (token?.length === 0) return
+		heartMutate({ postId })
+	}
 
 	const onDeleteClub = () => {
 		setRecoilCounter(true)
@@ -105,9 +112,7 @@ function Detail() {
 								)}
 								<div>
 									{!data?.response?.likeStatus ? (
-										<NotFillHeart_Icon
-											onClick={() => heartMutate({ postId })}
-										/>
+										<NotFillHeart_Icon onClick={onHeart} />
 									) : (
 										<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
 									)}
@@ -146,11 +151,12 @@ function Detail() {
 							comments={data?.response?.comments}
 							postId={postId}
 							refetch={refetch}
+							token={token}
 						/>
 					)}
 					<S.HeartBox>
 						{!data?.response?.likeStatus ? (
-							<NotFillHeart_Icon onClick={() => heartMutate({ postId })} />
+							<NotFillHeart_Icon onClick={onHeart} />
 						) : (
 							<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
 						)}
@@ -310,8 +316,11 @@ const Info = styled.div`
 	}
 `
 const Dec = styled.div`
-	margin: 3rem 0 10rem 0;
+	margin: 3rem 0 5rem 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+	/* background-color: red; */
+	min-height: 30rem;
+	border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 `
 const S = {
 	Wrapper,

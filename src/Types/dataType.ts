@@ -33,4 +33,5 @@ export interface CommentFormPropsType {
 	comments: Comment[]
 	refetch: () => void
 	postId?: number
+	token?: string | null
 }

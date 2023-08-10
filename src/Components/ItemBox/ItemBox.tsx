@@ -61,11 +61,12 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	)
 
 	const onClickNotHeart = (): void => {
-		if (token === null) return
+		if (token?.length === 0) return
+
 		mutate({ postId })
 	}
 	const onClickFillHeart = (): void => {
-		if (token === null) return
+		if (token?.length === 0) return
 		cancelMutate(postId)
 	}
 	let userInfo = UserInfoService.getUserInfo()

@@ -20,7 +20,12 @@ interface CommentType {
 	contents: null | string
 }
 
-function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
+function CommentForm({
+	comments,
+	refetch,
+	postId,
+	token,
+}: CommentFormPropsType) {
 	const [commentsInput, SetCommentsInput] = useState<string | undefined>(
 		undefined,
 	)
@@ -112,23 +117,27 @@ function CommentForm({ comments, refetch, postId }: CommentFormPropsType) {
 					<span>댓글</span>
 					{comments.length}
 				</div>
-				<S.CommentInput>
-					<textarea
-						placeholder="댓글을 작성하세요"
-						name="textarea"
-						onKeyDown={onkeyDown}
-						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-							SetCommentsInput(e.target.value)
-						}
-						// value={commentsInput !== undefined && commentsInput}
-						value={commentsInput}
-					/>
-				</S.CommentInput>
-				<span>
-					<Button size={'big'} variant={'default-reverse'} shape={'round'}>
-						댓글 작성
-					</Button>
-				</span>
+				{token && (
+					<>
+						<S.CommentInput>
+							<textarea
+								placeholder="댓글을 작성하세요"
+								name="textarea"
+								onKeyDown={onkeyDown}
+								onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+									SetCommentsInput(e.target.value)
+								}
+								// value={commentsInput !== undefined && commentsInput}
+								value={commentsInput}
+							/>
+						</S.CommentInput>
+						<span>
+							<Button size={'big'} variant={'default-reverse'} shape={'round'}>
+								댓글 작성
+							</Button>
+						</span>
+					</>
+				)}
 			</S.Container>
 			{comments.map((comment: any, idx: number) => (
 				<S.CommentsList key={idx}>
