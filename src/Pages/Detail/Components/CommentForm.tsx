@@ -67,6 +67,7 @@ function CommentForm({
 
 	const onSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+
 		SetCommentsInput(e.currentTarget.textarea.value)
 		if (AccessToken === null) return
 		if (commentsInput?.trim().length === 0) return
@@ -78,6 +79,7 @@ function CommentForm({
 		mutate(data)
 	}
 	const onkeyDown = (e: TextareaEventTargetType) => {
+		if (e.nativeEvent.isComposing) return
 		if (e.key === 'Enter') {
 			e.preventDefault()
 
@@ -94,6 +96,8 @@ function CommentForm({
 		}
 	}
 	const onKeyDownComment = (e: TextareaEventTargetType) => {
+		if (e.nativeEvent.isComposing) return
+
 		if (e.key === 'Enter') {
 			e.preventDefault()
 

@@ -42,7 +42,7 @@ function Haeder() {
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
-	console.log(recoilCounter)
+
 	return (
 		<>
 			<S.Wrapper>
