@@ -207,6 +207,7 @@ function SignUp() {
 				<span>
 					<Lock_Icon />
 					<Input
+						type="password"
 						placeholder="위에 설정한 비밀번호를 입력해주세요"
 						{...register('SignUpPwConfirm', {
 							required: '비밀번호 확인을 입력해주세요',
@@ -237,13 +238,7 @@ function SignUp() {
 				/>
 
 				<Notice />
-				<S.SignUpButton
-					disabled={
-						!validationMsg.email.status || !validationMsg.nickname.status
-					}
-				>
-					회원가입
-				</S.SignUpButton>
+				<S.SignUpButton>회원가입</S.SignUpButton>
 
 				{successModal && (
 					<SuccessModal

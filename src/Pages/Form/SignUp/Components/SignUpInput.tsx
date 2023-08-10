@@ -1,7 +1,5 @@
 import { Controller } from 'react-hook-form'
 import Input from '../../../../Components/Input/Input'
-import { Email_Icon } from '../../../../Icons/Icons'
-import { HookFormRule } from '../../../../Consts/HookFormRule'
 import HookFormError from '../../../../Components/Error/HookFormError'
 import { styled } from 'styled-components'
 import { FlexAlignCSS } from '../../../../Styles/common'
@@ -29,6 +27,7 @@ function SignUpInput(props: SingUpInputProps) {
 					<span>
 						{Icon}
 						<Input
+							type={name === 'SignUpPw' && 'password'}
 							placeholder={placeholder}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 								field.onChange(e.target.value)
