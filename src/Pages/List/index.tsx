@@ -56,15 +56,15 @@ function List() {
 				<Banner />
 				<S.FilterWrapper>
 					<CategoryNav />
-					<div>
+					<S.SearchBarWrap>
 						<SearchBar
 							setSelectVal={setSelectVal}
 							selectVal={selectVal}
 							setSearchValue={setSearchValue}
 							setPage={setPage}
 						/>
-						<FilterSelectBox />
-					</div>
+					</S.SearchBarWrap>
+					<FilterSelectBox />
 				</S.FilterWrapper>
 				{isLoading ? (
 					<S.Container>
@@ -117,16 +117,24 @@ const FilterWrapper = styled.div`
 	${WidthAutoCSS}
 	display:flex;
 	padding: 1rem 0;
-	& > div {
-		display: flex;
-		align-items: center;
-		margin-bottom: 1.5rem;
-	}
+	align-items: center;
+
+	margin-bottom: 1.5rem;
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		flex-direction: column;
+		align-items: flex-start;
 		& > div {
-			justify-content: space-between;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
 		}
 	}
 `
-const S = { Wrapper, Container, FilterWrapper }
+const SearchBarWrap = styled.div`
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		margin-bottom: 1rem;
+	}
+`
+
+const S = { Wrapper, Container, FilterWrapper, SearchBarWrap }

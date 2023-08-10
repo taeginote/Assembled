@@ -68,8 +68,12 @@ export default FilterSelectBox
 
 const SelectBox = styled.div`
 	position: relative;
-	width: 20rem;
+	max-width: 20rem;
 	margin-left: 1.5rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		margin-top: 3rem;
+		margin-left: 0;
+	}
 `
 const Button = styled.button`
 	width: 20rem;
@@ -125,6 +129,9 @@ const IconBox = styled.div<{ $isShowOptions: boolean }>`
 	transition: all linear 0.2s;
 	margin: 0.2rem 0.5rem 0 0;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		top: 0.3rem;
+		top: 0.4rem;
+		left: 15.5rem;
+		transition: none;
+		transform: ${({ $isShowOptions }) => $isShowOptions && 'none'};
 	}
 `

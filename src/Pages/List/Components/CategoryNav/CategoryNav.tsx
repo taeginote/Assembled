@@ -37,6 +37,9 @@ function CategoryNav() {
 export default CategoryNav
 const Wrapper = styled.div`
 	${WidthAutoCSS}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		margin-bottom: 3rem;
+	}
 `
 const Container = styled.div`
 	${FlexAlignCSS}
@@ -50,6 +53,7 @@ const NavBox = styled.div<{ $state: boolean }>`
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 		margin-right: 2rem;
 	}
+
 	cursor: pointer;
 	border-bottom: 3px solid
 		${({ theme, $state }) => ($state ? theme.COLOR.hover : 'none')};

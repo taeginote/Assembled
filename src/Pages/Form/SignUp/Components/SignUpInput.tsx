@@ -27,7 +27,7 @@ function SignUpInput(props: SingUpInputProps) {
 					<span>
 						{Icon}
 						<Input
-							type={name === 'SignUpPw' && 'password'}
+							type={name === 'SignUpPw' ? 'password' : 'text'}
 							placeholder={placeholder}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 								field.onChange(e.target.value)

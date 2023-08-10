@@ -136,7 +136,7 @@ function SignUp() {
 		if (validationMsg.nickname.status !== 'success') {
 			return setValidationMsg((prev: ValidationMsg) => ({
 				...prev,
-				nickname: { status: 'error', message: '이메일 중복확인 해주세요' },
+				nickname: { status: 'error', message: '닉네임 중복확인 해주세요' },
 			}))
 		}
 
