@@ -18,12 +18,14 @@ const Wrapper = styled.div`
 	background-color: #99ccff;
 	height: 40rem;
 	${FlexCenterCSS}
-
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		height: 32rem;
+	}
 	img {
 		width: 25rem;
-		padding: 0rem 6rem 0 0;
+		padding: 2rem 6rem 0 0;
 		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-			width: 20rem;
+			width: 18rem;
 			margin-left: 5rem;
 		}
 	}
@@ -36,13 +38,14 @@ const Title = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.big};
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.large};
+		font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
+		margin: 4rem 0 2rem 0;
 	}
 `
 const Dec = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.large};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	}
 `
 

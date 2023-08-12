@@ -120,6 +120,7 @@ const Wrapper = styled.div`
 	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		min-width: 100%;
+		font-size: ${({ theme }) => theme.FONT_SIZE.ss};
 	}
 `
 const Container = styled.div`
@@ -129,6 +130,9 @@ const Container = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 		margin-top: 1rem;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		}
 	}
 	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	padding-bottom: 2rem;

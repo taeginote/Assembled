@@ -8,9 +8,14 @@ const getCategoryData = async () => {
 	return res.data
 }
 
+type Category = {
+	categoryId: number
+	categoryName: string
+}
+
 const useGetCategoryData = () => {
 	//보류
-	const { data, isLoading, refetch }: any = useQuery(
+	const { data, isLoading, refetch } = useQuery<any, boolean>(
 		['useGetCategoryData'],
 		() => getCategoryData(),
 	)

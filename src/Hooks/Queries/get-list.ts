@@ -33,7 +33,7 @@ const useGetListData = (
 	sort?: filterType,
 	categoryId?: categoryType,
 ) => {
-	const { data, isLoading, refetch }: any = useQuery(
+	const { data, isLoading, refetch } = useQuery<any, boolean>(
 		['useGetListData', page, searchBy, searchQuery, sort, categoryId],
 		() => getListData(page, searchBy, searchQuery, sort, categoryId),
 	)

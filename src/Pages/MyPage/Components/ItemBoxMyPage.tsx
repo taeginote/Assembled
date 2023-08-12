@@ -110,7 +110,11 @@ const Container = styled.div`
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
-		margin-top: 1rem;
+		margin: 1rem 0;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+			text-align: start;
+		}
 	}
 	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	padding-bottom: 2rem;

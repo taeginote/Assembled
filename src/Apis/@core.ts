@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import UserApi from './UserApi'
 import TokenService from '../Utils/TokenService'
 import UserInfoService from '../Utils/UserInfoService'

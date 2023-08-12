@@ -193,6 +193,7 @@ const Wrapper = styled.form`
 	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		padding-top: 10rem;
+		margin-bottom: 3rem;
 	}
 `
 const Container = styled.div`

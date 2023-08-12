@@ -31,7 +31,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useGetDetailData from '../../Hooks/Queries/get-detail'
 
-type CategoryName = { categoryName: 'string' }
+type CategoryName = { categoryName: string }
 
 function ChangeRegister() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -63,11 +63,11 @@ function ChangeRegister() {
 		let categoryId = GetCategoryData?.response.find(
 			(el: CategoryName) => el.categoryName === e.Category,
 		)
-
+		console.log(categoryId)
 		const data: PostRegisterData = {
 			title: e.Title,
 			contents: e.Contents,
-			categoryId: categoryId.categoryId,
+			categoryId: categoryId?.categoryId,
 			writer,
 			personnelNumber: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
 			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,

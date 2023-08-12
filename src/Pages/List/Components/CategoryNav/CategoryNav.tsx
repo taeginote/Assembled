@@ -9,6 +9,7 @@ type Category = {
 	categoryId: number
 	categoryName: string
 }
+
 function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	let category: number = Number(searchParams.get('category')) | 1

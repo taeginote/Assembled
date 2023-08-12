@@ -8,7 +8,7 @@ const getCommentData = async (userId: string | null, page: null | number) => {
 
 const useGetCommentData = (userId: string | null, page: null | number) => {
 	//보류
-	const { data, isLoading, refetch }: any = useQuery(
+	const { data, isLoading, refetch } = useQuery<any, boolean>(
 		['useGetCommentData', page],
 		() => getCommentData(userId, page),
 	)
