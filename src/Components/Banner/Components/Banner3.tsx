@@ -23,9 +23,11 @@ const Wrapper = styled.div`
 	}
 	img {
 		width: 25rem;
+		height: 20rem;
 		padding: 2rem 6rem 0 0;
 		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 			width: 18rem;
+			height: 13rem;
 			margin-left: 4rem;
 		}
 	}

@@ -42,13 +42,17 @@ function Haeder() {
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
-
+	console.log('헤더')
 	return (
 		<>
 			<S.Wrapper>
 				<S.Container>
 					<div>
-						<S.Logo src="/assets/img/Logo.png" onClick={goLogo}></S.Logo>
+						<S.Logo
+							src="/assets/img/Logo.png"
+							alt="Logo"
+							onClick={goLogo}
+						></S.Logo>
 					</div>
 					<S.HeaderRightBox>
 						{auth.accessToken == null ? (
@@ -115,8 +119,10 @@ const Logo = styled.img`
 	margin-right: 3rem;
 	cursor: pointer;
 	width: 20rem;
+	height: 4.8rem;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		width: 18rem;
+		height: 4rem;
 	}
 `
 const HeaderRightBox = styled.div``
