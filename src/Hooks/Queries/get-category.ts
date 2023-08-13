@@ -12,6 +12,9 @@ type Category = {
 	categoryId: number
 	categoryName: string
 }
+interface UseCategoryType {
+	response: Category[]
+}
 
 const useGetCategoryData = () => {
 	//보류

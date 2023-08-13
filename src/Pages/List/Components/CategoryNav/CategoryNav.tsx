@@ -5,7 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import useGetCategoryData from '../../../../Hooks/Queries/get-category'
 import Categorykeleton from '../../../../Components/Skeleton/CategorySkeleton'
 
-type Category = {
+export type Category = {
 	categoryId: number
 	categoryName: string
 }

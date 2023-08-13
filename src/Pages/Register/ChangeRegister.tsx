@@ -61,6 +61,7 @@ function ChangeRegister() {
 		const writer = UserIdService.getUserId()
 
 		let categoryId = GetCategoryData?.response.find(
+			// (el: CategoryName) => el.categoryName === e.Category,
 			(el: CategoryName) => el.categoryName === e.Category,
 		)
 		console.log(categoryId)

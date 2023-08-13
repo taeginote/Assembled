@@ -28,8 +28,6 @@ import { PostRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import useGetDetailData from '../../Hooks/Queries/get-detail'
 
 type CategoryName = { categoryName: 'string' }
 
