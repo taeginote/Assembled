@@ -102,7 +102,11 @@ function Comment() {
 														setChangeVal(e.target.value)
 													}
 												/>
-												<button type="button" onClick={onChangeBtn}>
+												<button
+													type="button"
+													onClick={onChangeBtn}
+													title="Modify"
+												>
 													수정
 												</button>
 											</S.InputWrap>
@@ -112,21 +116,27 @@ function Comment() {
 									</S.Left>
 									<S.Right>
 										{changeViewNum !== el.commentId ? (
-											<button onClick={() => onChangeComment(el)}>
+											<button
+												onClick={() => onChangeComment(el)}
+												title="Modify"
+											>
 												<div>
 													<Ballon text={'댓글 수정'} />
 												</div>
 												<Pen_Icon />
 											</button>
 										) : (
-											<button onClick={() => setChangeViewNum(null)}>
+											<button
+												onClick={() => setChangeViewNum(null)}
+												title="Cancle"
+											>
 												<div>
 													<Ballon text={'수정 취소'} />
 												</div>
 												<Cancel_Icon />
 											</button>
 										)}
-										<button onClick={() => onDeleteComment(el)}>
+										<button onClick={() => onDeleteComment(el)} title="Delete">
 											<div>
 												<Ballon text={'댓글 삭제'} />
 											</div>

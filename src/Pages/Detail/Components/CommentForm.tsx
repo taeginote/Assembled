@@ -159,21 +159,27 @@ function CommentForm({
 							{comment?.userId == userId && (
 								<>
 									{changeViewNum !== comment.commentId ? (
-										<button onClick={() => setChangeViewNum(comment.commentId)}>
+										<button
+											onClick={() => setChangeViewNum(comment.commentId)}
+											title="Modify"
+										>
 											<div>
 												<Ballon text={'댓글 수정'} />
 											</div>
 											<Pen_Icon />
 										</button>
 									) : (
-										<button onClick={onCancelComment}>
+										<button onClick={onCancelComment} title="Cancel">
 											<div>
 												<Ballon text={'수정 취소'} />
 											</div>
 											<Cancel_Icon />
 										</button>
 									)}
-									<button onClick={() => deleteMutate(comment.commentId)}>
+									<button
+										onClick={() => deleteMutate(comment.commentId)}
+										title="Delete"
+									>
 										<div>
 											<Ballon text={'댓글 삭제'} />
 										</div>

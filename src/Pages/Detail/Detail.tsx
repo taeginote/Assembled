@@ -96,13 +96,16 @@ function Detail() {
 							<S.TopRight>
 								{IsMinePage && (
 									<p>
-										<button onClick={() => navigate(`/register/${postId}`)}>
+										<button
+											title="Modify"
+											onClick={() => navigate(`/register/${postId}`)}
+										>
 											<div>
 												<Ballon text={'모임 수정'} />
 											</div>
 											<Pen_Icon />
 										</button>
-										<button onClick={onDeleteClub}>
+										<button title="Delete" onClick={onDeleteClub}>
 											<div>
 												<Ballon text={'모임 삭제'} />
 											</div>

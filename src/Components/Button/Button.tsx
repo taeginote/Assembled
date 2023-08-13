@@ -29,6 +29,7 @@ function Button(props: ButtonProps) {
 			fontSize={fontSize}
 			// disabled={!!rest.disabled}
 			{...rest}
+			title="Button"
 		>
 			{children}
 		</S.Button>

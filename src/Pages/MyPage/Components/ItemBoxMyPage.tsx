@@ -51,13 +51,16 @@ function ItemBoxMyPage({
 			<S.TopWrap>
 				<S.Status>모집중</S.Status>
 				<p>
-					<button onClick={() => navigate(`/register/${postId}`)}>
+					<button
+						onClick={() => navigate(`/register/${postId}`)}
+						title="Modify"
+					>
 						<div>
 							<Ballon text={'모임 수정'} />
 						</div>
 						<Pen_Icon />
 					</button>
-					<button onClick={() => onDeleteClub(postId)}>
+					<button onClick={() => onDeleteClub(postId)} title="Delete">
 						<div>
 							<Ballon text={'모임 삭제'} />
 						</div>

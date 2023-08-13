@@ -3,21 +3,16 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyles = createGlobalStyle`
     @font-face {
         font-family: 'LINESeed-Bd';
-        font-display: auto;
         src: url('../assets/font/LINESeedKR-Bd.ttf');
     }
 
     @font-face {
         font-family: 'LINESeed-Rg';
-        font-display: auto;
-
         src: url('../assets/font/LINESeedKR-Rg.ttf');
     }
 
     @font-face {
         font-family: 'LINESeed-Th';
-        font-display: auto;
-
         src: url('../assets/font/LINESeedKR-Th.ttf');
     }
 
@@ -94,7 +89,7 @@ const GlobalStyles = createGlobalStyle`
 
     span {
         font-size:${({ theme }) => theme.FONT_SIZE.tiny}
-    }
+    } 
 `
 
 export default GlobalStyles
