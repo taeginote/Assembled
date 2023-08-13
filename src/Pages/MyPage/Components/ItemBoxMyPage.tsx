@@ -170,6 +170,7 @@ const Period = styled.div`
 const Title = styled.div`
 	min-height: 8rem;
 	max-height: 8rem;
+	text-align: start;
 `
 const UserImg = styled.img`
 	border-radius: 50%;
