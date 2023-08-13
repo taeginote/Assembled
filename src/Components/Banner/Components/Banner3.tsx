@@ -8,7 +8,7 @@ function Banner3() {
 				<S.Title>모임 혹은 스터디 어디 없을까?</S.Title>
 				<S.Dec>주말 혹은 남는시간을 이용해 모임 하나 가입해보자</S.Dec>
 			</S.Content>
-			<img src="assets/img/question-mark.png" />
+			<img src="assets/img/question-mark.png" alt="BannerIcon" />
 		</S.Wrapper>
 	)
 }

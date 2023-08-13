@@ -8,7 +8,7 @@ function Banner1() {
 				<S.Title>스터디와 모임을 찾고싶다면 어셈블!</S.Title>
 				<S.Dec>스터디 멤버를 찾나요? 어셈블에서 찾으세요</S.Dec>
 			</S.Content>
-			<img src="assets/img/placeholder.png" />
+			<img src="assets/img/placeholder.png" alt="BannerIcon" />
 		</S.Wrapper>
 	)
 }

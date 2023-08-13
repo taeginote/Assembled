@@ -8,7 +8,7 @@ function Banner2() {
 				<S.Title>어셈블 OPEN</S.Title>
 				<S.Dec>모임, 스터디를 하고싶으면 어셈블</S.Dec>
 			</S.Content>
-			<img src="assets/img/open-book.png" />
+			<img src="assets/img/open-book.png" alt="BannerIcon" />
 		</S.Wrapper>
 	)
 }

@@ -86,7 +86,7 @@ function Detail() {
 						<span>
 							<h1>{data?.response?.title}</h1>
 							<S.Profile>
-								<S.UserImg src={profileImg} />
+								<S.UserImg src={profileImg} alt="ProfileImage" />
 								<div>{data?.response?.writerNickname}</div>
 								<span> | </span>
 								<span>{data?.response?.createdTime?.split('T')[0]}</span>

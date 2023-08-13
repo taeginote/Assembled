@@ -90,7 +90,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={profileImg} />
+					<S.UserImg src={profileImg} alt="UserImage" />
 					<div>{writerNickname}</div>
 				</div>
 				<span>

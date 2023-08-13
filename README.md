@@ -24,8 +24,8 @@
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="https://github.com/taeginote"><img src="https://avatars.githubusercontent.com/u/103398790?v=4" width="120px;" alt=""/><br /><sub><b>프론트엔드 : 김태기 </b></sub></a><br /></td>
-        <td align="center"><img src="https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg" width="117px;" alt=""/><br /><sub><b>백엔드 (팀원 한명) </b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/taeginote"><img src="https://avatars.githubusercontent.com/u/103398790?v=4" width="120px;" alt="image"/><br /><sub><b>프론트엔드 : 김태기 </b></sub></a><br /></td>
+        <td align="center"><img src="https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg" width="117px;" alt="image"/><br /><sub><b>백엔드 (팀원 한명) </b></sub></a><br /></td>
     </tr>
     
   </tbody>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 function LoadingPage() {
 	return (
 		<S.Wrapper>
-			<img src="/assets/img/LogoTotal.png" />
+			<img src="/assets/img/LogoTotal.png" alt="Loading" />
 		</S.Wrapper>
 	)
 }
