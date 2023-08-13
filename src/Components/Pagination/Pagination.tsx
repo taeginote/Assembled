@@ -62,6 +62,7 @@ function Pagination({
 					scrollToTop(scroll)
 				}}
 				disabled={nowPage === 1}
+				title="Pagination Left"
 			>
 				<PaginationArrowSingle_Icon rotate={180} />
 			</S.Button>
@@ -83,6 +84,7 @@ function Pagination({
 					scrollToTop(scroll)
 				}}
 				disabled={nowPage === totalPage}
+				title="Pagination Right"
 			>
 				<PaginationArrowSingle_Icon />
 			</S.Button>
