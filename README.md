@@ -1,5 +1,5 @@
 <p align="middle" >
-<img width="300" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/460514cd-dd01-47e5-8bab-d95966010081">
+<img width="250" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/460514cd-dd01-47e5-8bab-d95966010081">
 </p>
 <!-- <br/> -->
  
@@ -34,3 +34,54 @@
 ## 프로젝트 기술스택 💡
 
 <img width="600" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/192a5544-c0fe-4678-b82f-db9bae1559be">
+
+**Deploy :** Vercel
+
+**Language :** TypeScript, JavaScript
+
+**Framework :** React
+
+**Library :** React Router, React Query, Recoil, Axios
+
+**Test :** Storybook, MSW
+
+**Build :** Webpack, Babel
+
+<br/>
+<br/>
+
+2023.06.15 ~ ing
+
+### 1차 설계
+
+#### x.x.x
+
+- 회원가입, 로그인 (JWT)
+
+- 모임 목록
+
+  - 모임 목록 (최신순, 인기순, 좋아요 순 정렬)
+  - 모임 검색 (제목, 내용, 작성자)
+
+- 마이페이지
+
+  - 내가 작성한 글
+  - 내가 작성한 댓글
+  - 회원 탈퇴
+
+- 모임 CRUD
+
+- 댓글 CRUD
+
+- 좋아요 추가, 삭제
+
+<br/>
+
+### 2차 설계 예정
+
+- 모임 고도화
+- 마이 페이지 기능 추가
+- 관리자
+- 실시간 검색어
+- 자유 게시판
+- 로그인 OAuth
