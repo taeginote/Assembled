@@ -28,7 +28,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		postId,
 		title,
 		categoryName,
-		profile,
+		writerProfileImages,
 		writerNickname,
 		perssonelNumber,
 		expectedPeriod,
@@ -37,7 +37,9 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		likeStatus,
 	} = data
 
-	const profileImg = ProfileImgReturn(profile?.fileFullPath)
+	const profileImg = ProfileImgReturn(writerProfileImages?.fileFullPath)
+
+	// 프로필 이미지 수정
 
 	let period =
 		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'

@@ -11,7 +11,7 @@ export interface ItemDataType {
 	postId?: number
 	title?: string
 	categoryName?: string
-	profile?: {
+	writerProfileImages?: {
 		fileFullPath?: string
 		originalName?: string
 	}

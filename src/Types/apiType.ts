@@ -42,7 +42,10 @@ export interface PostRegisterData {
 	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | '제한 없음'
 	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
 	title?: string
-	writer?: null | string
+}
+export interface PatchRegisterData extends PostRegisterData {
+	postStatus?: string
+	postId?: number
 }
 
 export interface PostApiType {
@@ -50,6 +53,9 @@ export interface PostApiType {
 	PostRegister(
 		params: PostRegisterData,
 	): Promise<AxiosResponse<PostRegisterData>>
+	PatchRegister(
+		params: PatchRegisterData,
+	): Promise<AxiosResponse<PatchRegisterData>>
 	getDetail(params: PostData): Promise<AxiosResponse<response>>
 	DeletePost(
 		params: number | undefined,

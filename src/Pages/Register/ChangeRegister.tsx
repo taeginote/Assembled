@@ -24,7 +24,7 @@ import { useMutation } from '@tanstack/react-query'
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import PostApi from '../../Apis/PostApi'
-import { PostRegisterData } from '../../Types/apiType'
+import { PatchRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
 import { useState } from 'react'
@@ -48,7 +48,7 @@ function ChangeRegister() {
 	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
 
 	const { mutate } = useMutation(
-		(data: PostRegisterData) => PostApi.PostRegister(data),
+		(data: PatchRegisterData) => PostApi.PatchRegister(data),
 		{
 			onSuccess: () => {
 				setModalView(true)
@@ -65,13 +65,14 @@ function ChangeRegister() {
 			(el: CategoryName) => el.categoryName === e.Category,
 		)
 
-		const data: PostRegisterData = {
+		const data: PatchRegisterData = {
 			title: e.Title,
 			contents: e.Contents,
 			categoryId: categoryId?.categoryId,
-			writer,
 			personnelNumber: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
 			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,
+			postStatus: 'PROGRESS', //PROGRESS , COMPLETED
+			postId: Number(postId),
 		}
 		mutate(data)
 	}
@@ -99,7 +100,7 @@ function ChangeRegister() {
 								Data={selectDataTeamMember}
 								control={control}
 								errorMsg="인원수를 선택해주세요."
-								datailData={data?.response?.perssonelNumber}
+								datailData={data?.response?.personnelNumber}
 							/>
 						</S.Box>
 						<S.Box>
@@ -176,7 +177,7 @@ function ChangeRegister() {
 					</span>
 					{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
 					{modalView && (
-						<SuccessModal text={'등록 성공'} setState={setModalView} />
+						<SuccessModal text={'수정 성공'} setState={setModalView} />
 					)}
 				</S.Wrapper>
 			)}

@@ -13,6 +13,9 @@ const PostApi: PostApiType = {
 	PostRegister(data) {
 		return axiosInstance.post(PATH, data)
 	},
+	PatchRegister(data) {
+		return axiosInstance.patch(PATH, data)
+	},
 	getDetail({ postId }) {
 		return axiosInstance.get(`${PATH}/${postId}`)
 	},

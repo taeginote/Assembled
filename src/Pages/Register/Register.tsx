@@ -64,7 +64,6 @@ function Register() {
 			title: e.Title,
 			contents: e.Contents,
 			categoryId: categoryId.categoryId,
-			writer,
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
 		}

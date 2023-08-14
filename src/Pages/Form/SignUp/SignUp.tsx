@@ -161,7 +161,7 @@ function SignUp() {
 			<S.container>
 				<h3>회원가입</h3>
 				<S.InputBox>
-					<S.ProfileImg src={preFile as string} alt="ProfileImage" />
+					<S.ProfileImg src={preFile as string} />
 					<S.ImgLabel htmlFor="profileImg">
 						<Camera_Icon />
 					</S.ImgLabel>
