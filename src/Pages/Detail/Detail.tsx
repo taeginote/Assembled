@@ -141,9 +141,9 @@ function Detail() {
 							<div>모집 인원</div>
 
 							<span>
-								{data?.response?.expectedPeriod === 0
+								{data?.response?.personnelNumber === 0
 									? '제한없음'
-									: data?.response?.perssonelNumber + '명'}
+									: data?.response?.personnelNumber + '명'}
 							</span>
 						</div>
 					</S.Info>
@@ -318,7 +318,7 @@ const Info = styled.div`
 		}
 	}
 `
-const Dec = styled.div`
+const Dec = styled.pre`
 	margin: 3rem 0 5rem 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 	/* background-color: red; */
