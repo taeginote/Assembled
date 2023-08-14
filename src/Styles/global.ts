@@ -4,16 +4,19 @@ const GlobalStyles = createGlobalStyle`
     @font-face {
         font-family: 'LINESeed-Bd';
         src: url('../assets/font/LINESeedKR-Bd.ttf');
+        font-display: swap;
     }
 
     @font-face {
         font-family: 'LINESeed-Rg';
         src: url('../assets/font/LINESeedKR-Rg.ttf');
+        font-display: swap;
     }
 
     @font-face {
         font-family: 'LINESeed-Th';
         src: url('../assets/font/LINESeedKR-Th.ttf');
+        font-display: swap;
     }
 
     * {
