@@ -61,12 +61,9 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 	)
 
 	const onClickNotHeart = (): void => {
-		if (token?.length === 0) return
-
 		mutate({ postId })
 	}
 	const onClickFillHeart = (): void => {
-		if (token?.length === 0) return
 		cancelMutate(postId)
 	}
 	let userInfo = UserInfoService.getUserInfo()
@@ -75,10 +72,14 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		<S.Wrapper>
 			<S.TopWrap>
 				<S.Status>모집중</S.Status>
-				{!likeStatus ? (
-					<NotFillHeart_Icon onClick={onClickNotHeart} />
-				) : (
-					<FillHeart_Icon onClick={onClickFillHeart} />
+				{token && (
+					<>
+						{!likeStatus ? (
+							<NotFillHeart_Icon onClick={onClickNotHeart} />
+						) : (
+							<FillHeart_Icon onClick={onClickFillHeart} />
+						)}
+					</>
 				)}
 			</S.TopWrap>
 			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>

@@ -34,7 +34,6 @@ function List() {
 	})
 	let searchBy: string = selectVal.value
 	let searchQuery: string = searchValue
-
 	const loadingArr: 0[] = Array(12).fill(0)
 
 	if (categoryId === null) {

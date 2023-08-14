@@ -64,7 +64,7 @@ function ChangeRegister() {
 			// (el: CategoryName) => el.categoryName === e.Category,
 			(el: CategoryName) => el.categoryName === e.Category,
 		)
-		console.log(categoryId)
+
 		const data: PostRegisterData = {
 			title: e.Title,
 			contents: e.Contents,

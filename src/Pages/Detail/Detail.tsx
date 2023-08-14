@@ -68,7 +68,7 @@ function Detail() {
 	)
 
 	const onHeart = () => {
-		if (token?.length === 0) return
+		if (token === null) return
 		heartMutate({ postId })
 	}
 

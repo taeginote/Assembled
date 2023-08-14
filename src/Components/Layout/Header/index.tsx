@@ -7,7 +7,7 @@ import {
 } from '../../../Styles/common'
 import { useAuth } from '../../../Contexts/auth'
 import SuccessModal from '../../Modal/successModal'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Hamburger from './MobileHamburger/Hamburger'
 import UserApi from '../../../Apis/UserApi'
 import { useState } from 'react'
@@ -20,6 +20,7 @@ import { useRecoilState } from 'recoil'
 function Haeder() {
 	const navigate = useNavigate()
 	const auth = useAuth()
+	const queryClient = useQueryClient()
 
 	const [successModal, setSuccessModal] = useState<boolean>(false)
 	const [recoilCounter, setRecoilCounter] =
@@ -42,7 +43,7 @@ function Haeder() {
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
-	console.log('헤더')
+
 	return (
 		<>
 			<S.Wrapper>
