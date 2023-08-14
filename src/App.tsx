@@ -6,6 +6,7 @@ import GlobalStyles from './Styles/global'
 import theme from './Styles/theme'
 import { RecoilRoot } from 'recoil'
 import AuthProvider from './Contexts/auth'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function App() {
 	const RouterObject = createBrowserRouter(router)
@@ -29,6 +30,7 @@ function App() {
 							<RouterProvider router={RouterObject} />
 						</ThemeProvider>
 					</RecoilRoot>
+					<ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
 				</QueryClientProvider>
 			</AuthProvider>
 		</>

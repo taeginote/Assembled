@@ -12,7 +12,7 @@ import useGetListData, {
 } from '../../Hooks/Queries/get-list'
 import { useSearchParams } from 'react-router-dom'
 import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import SearchBar from './Components/SearchBar/SearchBar'
@@ -48,6 +48,13 @@ function List() {
 		categoryId,
 	)
 	const totalPage: number = data?.response?.totalPages
+
+	useEffect(() => {
+		if (pageNumber !== 0) return
+		if (pageNumber === 0) {
+			setPage(1)
+		}
+	}, [pageNumber])
 
 	return (
 		<>

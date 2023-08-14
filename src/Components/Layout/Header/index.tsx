@@ -38,8 +38,7 @@ function Haeder() {
 	}
 
 	const goLogo = () => {
-		navigate('/')
-		window.location.reload()
+		navigate('')
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
