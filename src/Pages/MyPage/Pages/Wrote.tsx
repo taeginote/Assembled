@@ -51,7 +51,7 @@ function Wrote() {
 				<>
 					{isLoading ? (
 						<S.ListWrap>
-							<p>작성한 모임</p>
+							<p>운영중인 모임</p>
 							<S.Container>
 								{loadingArr.map((el: 0, idx: number) => (
 									<CardSkeleton key={idx} />
@@ -60,7 +60,7 @@ function Wrote() {
 						</S.ListWrap>
 					) : (
 						<S.ListWrap>
-							<p>작성한 모임</p>
+							<p>운영중인 모임</p>
 							<S.Container>
 								{data?.response?.content.map(
 									(el: ItemDataType, idx: number) => (

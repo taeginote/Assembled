@@ -68,7 +68,7 @@ function Haeder() {
 								<S.LogIn>
 									<div>
 										<S.Select onClick={() => navigate('/register')}>
-											새 글 쓰기
+											모임 생성
 										</S.Select>
 									</div>
 									<div>|</div>

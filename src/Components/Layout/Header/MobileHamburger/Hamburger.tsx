@@ -25,11 +25,11 @@ function Hamburger() {
 			url: '/',
 		},
 		{
-			name: '새 글 작성',
+			name: '모임 생성',
 			url: '/register',
 		},
 		{
-			name: '내가 작성한 글',
+			name: '운영중인 모임',
 			url: '/myPage',
 		},
 		{

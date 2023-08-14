@@ -1,9 +1,7 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 import UserApi from './UserApi'
 import TokenService from '../Utils/TokenService'
 import UserInfoService from '../Utils/UserInfoService'
-import { useSetRecoilState } from 'recoil'
-import { modalViewToken } from '../Atoms/modalViewToken'
 
 interface resDataType {
 	status: number

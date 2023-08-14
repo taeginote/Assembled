@@ -8,7 +8,7 @@ function SideFilterNav() {
 
 	const myPageFilterList = [
 		{
-			name: '내가 작성한 글',
+			name: '운영중인 모임',
 			url: '',
 		},
 		{

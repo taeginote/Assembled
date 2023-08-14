@@ -199,6 +199,9 @@ const Container = styled.div`
 `
 const Title = styled.h3`
 	margin-bottom: 3rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+	}
 `
 const Box = styled.div`
 	width: 100%;
