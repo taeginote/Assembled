@@ -157,14 +157,18 @@ function Detail() {
 							token={token}
 						/>
 					)}
-					<S.HeartBox>
-						{!data?.response?.likeStatus ? (
-							<NotFillHeart_Icon onClick={onHeart} />
-						) : (
-							<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
-						)}
-						<div>{data?.response?.likes}</div>
-					</S.HeartBox>
+
+					{!data?.response?.likeStatus ? (
+						<S.HeartBox onClick={onHeart}>
+							<NotFillHeart_Icon />
+							<div>{data?.response?.likes}</div>
+						</S.HeartBox>
+					) : (
+						<S.HeartBox onClick={() => cancelMutate(postId!)}>
+							<FillHeart_Icon />
+							<div>{data?.response?.likes}</div>
+						</S.HeartBox>
+					)}
 				</S.Container>
 			)}
 			{recoilCounter && (
@@ -225,6 +229,7 @@ const HeartBox = styled.div`
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		display: none;
 	}
+	cursor: pointer;
 `
 const Profile = styled.div`
 	${FlexAlignCSS}
