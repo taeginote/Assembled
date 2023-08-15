@@ -92,6 +92,9 @@ function Comment() {
 							{data?.response?.content.map((el: any, idx: number) => (
 								<S.container $state={changeViewNum === el.commentId} key={idx}>
 									<S.Left>
+										<S.Title>
+											여기에 해당 게시글 제목이 들어갈 예정입니다.
+										</S.Title>
 										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
 										{changeViewNum === el.commentId ? (
@@ -201,6 +204,10 @@ const container = styled.div<{ $state: boolean }>`
 const Left = styled.div`
 	width: 85%;
 `
+const Title = styled.div`
+	margin-bottom: 2rem;
+	font-size: ${({ theme }) => theme.FONT_SIZE.small};
+`
 const Time = styled.span`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
@@ -265,4 +272,5 @@ const S = {
 	Right,
 	Input,
 	InputWrap,
+	Title,
 }
