@@ -11,6 +11,7 @@ import Login from '../Pages/Form/Login/Login'
 import List from '../Pages/List'
 import SignUp from '../Pages/Form/SignUp/SignUp'
 import ChangeRegister from '../Pages/Register/ChangeRegister'
+import UserSetting from '../Pages/MyPage/Pages/UserSetting'
 
 const router = [
 	{
@@ -59,6 +60,10 @@ const router = [
 							{
 								path: '/myPage/withdrawal',
 								element: <Withdrawal />,
+							},
+							{
+								path: '/myPage/userSetting',
+								element: <UserSetting />,
 							},
 						],
 					},
