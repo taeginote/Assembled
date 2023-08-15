@@ -101,7 +101,7 @@ const Wrapper = styled.div`
 	${FlexCenterCSS}
 	&>div {
 		text-align: center;
-		line-height: 2.1;
+		/* line-height: 2.1; */
 	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		width: 85%;

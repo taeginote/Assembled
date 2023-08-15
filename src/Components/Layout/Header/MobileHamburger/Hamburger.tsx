@@ -37,6 +37,10 @@ function Hamburger() {
 			url: '/myPage/comment',
 		},
 		{
+			name: '내 정보 수정',
+			url: '/myPage/userSetting',
+		},
+		{
 			name: '로그아웃',
 			url: 'logout',
 		},

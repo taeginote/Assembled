@@ -16,6 +16,10 @@ function SideFilterNav() {
 			url: '/comment',
 		},
 		{
+			name: '내 정보 수정',
+			url: '/userSetting',
+		},
+		{
 			name: '회원 탈퇴',
 			url: '/withdrawal',
 		},
