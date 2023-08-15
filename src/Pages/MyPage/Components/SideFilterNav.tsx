@@ -16,6 +16,10 @@ function SideFilterNav() {
 			url: '/comment',
 		},
 		{
+			name: '내가 관심있는 모임',
+			url: '/likes',
+		},
+		{
 			name: '내 정보 수정',
 			url: '/userSetting',
 		},

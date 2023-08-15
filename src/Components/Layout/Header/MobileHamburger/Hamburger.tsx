@@ -37,6 +37,10 @@ function Hamburger() {
 			url: '/myPage/comment',
 		},
 		{
+			name: '내가 관심있는 모임',
+			url: '/myPage/likes',
+		},
+		{
 			name: '내 정보 수정',
 			url: '/myPage/userSetting',
 		},

@@ -12,6 +12,7 @@ import List from '../Pages/List'
 import SignUp from '../Pages/Form/SignUp/SignUp'
 import ChangeRegister from '../Pages/Register/ChangeRegister'
 import UserSetting from '../Pages/MyPage/Pages/UserSetting'
+import Likes from '../Pages/MyPage/Pages/Likes'
 
 const router = [
 	{
@@ -50,20 +51,24 @@ const router = [
 						element: <Mypage />,
 						children: [
 							{
-								path: '/myPage',
+								path: '',
 								element: <Wrote />,
 							},
 							{
-								path: '/myPage/comment',
+								path: 'comment',
 								element: <Comment />,
 							},
 							{
-								path: '/myPage/withdrawal',
+								path: 'withdrawal',
 								element: <Withdrawal />,
 							},
 							{
-								path: '/myPage/userSetting',
+								path: 'userSetting',
 								element: <UserSetting />,
+							},
+							{
+								path: 'likes',
+								element: <Likes />,
 							},
 						],
 					},

@@ -16,7 +16,7 @@ export interface ItemDataType {
 		originalName?: string
 	}
 	writerNickname?: string
-	perssonelNumber?: string
+	personnelNumber?: string
 	expectedPeriod?: string
 	commentCount?: string
 	likes?: number

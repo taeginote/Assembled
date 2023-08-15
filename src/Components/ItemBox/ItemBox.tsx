@@ -19,9 +19,9 @@ import TokenService from '../../Utils/TokenService'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
 import UserInfoService from '../../Utils/UserInfoService'
 
-function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
+function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 	const navigate = useNavigate()
-
+	console.log(data)
 	const token = TokenService.getAccessToken()
 
 	const {
@@ -30,7 +30,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 		categoryName,
 		writerProfileImages,
 		writerNickname,
-		perssonelNumber,
+		personnelNumber,
 		expectedPeriod,
 		commentCount,
 		likes,
@@ -98,7 +98,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch: any }) {
 				</div>
 				<span>
 					<Person_Icon />
-					<span>{perssonelNumber}인</span>
+					<span>{personnelNumber}인</span>
 					<Chat_Icon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>
