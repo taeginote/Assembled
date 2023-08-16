@@ -16,7 +16,7 @@ export type CommentApiType = {
 	postComment(data: CommentData): Promise<AxiosResponse<CommentData>>
 	getUserComment(params: any): Promise<AxiosResponse<any>>
 	deleteComment(params?: number): Promise<AxiosResponse<number>>
-	patchComment(data: any): Promise<AxiosResponse<any>>
+	putComment(data: any): Promise<AxiosResponse<any>>
 }
 
 export interface PostLike {
@@ -53,7 +53,7 @@ export interface PostApiType {
 	PostRegister(
 		params: PostRegisterData,
 	): Promise<AxiosResponse<PostRegisterData>>
-	PatchRegister(
+	putRegister(
 		params: PatchRegisterData,
 	): Promise<AxiosResponse<PatchRegisterData>>
 	getDetail(params: PostData): Promise<AxiosResponse<response>>

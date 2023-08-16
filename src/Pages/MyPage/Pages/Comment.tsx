@@ -45,7 +45,7 @@ function Comment() {
 		},
 	)
 	const { mutate: changeMutate } = useMutation(
-		data => CommentApi.patchComment(data),
+		data => CommentApi.putComment(data),
 		{
 			onSuccess: () => {
 				setChangeViewNum(null)

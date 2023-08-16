@@ -48,7 +48,7 @@ function ChangeRegister() {
 	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
 
 	const { mutate } = useMutation(
-		(data: PatchRegisterData) => PostApi.PatchRegister(data),
+		(data: PatchRegisterData) => PostApi.putRegister(data),
 		{
 			onSuccess: () => {
 				setModalView(true)
