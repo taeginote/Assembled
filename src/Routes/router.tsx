@@ -53,11 +53,11 @@ const router = [
 						children: [
 							{
 								path: '',
-								element: <Wrote />,
+								element: <Activity />,
 							},
 							{
-								path: 'activity',
-								element: <Activity />,
+								path: 'wrote',
+								element: <Wrote />,
 							},
 							{
 								path: 'comment',

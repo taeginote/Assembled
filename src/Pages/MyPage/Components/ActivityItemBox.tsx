@@ -6,14 +6,12 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../../Styles/common'
-import {
-	Chat_Icon,
-	FillHeart_Icon,
-	NotFillHeart_Icon,
-	Person_Icon,
-} from '../../../Icons/Icons'
-import TokenService from '../../../Utils/TokenService'
+import { Person_Icon } from '../../../Icons/Icons'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
+import Button from '../../../Components/Button/Button'
+import { Question_Icon } from '../../../Icons/Icons'
+import { Warning_Icon } from '../../../Icons/Icons'
+import { FlexCenterCSS } from '../../../Styles/common'
 
 function ActivityItemBox({
 	data,
@@ -22,10 +20,6 @@ function ActivityItemBox({
 	data: ItemDataType
 	refetch?: any
 }) {
-	const navigate = useNavigate()
-
-	const token = TokenService.getAccessToken()
-
 	const {
 		postId,
 		title,
@@ -49,14 +43,32 @@ function ActivityItemBox({
 	 * 페이지네이션 ( 다양한 모임에 활동중인 사람이 있을수있습니다. 저는 한 페이지에 4개를 받을 예정입니다.)
 	 *  */
 
+	//Member Test Array
+	const memberTestArray = [
+		{
+			name: '신형만',
+			url: 'https://i.namu.wiki/i/PAC1nP5VNDcG0B85hshoIAWaJJqoPgRHwkNMvAnBG6LSZuSiTq5pwtqGk-cjERXIlOKWwTGZOFfxLfrjPxE-Bg.webp',
+		},
+		{
+			name: '문',
+			url: 'https://i.namu.wiki/i/x3gcnscPd_zCtI0mRZSjo9oqknbbwGAq19WLTDYuRNpCYPa7XBLkGNvt6BxjmCrHxYaaQe2_-kukiiuIPo9CBA.webp',
+		},
+	]
+
 	const profileImg = ProfileImgReturn(writerProfileImages?.fileFullPath)
 
 	return (
 		<S.Wrapper>
 			<S.TopWrap>
 				<S.Status>모집중</S.Status>
+				<Button
+					size="big"
+					onClick={() => alert('모임 활동 페이지는 준비중입니다 :)')}
+				>
+					모임 활동
+				</Button>
 			</S.TopWrap>
-			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
+			<S.Container>
 				<S.Period>카테고리 | {categoryName}</S.Period>
 				<S.Title>
 					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
@@ -71,8 +83,17 @@ function ActivityItemBox({
 				<span>
 					<Person_Icon />
 					<span>{personnelNumber}인</span>
+					<Question_Icon />
 					{/* <Chat_Icon size={'20'} />
 					<div>{commentCount}개</div> */}
+					<div>
+						{memberTestArray.map(el => (
+							<S.UserList>
+								<S.UserImg src={el.url} />
+								<div>{el.name}</div>
+							</S.UserList>
+						))}
+					</div>
 				</span>
 			</S.UserBox>
 		</S.Wrapper>
@@ -86,14 +107,10 @@ const Wrapper = styled.div`
 	border: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	padding: 3rem;
 	border-radius: 2rem;
-	cursor: pointer;
 	width: 100%;
 	min-width: 25rem;
 	margin-bottom: 2rem;
-	&:hover {
-		transform: scale(1.01);
-		transition: transform 0.2s;
-	}
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		min-width: 100%;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ss};
@@ -120,16 +137,24 @@ const UserBox = styled.div`
 		${FlexAlignCSS}
 	}
 	& > span {
-		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		position: relative;
+		& > div {
 			display: none;
+			position: absolute;
+			min-width: 10rem;
+			right: -3rem;
+			top: -9.5rem;
+			border-radius: 0.5rem;
+			background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
+		}
+		&:hover {
+			& > div {
+				display: block;
+			}
 		}
 		${FlexAlignCSS}
-		span {
-			margin-right: 1rem;
-		}
-		* {
-			margin-right: 0.5rem;
-			opacity: 0.7;
+		&>span {
+			margin: 0 0.5rem;
 		}
 	}
 `
@@ -175,6 +200,14 @@ const TopWrap = styled.div`
 	width: 100%;
 	${FlexBetweenCSS}
 `
+const UserList = styled.div`
+	display: flex;
+
+	min-width: 10rem;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	${FlexAlignCSS}
+`
 
 const S = {
 	Wrapper,
@@ -187,4 +220,5 @@ const S = {
 	UserImg,
 	Title,
 	TopWrap,
+	UserList,
 }

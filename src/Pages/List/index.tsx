@@ -23,7 +23,7 @@ import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
 function List() {
 	//보류
 	const [searchParams, setSearchParams] = useSearchParams()
-	let categoryId: categoryType = Number(searchParams.get('category')) | 1
+	let categoryId: categoryType = Number(searchParams.get('category')) || 1
 	let sort: filterType = searchParams.get('sort')
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState(pageNumber || 1)

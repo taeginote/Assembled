@@ -30,11 +30,11 @@ function Hamburger() {
 		},
 		{
 			name: '내가 활동중인 모임',
-			url: '/myPage/activity',
+			url: '/myPage',
 		},
 		{
 			name: '내가 만든 모임',
-			url: '/myPage',
+			url: '/myPage/wrote',
 		},
 		{
 			name: '내가 작성한 댓글',

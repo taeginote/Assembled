@@ -38,11 +38,10 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 	} = data
 
 	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
-	console.log({ profileImg })
+
 	// 프로필 이미지 수정
 
-	let period =
-		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
+	let period = expectedPeriod == '0' ? '제한없음' : expectedPeriod + '달뒤'
 
 	const { mutate } = useMutation(
 		(likeData: PostLike) => PostLikeApi.PostLike(likeData),
@@ -98,7 +97,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 				</div>
 				<span>
 					<Person_Icon />
-					<span>{personnelNumber}인</span>
+					<span>{personnelNumber == '0' ? 'N명' : personnelNumber}</span>
 					<Chat_Icon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>

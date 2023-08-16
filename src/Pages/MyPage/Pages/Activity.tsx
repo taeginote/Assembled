@@ -38,11 +38,11 @@ function Activity() {
 		<S.Wrapper>
 			<S.ListWrap>
 				<p>내가 활동중인 모임</p>
-				{/* <S.Container> */}
+
 				{testArr.map((el, idx: number) => (
 					<ActivityItemBox data={testObject} key={idx} />
 				))}
-				{/* </S.Container> */}
+
 				<Pagination totalPage={1} limit={10} scroll={765} setPage={setPage} />
 			</S.ListWrap>
 		</S.Wrapper>

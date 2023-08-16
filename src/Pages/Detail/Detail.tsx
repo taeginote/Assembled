@@ -324,9 +324,13 @@ const Info = styled.div`
 	}
 `
 const Dec = styled.pre`
+	width: 100%;
+
+	white-space: pre-wrap;
+
+	word-wrap: break-word;
 	margin: 3rem 0 5rem 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
-	/* background-color: red; */
 	min-height: 30rem;
 	border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 `
