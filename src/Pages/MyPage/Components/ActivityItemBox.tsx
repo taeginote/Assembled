@@ -1,100 +1,84 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { ItemDataType } from '../../../Types/type'
 import {
 	FlexAlignCSS,
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../../Styles/common'
 import {
-	Person_Icon,
 	Chat_Icon,
-	Pen_Icon,
-	Trash_Icon,
+	FillHeart_Icon,
+	NotFillHeart_Icon,
+	Person_Icon,
 } from '../../../Icons/Icons'
-import { ItemDataType } from '../../../Types/type'
-import Ballon from '../../../Components/Ballon/Ballon'
-import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
-import { useSetRecoilState } from 'recoil'
+import TokenService from '../../../Utils/TokenService'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
-// import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 
-function ItemBoxMyPage({
+function ActivityItemBox({
 	data,
-	setPostId,
+	refetch,
 }: {
 	data: ItemDataType
-	setPostId: React.Dispatch<React.SetStateAction<number>>
+	refetch?: any
 }) {
 	const navigate = useNavigate()
+
+	const token = TokenService.getAccessToken()
+
 	const {
 		postId,
 		title,
 		categoryName,
-		// profile,
+		writerProfileImages,
 		writerNickname,
 		personnelNumber,
 		expectedPeriod,
 		commentCount,
-		writerProfileImages,
+		likes,
+		likeStatus,
 	} = data
 
-	// const profileImg = ProfileImgReturn(writerProfileImages[0].fileFullPath)
+	/**
+	 * 필요한 데이터
+	 * postStatus (모집중 혹은 모집완료)
+	 * categoryName (카테고리)
+	 * title (모임 이름)
+	 * 이미지를 담당자 이미지 즉, 방장의 이미지 와 방장 닉네임
+	 * 현 활동하고 있는 인원 수
+	 * 페이지네이션 ( 다양한 모임에 활동중인 사람이 있을수있습니다. 저는 한 페이지에 4개를 받을 예정입니다.)
+	 *  */
 
-	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
-
-	const onDeleteClub = (e?: number) => {
-		setRecoilCounter(true)
-		setPostId(e!)
-	}
-	let period =
-		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
+	const profileImg = ProfileImgReturn(writerProfileImages?.fileFullPath)
 
 	return (
 		<S.Wrapper>
 			<S.TopWrap>
 				<S.Status>모집중</S.Status>
-				<p>
-					<button
-						onClick={() => navigate(`/register/${postId}`)}
-						title="Modify"
-					>
-						<div>
-							<Ballon text={'모임 수정'} />
-						</div>
-						<Pen_Icon />
-					</button>
-					<button onClick={() => onDeleteClub(postId)} title="Delete">
-						<div>
-							<Ballon text={'모임 삭제'} />
-						</div>
-						<Trash_Icon />
-					</button>
-				</p>
 			</S.TopWrap>
-
 			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
-				<S.Period>마감일 | {period}</S.Period>
+				<S.Period>카테고리 | {categoryName}</S.Period>
 				<S.Title>
 					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
 				</S.Title>
-				<S.Category>{categoryName}</S.Category>
+				{/* <S.Category>{categoryName}</S.Category> */}
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={'profileImg'} />
-					<div>{writerNickname}</div>
+					<S.UserImg src={profileImg} alt="UserImage" />
+					<div>담당자 | {writerNickname}</div>
 				</div>
 				<span>
 					<Person_Icon />
 					<span>{personnelNumber}인</span>
-					<Chat_Icon size={'20'} />
-					<div>{commentCount}개</div>
+					{/* <Chat_Icon size={'20'} />
+					<div>{commentCount}개</div> */}
 				</span>
 			</S.UserBox>
 		</S.Wrapper>
 	)
 }
-export default ItemBoxMyPage
+export default ActivityItemBox
 
 const Wrapper = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
@@ -104,10 +88,15 @@ const Wrapper = styled.div`
 	border-radius: 2rem;
 	cursor: pointer;
 	width: 100%;
-	min-width: 15rem;
+	min-width: 25rem;
+	margin-bottom: 2rem;
 	&:hover {
 		transform: scale(1.01);
 		transition: transform 0.2s;
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		min-width: 100%;
+		font-size: ${({ theme }) => theme.FONT_SIZE.ss};
 	}
 `
 const Container = styled.div`
@@ -116,10 +105,9 @@ const Container = styled.div`
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
-		margin: 1rem 0;
+		margin-top: 1rem;
 		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 			font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-			text-align: start;
 		}
 	}
 	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
@@ -161,9 +149,9 @@ const Status = styled.span`
 	border-radius: 1rem;
 `
 const Category = styled.span`
+	background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-	color: #fb9b00;
-	background-color: #fff3e0;
+	color: ${({ theme }) => theme.COLOR.common.gray[300]};
 	padding: 0.1rem 0.7rem;
 	text-align: center;
 	border-radius: 1rem;
@@ -176,7 +164,6 @@ const Period = styled.div`
 const Title = styled.div`
 	min-height: 8rem;
 	max-height: 8rem;
-	text-align: start;
 `
 const UserImg = styled.img`
 	border-radius: 50%;
@@ -187,26 +174,6 @@ const UserImg = styled.img`
 const TopWrap = styled.div`
 	width: 100%;
 	${FlexBetweenCSS}
-	&>p {
-		width: 25%;
-		${FlexBetweenCSS}
-		&>button {
-			background-color: white;
-			position: relative;
-			& > div {
-				display: none;
-			}
-			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-				margin-right: 1.3rem;
-			}
-		}
-		& > button:hover {
-			scale: 1.1;
-			& > div {
-				display: block;
-			}
-		}
-	}
 `
 
 const S = {

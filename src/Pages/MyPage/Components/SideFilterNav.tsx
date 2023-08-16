@@ -8,8 +8,12 @@ function SideFilterNav() {
 
 	const myPageFilterList = [
 		{
-			name: '운영중인 모임',
+			name: '내가 만든 모임',
 			url: '',
+		},
+		{
+			name: '내가 활동중인 모임',
+			url: '/activity',
 		},
 		{
 			name: '내가 작성한 댓글',

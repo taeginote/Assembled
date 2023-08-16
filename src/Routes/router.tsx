@@ -13,6 +13,7 @@ import SignUp from '../Pages/Form/SignUp/SignUp'
 import ChangeRegister from '../Pages/Register/ChangeRegister'
 import UserSetting from '../Pages/MyPage/Pages/UserSetting'
 import Likes from '../Pages/MyPage/Pages/Likes'
+import Activity from '../Pages/MyPage/Pages/Activity'
 
 const router = [
 	{
@@ -53,6 +54,10 @@ const router = [
 							{
 								path: '',
 								element: <Wrote />,
+							},
+							{
+								path: 'activity',
+								element: <Activity />,
 							},
 							{
 								path: 'comment',

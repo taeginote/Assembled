@@ -21,7 +21,7 @@ import UserInfoService from '../../Utils/UserInfoService'
 
 function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 	const navigate = useNavigate()
-	console.log(data)
+
 	const token = TokenService.getAccessToken()
 
 	const {
@@ -37,8 +37,8 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 		likeStatus,
 	} = data
 
-	const profileImg = ProfileImgReturn(writerProfileImages?.fileFullPath)
-
+	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
+	console.log({ profileImg })
 	// 프로필 이미지 수정
 
 	let period =

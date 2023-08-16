@@ -29,7 +29,11 @@ function Hamburger() {
 			url: '/register',
 		},
 		{
-			name: '운영중인 모임',
+			name: '내가 활동중인 모임',
+			url: '/myPage/activity',
+		},
+		{
+			name: '내가 만든 모임',
 			url: '/myPage',
 		},
 		{
