@@ -31,7 +31,7 @@ function SelectInput(props: SelectInputProps) {
 		: datailData === 0
 		? '제한 없음'
 		: undefined
-
+	console.log(Data)
 	return (
 		<>
 			<Controller
@@ -46,7 +46,11 @@ function SelectInput(props: SelectInputProps) {
 						<S.Wrapper onClick={() => setIsView(!isView)}>
 							<S.Title $isView={isView} $status={field.value === undefined}>
 								<div>
-									{field.value === undefined ? '선택해 주세요' : field.value}
+									{field.value === undefined
+										? '선택해 주세요'
+										: field.value === 0
+										? '제한 없음'
+										: field.value}
 								</div>
 
 								<span>
