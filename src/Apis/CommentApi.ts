@@ -16,12 +16,8 @@ const CommentApi: CommentApiType = {
 	deleteComment(commentId) {
 		return axiosInstance.delete(`${PATH}/${commentId}`)
 	},
-	patchComment(data) {
-		const { commentId, contents } = data
-
-		return axiosInstance.patch(
-			PATH + `?commentId=${commentId}&contents=${contents}`,
-		)
+	putComment(data) {
+		return axiosInstance.put(PATH, data)
 	},
 }
 
