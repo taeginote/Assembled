@@ -16,6 +16,7 @@ import {
 	BsCaretDownFill,
 	BsFileEarmarkPerson,
 	BsTrash,
+	BsDot,
 } from 'react-icons/bs'
 import { BiUser, BiHappy } from 'react-icons/bi'
 import { MdOutlineCancel, MdOutlineToday } from 'react-icons/md'
@@ -56,6 +57,9 @@ export const Warning_Icon = ({ size }: IconSize) => (
 ) //경고
 
 export const DownIcon = () => <BsCaretDownFill size={'30'} color="#FB9B00" />
+export const SmallDownIcon = () => (
+	<BsCaretDownFill size={'20'} color="#FB9B00" />
+)
 
 export const Computer_Icon = () => <RiComputerLine size={'30'} /> //컴퓨터
 
@@ -99,3 +103,6 @@ export const Cancel_Icon = () => <MdOutlineCancel size={'17'} color="#777" /> //
 export const Cancel_big_Icon = ({ onClick }: any) => (
 	<RxCross2 size={'35'} color="#FB9B00" onClick={onClick} />
 ) //취소 버튼
+
+export const Dot_Icon = () => <BsDot size={'35'} color="#FB9B00" />
+//점
