@@ -6,7 +6,7 @@ import { Control, Controller, FieldValues } from 'react-hook-form'
 import HookFormError from '../../../../Components/Error/HookFormError'
 
 interface Option {
-	value?: number
+	value?: number | string
 	text?: string
 }
 interface CategoryOption extends Option {
@@ -45,13 +45,23 @@ function SelectInput(props: SelectInputProps) {
 					<>
 						<S.Wrapper onClick={() => setIsView(!isView)}>
 							<S.Title $isView={isView} $status={field.value === undefined}>
-								<div>
-									{field.value === undefined
-										? '선택해 주세요'
-										: field.value === 0
-										? '제한 없음'
-										: field.value}
-								</div>
+								{name === 'status' ? (
+									<div>
+										{field.value === undefined
+											? '선택해 주세요'
+											: field.value === 0
+											? '제한 없음'
+											: field.value}
+									</div>
+								) : (
+									<div>
+										{field.value === undefined
+											? '선택해 주세요'
+											: field.value === 'PROGRESS'
+											? '모집중'
+											: '모집완료'}
+									</div>
+								)}
 
 								<span>
 									<DownIcon />

@@ -6,7 +6,10 @@ import {
 	TopPadding,
 	WidthAutoCSS,
 } from '../../Styles/common'
-import { selectDataTeamMember } from './Components/SelectBox/SelectData'
+import {
+	PostStatus,
+	selectDataTeamMember,
+} from './Components/SelectBox/SelectData'
 import { selectDataPeriod } from './Components/SelectBox/SelectData'
 import { useRecoilState } from 'recoil'
 import ConfirmModal from '../../Components/Modal/confirmModal'
@@ -26,7 +29,6 @@ import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import PostApi from '../../Apis/PostApi'
 import { PatchRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
-import UserIdService from '../../Utils/UserIdService'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useGetDetailData from '../../Hooks/Queries/get-detail'
@@ -58,10 +60,7 @@ function ChangeRegister() {
 	)
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
-		const writer = UserIdService.getUserId()
-
 		let categoryId = GetCategoryData?.response.find(
-			// (el: CategoryName) => el.categoryName === e.Category,
 			(el: CategoryName) => el.categoryName === e.Category,
 		)
 
@@ -71,12 +70,12 @@ function ChangeRegister() {
 			categoryId: categoryId?.categoryId,
 			personnelNumber: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
 			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,
-			postStatus: 'PROGRESS', //PROGRESS , COMPLETED
+			postStatus: e.Status,
 			postId: Number(postId),
 		}
 		mutate(data)
 	}
-
+	console.log(data)
 	return (
 		<>
 			{data !== undefined && (
@@ -111,6 +110,16 @@ function ChangeRegister() {
 								control={control}
 								errorMsg="프로젝트 기간을 선택해주세요."
 								datailData={data?.response?.expectedPeriod}
+							/>
+						</S.Box>
+						<S.Box>
+							<div>모임 모집 여부 *</div>
+							<SelectInput
+								name="Status"
+								Data={PostStatus}
+								control={control}
+								errorMsg="프로젝트 모집 여부를 선택해주세요"
+								datailData={data?.response?.postStatus}
 							/>
 						</S.Box>
 					</S.Container>

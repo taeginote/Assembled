@@ -55,3 +55,14 @@ export const selectDataPeriod = [
 		value: 0,
 	},
 ]
+
+export const PostStatus = [
+	{
+		text: '모집중',
+		value: 'PROGRESS',
+	},
+	{
+		text: '모집완료',
+		value: 'COMPLETED',
+	},
+]
