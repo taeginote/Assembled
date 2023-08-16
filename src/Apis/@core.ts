@@ -2,6 +2,7 @@ import axios from 'axios'
 import UserApi from './UserApi'
 import TokenService from '../Utils/TokenService'
 import UserInfoService from '../Utils/UserInfoService'
+import UserIdService from '../Utils/UserIdService'
 
 interface resDataType {
 	status: number
@@ -44,6 +45,10 @@ axiosInstance.interceptors.response.use(
 		if (error.response.status === 403) {
 			TokenService.removeAccessToken()
 			UserInfoService.removeUserInfo()
+			UserIdService.removeUserId()
+			window.location.reload()
+
+			alert('인증토큰이 만료되었습니다\n다시 로그인 해주세요')
 			return Promise.reject(error)
 		}
 
