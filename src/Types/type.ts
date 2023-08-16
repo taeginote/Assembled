@@ -12,7 +12,7 @@ export interface ItemDataType {
 	title?: string
 	categoryName?: string
 	writerProfileImages?: {
-		fileFullPath?: string
+		filePath?: string
 		originalName?: string
 	}
 	writerNickname?: string
