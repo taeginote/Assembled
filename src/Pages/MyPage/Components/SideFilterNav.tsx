@@ -2,12 +2,7 @@ import styled from 'styled-components'
 import { FlexAlignCSS, FlexColumnCSS } from '../../../Styles/common'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import {
-	Dot_Icon,
-	DownIcon,
-	Plus_Icon,
-	SmallDownIcon,
-} from '../../../Icons/Icons'
+import { SmallDownIcon } from '../../../Icons/Icons'
 
 function SideFilterNav() {
 	const navigate = useNavigate()
@@ -56,15 +51,21 @@ function SideFilterNav() {
 			children: [
 				{
 					name: '내 정보 수정',
-					url: '/userSetting',
+					url: '/setting/userSetting',
 				},
 				{
 					name: '회원 탈퇴',
-					url: '/withdrawal',
+					url: '/setting/withdrawal',
 				},
 			],
 		},
 	]
+
+	const onClickOneDepth = (title: string) => {
+		navigate(title)
+		setSelectTitle(null)
+	}
+
 	useEffect(() => {
 		setSelectTitle(currentPage)
 	}, [])
@@ -83,10 +84,12 @@ function SideFilterNav() {
 							}
 						>
 							{el.sort}
-							<SmallDownIcon />
+							<div>
+								<SmallDownIcon />
+							</div>
 						</S.OneDepthBox>
 					) : (
-						<S.OneDepthBox key={idx} onClick={() => navigate(el.title)}>
+						<S.OneDepthBox key={idx} onClick={() => onClickOneDepth(el.title)}>
 							{el.sort}
 						</S.OneDepthBox>
 					)}
@@ -133,7 +136,15 @@ const OneDepthBox = styled.div`
 const TwoDepthBox = styled.div<{ $state: boolean }>`
 	width: 140%;
 	min-height: 4.3rem;
-
+	@keyframes dropdown {
+		0% {
+			transform: translateY(-100%);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+	animation: dropdown 0.4s ease;
 	cursor: pointer;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	${FlexAlignCSS};

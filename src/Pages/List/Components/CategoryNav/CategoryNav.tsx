@@ -12,7 +12,7 @@ export type Category = {
 
 function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	let category: number = Number(searchParams.get('category')) | 1
+	let category: number = Number(searchParams.get('category')) || 1
 
 	const { data, isLoading } = useGetCategoryData()
 
