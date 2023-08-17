@@ -34,7 +34,7 @@ function Hamburger() {
 		},
 		{
 			name: '내가 만든 모임',
-			url: '/myPage/wrote',
+			url: '/myPage/meeting/wrote',
 		},
 		{
 			name: '내가 작성한 댓글',
@@ -42,11 +42,11 @@ function Hamburger() {
 		},
 		{
 			name: '내가 관심있는 모임',
-			url: '/myPage/likes',
+			url: '/myPage/meeting/likes',
 		},
 		{
 			name: '내 정보 수정',
-			url: '/myPage/userSetting',
+			url: '/myPage/setting/userSetting',
 		},
 		{
 			name: '로그아웃',
@@ -54,7 +54,7 @@ function Hamburger() {
 		},
 		{
 			name: '회원 탈퇴',
-			url: '/myPage/withdrawal',
+			url: '/myPage/setting/withdrawal',
 		},
 	]
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
@@ -113,7 +113,7 @@ const Wrapper = styled.div`
 `
 const ListBox = styled.ul`
 	position: absolute;
-	width: 50vw;
+	width: 55vw;
 	height: 100vh;
 	top: -1.5rem;
 	right: -3rem;

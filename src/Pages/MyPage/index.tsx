@@ -31,12 +31,11 @@ const Container = styled.div`
 	justify-content: space-between;
 
 	& > span {
-		width: 100%;
 		display: flex;
-	}
-
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		/* flex-direction: column; */
+		width: 80%;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			width: 100%;
+		}
 	}
 `
 const S = { Wrapper, Container }

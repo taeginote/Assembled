@@ -75,7 +75,7 @@ function ChangeRegister() {
 		}
 		mutate(data)
 	}
-	console.log(data)
+
 	return (
 		<>
 			{data !== undefined && (

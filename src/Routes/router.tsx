@@ -56,24 +56,24 @@ const router = [
 								element: <Activity />,
 							},
 							{
-								path: 'wrote',
+								path: 'meeting/wrote',
 								element: <Wrote />,
+							},
+							{
+								path: 'meeting/likes',
+								element: <Likes />,
 							},
 							{
 								path: 'comment',
 								element: <Comment />,
 							},
 							{
-								path: 'withdrawal',
+								path: 'setting/withdrawal',
 								element: <Withdrawal />,
 							},
 							{
-								path: 'userSetting',
+								path: 'setting/userSetting',
 								element: <UserSetting />,
-							},
-							{
-								path: 'likes',
-								element: <Likes />,
 							},
 						],
 					},

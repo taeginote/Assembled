@@ -8,6 +8,7 @@ import {
 	AiOutlineCheckCircle,
 	AiFillHeart,
 	AiOutlineHeart,
+	AiOutlinePlus,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -22,10 +23,11 @@ import { BiUser, BiHappy } from 'react-icons/bi'
 import { MdOutlineCancel, MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
-import { FaQuestion, FaPen } from 'react-icons/fa'
+import { FaQuestion, FaPen, FaPlus } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { RxCross2 } from 'react-icons/rx'
+import { HiOutlinePlus } from 'react-icons/hi'
 type IconSize = {
 	size?: string
 }
@@ -58,7 +60,7 @@ export const Warning_Icon = ({ size }: IconSize) => (
 
 export const DownIcon = () => <BsCaretDownFill size={'30'} color="#FB9B00" />
 export const SmallDownIcon = () => (
-	<BsCaretDownFill size={'20'} color="#FB9B00" />
+	<BsCaretDownFill size={'20'} color="#a6a6a6" />
 )
 
 export const Computer_Icon = () => <RiComputerLine size={'30'} /> //컴퓨터
@@ -106,3 +108,6 @@ export const Cancel_big_Icon = ({ onClick }: any) => (
 
 export const Dot_Icon = () => <BsDot size={'35'} color="#FB9B00" />
 //점
+
+export const Plus_Icon = () => <HiOutlinePlus size={'22'} color="#FB9B00" />
+//플러스

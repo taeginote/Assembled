@@ -31,7 +31,7 @@ function SelectInput(props: SelectInputProps) {
 		: datailData === 0
 		? '제한 없음'
 		: undefined
-	console.log(Data)
+
 	return (
 		<>
 			<Controller

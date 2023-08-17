@@ -68,7 +68,8 @@ const ListWrap = styled.div`
 	flex-direction: column;
 	align-items: center;
 	margin-left: 20rem;
-	width: 100%;
+	width: 90%;
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 4.5rem;
 	}

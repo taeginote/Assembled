@@ -140,7 +140,6 @@ export default UserSetting
 
 const Wrapper = styled.form`
 	width: 100%;
-	margin: 0 10rem;
 	display: flex;
 	justify-content: center;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
