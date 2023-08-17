@@ -35,6 +35,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 		commentCount,
 		likes,
 		likeStatus,
+		postStatus, //'PROGRESS' | 'COMPLETED'
 	} = data
 
 	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
@@ -72,7 +73,11 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 	return (
 		<S.Wrapper>
 			<S.TopWrap>
-				<S.Status>모집중</S.Status>
+				{postStatus === 'PROGRESS' ? (
+					<S.Status $state={true}>모집중</S.Status>
+				) : (
+					<S.Status $state={false}>모집완료</S.Status>
+				)}
 				{token && (
 					<>
 						{!likeStatus ? (
@@ -166,10 +171,13 @@ const MainImgContainer = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	}
 `
-const Status = styled.span`
-	background-color: ${({ theme }) => theme.COLOR.orange};
+const Status = styled.span<{ $state: boolean }>`
+	background-color: ${({ theme, $state }) =>
+		$state ? theme.COLOR.orange : theme.COLOR.common.gray[100]};
+
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-	color: ${({ theme }) => theme.COLOR.hover};
+	color: ${({ theme, $state }) =>
+		$state ? theme.COLOR.hover : theme.COLOR.common.gray[200]};
 	padding: 0.1rem 0.7rem;
 	text-align: center;
 	border-radius: 1rem;

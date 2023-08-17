@@ -130,8 +130,6 @@ const OneDepthBox = styled.div`
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	${FlexAlignCSS}
 	justify-content: space-between;
-
-	z-index: 100000;
 `
 const TwoDepthBox = styled.div<{ $state: boolean }>`
 	width: 140%;

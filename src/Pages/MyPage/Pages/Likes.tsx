@@ -23,10 +23,10 @@ function Likes() {
 		personnelNumber: '2',
 		postId: 128,
 		postProfileImages: [],
-		postStatus: 'PROGRESS',
 		title: '안녕하세요',
 		writerId: 86,
 		writerNickname: 'taek11',
+		postStatus: 'PROGRESS',
 	}
 
 	const [searchParams, setSearchParams] = useSearchParams()
@@ -36,7 +36,7 @@ function Likes() {
 	return (
 		<S.Wrapper>
 			<S.ListWrap>
-				<p>관심있는 모임</p>
+				<p>관심있는 모임 (준비중)</p>
 				<S.Container>
 					{testArr.map((el, idx: number) => (
 						<ItemBox data={testObject} key={idx} />

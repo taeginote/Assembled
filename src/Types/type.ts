@@ -21,6 +21,7 @@ export interface ItemDataType {
 	commentCount?: string
 	likes?: number
 	likeStatus?: boolean
+	postStatus: 'PROGRESS' | 'COMPLETED'
 }
 
 //onKey도 쓰이고 target도 쓰이는곳

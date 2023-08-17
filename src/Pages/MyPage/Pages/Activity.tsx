@@ -37,7 +37,7 @@ function Activity() {
 	return (
 		<S.Wrapper>
 			<S.ListWrap>
-				<p>내가 활동중인 모임</p>
+				<p>내가 활동중인 모임 (준비중)</p>
 
 				{testArr.map((el, idx: number) => (
 					<ActivityItemBox data={testObject} key={idx} />
