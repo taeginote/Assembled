@@ -8,7 +8,7 @@ const getCategoryData = async () => {
 	return res.data
 }
 
-type Category = {
+export type Category = {
 	categoryId: number
 	categoryName: string
 }
@@ -18,10 +18,11 @@ interface UseCategoryType {
 
 const useGetCategoryData = () => {
 	//보류
-	const { data, isLoading, refetch } = useQuery<any, boolean>(
+	const { data, isLoading, refetch } = useQuery<UseCategoryType, boolean>(
 		['useGetCategoryData'],
 		() => getCategoryData(),
 	)
+
 	return { data, isLoading, refetch }
 }
 

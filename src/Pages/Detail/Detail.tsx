@@ -37,8 +37,8 @@ function Detail() {
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
-	const profileImg = ProfileImgReturn(data?.profile?.fileFullPath)
-	const IsMinePage = data?.response.writerId == UserId ? true : false
+	const profileImg = ProfileImgReturn(data?.writerProfileImages)
+	const IsMinePage = data?.response?.writerId == UserId ? true : false
 
 	const { mutate } = useMutation(
 		(postId: number | undefined) => PostApi.DeletePost(postId),

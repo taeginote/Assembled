@@ -67,7 +67,7 @@ function ChangeRegister() {
 		const data: PatchRegisterData = {
 			title: e.Title,
 			contents: e.Contents,
-			categoryId: categoryId?.categoryId,
+			categoryId: categoryId!.categoryId,
 			personnelNumber: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
 			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,
 			postStatus: e.Status,
@@ -86,7 +86,7 @@ function ChangeRegister() {
 							<div>카테고리 *</div>
 							<SelectInput
 								name="Category"
-								Data={GetCategoryData?.response}
+								Data={GetCategoryData!.response}
 								control={control}
 								errorMsg="카테고리를 선택해주세요."
 								datailData={data?.response?.categoryName}

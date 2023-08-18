@@ -15,38 +15,6 @@ let listData: listDataType = {
 for (let i = 0; i < 10; i++) {
 	listData.response.push(
 		{
-			postId: i,
-			title: '인프런에서 스터디 구합니다.',
-			contents: '어셈블 프로젝트에서 디자이너 1명 구합니다.',
-			categoryName: 'project',
-			writerNickname: '아디다스',
-			writeDate: CurrentTime(),
-			postStatus: '모집중',
-			hits: '5',
-			likes: '3',
-			personnelNumber: 5,
-			expectedPeriod: '3',
-			profile: {
-				fileFullPath:
-					'https://i.pinimg.com/550x/ec/11/a2/ec11a24bf2a02078962b9f32f71d8c49.jpg', // 예시) D://project/file
-				originalName: '파일 이름',
-			},
-			commentCount: 1,
-			comments: [
-				{
-					commentContents:
-						'대면하시는 지역이 궁금합니다. 혹시 오픈 채팅방이 있을까요? 질문이있습니다.',
-					commentCreator: '꼬꼬마 동그리',
-					commentCreatedDate: CurrentTime(),
-					userProfile: {
-						fileFullPath:
-							'https://item.kakaocdn.net/do/4541d21d270056444e826e2996f30e688f324a0b9c48f77dbce3a43bd11ce785', // 예시) D://project/file
-						originalName: '파일 이름',
-					},
-				},
-			],
-		},
-		{
 			postId: (i + 1) * 100,
 			title: '사이드프로젝트 같이 할 인원구합니다.',
 			contents: '우아한테크코스 지원할 예정인데 백3 프2로 진행할 예정입니다.',

@@ -25,11 +25,9 @@ import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import PostApi from '../../Apis/PostApi'
 import { PostRegisterData } from '../../Types/apiType'
-import useGetCategoryData from '../../Hooks/Queries/get-category'
+import useGetCategoryData, { Category } from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
 import { useState } from 'react'
-
-type CategoryName = { categoryName: 'string' }
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -57,13 +55,13 @@ function Register() {
 		const writer = UserIdService.getUserId()
 
 		let categoryId = GetCategoryData?.response.find(
-			(el: CategoryName) => el.categoryName === e.Category,
+			(el: Category) => el.categoryName === e.Category,
 		)
 
 		const data: PostRegisterData = {
 			title: e.Title,
 			contents: e.Contents,
-			categoryId: categoryId.categoryId,
+			categoryId: categoryId!.categoryId,
 			personnelNumber: e.TeamMember,
 			expectedPeriod: e.Period,
 		}
@@ -78,7 +76,7 @@ function Register() {
 					<div>카테고리 *</div>
 					<SelectInput
 						name="Category"
-						Data={GetCategoryData?.response}
+						Data={GetCategoryData!.response}
 						control={control}
 						errorMsg="카테고리를 선택해주세요."
 					/>

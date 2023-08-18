@@ -1,6 +1,11 @@
 import { AxiosResponse } from 'axios'
 import { response } from './dataType'
-import { categoryType, filterType } from '../Hooks/Queries/get-list'
+import {
+	UseListType,
+	categoryType,
+	filterType,
+} from '../Hooks/Queries/get-list'
+import { Comments, UseDetailType } from '../Hooks/Queries/get-detail'
 
 export interface PostData {
 	postId?: number
@@ -37,7 +42,7 @@ interface GetListData {
 	response?: []
 }
 export interface PostRegisterData {
-	categoryId?: 1 | null | number
+	categoryId: 1 | number
 	contents?: string
 	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | '제한 없음'
 	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
@@ -49,14 +54,14 @@ export interface PatchRegisterData extends PostRegisterData {
 }
 
 export interface PostApiType {
-	getList(params: GetListData): Promise<AxiosResponse<GetListData>>
+	getList(params: GetListData): Promise<AxiosResponse<UseListType>>
 	PostRegister(
 		params: PostRegisterData,
 	): Promise<AxiosResponse<PostRegisterData>>
 	putRegister(
 		params: PatchRegisterData,
 	): Promise<AxiosResponse<PatchRegisterData>>
-	getDetail(params: PostData): Promise<AxiosResponse<response>>
+	getDetail(params: PostData): Promise<AxiosResponse<UseDetailType>>
 	DeletePost(
 		params: number | undefined,
 	): Promise<AxiosResponse<number | undefined>>

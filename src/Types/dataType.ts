@@ -1,11 +1,11 @@
 interface Comment {
-	commentContents: string
-	commentCreator: string
-	commentCreatedDate: string
-	userProfile: {
-		fileFullPath: string
-		originalName: string
-	}
+	commentId: number
+	contents: string
+	postId: number
+	profile: any
+	userId: number
+	writeDate: string
+	writerNickname: string
 }
 
 export interface response {
