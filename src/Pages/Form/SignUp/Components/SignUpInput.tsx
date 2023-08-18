@@ -12,16 +12,19 @@ interface SingUpInputProps {
 	Icon?: React.ReactNode
 	placeholder: string
 	onValidation?: any
+	data?: any
 }
 
 function SignUpInput(props: SingUpInputProps) {
-	const { name, control, errorRules, Icon, placeholder, onValidation } = props
+	const { name, control, errorRules, Icon, placeholder, onValidation, data } =
+		props
 
 	return (
 		<Controller
 			name={name}
 			control={control}
 			rules={errorRules}
+			defaultValue={data}
 			render={({ field, fieldState: { error } }) => (
 				<S.Wrapper>
 					<span>
@@ -32,6 +35,7 @@ function SignUpInput(props: SingUpInputProps) {
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 								field.onChange(e.target.value)
 							}
+							defaultValue={data}
 						/>
 
 						{(name === 'SignUpEmail' || name === 'SignUpNickName') && (

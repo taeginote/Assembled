@@ -1,3 +1,4 @@
+import { constants } from 'buffer'
 import { UserApiType } from '../Types/apiType'
 import axiosInstance from './@core'
 
@@ -50,6 +51,11 @@ const UserApi: UserApiType = {
 	},
 	deletewithdrawal() {
 		return axiosInstance.delete(`/assemble/user/withdrawal`)
+	},
+	getUserInfo(userId) {
+		return axiosInstance.get(`/assemble/user/${userId}`, {
+			params: { userId },
+		})
 	},
 }
 

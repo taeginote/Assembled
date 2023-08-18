@@ -8,6 +8,10 @@ export interface childrenType {
 
 //아이템 데이터 type
 export interface ItemDataType {
+	contents: string
+	hits: number
+	postProfileImages: any
+	writerId: number
 	postId?: number
 	title?: string
 	categoryName?: string
@@ -16,7 +20,7 @@ export interface ItemDataType {
 		originalName?: string
 	}
 	writerNickname?: string
-	personnelNumber?: string
+	personnelNumber?: string | number
 	expectedPeriod?: string
 	commentCount?: string
 	likes?: number

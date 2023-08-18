@@ -24,7 +24,6 @@ axiosInstance.interceptors.request.use(
 		if (access_token === null) return config
 		if (access_token) {
 			config.headers['Authorization'] = `Bearer ${access_token}`
-			// config.headers['Cookie'] = 'RefreshToken=test'
 		}
 		return config
 	},

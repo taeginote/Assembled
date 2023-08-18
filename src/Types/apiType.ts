@@ -97,6 +97,7 @@ interface EmailValidation {
 interface NicknameValidation {
 	nickname?: string
 }
+
 interface resType1 {
 	error: {
 		message: 'string'
@@ -121,6 +122,7 @@ export type UserApiType = {
 	getToken(): Promise<AxiosResponse>
 	postLogout(): Promise<AxiosResponse>
 	deletewithdrawal(): Promise<AxiosResponse>
+	getUserInfo(data: string | null): Promise<AxiosResponse<any>>
 }
 
 export interface ApiError {
