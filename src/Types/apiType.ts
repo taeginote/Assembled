@@ -123,6 +123,9 @@ export type UserApiType = {
 	postLogout(): Promise<AxiosResponse>
 	deletewithdrawal(): Promise<AxiosResponse>
 	getUserInfo(data: string | null): Promise<AxiosResponse<any>>
+	PutUserInfo(
+		data: Omit<signUpData, 'password'>,
+	): Promise<AxiosResponse<Omit<signUpData, 'password'>>>
 }
 
 export interface ApiError {

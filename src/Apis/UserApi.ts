@@ -1,4 +1,3 @@
-import { constants } from 'buffer'
 import { UserApiType } from '../Types/apiType'
 import axiosInstance from './@core'
 
@@ -56,6 +55,19 @@ const UserApi: UserApiType = {
 		return axiosInstance.get(`/assemble/user/${userId}`, {
 			params: { userId },
 		})
+	},
+	PutUserInfo(data) {
+		const { birthDate, name, nickname, phoneNumber, profileImage } = data
+		return axiosInstance.put(
+			'/assemble/user' +
+				`?birthDate=${birthDate}&name=${name}&nickname=${nickname}&phoneNumber=${phoneNumber}`,
+			profileImage,
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			},
+		)
 	},
 }
 

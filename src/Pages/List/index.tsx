@@ -47,7 +47,7 @@ function List() {
 		sort,
 		categoryId,
 	)
-	const totalPage: number = data?.response?.totalPages
+	const totalPage: number | undefined = data?.response?.totalPages
 
 	useEffect(() => {
 		if (pageNumber !== 0) return
@@ -84,11 +84,9 @@ function List() {
 							<ListNoData setSearchValue={setSearchValue} />
 						) : (
 							<S.Container>
-								{data?.response?.content?.map(
-									(data: ItemDataType, idx: number) => (
-										<ItemBox data={data} key={idx} refetch={refetch} />
-									),
-								)}
+								{data?.response?.content?.map((data: any, idx: number) => (
+									<ItemBox data={data} key={idx} refetch={refetch} />
+								))}
 							</S.Container>
 						)}
 					</>
@@ -96,7 +94,7 @@ function List() {
 			</S.Wrapper>
 			{data?.response?.content?.length !== 0 && (
 				<Pagination
-					totalPage={totalPage}
+					totalPage={totalPage!}
 					limit={10}
 					scroll={0}
 					setPage={setPage}

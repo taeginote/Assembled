@@ -39,7 +39,7 @@ const useGetWroteData = (postId: string | null, page: null | number) => {
 		['useGetWroteData', page],
 		() => getWroteData(postId, page),
 	)
-	console.log(data)
+
 	return { data, isLoading, refetch }
 }
 

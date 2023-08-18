@@ -3,31 +3,31 @@ import {
 	FlexAlignCSS,
 	FlexCenterCSS,
 	FlexColumnCSS,
-	TopPadding,
 } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import {
 	Camera_Icon,
 	Date_Icon,
 	Email_Icon,
-	Lock_Icon,
 	Name_Icon,
 	Nickname_Icon,
 	Phone_Icon,
 } from '../../../Icons/Icons'
-import HookFormError from '../../../Components/Error/HookFormError'
+
 import SignUpInput from '../../Form/SignUp/Components/SignUpInput'
 import Input from '../../../Components/Input/Input'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { HookFormRule } from '../../../Consts/HookFormRule'
-import { SignUpSubmitData } from '../../../Types/type'
+import { SignUpSubmitData, UserInfoSubmitData } from '../../../Types/type'
 import useGetUserInfoData from '../../../Hooks/Queries/get-userInfo'
 import UserIdService from '../../../Utils/UserIdService'
 import UserApi from '../../../Apis/UserApi'
-import SignUpValidationError from '../../../Error/SignUpValidationError'
-import { ApiError } from '../../../Types/apiType'
-import { ValidationMsg } from '../../Form/SignUp/SignUp'
+
+import { signUpData } from '../../../Types/apiType'
+
+import { useMutation } from '@tanstack/react-query'
+import SuccessModal from '../../../Components/Modal/successModal'
 
 function UserSetting() {
 	const {
@@ -40,15 +40,22 @@ function UserSetting() {
 	} = useForm()
 
 	const userId = UserIdService.getUserId()
-
-	const { data, isLoading } = useGetUserInfoData(userId)
-
-	const [validationMsg, setValidationMsg] = useState<ValidationMsg>({
-		email: { status: false, message: '' },
-		nickname: { status: false, message: '' },
-	})
 	const [preFile, setPreFile] = useState<string | null>('')
 	const [imgFile, setImgFile] = useState<File | null>()
+	const [successModal, setSuccessModal] = useState<boolean>(false)
+
+	const { data, isLoading, refetch } = useGetUserInfoData(userId)
+
+	const { mutate } = useMutation(
+		(data: Omit<signUpData, 'password'>) => UserApi.PutUserInfo(data),
+		{
+			onSuccess: () => {
+				setSuccessModal(true)
+				refetch()
+			},
+			onError: () => {},
+		},
+	)
 
 	const ChangePreFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files !== null) {
@@ -62,45 +69,18 @@ function UserSetting() {
 		}
 	}
 
-	const onValidation = async (target: string) => {
-		const value = getValues(target)
-		if (value?.trim().length === 0 || value === undefined) return
-
-		if (target === 'SignUpEmail') {
-			try {
-				const res = await UserApi.getEmailValidation(value)
-				const { response }: any = res?.data
-				SignUpValidationError('SignUpEmail', setValidationMsg, response)
-			} catch (err: ApiError | any) {
-				const response = err?.response.data.status
-				SignUpValidationError('SignUpEmail', setValidationMsg, response)
-			}
+	const onSubmit: SubmitHandler<UserInfoSubmitData> = e => {
+		let formData: any = new FormData()
+		formData.append('profileImage', imgFile)
+		const data = {
+			// email: e.SignUpEmail?.trim() || '',
+			name: e.SignUpName?.trim() || '',
+			nickname: e.EditNickName?.trim() || '',
+			birthDate: e.SignUpBirthday?.trim() || '',
+			phoneNumber: e.SignUpPhone?.trim() || '',
+			profileImage: formData,
 		}
-		if (target === 'SignUpNickName') {
-			try {
-				const res = await UserApi.getNickNameValidation(value)
-				const { response }: any = res?.data
-				SignUpValidationError('SignUpNickName', setValidationMsg, response)
-			} catch (err: ApiError | any) {
-				const response = err?.response.data.status
-				SignUpValidationError('SignUpNickName', setValidationMsg, response)
-			}
-		}
-	}
-
-	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
-		if (validationMsg.email.status !== 'success') {
-			return setValidationMsg((prev: ValidationMsg) => ({
-				...prev,
-				email: { status: 'error', message: '이메일 중복확인 해주세요' },
-			}))
-		}
-		if (validationMsg.nickname.status !== 'success') {
-			return setValidationMsg((prev: ValidationMsg) => ({
-				...prev,
-				nickname: { status: 'error', message: '닉네임 중복확인 해주세요' },
-			}))
-		}
+		mutate(data)
 	}
 
 	return (
@@ -126,19 +106,13 @@ function UserSetting() {
 							/>
 						</S.InputBox>
 						<SignUpInput
-							name="SignUpEmail"
+							name="EditEmail"
 							control={control}
 							errorRules={HookFormRule.SignUpEmail}
 							Icon={<Email_Icon />}
 							placeholder="example@assembled.com"
-							onValidation={onValidation}
 							data={data?.response?.email}
 						/>
-						{validationMsg.email.status && (
-							<HookFormError status={validationMsg.email.status}>
-								{validationMsg.email.message}
-							</HookFormError>
-						)}
 						<SignUpInput
 							name="SignUpName"
 							control={control}
@@ -148,19 +122,14 @@ function UserSetting() {
 							data={data?.response?.name}
 						/>
 						<SignUpInput
-							name="SignUpNickName"
+							name="EditNickName"
 							control={control}
 							errorRules={HookFormRule.SignUpNickName}
 							Icon={<Nickname_Icon />}
 							placeholder="닉네임을 입력해주세요"
-							onValidation={onValidation}
 							data={data?.response?.nickname}
 						/>
-						{validationMsg.nickname.status && (
-							<HookFormError status={validationMsg.nickname.status}>
-								{validationMsg.nickname.message}
-							</HookFormError>
-						)}
+
 						{/* <SignUpInput
 							name="SignUpPw"
 							control={control}
@@ -203,6 +172,13 @@ function UserSetting() {
 						/>
 						<S.SignUpButton>수정 완료</S.SignUpButton>
 					</S.container>
+					{successModal && (
+						<SuccessModal
+							text={'수정 완료'}
+							url={'/myPage/setting/userSetting'}
+							setState={setSuccessModal}
+						/>
+					)}
 				</S.Wrapper>
 			)}
 		</>

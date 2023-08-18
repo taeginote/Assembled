@@ -80,6 +80,14 @@ export interface SignUpSubmitData {
 	SignUpPhone?: string
 	profileImg?: string
 }
+export interface UserInfoSubmitData {
+	EditEmail?: string
+	SignUpName?: string
+	EditNickName?: string
+	SignUpBirthday?: string
+	SignUpPhone?: string
+	profileImg?: string
+}
 
 //말풍선
 export interface BallonType {
