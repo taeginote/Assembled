@@ -87,11 +87,15 @@ function ItemBoxMyPage({
 			<S.UserBox>
 				<div>
 					<S.UserImg src={'profileImg'} />
-					<div>{writerNickname}</div>
+					<div>
+						{writerNickname && writerNickname?.length > 5
+							? writerNickname?.substr(0, 5) + '...'
+							: writerNickname}
+					</div>
 				</div>
 				<span>
-					<Person_Icon />
-					<span>{personnelNumber}인</span>
+					{/* <Person_Icon />
+					<span>{personnelNumber}인</span> */}
 					<Chat_Icon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>

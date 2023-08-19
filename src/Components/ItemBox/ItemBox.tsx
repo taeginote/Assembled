@@ -98,7 +98,11 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 			<S.UserBox>
 				<div>
 					<S.UserImg src={profileImg} alt="UserImage" />
-					<div>{writerNickname}</div>
+					<div>
+						{writerNickname && writerNickname?.length > 7
+							? writerNickname?.substr(0, 7) + '...'
+							: writerNickname}
+					</div>
 				</div>
 				<span>
 					<Person_Icon />
