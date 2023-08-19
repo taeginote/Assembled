@@ -10,6 +10,7 @@ interface UseUserInfoType {
 		profile: any
 		role: string
 		userId: string
+		birthDate: string
 	}
 	status: number
 	success: boolean

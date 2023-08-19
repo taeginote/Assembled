@@ -12,7 +12,7 @@ interface SingUpInputProps {
 	Icon?: React.ReactNode
 	placeholder: string
 	onValidation?: any
-	data?: any
+	data?: string
 }
 
 function SignUpInput(props: SingUpInputProps) {

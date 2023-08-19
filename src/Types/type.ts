@@ -81,7 +81,6 @@ export interface SignUpSubmitData {
 	profileImg?: string
 }
 export interface UserInfoSubmitData {
-	EditEmail?: string
 	SignUpName?: string
 	EditNickName?: string
 	SignUpBirthday?: string

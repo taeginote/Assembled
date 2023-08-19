@@ -73,7 +73,6 @@ function UserSetting() {
 		let formData: any = new FormData()
 		formData.append('profileImage', imgFile)
 		const data = {
-			// email: e.SignUpEmail?.trim() || '',
 			name: e.SignUpName?.trim() || '',
 			nickname: e.EditNickName?.trim() || '',
 			birthDate: e.SignUpBirthday?.trim() || '',
@@ -106,14 +105,6 @@ function UserSetting() {
 							/>
 						</S.InputBox>
 						<SignUpInput
-							name="EditEmail"
-							control={control}
-							errorRules={HookFormRule.SignUpEmail}
-							Icon={<Email_Icon />}
-							placeholder="example@assembled.com"
-							data={data?.response?.email}
-						/>
-						<SignUpInput
 							name="SignUpName"
 							control={control}
 							errorRules={HookFormRule.SignUpName}
@@ -129,38 +120,13 @@ function UserSetting() {
 							placeholder="닉네임을 입력해주세요"
 							data={data?.response?.nickname}
 						/>
-
-						{/* <SignUpInput
-							name="SignUpPw"
-							control={control}
-							errorRules={HookFormRule.SignUpPw}
-							Icon={<Lock_Icon />}
-							placeholder="비밀번호를 입력해주세요"
-						/>
-						<span>
-							<Lock_Icon />
-							<Input
-								type="password"
-								placeholder="위에 설정한 비밀번호를 입력해주세요"
-								{...register('SignUpPwConfirm', {
-									required: '비밀번호 확인을 입력해주세요',
-									validate: val =>
-										val === watch('SignUpPw') ||
-										'입력한 비밀번호와 일치하지 않습니다',
-								})}
-							/>
-						</span>
-						{errors.SignUpPwConfirm && (
-							<HookFormError>
-								{errors.SignUpPwConfirm?.message?.toString()}
-							</HookFormError>
-						)} */}
 						<SignUpInput
 							name="SignUpBirthday"
 							control={control}
 							errorRules={HookFormRule.SignUpBirthday}
 							Icon={<Date_Icon />}
 							placeholder="생년월일(8자리) ex) 19980505"
+							data={data?.response?.birthDate}
 						/>
 						<SignUpInput
 							name="SignUpPhone"
