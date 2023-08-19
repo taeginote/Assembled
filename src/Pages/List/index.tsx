@@ -49,7 +49,6 @@ function List() {
 	)
 	const totalPage: number | undefined = data?.response?.totalPages
 
-	console.log(data)
 	useEffect(() => {
 		if (pageNumber !== 0) return
 		if (pageNumber === 0) {

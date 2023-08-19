@@ -22,6 +22,10 @@ import PostLikeApi from '../../Apis/PostLikeApi'
 import UserIdService from '../../Utils/UserIdService'
 import { FlexCenterCSS } from '../../Styles/common'
 import TokenService from '../../Utils/TokenService'
+import Button from '../../Components/Button/Button'
+import { FlexColumnCSS } from '../../Styles/common'
+import JoinModal from '../../Components/Modal/joinModal'
+import { useState } from 'react'
 
 function Detail() {
 	const navigate = useNavigate()
@@ -29,6 +33,7 @@ function Detail() {
 	const token = TokenService.getAccessToken()
 
 	const [searchParams, setSearchParams] = useSearchParams()
+	const [joinModal, setJoinModal] = useState(false)
 	const [recoilCounter, setRecoilCounter] =
 		useRecoilState<boolean>(modalViewConfirm)
 
@@ -158,17 +163,22 @@ function Detail() {
 						/>
 					)}
 
-					{!data?.response?.likeStatus ? (
-						<S.HeartBox onClick={onHeart}>
-							<NotFillHeart_Icon />
-							<div>{data?.response?.likes}</div>
-						</S.HeartBox>
-					) : (
-						<S.HeartBox onClick={() => cancelMutate(postId!)}>
-							<FillHeart_Icon />
-							<div>{data?.response?.likes}</div>
-						</S.HeartBox>
-					)}
+					<S.FloatBox>
+						{!data?.response?.likeStatus ? (
+							<S.HeartBox onClick={onHeart}>
+								<NotFillHeart_Icon />
+								<div>{data?.response?.likes}</div>
+							</S.HeartBox>
+						) : (
+							<S.HeartBox onClick={() => cancelMutate(postId!)}>
+								<FillHeart_Icon />
+								<div>{data?.response?.likes}</div>
+							</S.HeartBox>
+						)}
+						<S.JoinButton onClick={() => setJoinModal(true)}>
+							가입 신청
+						</S.JoinButton>
+					</S.FloatBox>
 				</S.Container>
 			)}
 			{recoilCounter && (
@@ -178,6 +188,17 @@ function Detail() {
 					mutate={mutate}
 					postId={postId}
 				/>
+			)}
+			{joinModal && (
+				<JoinModal>
+					<S.JoinText>안녕하세요~ 잘 부탁드립니다~😀</S.JoinText>
+					<S.ButtonWrap>
+						<Button>가입 신청</Button>
+						<Button variant="default-white" onClick={() => setJoinModal(false)}>
+							취소
+						</Button>
+					</S.ButtonWrap>
+				</JoinModal>
 			)}
 		</S.Wrapper>
 	)
@@ -212,13 +233,10 @@ const Container = styled.div`
 	}
 `
 const HeartBox = styled.div`
-	position: fixed;
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[300]};
 	border-radius: 1rem;
-	width: 7rem;
+	width: 10rem;
 	height: 5rem;
-	top: 45%;
-	right: 17%;
 	box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
 	${FlexCenterCSS}
 	& > div {
@@ -230,6 +248,20 @@ const HeartBox = styled.div`
 		display: none;
 	}
 	cursor: pointer;
+`
+const JoinButton = styled(Button)`
+	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+	margin-top: 1rem;
+	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[100]};
+	border-radius: 1rem;
+	height: 5rem;
+`
+const FloatBox = styled.div`
+	position: fixed;
+	top: 45%;
+	right: 15%;
+	${FlexColumnCSS}
+	align-items: center;
 `
 const Profile = styled.div`
 	${FlexAlignCSS}
@@ -334,6 +366,28 @@ const Dec = styled.pre`
 	min-height: 30rem;
 	border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 `
+
+const JoinText = styled.textarea`
+	width: 90%;
+	white-space: pre-wrap;
+	border-radius: 1rem;
+	word-wrap: break-word;
+	margin: 1rem 0 2rem 0;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	min-height: 30rem;
+	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[300]};
+	padding: 2rem;
+	&:focus {
+		border: none;
+		outline: 2px solid ${({ theme }) => theme.COLOR.sub};
+	}
+`
+const ButtonWrap = styled.div`
+	display: flex;
+	* {
+		margin: 0 2rem;
+	}
+`
 const S = {
 	Wrapper,
 	Container,
@@ -344,4 +398,8 @@ const S = {
 	Top,
 	TopRight,
 	HeartBox,
+	FloatBox,
+	JoinButton,
+	ButtonWrap,
+	JoinText,
 }

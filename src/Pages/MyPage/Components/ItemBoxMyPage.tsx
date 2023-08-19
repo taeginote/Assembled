@@ -113,7 +113,7 @@ const Wrapper = styled.div`
 	border-radius: 2rem;
 	cursor: pointer;
 	width: 100%;
-	min-width: 15rem;
+	min-width: 25rem;
 	&:hover {
 		transform: scale(1.01);
 		transition: transform 0.2s;
