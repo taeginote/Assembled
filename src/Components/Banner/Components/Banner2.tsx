@@ -6,7 +6,7 @@ function Banner2() {
 		<S.Wrapper>
 			<S.Content>
 				<S.Title>어셈블 OPEN</S.Title>
-				<S.Dec>모임, 스터디를 하고싶으면 어셈블</S.Dec>
+				<S.Dec>여러분의 모임을 만들고, 관리해보자</S.Dec>
 			</S.Content>
 			<img src="assets/img/open-book.png" alt="BannerIcon" />
 		</S.Wrapper>
@@ -22,9 +22,10 @@ const Wrapper = styled.div`
 		height: 32rem;
 	}
 	img {
-		width: 25rem;
+		width: 20rem;
 		height: 20rem;
 		padding: 2rem 6rem 0 0;
+
 		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 			width: 18rem;
 			height: 13rem;
