@@ -81,6 +81,21 @@ function Detail() {
 		setRecoilCounter(true)
 	}
 
+	const onClickJoinBtn = () => {
+		setJoinModal(true)
+		document.body.style.overflow = 'hidden'
+		//document.body.style.overflow = "unset"; //스크롤바가 사라졌다가 다시 나타나면서 가로가 변형된다. //스크롤 방지 해제
+	}
+
+	const onJoinMeeting = () => {
+		setJoinModal(false)
+		document.body.style.overflow = 'auto'
+		alert('가입신청 기능은 준비중입니다😀')
+	}
+	const onClickJoinCancel = () => {
+		setJoinModal(false)
+		document.body.style.overflow = 'auto'
+	}
 	return (
 		<S.Wrapper>
 			{isLoading ? (
@@ -175,9 +190,7 @@ function Detail() {
 								<div>{data?.response?.likes}</div>
 							</S.HeartBox>
 						)}
-						<S.JoinButton onClick={() => setJoinModal(true)}>
-							가입 신청
-						</S.JoinButton>
+						<S.JoinButton onClick={onClickJoinBtn}>가입 신청</S.JoinButton>
 					</S.FloatBox>
 				</S.Container>
 			)}
@@ -193,8 +206,8 @@ function Detail() {
 				<JoinModal>
 					<S.JoinText>안녕하세요~ 잘 부탁드립니다~😀</S.JoinText>
 					<S.ButtonWrap>
-						<Button>가입 신청</Button>
-						<Button variant="default-white" onClick={() => setJoinModal(false)}>
+						<Button onClick={onJoinMeeting}>가입 신청</Button>
+						<Button variant="default-white" onClick={onClickJoinCancel}>
 							취소
 						</Button>
 					</S.ButtonWrap>
@@ -384,9 +397,11 @@ const JoinText = styled.textarea`
 `
 const ButtonWrap = styled.div`
 	display: flex;
+	justify-content: center;
 	* {
 		margin: 0 2rem;
 	}
+	margin: 0 6rem;
 `
 const S = {
 	Wrapper,

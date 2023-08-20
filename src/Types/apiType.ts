@@ -1,17 +1,11 @@
 import { AxiosResponse } from 'axios'
-import { response } from './dataType'
 import {
 	UseListType,
 	categoryType,
 	filterType,
 } from '../Hooks/Queries/get-list'
-import { Comments, UseDetailType } from '../Hooks/Queries/get-detail'
+import { UseDetailType } from '../Hooks/Queries/get-detail'
 
-export interface PostData {
-	postId?: number
-}
-
-//이건 댓글 API 아직 백엔드 없어서 보류
 export interface CommentData {
 	contents?: string
 	postId?: number
@@ -61,7 +55,7 @@ export interface PostApiType {
 	putRegister(
 		params: PatchRegisterData,
 	): Promise<AxiosResponse<PatchRegisterData>>
-	getDetail(params: PostData): Promise<AxiosResponse<UseDetailType>>
+	getDetail(params: { postId: number }): Promise<AxiosResponse<UseDetailType>>
 	DeletePost(
 		params: number | undefined,
 	): Promise<AxiosResponse<number | undefined>>
@@ -73,6 +67,7 @@ export interface CategoryApiType {
 }
 
 //User api type
+
 export interface signUpData {
 	email?: string
 	name?: string
@@ -86,7 +81,6 @@ export interface signUpData {
 export interface LoginData {
 	email?: string
 	password?: string
-
 	// 보류
 	response?: any
 }
@@ -96,18 +90,6 @@ interface EmailValidation {
 }
 interface NicknameValidation {
 	nickname?: string
-}
-
-interface resType1 {
-	error: {
-		message: 'string'
-		status: number
-	}
-	response: {
-		accessToken: 'string'
-	}
-	status: number
-	success: true
 }
 
 export type UserApiType = {

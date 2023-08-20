@@ -57,7 +57,7 @@ const Wrapper = styled.div`
 	height: 200vh;
 	width: 100%;
 	z-index: 9999;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.4);
 	${FlexCenterCSS}
 `
 const Text = styled.div`

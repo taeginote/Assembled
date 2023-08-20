@@ -26,7 +26,7 @@ import {
 	Nickname_Icon,
 	Phone_Icon,
 } from '../../../Icons/Icons'
-import { ApiError, signUpData } from '../../../Types/apiType'
+import { signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useEffect, useState } from 'react'
 import SignUpInput from './Components/SignUpInput'

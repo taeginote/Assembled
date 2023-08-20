@@ -39,7 +39,7 @@ const Wrapper = styled.div`
 	min-height: 100%;
 	width: 100%;
 	z-index: 999;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.4);
 	${FlexCenterCSS}
 `
 

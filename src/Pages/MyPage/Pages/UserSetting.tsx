@@ -8,7 +8,6 @@ import Button from '../../../Components/Button/Button'
 import {
 	Camera_Icon,
 	Date_Icon,
-	Email_Icon,
 	Name_Icon,
 	Nickname_Icon,
 	Phone_Icon,
@@ -19,7 +18,7 @@ import Input from '../../../Components/Input/Input'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { HookFormRule } from '../../../Consts/HookFormRule'
-import { SignUpSubmitData, UserInfoSubmitData } from '../../../Types/type'
+import { UserInfoSubmitData } from '../../../Types/type'
 import useGetUserInfoData from '../../../Hooks/Queries/get-userInfo'
 import UserIdService from '../../../Utils/UserIdService'
 import UserApi from '../../../Apis/UserApi'
@@ -33,8 +32,6 @@ function UserSetting() {
 	const {
 		register,
 		handleSubmit,
-		watch,
-		getValues,
 		control,
 		formState: { errors },
 	} = useForm()

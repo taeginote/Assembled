@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html {
-        // Font : Line Seed (라인 시드)
+    
         font-size: 62.5%;
         font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 

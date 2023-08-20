@@ -33,7 +33,6 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 		personnelNumber,
 		expectedPeriod,
 		commentCount,
-		likes,
 		likeStatus,
 		postStatus, //'PROGRESS' | 'COMPLETED'
 	} = data

@@ -22,11 +22,11 @@ const Wrapper = styled.div`
 	height: 200vh;
 	width: 100%;
 	z-index: 9999;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.4);
 	${FlexCenterCSS}
 `
 const Logo = styled.img`
-	width: 15rem;
+	width: 17rem;
 `
 const Box = styled.div`
 	width: 45rem;

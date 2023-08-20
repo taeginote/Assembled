@@ -8,6 +8,7 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 
 import SwiperCore, { Autoplay, EffectFade, Pagination } from 'swiper'
+import Banner4 from './Components/Banner4'
 SwiperCore.use([Autoplay, EffectFade, Pagination])
 
 function Banner() {
