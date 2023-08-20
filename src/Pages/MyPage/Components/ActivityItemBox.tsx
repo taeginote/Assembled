@@ -33,6 +33,8 @@ function ActivityItemBox({
 		likeStatus,
 	} = data
 
+	// const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
+
 	/**
 	 * 필요한 데이터
 	 * postStatus (모집중 혹은 모집완료)

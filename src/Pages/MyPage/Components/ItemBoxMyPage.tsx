@@ -39,7 +39,7 @@ function ItemBoxMyPage({
 		postStatus,
 	} = data
 
-	// const profileImg = ProfileImgReturn(writerProfileImages[0].fileFullPath)
+	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
 
 	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 
@@ -86,7 +86,7 @@ function ItemBoxMyPage({
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={'profileImg'} />
+					<S.UserImg src={profileImg} />
 					<div>
 						{writerNickname && writerNickname?.length > 5
 							? writerNickname?.substr(0, 5) + '...'

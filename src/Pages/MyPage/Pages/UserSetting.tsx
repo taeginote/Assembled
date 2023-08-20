@@ -27,6 +27,7 @@ import { signUpData } from '../../../Types/apiType'
 
 import { useMutation } from '@tanstack/react-query'
 import SuccessModal from '../../../Components/Modal/successModal'
+import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 
 function UserSetting() {
 	const {
@@ -42,6 +43,7 @@ function UserSetting() {
 	const [successModal, setSuccessModal] = useState<boolean>(false)
 
 	const { data, isLoading, refetch } = useGetUserInfoData(userId)
+	const profileImg = ProfileImgReturn(data?.response?.profile?.filePath)
 
 	const { mutate } = useMutation(
 		(data: Omit<signUpData, 'password'>) => UserApi.PutUserInfo(data),
@@ -85,7 +87,7 @@ function UserSetting() {
 				<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 					<S.container>
 						<S.InputBox>
-							<S.ProfileImg src={preFile as string} />
+							<S.ProfileImg src={(preFile || profileImg) as string} />
 							<S.ImgLabel htmlFor="profileImg">
 								<Camera_Icon />
 							</S.ImgLabel>

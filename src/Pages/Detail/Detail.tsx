@@ -42,7 +42,9 @@ function Detail() {
 
 	const { data, isLoading, refetch } = useGetDetailData(postId)
 
-	const profileImg = ProfileImgReturn(data?.writerProfileImages)
+	const profileImg = ProfileImgReturn(
+		data?.response?.writerProfileImages?.filePath,
+	)
 	const IsMinePage = data?.response?.writerId == UserId ? true : false
 
 	const { mutate } = useMutation(
