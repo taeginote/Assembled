@@ -71,6 +71,7 @@ function Comment() {
 		}
 		changeMutate(data)
 	}
+
 	// onClick={() => navigate(`/Detail?postId=${el.postId}`)} 이거 해당 게시글 가는거 icon 넣어서 추가해야할듯함
 	return (
 		<>
@@ -92,9 +93,7 @@ function Comment() {
 							{data?.response?.content.map((el: any, idx: number) => (
 								<S.container $state={changeViewNum === el.commentId} key={idx}>
 									<S.Left>
-										<S.Title>
-											여기에 해당 게시글 제목이 들어갈 예정입니다.
-										</S.Title>
+										<S.Title>{el.postTitle}</S.Title>
 										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
 										{changeViewNum === el.commentId ? (

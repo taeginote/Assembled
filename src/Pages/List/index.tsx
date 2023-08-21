@@ -19,6 +19,7 @@ import SearchBar from './Components/SearchBar/SearchBar'
 import ListNoData from '../../Error/ListNoData'
 import { ItemDataType } from '../../Types/type'
 import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
+import UpButton from '../../Components/UpButton/upButton'
 
 function List() {
 	//보류
@@ -89,6 +90,7 @@ function List() {
 								))}
 							</S.Container>
 						)}
+						<UpButton />
 					</>
 				)}
 			</S.Wrapper>

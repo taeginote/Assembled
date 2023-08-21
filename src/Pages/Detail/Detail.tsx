@@ -136,12 +136,17 @@ function Detail() {
 									</p>
 								)}
 								<div>
-									{!data?.response?.likeStatus ? (
-										<NotFillHeart_Icon onClick={onHeart} />
-									) : (
-										<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
-									)}
-									<div>{data?.response?.likes}</div>
+									<S.JoinButton size="big" onClick={onClickJoinBtn}>
+										가입 신청
+									</S.JoinButton>
+									<S.WebkHeartBox>
+										{!data?.response?.likeStatus ? (
+											<NotFillHeart_Icon onClick={onHeart} />
+										) : (
+											<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
+										)}
+										<div>{data?.response?.likes}</div>
+									</S.WebkHeartBox>
 								</div>
 							</S.TopRight>
 						</>
@@ -259,9 +264,6 @@ const HeartBox = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
 		color: ${({ theme }) => theme.COLOR.common.gray[200]};
 	}
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
-		display: none;
-	}
 	cursor: pointer;
 `
 const JoinButton = styled(Button)`
@@ -277,6 +279,9 @@ const FloatBox = styled.div`
 	right: 15%;
 	${FlexColumnCSS}
 	align-items: center;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		display: none;
+	}
 `
 const Profile = styled.div`
 	${FlexAlignCSS}
@@ -305,8 +310,9 @@ const TopRight = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: end;
-	margin-bottom: 4.8rem;
+	margin-bottom: 3.5rem;
 	align-items: end;
+
 	& > p {
 		margin: 2rem 0 5rem 0;
 		& > button {
@@ -326,16 +332,26 @@ const TopRight = styled.div`
 	}
 	& > div {
 		display: none;
-		@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
-			${FlexCenterCSS}
-			&>div {
-				margin-left: 0.5rem;
-				font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-				color: ${({ theme }) => theme.COLOR.common.gray[200]};
-			}
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			display: flex;
+			align-items: center;
 		}
-		cursor: pointer;
 	}
+`
+const WebkHeartBox = styled.div`
+	display: none;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+		display: flex;
+		align-items: center;
+		margin-top: 0.5rem;
+		margin-left: 1rem;
+		& > div {
+			margin-left: 0.5rem;
+			font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+			color: ${({ theme }) => theme.COLOR.common.gray[200]};
+		}
+	}
+	cursor: pointer;
 `
 const UserImg = styled.img`
 	border-radius: 50%;
@@ -419,4 +435,5 @@ const S = {
 	JoinButton,
 	ButtonWrap,
 	JoinText,
+	WebkHeartBox,
 }

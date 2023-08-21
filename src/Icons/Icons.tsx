@@ -19,7 +19,7 @@ import {
 	BsTrash,
 	BsDot,
 } from 'react-icons/bs'
-import { BiUser, BiHappy } from 'react-icons/bi'
+import { BiUser, BiHappy, BiChevronsUp } from 'react-icons/bi'
 import { MdOutlineCancel, MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
@@ -111,3 +111,6 @@ export const Dot_Icon = () => <BsDot size={'35'} color="#FB9B00" />
 
 export const Plus_Icon = () => <HiOutlinePlus size={'22'} color="#FB9B00" />
 //플러스
+
+export const Up_Icon = () => <BiChevronsUp size={'40'} color="#FDD19B" />
+//Up

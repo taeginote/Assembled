@@ -137,6 +137,7 @@ const Container = styled.div`
 const UserBox = styled.div`
 	${FlexBetweenCSS}
 	padding: 2rem 0 0 0;
+
 	& > div {
 		${FlexAlignCSS}
 	}
