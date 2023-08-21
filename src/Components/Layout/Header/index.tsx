@@ -6,13 +6,11 @@ import {
 	WidthAutoCSS,
 } from '../../../Styles/common'
 import { useAuth } from '../../../Contexts/auth'
-import SuccessModal from '../../Modal/successModal'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+
+import { useMutation } from '@tanstack/react-query'
 import Hamburger from './MobileHamburger/Hamburger'
 import UserApi from '../../../Apis/UserApi'
 import { useState } from 'react'
-
-import { useRecoilState } from 'recoil'
 import scrollToTop from '../../../Utils/scrollToTop'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
@@ -20,14 +18,13 @@ import scrollToTop from '../../../Utils/scrollToTop'
 function Haeder() {
 	const navigate = useNavigate()
 	const auth = useAuth()
-	const queryClient = useQueryClient()
 
 	const [successModal, setSuccessModal] = useState<boolean>(false)
 
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
 		onSuccess: () => {
-			setSuccessModal(() => true)
 			auth.logout()
+			navigate('/')
 		},
 	})
 
@@ -84,13 +81,6 @@ function Haeder() {
 				</S.Container>
 			</S.Wrapper>
 			<S.FooterWrapper>{/* <MobileFooter /> */}</S.FooterWrapper>
-			{successModal && (
-				<SuccessModal
-					text={'로그아웃 되었습니다.'}
-					setState={setSuccessModal}
-				/>
-			)}
-
 			<Outlet />
 		</>
 	)

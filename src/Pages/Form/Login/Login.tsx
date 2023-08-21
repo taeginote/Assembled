@@ -3,15 +3,11 @@ import Input from '../../../Components/Input/Input'
 import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import HookFormError from '../../../Components/Error/HookFormError'
 import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
-import NotificationModal from '../../../Components/Modal/NotificationModal'
-import { useRecoilState } from 'recoil'
-import { modalViewNotification } from '../../../Atoms/modalView.atom'
-import SuccessModal from '../../../Components/Modal/successModal'
 import { useAuth } from '../../../Contexts/auth'
 import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
 import { LoginData } from '../../../Types/apiType'
@@ -30,11 +26,8 @@ function Login() {
 		formState: { errors },
 	} = useForm()
 
-	const [recoilCounter, setRecoilCounter] = useRecoilState(
-		modalViewNotification,
-	)
-	const [successModal, setSuccessModal] = useState(false)
-
+	const [loginError, setLoginError] = useState<null | string>(null)
+	const navigate = useNavigate()
 	const auth = useAuth()
 
 	const { mutate, isLoading } = useMutation(
@@ -48,8 +41,6 @@ function Login() {
 					profile: profile[0]?.fileFullPath,
 				}
 
-				setSuccessModal(() => true)
-
 				if (res.data.response.token.accessToken) {
 					auth.login(
 						res.data.response.token.accessToken,
@@ -57,9 +48,10 @@ function Login() {
 						userInfo,
 					)
 				}
+				navigate('/')
 			},
-			onError: err => {
-				setRecoilCounter(() => true)
+			onError: () => {
+				setLoginError('이메일 혹은 비밀번호가 틀렸습니다.')
 			},
 		},
 	)
@@ -101,16 +93,12 @@ function Login() {
 				{errors.LoginPW && (
 					<HookFormError>{errors.LoginPW?.message?.toString()}</HookFormError>
 				)}
+				{loginError !== null && <HookFormError>{loginError}</HookFormError>}
 				<S.GoSignUp>
 					아직 어셈블 계정이 없나요?
 					<S.LinkDesign to={'/Signup'}> 회원가입하기</S.LinkDesign>
 				</S.GoSignUp>
 				<S.SignUpButton>로그인</S.SignUpButton>
-				{/* 보류 이거 로그인 페이지가 아니라 list로 가야함 테스트 때문에  */}
-				{successModal && (
-					<SuccessModal text={'로그인 성공'} setState={setSuccessModal} />
-				)}
-				{recoilCounter && <NotificationModal text={'로그인 실패'} />}
 			</S.container>
 		</S.Wrapper>
 	)
