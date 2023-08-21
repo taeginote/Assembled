@@ -148,7 +148,7 @@ function CommentForm({
 					<S.CommentTop>
 						<span>
 							<S.UserImg
-								src={ProfileImgReturn(comment?.profile?.fileFullPath)}
+								src={ProfileImgReturn(comment?.profile?.filePath)}
 								alt="UserImage"
 							/>
 							<div>
