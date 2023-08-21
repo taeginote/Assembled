@@ -14,6 +14,7 @@ import { useState } from 'react'
 import TokenModal from '../../Modal/tokenModal'
 import { modalViewToken } from '../../../Atoms/modalViewToken'
 import { useRecoilState } from 'recoil'
+import scrollToTop from '../../../Utils/scrollToTop'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
@@ -39,6 +40,7 @@ function Haeder() {
 
 	const goLogo = () => {
 		navigate('')
+		scrollToTop(0)
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
