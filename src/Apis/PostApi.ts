@@ -27,6 +27,11 @@ const PostApi: PostApiType = {
 			params: { page, size: 9 },
 		})
 	},
+	getUserLike(page) {
+		return axiosInstance.get(`${PATH}/like`, {
+			params: { page, size: 9 },
+		})
+	},
 }
 
 export default PostApi

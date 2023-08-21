@@ -6,23 +6,24 @@ export interface childrenType {
 	children: React.ReactNode
 }
 
+interface IdxSignature {
+	[key: string]: string
+}
+
 //아이템 데이터 type
 export interface ItemDataType {
 	contents: string
 	hits: number
-	postProfileImages: any
+	postProfileImages?: IdxSignature
 	writerId: number
 	postId?: number
 	title?: string
 	categoryName?: string
-	writerProfileImages?: {
-		filePath?: string
-		originalName?: string
-	}
+	writerProfileImages?: IdxSignature
 	writerNickname?: string
 	personnelNumber?: string | number
-	expectedPeriod?: string
-	commentCount?: string
+	expectedPeriod?: number
+	commentCount?: number
 	likes?: number
 	likeStatus?: boolean
 	postStatus: 'PROGRESS' | 'COMPLETED'

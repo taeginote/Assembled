@@ -8,42 +8,55 @@ import {
 import Pagination from '../../../Components/Pagination/Pagination'
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import useGetUserLikeData from '../../../Hooks/Queries/get-userlike'
+import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
+import MyPageListNoData from '../../../Error/MypageListNoData'
 
 function Likes() {
 	//디자인을 위한 test Mock
-	const testArr: number[] = [1, 1, 1, 1, 1, 1, 1, 1]
-	const testObject = {
-		categoryName: '개발/프로그래밍',
-		contents:
-			'안녕하세요\n\n안녕하세요\n\n\n안녕하세요\n\n안녕하세요\n안녕하세요\n\n',
-		expectedPeriod: '2',
-		hits: 0,
-		likeStatus: false,
-		likes: 0,
-		personnelNumber: '2',
-		postId: 128,
-		postProfileImages: [],
-		title: '안녕하세요',
-		writerId: 86,
-		writerNickname: 'taek11',
-		postStatus: 'PROGRESS',
-	}
-
 	const [searchParams, setSearchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 0)
 
+	const loadingArr: 0[] = Array(12).fill(0)
+
+	const { data, isLoading } = useGetUserLikeData(page)
+	console.log(data)
 	return (
 		<S.Wrapper>
-			<S.ListWrap>
-				<p>관심있는 모임 (준비중)</p>
-				<S.Container>
-					{testArr.map((el, idx: number) => (
-						<ItemBox data={testObject} key={idx} />
-					))}
-				</S.Container>
-				<Pagination totalPage={1} limit={10} scroll={765} setPage={setPage} />
-			</S.ListWrap>
+			{data?.response?.content?.length === 0 ? (
+				<S.ListWrap>
+					<MyPageListNoData comment={'좋아요한 모임이 없습니다.'} />
+				</S.ListWrap>
+			) : (
+				<>
+					{isLoading ? (
+						<S.ListWrap>
+							<p>관심있는 모임</p>
+							<S.Container>
+								{loadingArr.map((el: 0, idx: number) => (
+									<CardSkeleton key={idx} />
+								))}
+							</S.Container>
+						</S.ListWrap>
+					) : (
+						<S.ListWrap>
+							<p>관심있는 모임</p>
+							<S.Container>
+								{data?.response?.content?.map((el, idx: number) => (
+									<ItemBox data={el} key={idx} />
+								))}
+							</S.Container>
+							<Pagination
+								totalPage={1}
+								limit={10}
+								scroll={765}
+								setPage={setPage}
+							/>
+						</S.ListWrap>
+					)}
+				</>
+			)}
 		</S.Wrapper>
 	)
 }
@@ -67,8 +80,8 @@ const ListWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-left: 20rem;
-	width: 90%;
+	margin-left: 15rem;
+	width: 100%;
 
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 4.5rem;

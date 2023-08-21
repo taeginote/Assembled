@@ -5,6 +5,7 @@ import {
 	filterType,
 } from '../Hooks/Queries/get-list'
 import { UseDetailType } from '../Hooks/Queries/get-detail'
+import { UseUserLikeType } from '../Hooks/Queries/get-userlike'
 
 export interface CommentData {
 	contents?: string
@@ -60,6 +61,7 @@ export interface PostApiType {
 		params: number | undefined,
 	): Promise<AxiosResponse<number | undefined>>
 	getUserWrote(params: any): Promise<AxiosResponse<any>>
+	getUserLike(params: number): Promise<AxiosResponse<UseUserLikeType>>
 	//여기는 모임 수정 (아직 구현 X)
 }
 export interface CategoryApiType {

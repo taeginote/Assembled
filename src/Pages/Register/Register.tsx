@@ -76,7 +76,7 @@ function Register() {
 					<div>카테고리 *</div>
 					<SelectInput
 						name="Category"
-						Data={GetCategoryData!.response}
+						Data={GetCategoryData! && GetCategoryData!.response}
 						control={control}
 						errorMsg="카테고리를 선택해주세요."
 					/>
