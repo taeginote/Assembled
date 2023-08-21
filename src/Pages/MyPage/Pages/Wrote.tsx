@@ -119,20 +119,20 @@ const Container = styled.div`
 		${ColumnNumberCSS(2)};
 	}
 	& > div {
-		width: 100%;
+		width: 105%;
 	}
 `
 const ListWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-left: 20rem;
+	margin-left: 15rem;
 	width: 100%;
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 7rem;
 	}
 	& > p {
-		width: 140%;
+		width: 145%;
 		text-align: start;
 		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};

@@ -11,8 +11,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Hamburger from './MobileHamburger/Hamburger'
 import UserApi from '../../../Apis/UserApi'
 import { useState } from 'react'
-import TokenModal from '../../Modal/tokenModal'
-import { modalViewToken } from '../../../Atoms/modalViewToken'
+
 import { useRecoilState } from 'recoil'
 import scrollToTop from '../../../Utils/scrollToTop'
 
@@ -24,8 +23,6 @@ function Haeder() {
 	const queryClient = useQueryClient()
 
 	const [successModal, setSuccessModal] = useState<boolean>(false)
-	const [recoilCounter, setRecoilCounter] =
-		useRecoilState<boolean>(modalViewToken)
 
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
 		onSuccess: () => {
@@ -93,7 +90,7 @@ function Haeder() {
 					setState={setSuccessModal}
 				/>
 			)}
-			{recoilCounter && <TokenModal />}
+
 			<Outlet />
 		</>
 	)
