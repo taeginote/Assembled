@@ -1,3 +1,4 @@
+import { categoryType, filterType } from '../Hooks/Queries/get-list'
 import { UserInfoType } from '../Pages/Form/Login/Login'
 import { DataType } from '../Pages/List/Components/SearchBar/SearchBar'
 

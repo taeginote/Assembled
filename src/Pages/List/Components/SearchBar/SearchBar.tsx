@@ -28,7 +28,6 @@ function SearchBar({
 	const onClickSearch = (e: any) => {
 		e.preventDefault()
 		setIsView(false)
-		setSearchValue(e.target.text.value)
 		setPage(1)
 	}
 

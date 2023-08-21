@@ -12,7 +12,7 @@ export type Category = {
 
 function CategoryNav() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	let category: number = Number(searchParams.get('category')) || 1
+	let category: number | null = Number(searchParams.get('category')) || null
 
 	const { data, isLoading } = useGetCategoryData()
 
@@ -23,6 +23,9 @@ function CategoryNav() {
 					<Categorykeleton />
 				) : (
 					<>
+						<S.NavBox $state={category === null}>
+							<Link to={'/'}>전체</Link>
+						</S.NavBox>
 						{data?.response?.map((el: Category, idx: number) => (
 							<S.NavBox key={idx} $state={el.categoryId == category}>
 								<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>

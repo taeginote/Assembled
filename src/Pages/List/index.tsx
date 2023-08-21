@@ -17,16 +17,18 @@ import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import SearchBar from './Components/SearchBar/SearchBar'
 import ListNoData from '../../Error/ListNoData'
-import { ItemDataType } from '../../Types/type'
+
 import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
 import UpButton from '../../Components/UpButton/upButton'
 
 function List() {
 	//보류
 	const [searchParams, setSearchParams] = useSearchParams()
-	let categoryId: categoryType = Number(searchParams.get('category')) || 1
+	let categoryId: categoryType = Number(searchParams.get('category')) || null
 	let sort: filterType = searchParams.get('sort')
 	let pageNumber: number | null = Number(searchParams.get('page'))
+	let search: string | null = searchParams.get('search')
+
 	const [page, setPage] = useState(pageNumber || 1)
 	const [searchValue, setSearchValue] = useState<string>('')
 	const [selectVal, setSelectVal] = useState({
@@ -36,10 +38,6 @@ function List() {
 	let searchBy: string = selectVal.value
 	let searchQuery: string = searchValue
 	const loadingArr: 0[] = Array(12).fill(0)
-
-	if (categoryId === null) {
-		categoryId = 1
-	}
 
 	const { data, isLoading, refetch } = useGetListData(
 		page,

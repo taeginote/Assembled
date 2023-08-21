@@ -11,7 +11,6 @@ import { useMutation } from '@tanstack/react-query'
 import Hamburger from './MobileHamburger/Hamburger'
 import UserApi from '../../../Apis/UserApi'
 import { useState } from 'react'
-import scrollToTop from '../../../Utils/scrollToTop'
 
 // import MobileFooter from '../Footer/MobileFooter/MobileFooter'
 
@@ -34,7 +33,8 @@ function Haeder() {
 
 	const goLogo = () => {
 		navigate('')
-		scrollToTop(0)
+		window.scrollTo(0, 0)
+		window.location.reload()
 	}
 
 	//mobileFooter쓰면 useContext 오류 뜸
