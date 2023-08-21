@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
 import Ballon from '../../../Components/Ballon/Ballon'
 
-interface CommentType {
+export interface CommentType {
 	commentId: null | number
 	contents: null | string
 }

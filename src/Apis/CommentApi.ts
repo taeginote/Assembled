@@ -1,4 +1,4 @@
-import { CommentApiType, PostApiType } from '../Types/apiType'
+import { CommentApiType } from '../Types/apiType'
 import axiosInstance from './@core'
 
 //리스트 관련 Apis

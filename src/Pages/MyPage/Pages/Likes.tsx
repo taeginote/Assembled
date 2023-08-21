@@ -21,7 +21,7 @@ function Likes() {
 	const loadingArr: 0[] = Array(12).fill(0)
 
 	const { data, isLoading } = useGetUserLikeData(page)
-	console.log(data)
+
 	return (
 		<S.Wrapper>
 			{data?.response?.content?.length === 0 ? (

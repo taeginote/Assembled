@@ -6,17 +6,22 @@ import {
 } from '../Hooks/Queries/get-list'
 import { UseDetailType } from '../Hooks/Queries/get-detail'
 import { UseUserLikeType } from '../Hooks/Queries/get-userlike'
+import { UseCommentType } from '../Hooks/Queries/get-comment'
+import { CommentType } from '../Pages/Detail/Components/CommentForm'
 
 export interface CommentData {
 	contents?: string
 	postId?: number
 }
-
+interface CommentParams {
+	userId: string | null
+	page: null | number
+}
 export type CommentApiType = {
 	postComment(data: CommentData): Promise<AxiosResponse<CommentData>>
-	getUserComment(params: any): Promise<AxiosResponse<any>>
+	getUserComment(params: CommentParams): Promise<AxiosResponse<UseCommentType>>
 	deleteComment(params?: number): Promise<AxiosResponse<number>>
-	putComment(data: any): Promise<AxiosResponse<any>>
+	putComment(data: CommentType): Promise<AxiosResponse>
 }
 
 export interface PostLike {

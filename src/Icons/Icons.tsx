@@ -8,7 +8,6 @@ import {
 	AiOutlineCheckCircle,
 	AiFillHeart,
 	AiOutlineHeart,
-	AiOutlinePlus,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -23,7 +22,7 @@ import { BiUser, BiHappy, BiChevronsUp } from 'react-icons/bi'
 import { MdOutlineCancel, MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
-import { FaQuestion, FaPen, FaPlus } from 'react-icons/fa'
+import { FaQuestion, FaPen } from 'react-icons/fa'
 import { IoIosAirplane } from 'react-icons/io'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { RxCross2 } from 'react-icons/rx'

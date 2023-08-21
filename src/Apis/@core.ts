@@ -19,7 +19,7 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use(
-	(config: any) => {
+	config => {
 		const access_token = TokenService.getAccessToken()
 		if (access_token === null) return config
 		if (access_token) {

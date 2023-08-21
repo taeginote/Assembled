@@ -10,7 +10,7 @@ type Content = {
 	writeDate: string
 	writerNickname: string
 }
-interface UseCommentType {
+export interface UseCommentType {
 	response: {
 		totalPages: number
 		content: Content[]

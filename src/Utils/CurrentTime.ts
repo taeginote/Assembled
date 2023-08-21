@@ -1,4 +1,5 @@
 function CurrentTime() {
+	//msw 사용 실시간시간 테스트
 	const now = new Date()
 
 	//년 월 일
