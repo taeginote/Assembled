@@ -31,6 +31,10 @@ function SignUpInput(props: SingUpInputProps) {
 						{Icon}
 						<Input
 							type={name === 'SignUpPw' ? 'password' : 'text'}
+							maxlength={
+								(name === 'SignUpBirthday' && 8) ||
+								(name === 'SignUpPhone' && 11)
+							}
 							placeholder={placeholder}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 								field.onChange(e.target.value)
@@ -75,6 +79,7 @@ const ValidationBtn = styled.input`
 		background: ${({ theme }) => theme.COLOR.hover};
 	}
 `
+
 const S = {
 	Wrapper,
 	ValidationBtn,

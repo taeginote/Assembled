@@ -26,7 +26,7 @@ import {
 	Nickname_Icon,
 	Phone_Icon,
 } from '../../../Icons/Icons'
-import { signUpData } from '../../../Types/apiType'
+import { ApiError, signUpData } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useEffect, useState } from 'react'
 import SignUpInput from './Components/SignUpInput'
@@ -160,6 +160,7 @@ function SignUp() {
 		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.container>
 				<h3>회원가입</h3>
+
 				<S.InputBox>
 					<S.ProfileImg src={preFile as string} />
 					<S.ImgLabel htmlFor="profileImg">
