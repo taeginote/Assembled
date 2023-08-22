@@ -70,7 +70,7 @@ function Wrote() {
 							</S.Container>
 							{data?.response?.content?.length !== 0 && (
 								<Pagination
-									totalPage={data?.response?.totalPages}
+									totalPage={data?.response?.totalPages!}
 									limit={10}
 									scroll={765}
 									setPage={setPage}

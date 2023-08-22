@@ -15,7 +15,7 @@ interface IdxSignature {
 export interface ItemDataType {
 	contents: string
 	hits: number
-	postProfileImages?: IdxSignature
+	postProfileImages?: IdxSignature | []
 	writerId: number
 	postId?: number
 	title?: string
