@@ -102,7 +102,6 @@ function Detail() {
 	const onJoinMeeting = (e: any) => {
 		setJoinModal(false)
 		document.body.style.overflow = 'auto'
-
 		alert('가입신청 기능은 준비중입니다😀')
 
 		// postJoin({

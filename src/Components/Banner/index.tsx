@@ -1,7 +1,4 @@
 import styled from 'styled-components'
-import Banner1 from './Components/Banner1'
-import Banner2 from './Components/Banner2'
-import Banner3 from './Components/Banner3'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
@@ -9,6 +6,9 @@ import 'swiper/css/pagination'
 
 import SwiperCore, { Autoplay, EffectFade, Pagination } from 'swiper'
 import Banner4 from './Components/Banner4'
+import Banner5 from './Components/Banner5'
+import Banner6 from './Components/Banner6'
+
 SwiperCore.use([Autoplay, EffectFade, Pagination])
 
 function Banner() {
@@ -31,13 +31,13 @@ function Banner() {
 				autoplay={{ delay: 3500 }}
 			>
 				<SwiperSlide>
-					<Banner1 />
+					<Banner4 />
 				</SwiperSlide>
 				<SwiperSlide>
-					<Banner2 />
+					<Banner5 />
 				</SwiperSlide>
 				<SwiperSlide>
-					<Banner3 />
+					<Banner6 />
 				</SwiperSlide>
 			</Swiper>
 		</S.Wrapper>
@@ -48,5 +48,6 @@ export default Banner
 const Wrapper = styled.div`
 	margin-bottom: 2rem;
 	width: 100%;
+	/* height: 40rem; */
 `
 const S = { Wrapper }
