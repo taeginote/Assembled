@@ -102,16 +102,16 @@ function Register() {
 			</S.Container>
 
 			<S.Box>
-				<div>제목 *</div>
+				<div>모임 이름 *</div>
 				<Controller
 					name={'Title'}
 					control={control}
 					rules={{
-						required: '제목을 입력해주세요',
+						required: '정하고싶은 모임의 이름을 입력해주세요',
 					}}
 					render={({ field }) => (
 						<S.Input
-							placeholder="제목을 입력해 주세요"
+							placeholder="정하고싶은 모임의 이름을 입력해주세요"
 							$status={field.value === undefined}
 							value={field.value}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -130,11 +130,11 @@ function Register() {
 					name={'Contents'}
 					control={control}
 					rules={{
-						required: '설명을 입력해 주세요',
+						required: '모임에 대한 설명을 입력해 주세요',
 					}}
 					render={({ field }) => (
 						<textarea
-							placeholder="설명을 입력해 주세요"
+							placeholder="모임에 대한 설명을 입력해 주세요"
 							// status={field.value === undefined}
 							value={field.value}
 							onChange={e => field.onChange(e.target.value)}
