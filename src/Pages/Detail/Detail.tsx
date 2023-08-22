@@ -17,7 +17,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import { useRecoilState } from 'recoil'
-import { PostLike } from '../../Types/apiType'
+import { PostLike, postJoinType } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import UserIdService from '../../Utils/UserIdService'
 import { FlexCenterCSS } from '../../Styles/common'
@@ -26,6 +26,7 @@ import Button from '../../Components/Button/Button'
 import { FlexColumnCSS } from '../../Styles/common'
 import JoinModal from '../../Components/Modal/joinModal'
 import { useState } from 'react'
+import JoinApi from '../../Apis/JoinApi'
 
 function Detail() {
 	const navigate = useNavigate()
@@ -74,6 +75,15 @@ function Detail() {
 		},
 	)
 
+	const { mutate: postJoin } = useMutation(
+		(data: postJoinType) => JoinApi.postJoin(data),
+		{
+			onSuccess: () => {
+				refetch()
+			},
+		},
+	)
+
 	const onHeart = () => {
 		if (token === null) return
 		heartMutate({ postId })
@@ -89,15 +99,26 @@ function Detail() {
 		//document.body.style.overflow = "unset"; //스크롤바가 사라졌다가 다시 나타나면서 가로가 변형된다. //스크롤 방지 해제
 	}
 
-	const onJoinMeeting = () => {
+	const onJoinMeeting = (e: any) => {
 		setJoinModal(false)
 		document.body.style.overflow = 'auto'
+
 		alert('가입신청 기능은 준비중입니다😀')
+
+		// postJoin({
+		// 	joinRequestMessage:
+		// 		e.target.textarea.value.trim().length === 0
+		// 			? '안녕하세요~ 잘 부탁드립니다~😀'
+		// 			: e.target.textarea.value,
+		// 	postId: postId!,
+		// })
 	}
+
 	const onClickJoinCancel = () => {
 		setJoinModal(false)
 		document.body.style.overflow = 'auto'
 	}
+
 	return (
 		<S.Wrapper>
 			{isLoading ? (
@@ -211,13 +232,18 @@ function Detail() {
 			)}
 			{joinModal && (
 				<JoinModal>
-					<S.JoinText>안녕하세요~ 잘 부탁드립니다~😀</S.JoinText>
-					<S.ButtonWrap>
-						<Button onClick={onJoinMeeting}>가입 신청</Button>
-						<Button variant="default-white" onClick={onClickJoinCancel}>
-							취소
-						</Button>
-					</S.ButtonWrap>
+					<S.JoinModalWrap onSubmit={onJoinMeeting}>
+						<S.JoinText
+							id="textarea"
+							placeholder="작성하지 않으면 아래와 같은 멘트로 보내드려요&#13;&#10;( 안녕하세요~ 잘 부탁드립니다~😀 )"
+						></S.JoinText>
+						<S.ButtonWrap>
+							<Button>가입 신청</Button>
+							<Button variant="default-white" onClick={onClickJoinCancel}>
+								취소
+							</Button>
+						</S.ButtonWrap>
+					</S.JoinModalWrap>
 				</JoinModal>
 			)}
 		</S.Wrapper>
@@ -397,6 +423,7 @@ const Dec = styled.pre`
 	min-height: 30rem;
 	border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 `
+const JoinModalWrap = styled.form``
 
 const JoinText = styled.textarea`
 	width: 90%;
@@ -436,4 +463,5 @@ const S = {
 	ButtonWrap,
 	JoinText,
 	WebkHeartBox,
+	JoinModalWrap,
 }

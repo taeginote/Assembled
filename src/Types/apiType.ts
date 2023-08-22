@@ -73,6 +73,15 @@ export interface CategoryApiType {
 	getCategory(): Promise<AxiosResponse>
 }
 
+//Join Api
+export interface postJoinType {
+	joinRequestMessage: string
+	postId: number
+}
+export interface JoinApiType {
+	postJoin(data: postJoinType): Promise<AxiosResponse>
+}
+
 //User api type
 
 export interface signUpData {

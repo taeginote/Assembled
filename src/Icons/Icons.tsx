@@ -27,6 +27,8 @@ import { IoIosAirplane } from 'react-icons/io'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { RxCross2 } from 'react-icons/rx'
 import { HiOutlinePlus } from 'react-icons/hi'
+import { GrView } from 'react-icons/gr'
+
 type IconSize = {
 	size?: string
 }
@@ -113,3 +115,5 @@ export const Plus_Icon = () => <HiOutlinePlus size={'22'} color="#FB9B00" />
 
 export const Up_Icon = () => <BiChevronsUp size={'40'} color="#FDD19B" />
 //Up
+
+export const View_Icon = () => <GrView size={'15'} />

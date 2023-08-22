@@ -10,7 +10,7 @@ import {
 	Chat_Icon,
 	FillHeart_Icon,
 	NotFillHeart_Icon,
-	Person_Icon,
+	View_Icon,
 } from '../../Icons/Icons'
 import { useMutation } from '@tanstack/react-query'
 import { PostLike } from '../../Types/apiType'
@@ -30,18 +30,18 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 		categoryName,
 		writerProfileImages,
 		writerNickname,
-		personnelNumber,
 		expectedPeriod,
 		commentCount,
 		likeStatus,
 		postStatus, //'PROGRESS' | 'COMPLETED'
+		hits,
 	} = data
 
 	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
 
 	// 프로필 이미지 수정
 
-	let period = expectedPeriod == '0' ? '제한없음' : expectedPeriod + '달뒤'
+	let period = expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
 
 	const { mutate } = useMutation(
 		(likeData: PostLike) => PostLikeApi.PostLike(likeData),
@@ -89,6 +89,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 			</S.TopWrap>
 			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
 				<S.Period>마감일 | {period}</S.Period>
+
 				<S.Title>
 					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
 				</S.Title>
@@ -104,10 +105,10 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 					</div>
 				</div>
 				<span>
-					<Person_Icon />
-					<span>{personnelNumber == '0' ? 'N명' : personnelNumber}</span>
+					<View_Icon />
+					<span>{hits}</span>
 					<Chat_Icon size={'20'} />
-					<div>{commentCount}개</div>
+					<div>{commentCount}</div>
 				</span>
 			</S.UserBox>
 		</S.Wrapper>
@@ -196,7 +197,6 @@ const Category = styled.span`
 `
 const Period = styled.div`
 	color: ${({ theme }) => theme.COLOR.common.gray[300]};
-	margin-top: 2rem;
 `
 const Title = styled.div`
 	min-height: 8rem;
