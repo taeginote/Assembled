@@ -23,7 +23,7 @@ import useGetUserInfoData from '../../../Hooks/Queries/get-userInfo'
 import UserIdService from '../../../Utils/UserIdService'
 import UserApi from '../../../Apis/UserApi'
 
-import { signUpData } from '../../../Types/apiType'
+import { signUpProps } from '../../../Types/apiType'
 
 import { useMutation } from '@tanstack/react-query'
 import SuccessModal from '../../../Components/Modal/successModal'
@@ -46,7 +46,8 @@ function UserSetting() {
 	const profileImg = ProfileImgReturn(data?.response?.profile?.filePath)
 
 	const { mutate } = useMutation(
-		(data: Omit<signUpData, 'password'>) => UserApi.PutUserInfo(data),
+		(data: Omit<signUpProps, 'password' | 'email'>) =>
+			UserApi.PutUserInfo(data),
 		{
 			onSuccess: () => {
 				setSuccessModal(true)

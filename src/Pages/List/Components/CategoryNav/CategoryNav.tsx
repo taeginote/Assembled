@@ -11,7 +11,7 @@ export type Category = {
 }
 
 function CategoryNav() {
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	let category: number | null = Number(searchParams.get('category')) || null
 
 	const { data, isLoading } = useGetCategoryData()

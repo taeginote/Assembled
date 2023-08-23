@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import CategoryApi from '../../Apis/CategoryApi'
+import { Category } from '../../Pages/List/Components/CategoryNav/CategoryNav'
 
 const getCategoryData = async () => {
 	const res = await CategoryApi.getCategory()
@@ -8,10 +9,6 @@ const getCategoryData = async () => {
 	return res.data
 }
 
-export type Category = {
-	categoryId: number
-	categoryName: string
-}
 interface UseCategoryType {
 	response: Category[]
 }

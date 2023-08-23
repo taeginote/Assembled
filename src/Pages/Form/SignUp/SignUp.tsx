@@ -26,20 +26,19 @@ import {
 	Nickname_Icon,
 	Phone_Icon,
 } from '../../../Icons/Icons'
-import { ApiError, signUpData } from '../../../Types/apiType'
+import { signUpProps } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
 import { useEffect, useState } from 'react'
 import SignUpInput from './Components/SignUpInput'
 import SignUpValidationError from '../../../Error/SignUpValidationError'
-
 export interface ValidationMsg {
 	//이거 status가 string, boolean 왔다갔다 거림 리팩토링때 수정 예정
 	email: {
-		status: any
+		status?: boolean | string
 		message: string
 	}
 	nickname: {
-		status: any
+		status?: boolean | string
 		message: string
 	}
 }
@@ -81,7 +80,7 @@ function SignUp() {
 	const [successModal, setSuccessModal] = useState(false)
 
 	// profileImage 추가해야함
-	const { mutate } = useMutation((data: signUpData) => UserApi.SignUp(data), {
+	const { mutate } = useMutation((data: signUpProps) => UserApi.SignUp(data), {
 		onSuccess: () => {
 			setSuccessModal(() => true)
 		},
@@ -109,7 +108,7 @@ function SignUp() {
 				const res = await UserApi.getEmailValidation(value)
 				const { response }: any = res?.data
 				SignUpValidationError('SignUpEmail', setValidationMsg, response)
-			} catch (err: ApiError | any) {
+			} catch (err: any) {
 				const response = err?.response.data.status
 				SignUpValidationError('SignUpEmail', setValidationMsg, response)
 			}
@@ -119,7 +118,7 @@ function SignUp() {
 				const res = await UserApi.getNickNameValidation(value)
 				const { response }: any = res?.data
 				SignUpValidationError('SignUpNickName', setValidationMsg, response)
-			} catch (err: ApiError | any) {
+			} catch (err: any) {
 				const response = err?.response.data.status
 				SignUpValidationError('SignUpNickName', setValidationMsg, response)
 			}
@@ -187,7 +186,7 @@ function SignUp() {
 					onValidation={onValidation}
 				/>
 				{validationMsg.email.status && (
-					<HookFormError status={validationMsg.email.status}>
+					<HookFormError status={validationMsg.email.status!}>
 						{validationMsg.email.message}
 					</HookFormError>
 				)}

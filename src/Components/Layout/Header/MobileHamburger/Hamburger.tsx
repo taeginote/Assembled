@@ -1,9 +1,5 @@
 import { styled } from 'styled-components'
-import {
-	Cancel_Icon,
-	Cancel_big_Icon,
-	Hamburger_Icon,
-} from '../../../../Icons/Icons'
+import { Cancel_big_Icon, Hamburger_Icon } from '../../../../Icons/Icons'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../../Contexts/auth'

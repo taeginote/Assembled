@@ -1,96 +1,90 @@
 import { AxiosResponse } from 'axios'
-import {
-	UseListType,
-	categoryType,
-	filterType,
-} from '../Hooks/Queries/get-list'
-import { UseDetailType } from '../Hooks/Queries/get-detail'
-import { UseUserLikeType } from '../Hooks/Queries/get-userlike'
-import { UseCommentType } from '../Hooks/Queries/get-comment'
-import { CommentType } from '../Pages/Detail/Components/CommentForm'
+import { categoryType, filterType } from '../Hooks/Queries/get-list'
 
-export interface CommentData {
+export interface PostCommentProps {
 	contents?: string
 	postId?: number
 }
-interface CommentParams {
+interface GetUserCommentProps {
 	userId: string | null
-	page: null | number
+	page: number | null
 }
-export type CommentApiType = {
-	postComment(data: CommentData): Promise<AxiosResponse<CommentData>>
-	getUserComment(params: CommentParams): Promise<AxiosResponse<UseCommentType>>
-	deleteComment(params?: number): Promise<AxiosResponse<number>>
-	putComment(data: CommentType): Promise<AxiosResponse>
+export interface PutCommentProps {
+	commentId: null | number
+	contents: null | string
 }
 
-export interface PostLike {
+export type CommentApiType = {
+	postComment(data: PostCommentProps): Promise<AxiosResponse>
+	getUserComment(params: GetUserCommentProps): Promise<AxiosResponse>
+	deleteComment(params?: number): Promise<AxiosResponse>
+	putComment(data: PutCommentProps): Promise<AxiosResponse>
+}
+
+export interface PostLikeProps {
 	postId?: number | null
 }
 
 export interface PostLikeApiType {
-	PostLike(params: PostLike): Promise<AxiosResponse<PostLike>>
-	CancelLike(params?: number): Promise<AxiosResponse<number | undefined>>
+	PostLike(params: PostLikeProps): Promise<AxiosResponse>
+	CancelLike(params?: number): Promise<AxiosResponse>
 }
 
-interface GetListData {
+interface GetListProps {
 	page?: number
 	searchBy?: string
 	searchQuery?: string
 	categoryId?: categoryType
 	sort?: filterType
-	response?: []
 }
-export interface PostRegisterData {
+export interface PostRegisterProps {
 	categoryId: 1 | number
 	contents?: string
 	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | '제한 없음'
 	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
 	title?: string
 }
-export interface PatchRegisterData extends PostRegisterData {
+export interface PatchRegisterData extends PostRegisterProps {
 	postStatus?: string
 	postId?: number
 }
 
+interface GetUserWroteProps {
+	postId: string | null
+	page: null | number
+}
+
 export interface PostApiType {
-	getList(params: GetListData): Promise<AxiosResponse<UseListType>>
-	PostRegister(
-		params: PostRegisterData,
-	): Promise<AxiosResponse<PostRegisterData>>
-	putRegister(
-		params: PatchRegisterData,
-	): Promise<AxiosResponse<PatchRegisterData>>
-	getDetail(params: { postId: number }): Promise<AxiosResponse<UseDetailType>>
-	DeletePost(
-		params: number | undefined,
-	): Promise<AxiosResponse<number | undefined>>
-	getUserWrote(params: any): Promise<AxiosResponse<any>>
-	getUserLike(params: number): Promise<AxiosResponse<UseUserLikeType>>
-	//여기는 모임 수정 (아직 구현 X)
+	getList(params: GetListProps): Promise<AxiosResponse>
+	PostRegister(params: PostRegisterProps): Promise<AxiosResponse>
+	putRegister(params: PatchRegisterData): Promise<AxiosResponse>
+	getDetail(params: PostLikeProps): Promise<AxiosResponse>
+	DeletePost(params?: number): Promise<AxiosResponse>
+	getUserWrote(params: GetUserWroteProps): Promise<AxiosResponse>
+	getUserLike(params: number): Promise<AxiosResponse>
 }
 export interface CategoryApiType {
 	getCategory(): Promise<AxiosResponse>
 }
 
 //Join Api
-export interface postJoinType {
+export interface postJoinProps {
 	joinRequestMessage: string
 	postId: number
 }
 export interface JoinApiType {
-	postJoin(data: postJoinType): Promise<AxiosResponse>
+	postJoin(data: postJoinProps): Promise<AxiosResponse>
 }
 
 //User api type
 
-export interface signUpData {
-	email?: string
-	name?: string
-	nickname?: string
-	password?: string
-	birthDate?: string
-	phoneNumber?: string
+export interface signUpProps {
+	email: string
+	name: string
+	nickname: string
+	password: string
+	birthDate: string
+	phoneNumber: string
 	profileImage?: string[]
 }
 
@@ -109,29 +103,15 @@ interface NicknameValidation {
 }
 
 export type UserApiType = {
-	SignUp(data: signUpData): Promise<AxiosResponse<signUpData>>
-	Login(data: LoginData): Promise<AxiosResponse<LoginData>>
-	getEmailValidation(
-		data: EmailValidation,
-	): Promise<AxiosResponse<EmailValidation>>
-	getNickNameValidation(
-		data: NicknameValidation,
-	): Promise<AxiosResponse<NicknameValidation>>
+	SignUp(data: signUpProps): Promise<AxiosResponse>
+	Login(data: LoginData): Promise<AxiosResponse>
+	getEmailValidation(data: EmailValidation): Promise<AxiosResponse>
+	getNickNameValidation(data: NicknameValidation): Promise<AxiosResponse>
 	getToken(): Promise<AxiosResponse>
 	postLogout(): Promise<AxiosResponse>
 	deletewithdrawal(): Promise<AxiosResponse>
-	getUserInfo(data: string | null): Promise<AxiosResponse<any>>
+	getUserInfo(data: string | null): Promise<AxiosResponse>
 	PutUserInfo(
-		data: Omit<signUpData, 'password'>,
-	): Promise<AxiosResponse<Omit<signUpData, 'password'>>>
-}
-
-export interface ApiError {
-	response: {
-		data: {
-			error: {
-				message: string
-			}
-		}
-	}
+		data: Omit<signUpProps, 'password' | 'email'>,
+	): Promise<AxiosResponse>
 }

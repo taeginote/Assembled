@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 import { useMutation } from '@tanstack/react-query'
-
 import { FlexAlignCSS } from '../../../Styles/common'
-
 import Button from '../../../Components/Button/Button'
 import { CommentFormPropsType } from '../../../Types/dataType'
-import { CommentData } from '../../../Types/apiType'
+import { PostCommentProps, PutCommentProps } from '../../../Types/apiType'
 import CommentApi from '../../../Apis/CommentApi'
 import UserIdService from '../../../Utils/UserIdService'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
@@ -14,11 +12,6 @@ import { TextareaEventTargetType } from '../../../Types/type'
 import { useState } from 'react'
 import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
 import Ballon from '../../../Components/Ballon/Ballon'
-
-export interface CommentType {
-	commentId: null | number
-	contents: null | string
-}
 
 function CommentForm({
 	comments,
@@ -36,7 +29,7 @@ function CommentForm({
 	const AccessToken = TokenService.getAccessToken()
 
 	const { mutate } = useMutation(
-		(data: CommentData) => CommentApi.postComment(data),
+		(data: PostCommentProps) => CommentApi.postComment(data),
 		{
 			onSuccess: () => {
 				SetCommentsInput('')
@@ -46,7 +39,7 @@ function CommentForm({
 		},
 	)
 	const { mutate: changeMutate } = useMutation(
-		(data: CommentType) => CommentApi.putComment(data),
+		(data: PutCommentProps) => CommentApi.putComment(data),
 		{
 			onSuccess: () => {
 				setChangeViewNum(null)
@@ -56,7 +49,7 @@ function CommentForm({
 		},
 	)
 	const { mutate: deleteMutate } = useMutation(
-		(commentId?: number) => CommentApi.deleteComment(commentId),
+		(commentId: number) => CommentApi.deleteComment(commentId),
 		{
 			onSuccess: () => {
 				refetch()
@@ -72,7 +65,7 @@ function CommentForm({
 		if (AccessToken === null) return
 		if (commentsInput?.trim().length === 0) return
 
-		const data: CommentData = {
+		const data: PostCommentProps = {
 			contents: commentsInput,
 			postId,
 		}
@@ -88,7 +81,7 @@ function CommentForm({
 			if (AccessToken === null) return
 			if (commentsInput?.trim().length === 0) return
 
-			const data: CommentData = {
+			const data: PostCommentProps = {
 				contents: commentsInput,
 				postId,
 			}
@@ -102,7 +95,7 @@ function CommentForm({
 			e.preventDefault()
 
 			if (changeCommentVal?.trim().length === 0) return
-			const data: CommentType = {
+			const data: PutCommentProps = {
 				commentId: changeViewNum,
 				contents: changeCommentVal,
 			}

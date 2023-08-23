@@ -24,10 +24,11 @@ import { useMutation } from '@tanstack/react-query'
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import PostApi from '../../Apis/PostApi'
-import { PostRegisterData } from '../../Types/apiType'
-import useGetCategoryData, { Category } from '../../Hooks/Queries/get-category'
+import { PostRegisterProps } from '../../Types/apiType'
+import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
 import { useState } from 'react'
+import { Category } from '../List/Components/CategoryNav/CategoryNav'
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
@@ -42,7 +43,7 @@ function Register() {
 	const { data: GetCategoryData } = useGetCategoryData()
 
 	const { mutate } = useMutation(
-		(data: PostRegisterData) => PostApi.PostRegister(data),
+		(data: PostRegisterProps) => PostApi.PostRegister(data),
 		{
 			onSuccess: () => {
 				setModalView(true)
@@ -58,7 +59,7 @@ function Register() {
 			(el: Category) => el.categoryName === e.Category,
 		)
 
-		const data: PostRegisterData = {
+		const data: PostRegisterProps = {
 			title: e.Title,
 			contents: e.Contents,
 			categoryId: categoryId!.categoryId,

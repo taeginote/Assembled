@@ -29,7 +29,6 @@ export interface UseWroteType {
 
 const getWroteData = async (postId: string | null, page: null | number) => {
 	const res = await PostApi.getUserWrote({ postId, page })
-
 	return res.data
 }
 

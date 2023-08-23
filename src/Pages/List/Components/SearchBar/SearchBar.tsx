@@ -23,7 +23,7 @@ function SearchBar({
 		{ title: '작성자', value: 'writer' },
 	]
 
-	const [isView, setIsView] = useState<boolean>(false)
+	const [isView, setIsView] = useState(false)
 
 	const onClickSearch = (e: any) => {
 		e.preventDefault()

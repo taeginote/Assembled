@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { BallonType } from '../../Types/type'
+interface BallonType {
+	text?: string
+}
 
 function Ballon({ text }: BallonType) {
 	return <S.BallonText>{text}</S.BallonText>

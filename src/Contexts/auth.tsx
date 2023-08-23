@@ -1,9 +1,15 @@
 import { useContext, useState, createContext, useEffect } from 'react'
 import TokenService from '../Utils/TokenService'
-import { AuthContextType, childrenType } from '../Types/type'
+import { childrenType } from '../Types/type'
 import UserIdService from '../Utils/UserIdService'
 import UserInfoService from '../Utils/UserInfoService'
 import { UserInfoType } from '../Pages/Form/Login/Login'
+
+interface AuthContextType {
+	accessToken: string | null
+	login: (token: string, id: string, userInfo: UserInfoType) => void
+	logout: () => void
+}
 
 const AuthContext = createContext<AuthContextType>({
 	accessToken: null,

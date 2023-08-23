@@ -1,3 +1,4 @@
+import { OnClickType } from '../../Types/type'
 import * as S from './Button.style'
 
 interface ButtonProps {
@@ -8,7 +9,7 @@ interface ButtonProps {
 	type?: 'submit' | 'button'
 	disabled?: boolean
 	children?: React.ReactNode
-	onClick?: any //보류
+	onClick?: OnClickType
 }
 
 function Button(props: ButtonProps) {

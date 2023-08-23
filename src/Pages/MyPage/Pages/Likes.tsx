@@ -20,7 +20,7 @@ function Likes() {
 
 	const loadingArr: 0[] = Array(12).fill(0)
 
-	const { data, isLoading } = useGetUserLikeData(page)
+	const { data, isLoading, refetch } = useGetUserLikeData(page)
 
 	return (
 		<S.Wrapper>
@@ -44,7 +44,7 @@ function Likes() {
 							<p>관심있는 모임</p>
 							<S.Container>
 								{data?.response?.content?.map((el, idx: number) => (
-									<ItemBox data={el} key={idx} />
+									<ItemBox data={el} refetch={refetch} key={idx} />
 								))}
 							</S.Container>
 							<Pagination

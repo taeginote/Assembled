@@ -17,7 +17,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import { useRecoilState } from 'recoil'
-import { PostLike, postJoinType } from '../../Types/apiType'
+import { PostLikeProps, postJoinProps } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import UserIdService from '../../Utils/UserIdService'
 import { FlexCenterCSS } from '../../Styles/common'
@@ -33,7 +33,7 @@ function Detail() {
 	const queryClient = useQueryClient()
 	const token = TokenService.getAccessToken()
 
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	const [joinModal, setJoinModal] = useState(false)
 	const [recoilCounter, setRecoilCounter] =
 		useRecoilState<boolean>(modalViewConfirm)
@@ -49,7 +49,7 @@ function Detail() {
 	const IsMinePage = data?.response?.writerId == UserId ? true : false
 
 	const { mutate } = useMutation(
-		(postId: number | undefined) => PostApi.DeletePost(postId),
+		(postId: number) => PostApi.DeletePost(postId),
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries(['useGetListData'])
@@ -58,7 +58,7 @@ function Detail() {
 		},
 	)
 	const { mutate: heartMutate } = useMutation(
-		(likeData: PostLike) => PostLikeApi.PostLike(likeData),
+		(likeData: PostLikeProps) => PostLikeApi.PostLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -67,7 +67,7 @@ function Detail() {
 	)
 
 	const { mutate: cancelMutate } = useMutation(
-		(likeData?: number) => PostLikeApi.CancelLike(likeData),
+		(likeData: number) => PostLikeApi.CancelLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -76,7 +76,7 @@ function Detail() {
 	)
 
 	const { mutate: postJoin } = useMutation(
-		(data: postJoinType) => JoinApi.postJoin(data),
+		(data: postJoinProps) => JoinApi.postJoin(data),
 		{
 			onSuccess: () => {
 				refetch()

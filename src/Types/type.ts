@@ -1,5 +1,3 @@
-import { categoryType, filterType } from '../Hooks/Queries/get-list'
-import { UserInfoType } from '../Pages/Form/Login/Login'
 import { DataType } from '../Pages/List/Components/SearchBar/SearchBar'
 
 //children 있는 자식 type
@@ -42,12 +40,6 @@ export type TextareaEventTargetType =
 
 //Pagination Type
 //props type
-export interface PaginationType {
-	limit: number
-	totalPage: number
-	setPage: (page: number) => void
-	scroll: number
-}
 type selectValType = {
 	title: '제목' | '내용' | string //의문임 왜 string이 있어야할까?
 	value: 'title' | 'contents' | string
@@ -57,13 +49,6 @@ export interface SearchType {
 	selectVal: selectValType
 	setSearchValue: (page: string) => void
 	setPage: (page: number) => void
-}
-
-//Auth type
-export interface AuthContextType {
-	accessToken: string | null
-	login: (token: string, id: string, userInfo: UserInfoType) => void
-	logout: () => void
 }
 
 //리액트 훅 폼 Login type
@@ -90,7 +75,4 @@ export interface UserInfoSubmitData {
 	profileImg?: string
 }
 
-//말풍선
-export interface BallonType {
-	text?: string
-}
+export type OnClickType = (event: React.MouseEvent<HTMLButtonElement>) => void
