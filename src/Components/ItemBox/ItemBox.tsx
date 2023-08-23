@@ -13,11 +13,10 @@ import {
 	View_Icon,
 } from '../../Icons/Icons'
 import { useMutation } from '@tanstack/react-query'
-import { PostLike } from '../../Types/apiType'
+import { PostLikeProps } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import TokenService from '../../Utils/TokenService'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
-import UserInfoService from '../../Utils/UserInfoService'
 
 function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 	const navigate = useNavigate()
@@ -39,12 +38,10 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 
 	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
 
-	// 프로필 이미지 수정
-
 	let period = expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
 
 	const { mutate } = useMutation(
-		(likeData: PostLike) => PostLikeApi.PostLike(likeData),
+		(likeData: PostLikeProps) => PostLikeApi.PostLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -53,7 +50,7 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 	)
 
 	const { mutate: cancelMutate } = useMutation(
-		(likeData?: number) => PostLikeApi.CancelLike(likeData),
+		(likeData: number) => PostLikeApi.CancelLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -65,9 +62,8 @@ function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
 		mutate({ postId })
 	}
 	const onClickFillHeart = (): void => {
-		cancelMutate(postId)
+		cancelMutate(postId!)
 	}
-	let userInfo = UserInfoService.getUserInfo()
 
 	return (
 		<S.Wrapper>
