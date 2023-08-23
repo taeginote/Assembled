@@ -10,16 +10,8 @@ import { Person_Icon } from '../../../Icons/Icons'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import Button from '../../../Components/Button/Button'
 import { Question_Icon } from '../../../Icons/Icons'
-import { Warning_Icon } from '../../../Icons/Icons'
-import { FlexCenterCSS } from '../../../Styles/common'
 
-function ActivityItemBox({
-	data,
-	refetch,
-}: {
-	data: ItemDataType
-	refetch?: any
-}) {
+function ActivityItemBox({ data }: { data: ItemDataType; refetch?: any }) {
 	const {
 		postId,
 		title,

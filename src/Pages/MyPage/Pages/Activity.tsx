@@ -30,7 +30,7 @@ function Activity() {
 		writerNickname: 'taek11',
 	}
 
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 0)
 

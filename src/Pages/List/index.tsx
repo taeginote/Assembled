@@ -23,11 +23,10 @@ import UpButton from '../../Components/UpButton/upButton'
 
 function List() {
 	//보류
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	let categoryId: categoryType = Number(searchParams.get('category')) || null
 	let sort: filterType = searchParams.get('sort')
 	let pageNumber: number | null = Number(searchParams.get('page'))
-	let search: string | null = searchParams.get('search')
 
 	const [page, setPage] = useState(pageNumber || 1)
 	const [searchValue, setSearchValue] = useState<string>('')

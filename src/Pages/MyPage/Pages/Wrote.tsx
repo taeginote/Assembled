@@ -21,7 +21,7 @@ import MyPageListNoData from '../../../Error/MypageListNoData'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 0)
 	const [postId, setPostId] = useState<number>(1)

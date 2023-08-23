@@ -6,7 +6,7 @@ import Pagination from '../../../Components/Pagination/Pagination'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import Ballon from '../../../Components/Ballon/Ballon'
-import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
+import { Trash_Icon } from '../../../Icons/Icons'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import CommentApi from '../../../Apis/CommentApi'
 import { useRecoilState } from 'recoil'
@@ -19,7 +19,7 @@ type CommentId = { commentId: any }
 
 function Comment() {
 	const queryClient = useQueryClient()
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	const navigate = useNavigate()
 	const [recoilCounter, setRecoilCounter] =
 		useRecoilState<boolean>(modalViewConfirm)
@@ -28,8 +28,7 @@ function Comment() {
 
 	const [page, setPage] = useState<number>(pageNumber || 0)
 	const [commentId, setCommentId] = useState<null | number>(null)
-	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
-	const [changeVal, setChangeVal] = useState<null | string>(null)
+
 	const loadingArr: 0[] = Array(4).fill(0)
 
 	const { data, isLoading } = useGetCommentData(userId, page)
@@ -44,32 +43,10 @@ function Comment() {
 			onError: () => {},
 		},
 	)
-	const { mutate: changeMutate } = useMutation(
-		data => CommentApi.putComment(data),
-		{
-			onSuccess: () => {
-				setChangeViewNum(null)
-				queryClient.invalidateQueries(['useGetCommentData'])
-			},
-			onError: () => {},
-		},
-	)
 
 	const onDeleteComment = (e: CommentId) => {
 		setRecoilCounter(true)
 		setCommentId(e.commentId)
-	}
-	const onChangeComment = (e: CommentId) => {
-		setChangeViewNum(e.commentId)
-	}
-
-	const onChangeBtn = () => {
-		if (changeVal?.trim().length === 0) return
-		const data: any = {
-			commentId: changeViewNum,
-			contents: changeVal,
-		}
-		changeMutate(data)
 	}
 
 	// onClick={() => navigate(`/Detail?postId=${el.postId}`)} 이거 해당 게시글 가는거 icon 넣어서 추가해야할듯함
@@ -91,53 +68,15 @@ function Comment() {
 						<S.Wrapper>
 							<p>작성한 댓글</p>
 							{data?.response?.content.map((el: any, idx: number) => (
-								<S.container $state={changeViewNum === el.commentId} key={idx}>
-									<S.Left>
+								<S.container>
+									<S.Left
+										onClick={() => navigate(`/Detail?postId=${el.postId}`)}
+									>
 										<S.Title>{el.postTitle}</S.Title>
 										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
-										{changeViewNum === el.commentId ? (
-											<S.InputWrap>
-												<S.Input
-													value={changeVal === null ? el.contents : changeVal}
-													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-														setChangeVal(e.target.value)
-													}
-												/>
-												<button
-													type="button"
-													onClick={onChangeBtn}
-													title="Modify"
-												>
-													수정
-												</button>
-											</S.InputWrap>
-										) : (
-											<S.Text>{el.contents}</S.Text>
-										)}
 									</S.Left>
 									<S.Right>
-										{changeViewNum !== el.commentId ? (
-											<button
-												onClick={() => onChangeComment(el)}
-												title="Modify"
-											>
-												<div>
-													<Ballon text={'댓글 수정'} />
-												</div>
-												<Pen_Icon />
-											</button>
-										) : (
-											<button
-												onClick={() => setChangeViewNum(null)}
-												title="Cancle"
-											>
-												<div>
-													<Ballon text={'수정 취소'} />
-												</div>
-												<Cancel_Icon />
-											</button>
-										)}
 										<button onClick={() => onDeleteComment(el)} title="Delete">
 											<div>
 												<Ballon text={'댓글 삭제'} />
@@ -184,11 +123,10 @@ const Wrapper = styled.div`
 		margin: 0 2rem;
 	}
 `
-const container = styled.div<{ $state: boolean }>`
+const container = styled.div`
 	border-left: 5px solid ${({ theme }) => theme.COLOR.hover};
 	margin-bottom: 5rem;
 	padding: 1rem 2rem;
-	background-color: ${({ theme, $state }) => $state && theme.COLOR.orange};
 	&:hover {
 		background-color: ${({ theme }) => theme.COLOR.orange};
 		transition: all 1s;
@@ -201,7 +139,7 @@ const container = styled.div<{ $state: boolean }>`
 	justify-content: space-between;
 `
 const Left = styled.div`
-	width: 85%;
+	width: 95%;
 `
 const Title = styled.div`
 	margin-bottom: 2rem;
@@ -236,31 +174,7 @@ const Right = styled.div`
 		}
 	}
 `
-const Input = styled.input`
-	margin-top: 2rem;
-	border: none;
-	padding: 1rem 6rem 1rem 1rem;
-	border: 2px solid ${({ theme }) => theme.COLOR.orange};
-	border-radius: 3px;
-	width: 100%;
-`
-const InputWrap = styled.div`
-	position: relative;
-	& > button {
-		padding: 0.7rem;
-		position: absolute;
-		width: 4rem;
-		right: 0.5rem;
-		top: 2.5rem;
-		cursor: pointer;
-		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-			padding: 0.5rem;
-			top: 2.7rem;
-		}
-	}
-	width: 100%;
-	z-index: 10000;
-`
+
 const S = {
 	Wrapper,
 	container,
@@ -269,7 +183,5 @@ const S = {
 	SubTime,
 	Left,
 	Right,
-	Input,
-	InputWrap,
 	Title,
 }

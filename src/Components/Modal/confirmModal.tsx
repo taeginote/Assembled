@@ -23,7 +23,12 @@ function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
 		if (url === undefined) {
 			navigate('/')
 		}
+		document.body.style.overflow = 'auto'
+		setRecoilCounter(false)
+	}
 
+	const onClickCancel = () => {
+		document.body.style.overflow = 'auto'
 		setRecoilCounter(false)
 	}
 	return (
@@ -38,7 +43,7 @@ function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
 					<Button
 						size={'normal'}
 						variant={'default-white'}
-						onClick={() => setRecoilCounter(false)}
+						onClick={onClickCancel}
 					>
 						취소
 					</Button>

@@ -11,7 +11,7 @@ function FilterSelectBox() {
 	const navigate = useNavigate()
 	const [isShowOptions, setShowOptions] = useState<boolean>(false)
 
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	let filter: string | null = searchParams.get('sort')
 	let category: number | null = Number(searchParams.get('category'))
 

@@ -14,7 +14,7 @@ import MyPageListNoData from '../../../Error/MypageListNoData'
 
 function Likes() {
 	//디자인을 위한 test Mock
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 0)
 
