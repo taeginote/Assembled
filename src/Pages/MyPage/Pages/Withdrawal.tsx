@@ -7,8 +7,12 @@ import SuccessModal from '../../../Components/Modal/successModal'
 import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
 import { useAuth } from '../../../Contexts/auth'
+import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
+import { useRecoilState } from 'recoil'
+import ConfirmModal from '../../../Components/Modal/confirmModal'
 
 function Withdrawal() {
+	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 	const [modalView, setModalView] = useState(false)
 	const auth = useAuth()
 
@@ -16,12 +20,16 @@ function Withdrawal() {
 		onSuccess: () => {
 			setModalView(true)
 			auth.logout()
+			alert(
+				'지금까지 어셈블을 이용해주셔서 감사합니다~\n 언제든지 저희와 함께한 추억을 회상하거나 다시 찾아오실 수 있습니다.',
+			)
 		},
 		onError: () => {},
 	})
 
 	const onWithdrawal = () => {
-		mutate()
+		setRecoilCounter(true)
+		document.body.style.overflow = 'hidden'
 	}
 	return (
 		<S.Wrapper>
@@ -40,6 +48,13 @@ function Withdrawal() {
 					text={'회원탈퇴 성공'}
 					url={'/myPage/withdrawal'}
 					setState={setModalView}
+				/>
+			)}
+			{recoilCounter && (
+				<ConfirmModal
+					text={'정말로 회원탈퇴하시나요?'}
+					url={'/'}
+					mutate={mutate}
 				/>
 			)}
 		</S.Wrapper>
