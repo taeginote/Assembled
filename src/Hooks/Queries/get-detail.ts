@@ -42,7 +42,6 @@ const getDetailData = async (postId: number) => {
 }
 
 const useGetDetailData = (postId: number) => {
-	//보류
 	const { data, isLoading, refetch } = useQuery<UseDetailType, boolean>(
 		['useGetDetailData', postId],
 		() => getDetailData(postId),

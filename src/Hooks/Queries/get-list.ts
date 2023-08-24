@@ -48,7 +48,6 @@ const getListData = async (
 	return res.data
 }
 
-//보류
 const useGetListData = (
 	page?: number,
 	searchBy?: string,

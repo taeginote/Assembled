@@ -25,7 +25,6 @@ const getCommentData = async (userId: string | null, page: null | number) => {
 }
 
 const useGetCommentData = (userId: string | null, page: null | number) => {
-	//보류
 	const { data, isLoading, refetch } = useQuery<UseCommentType, boolean>(
 		['useGetCommentData', page],
 		() => getCommentData(userId, page),

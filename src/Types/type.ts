@@ -36,9 +36,6 @@ export type TextareaEventTargetType =
 	| React.ChangeEvent<HTMLTextAreaElement> &
 			React.KeyboardEvent<HTMLTextAreaElement>
 
-//select Box
-
-//Pagination Type
 //props type
 type selectValType = {
 	title: '제목' | '내용' | string //의문임 왜 string이 있어야할까?

@@ -42,6 +42,9 @@ export interface ValidationMsg {
 		message: string
 	}
 }
+type ResponseType = {
+	response: boolean
+}
 
 function SignUp() {
 	const {
@@ -106,7 +109,7 @@ function SignUp() {
 		if (target === 'SignUpEmail') {
 			try {
 				const res = await UserApi.getEmailValidation(value)
-				const { response }: any = res?.data
+				const { response }: ResponseType = res?.data
 				SignUpValidationError('SignUpEmail', setValidationMsg, response)
 			} catch (err: any) {
 				const response = err?.response.data.status
@@ -116,7 +119,8 @@ function SignUp() {
 		if (target === 'SignUpNickName') {
 			try {
 				const res = await UserApi.getNickNameValidation(value)
-				const { response }: any = res?.data
+
+				const { response }: ResponseType = res?.data
 				SignUpValidationError('SignUpNickName', setValidationMsg, response)
 			} catch (err: any) {
 				const response = err?.response.data.status
@@ -138,10 +142,11 @@ function SignUp() {
 				nickname: { status: 'error', message: '닉네임 중복확인 해주세요' },
 			}))
 		}
-
-		let formData: any = new FormData()
-		formData.append('profileImage', imgFile)
-
+		//이미지 타입 재정비해야함
+		let formData: FormData = new FormData()
+		if (imgFile instanceof File) {
+			formData.append('profileImage', imgFile)
+		}
 		const data = {
 			email: e.SignUpEmail?.trim() || '',
 			name: e.SignUpName?.trim() || '',

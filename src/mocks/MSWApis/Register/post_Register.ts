@@ -1,9 +1,37 @@
 import { rest } from 'msw'
 import listData from '../../Data/ListData'
 import CurrentTime from '../../../Utils/CurrentTime'
-import { response } from '../../../Types/dataType'
 import { postRegisterType } from '../../../Types/mswType'
 
+interface Comment {
+	commentId: number
+	contents: string
+	postId: number
+	profile: any
+	userId: number
+	writeDate: string
+	writerNickname: string
+}
+
+interface response {
+	postId: number
+	title: string
+	contents: string
+	categoryName: 'study' | 'project' | string
+	writerNickname: string
+	writeDate: string
+	postStatus: string
+	hits: string
+	likes: string
+	personnelNumber: 0 | 2 | 3 | 4 | 5 | 10 | number
+	expectedPeriod: '0' | '1' | '2' | '3' | '4' | '5' | '6' | string
+	profile: {
+		fileFullPath: string
+		originalName: string
+	}
+	commentCount: number
+	comments: Comment[]
+}
 export const post_Register = [
 	rest.post('/register', (req, res, ctx) => {
 		const { data } = req.body as postRegisterType

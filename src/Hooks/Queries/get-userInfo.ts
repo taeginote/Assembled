@@ -22,7 +22,6 @@ const getUserInfoData = async (userId: string | null) => {
 }
 
 const useGetUserInfoData = (userId: string | null) => {
-	//보류
 	const { data, isLoading, refetch } = useQuery<UseUserInfoType, boolean>(
 		['useGetUserInfoData', userId],
 		() => getUserInfoData(userId),

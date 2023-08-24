@@ -22,7 +22,6 @@ import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
 import UpButton from '../../Components/UpButton/upButton'
 
 function List() {
-	//보류
 	const [searchParams] = useSearchParams()
 	let categoryId: categoryType = Number(searchParams.get('category')) || null
 	let sort: filterType = searchParams.get('sort')

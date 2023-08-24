@@ -14,7 +14,6 @@ interface UseCategoryType {
 }
 
 const useGetCategoryData = () => {
-	//보류
 	const { data, isLoading, refetch } = useQuery<UseCategoryType, boolean>(
 		['useGetCategoryData'],
 		() => getCategoryData(),

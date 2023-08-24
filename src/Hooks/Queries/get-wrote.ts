@@ -33,7 +33,6 @@ const getWroteData = async (postId: string | null, page: null | number) => {
 }
 
 const useGetWroteData = (postId: string | null, page: null | number) => {
-	//보류
 	const { data, isLoading, refetch } = useQuery<UseWroteType, boolean>(
 		['useGetWroteData', page],
 		() => getWroteData(postId, page),

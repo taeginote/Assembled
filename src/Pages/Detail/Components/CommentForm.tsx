@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { useMutation } from '@tanstack/react-query'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
-import { CommentFormPropsType } from '../../../Types/dataType'
 import { PostCommentProps, PutCommentProps } from '../../../Types/apiType'
 import CommentApi from '../../../Apis/CommentApi'
 import UserIdService from '../../../Utils/UserIdService'
@@ -12,6 +11,13 @@ import { TextareaEventTargetType } from '../../../Types/type'
 import { useState } from 'react'
 import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
 import Ballon from '../../../Components/Ballon/Ballon'
+
+interface CommentFormPropsType {
+	comments: Comment[]
+	refetch: () => void
+	postId?: number
+	token?: string | null
+}
 
 function CommentForm({
 	comments,

@@ -3,8 +3,14 @@ import { FlexAlignCSS, FlexColumnCSS } from '../../../Styles/common'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { SmallDownIcon } from '../../../Icons/Icons'
+import { useRecoilState } from 'recoil'
+import { userRole } from '../../../Atoms/UserRole.atom'
 
 function SideFilterNav() {
+	const [recoilCounter, setRecoilCounter] = useRecoilState<string | null>(
+		userRole,
+	)
+	console.log(recoilCounter)
 	const navigate = useNavigate()
 	const { pathname } = useLocation()
 	const [selectTitle, setSelectTitle] = useState<string | null>(null)
@@ -107,6 +113,9 @@ function SideFilterNav() {
 					</>
 				</>
 			))}
+			{recoilCounter === 'ADMIN' && (
+				<S.OneDepthBox>관리자 페이지</S.OneDepthBox>
+			)}
 		</S.Wrapper>
 	)
 }

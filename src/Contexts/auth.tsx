@@ -2,12 +2,12 @@ import { useContext, useState, createContext, useEffect } from 'react'
 import TokenService from '../Utils/TokenService'
 import { childrenType } from '../Types/type'
 import UserIdService from '../Utils/UserIdService'
-import UserInfoService from '../Utils/UserInfoService'
+import UserInfoService from '../Utils/UserStatusService'
 import { UserInfoType } from '../Pages/Form/Login/Login'
 
 interface AuthContextType {
 	accessToken: string | null
-	login: (token: string, id: string, userInfo: UserInfoType) => void
+	login: (token: string, id: string, role: string) => void
 	logout: () => void
 }
 
@@ -27,17 +27,17 @@ function AuthProvider({ children }: childrenType) {
 		setAccessToken(token)
 	}, [])
 
-	const login = (token: string, id: string, userInfo: UserInfoType) => {
+	const login = (token: string, id: string, role: string) => {
 		TokenService.setAccessToken(token)
 		UserIdService.setUserId(id)
-		UserInfoService.setUserInfo(userInfo)
+		UserInfoService.setUserStatus(role)
 		setAccessToken(token)
 	}
 
 	const logout = () => {
 		TokenService.removeAccessToken()
 		UserIdService.removeUserId()
-		UserInfoService.removeUserInfo()
+		UserInfoService.removeUserStatus()
 		setAccessToken(null)
 	}
 

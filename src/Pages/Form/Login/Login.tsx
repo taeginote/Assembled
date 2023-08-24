@@ -13,6 +13,8 @@ import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
 import { LoginData } from '../../../Types/apiType'
 import { LoginSubmitData } from '../../../Types/type'
 import { useState } from 'react'
+import { userRole } from '../../../Atoms/UserRole.atom'
+import { useRecoilState } from 'recoil'
 
 export interface UserInfoType {
 	nickname: string
@@ -26,35 +28,33 @@ function Login() {
 		formState: { errors },
 	} = useForm()
 
+	const [recoilCounter, setRecoilCounter] = useRecoilState<string | null>(
+		userRole,
+	)
+
 	const [loginError, setLoginError] = useState<null | string>(null)
 	const navigate = useNavigate()
 	const auth = useAuth()
 
-	const { mutate, isLoading } = useMutation(
-		(data: LoginData) => UserApi.Login(data),
-		{
-			onSuccess: res => {
-				const { nickname, profile } = res?.data?.response
+	const { mutate } = useMutation((data: LoginData) => UserApi.Login(data), {
+		onSuccess: res => {
+			console.log(res)
+			const { nickname, profile, role } = res?.data?.response
+			setRecoilCounter(role)
 
-				const userInfo: UserInfoType = {
-					nickname,
-					profile: profile[0]?.fileFullPath,
-				}
-
-				if (res.data.response.token.accessToken) {
-					auth.login(
-						res.data.response.token.accessToken,
-						res.data.response.userId,
-						userInfo,
-					)
-				}
-				navigate('/')
-			},
-			onError: () => {
-				setLoginError('이메일 혹은 비밀번호가 틀렸습니다.')
-			},
+			if (res.data.response.token.accessToken) {
+				auth.login(
+					res.data.response.token.accessToken,
+					res.data.response.userId,
+					role,
+				)
+			}
+			navigate('/')
 		},
-	)
+		onError: () => {
+			setLoginError('이메일 혹은 비밀번호가 틀렸습니다.')
+		},
+	})
 
 	const onSubmit: SubmitHandler<LoginSubmitData> = e => {
 		const logInData = {

@@ -85,7 +85,7 @@ export interface signUpProps {
 	password: string
 	birthDate: string
 	phoneNumber: string
-	profileImage?: string[]
+	profileImage?: FormData
 }
 
 export interface LoginData {

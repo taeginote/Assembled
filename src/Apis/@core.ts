@@ -1,7 +1,7 @@
 import axios from 'axios'
 import UserApi from './UserApi'
 import TokenService from '../Utils/TokenService'
-import UserInfoService from '../Utils/UserInfoService'
+import UserInfoService from '../Utils/UserStatusService'
 import UserIdService from '../Utils/UserIdService'
 
 interface resDataType {
@@ -43,7 +43,7 @@ axiosInstance.interceptors.response.use(
 		}
 		if (error.response.status === 403) {
 			TokenService.removeAccessToken()
-			UserInfoService.removeUserInfo()
+			UserInfoService.removeUserStatus()
 			UserIdService.removeUserId()
 			window.location.reload()
 
