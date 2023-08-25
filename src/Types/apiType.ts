@@ -64,9 +64,14 @@ export interface PostApiType {
 	getUserWrote(params: GetUserWroteProps): Promise<AxiosResponse>
 	getUserLike(params: number): Promise<AxiosResponse>
 }
+export interface PutCategoryProps {
+	categoryName: string
+	id: number
+}
 export interface CategoryApiType {
 	getCategory(): Promise<AxiosResponse>
-	PutCategory(data: Category): Promise<AxiosResponse>
+	PutCategory(data: PutCategoryProps): Promise<AxiosResponse>
+	DeleteCategory(id: number): Promise<AxiosResponse>
 }
 
 //Join Api

@@ -10,6 +10,7 @@ const COLOR = {
 	sub: '#FCBA5C',
 	orange: '#FDD19B',
 	button: '#070707',
+	admin: '#f1f3f5;',
 	common: {
 		white: '#FFF',
 		black: '#000',

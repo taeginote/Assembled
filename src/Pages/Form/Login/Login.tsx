@@ -38,7 +38,6 @@ function Login() {
 
 	const { mutate } = useMutation((data: LoginData) => UserApi.Login(data), {
 		onSuccess: res => {
-			console.log(res)
 			const { nickname, profile, role } = res?.data?.response
 			setRecoilCounter(role)
 

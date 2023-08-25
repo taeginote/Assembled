@@ -17,7 +17,11 @@ function Admin() {
 						<span>Assemble</span>
 						관리자 페이지
 					</div>
-					<Button size="big" onClick={() => navigate('/')}>
+					<Button
+						size="big"
+						variant="default-white"
+						onClick={() => navigate('/')}
+					>
 						홈으로 가기
 					</Button>
 				</S.Header>
@@ -36,7 +40,7 @@ export default Admin
 const Wrapper = styled.div`
 	width: 100vw;
 	min-height: 100vh;
-	background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
+
 	${FlexCenterCSS}
 `
 const Box = styled.div`
@@ -61,7 +65,7 @@ const Header = styled.h3`
 const Section = styled.div`
 	display: flex;
 	& > span {
-		margin-left: 10rem;
+		margin-left: 20rem;
 	}
 `
 const S = { Wrapper, Box, Header, Section }
