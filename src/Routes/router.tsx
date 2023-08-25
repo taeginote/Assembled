@@ -14,6 +14,8 @@ import ChangeRegister from '../Pages/Register/ChangeRegister'
 import UserSetting from '../Pages/MyPage/Pages/UserSetting'
 import Likes from '../Pages/MyPage/Pages/Likes'
 import Activity from '../Pages/MyPage/Pages/Activity'
+import Admin from '../Pages/Admin/admin'
+import AdminCategory from '../Pages/Admin/Pages/AdminCategory'
 
 const router = [
 	{
@@ -78,6 +80,16 @@ const router = [
 						],
 					},
 				],
+			},
+		],
+	},
+	{
+		path: '/admin',
+		element: <Admin />,
+		children: [
+			{
+				path: '',
+				element: <AdminCategory />,
 			},
 		],
 	},
