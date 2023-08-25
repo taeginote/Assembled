@@ -8,6 +8,9 @@ const CategoryApi: CategoryApiType = {
 	getCategory() {
 		return axiosInstance.get(PATH)
 	},
+	PutCategory(data) {
+		return axiosInstance.put(PATH, data)
+	},
 }
 
 export default CategoryApi

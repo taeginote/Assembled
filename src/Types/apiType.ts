@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { categoryType, filterType } from '../Hooks/Queries/get-list'
+import { Category } from '../Pages/List/Components/CategoryNav/CategoryNav'
 
 export interface PostCommentProps {
 	contents?: string
@@ -65,6 +66,7 @@ export interface PostApiType {
 }
 export interface CategoryApiType {
 	getCategory(): Promise<AxiosResponse>
+	PutCategory(data: Category): Promise<AxiosResponse>
 }
 
 //Join Api
