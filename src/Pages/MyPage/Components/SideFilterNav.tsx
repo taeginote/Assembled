@@ -7,9 +7,7 @@ import { useRecoilState } from 'recoil'
 import { userRole } from '../../../Atoms/UserRole.atom'
 
 function SideFilterNav() {
-	const [recoilCounter, setRecoilCounter] = useRecoilState<string | null>(
-		userRole,
-	)
+	const [recoilCounter] = useRecoilState<string | null>(userRole)
 	console.log(recoilCounter)
 	const navigate = useNavigate()
 	const { pathname } = useLocation()
@@ -113,8 +111,10 @@ function SideFilterNav() {
 					</>
 				</>
 			))}
-			{recoilCounter === 'ADMIN' && (
-				<S.OneDepthBox>관리자 페이지</S.OneDepthBox>
+			{recoilCounter !== 'ADMIN' && (
+				<S.OneDepthBox onClick={() => navigate('/admin')}>
+					관리자 페이지
+				</S.OneDepthBox>
 			)}
 		</S.Wrapper>
 	)
