@@ -1,5 +1,4 @@
 import { styled } from 'styled-components'
-import { FlexCenterCSS } from '../../Styles/common'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Button from '../../Components/Button/Button'
 import { FlexColumnCSS } from '../../Styles/common'
@@ -13,7 +12,7 @@ function Admin() {
 		<S.Wrapper>
 			<S.Header>
 				<div>
-					<span>Assemble</span>
+					<span onClick={() => navigate('/')}>Assemble</span>
 					관리자 페이지
 				</div>
 				<Button
@@ -64,6 +63,7 @@ const Header = styled.h3`
 			font-size: ${({ theme }) => theme.FONT_SIZE.big};
 			color: ${({ theme }) => theme.COLOR.hover};
 			margin-right: 1rem;
+			cursor: pointer;
 		}
 	}
 `

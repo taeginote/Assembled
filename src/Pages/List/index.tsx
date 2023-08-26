@@ -20,6 +20,7 @@ import ListNoData from '../../Error/ListNoData'
 
 import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
 import UpButton from '../../Components/UpButton/upButton'
+import CetegoryCarousel from './Components/categoryCarousel'
 
 function List() {
 	const [searchParams] = useSearchParams()
@@ -69,6 +70,7 @@ function List() {
 					</S.SearchBarWrap>
 					<FilterSelectBox />
 				</S.FilterWrapper>
+
 				{isLoading ? (
 					<S.Container>
 						{loadingArr.map((el: 0, idx: number) => (

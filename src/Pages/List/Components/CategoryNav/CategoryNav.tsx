@@ -4,6 +4,21 @@ import { FlexAlignCSS } from '../../../../Styles/common'
 import { Link, useSearchParams } from 'react-router-dom'
 import useGetCategoryData from '../../../../Hooks/Queries/get-category'
 import Categorykeleton from '../../../../Components/Skeleton/CategorySkeleton'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+import SwiperCore, {
+	Autoplay,
+	EffectFade,
+	Navigation,
+	Pagination,
+	Scrollbar,
+} from 'swiper'
+
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
+
+SwiperCore.use([Autoplay, EffectFade, Pagination])
 
 export type Category = {
 	categoryId: number
@@ -11,6 +26,8 @@ export type Category = {
 }
 
 function CategoryNav() {
+	SwiperCore.use([Navigation, Scrollbar])
+
 	const [searchParams] = useSearchParams()
 	let category: number | null = Number(searchParams.get('category')) || null
 
@@ -26,6 +43,7 @@ function CategoryNav() {
 						<S.NavBox $state={category === null}>
 							<Link to={'/'}>전체</Link>
 						</S.NavBox>
+
 						{data?.response?.map((el: Category, idx: number) => (
 							<S.NavBox key={idx} $state={el.categoryId == category}>
 								<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>
@@ -47,6 +65,8 @@ const Wrapper = styled.div`
 `
 const Container = styled.div`
 	${FlexAlignCSS}
+
+	max-width: 50%;
 `
 //스타일 props
 const NavBox = styled.div<{ $state: boolean }>`

@@ -49,6 +49,7 @@ function Comment() {
 		setCommentId(e.commentId)
 	}
 
+	console.log(data?.response?.content)
 	// onClick={() => navigate(`/Detail?postId=${el.postId}`)} 이거 해당 게시글 가는거 icon 넣어서 추가해야할듯함
 	return (
 		<>
@@ -73,6 +74,7 @@ function Comment() {
 										onClick={() => navigate(`/Detail?postId=${el.postId}`)}
 									>
 										<S.Title>{el.postTitle}</S.Title>
+										<S.Text>{el.contents}</S.Text>
 										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
 									</S.Left>
@@ -140,10 +142,12 @@ const container = styled.div`
 `
 const Left = styled.div`
 	width: 95%;
+	cursor: pointer;
 `
 const Title = styled.div`
 	margin-bottom: 2rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
+	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 `
 const Time = styled.span`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
@@ -155,7 +159,7 @@ const SubTime = styled.span`
 	color: ${({ theme }) => theme.COLOR.common.gray[200]};
 `
 const Text = styled.div`
-	margin-top: 2rem;
+	margin: 2rem 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
 const Right = styled.div`

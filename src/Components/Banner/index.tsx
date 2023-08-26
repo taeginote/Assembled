@@ -48,6 +48,8 @@ export default Banner
 const Wrapper = styled.div`
 	margin-bottom: 2rem;
 	width: 100%;
-	/* height: 40rem; */
+	.swiper .swiper-pagination-bullet {
+		background-color: orange;
+	}
 `
 const S = { Wrapper }
