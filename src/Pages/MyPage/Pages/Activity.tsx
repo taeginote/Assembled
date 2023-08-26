@@ -74,11 +74,13 @@ const ListWrap = styled.div`
 	}
 	& > p {
 		margin-left: 14rem;
-		width: 118%;
+		width: 100%;
+		margin-right: 14rem;
 		text-align: start;
 		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 		margin-bottom: 2rem;
+		background-color: red;
 	}
 `
 const Container = styled.div`

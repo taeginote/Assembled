@@ -131,6 +131,7 @@ const ListWrap = styled.div`
 
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 7rem;
+		width: 80%;
 	}
 	& > p {
 		width: 145%;

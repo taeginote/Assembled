@@ -49,7 +49,6 @@ function Comment() {
 		setCommentId(e.commentId)
 	}
 
-	console.log(data?.response?.content)
 	// onClick={() => navigate(`/Detail?postId=${el.postId}`)} 이거 해당 게시글 가는거 icon 넣어서 추가해야할듯함
 	return (
 		<>

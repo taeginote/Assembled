@@ -340,6 +340,9 @@ const TopRight = styled.div`
 
 	& > p {
 		margin: 2rem 0 5rem 0;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			margin: 0 0 3rem 0;
+		}
 		& > button {
 			background-color: white;
 			position: relative;
@@ -357,6 +360,7 @@ const TopRight = styled.div`
 	}
 	& > div {
 		display: none;
+
 		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 			display: flex;
 			align-items: center;
