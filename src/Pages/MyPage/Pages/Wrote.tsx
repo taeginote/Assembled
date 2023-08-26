@@ -112,14 +112,14 @@ const ButtonWrap = styled.div`
 	margin-bottom: 3rem;
 `
 const Container = styled.div`
-	width: 140%;
+	width: 145%;
 	${GridCenterCSS}
 	${ColumnNumberCSS(3)};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		${ColumnNumberCSS(2)};
 	}
 	& > div {
-		width: 105%;
+		width: 100%;
 	}
 `
 const ListWrap = styled.div`
@@ -128,6 +128,7 @@ const ListWrap = styled.div`
 	align-items: center;
 	margin-left: 15rem;
 	width: 100%;
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 7rem;
 	}

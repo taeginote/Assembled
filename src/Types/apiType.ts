@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios'
 import { categoryType, filterType } from '../Hooks/Queries/get-list'
-import { Category } from '../Pages/List/Components/CategoryNav/CategoryNav'
 
 export interface PostCommentProps {
 	contents?: string
@@ -72,6 +71,7 @@ export interface CategoryApiType {
 	getCategory(): Promise<AxiosResponse>
 	PutCategory(data: PutCategoryProps): Promise<AxiosResponse>
 	DeleteCategory(id: number): Promise<AxiosResponse>
+	PostCategory(data: Omit<PutCategoryProps, 'id'>): Promise<AxiosResponse>
 }
 
 //Join Api

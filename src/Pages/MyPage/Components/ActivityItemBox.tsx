@@ -11,7 +11,12 @@ import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import Button from '../../../Components/Button/Button'
 import { Question_Icon } from '../../../Icons/Icons'
 
-function ActivityItemBox({ data }: { data: ItemDataType; refetch?: any }) {
+function ActivityItemBox({
+	data,
+}: {
+	data: ItemDataType
+	refetch?: () => void
+}) {
 	const {
 		postId,
 		title,

@@ -11,20 +11,20 @@ function Admin() {
 
 	return (
 		<S.Wrapper>
+			<S.Header>
+				<div>
+					<span>Assemble</span>
+					관리자 페이지
+				</div>
+				<Button
+					size="big"
+					variant="default-white"
+					onClick={() => navigate('/')}
+				>
+					홈으로 가기
+				</Button>
+			</S.Header>
 			<S.Box>
-				<S.Header>
-					<div>
-						<span>Assemble</span>
-						관리자 페이지
-					</div>
-					<Button
-						size="big"
-						variant="default-white"
-						onClick={() => navigate('/')}
-					>
-						홈으로 가기
-					</Button>
-				</S.Header>
 				<S.Section>
 					<AdminSideFilterNav />
 					<span>
@@ -40,19 +40,24 @@ export default Admin
 const Wrapper = styled.div`
 	width: 100vw;
 	min-height: 100vh;
-
-	${FlexCenterCSS}
+	${FlexColumnCSS}
+	width: 100%;
 `
 const Box = styled.div`
 	width: 90%;
-	min-height: 100vh;
 	padding-top: 4rem;
 	${FlexColumnCSS}
+	align-items: center;
+	text-align: center;
 `
+
 const Header = styled.h3`
 	${FlexAlignCSS}
 	justify-content: space-between;
-	margin-bottom: 5rem;
+	padding: 3rem 10rem 3rem;
+	margin-bottom: 2rem;
+	box-shadow: 0 4px 10px -5px gray;
+
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
 		& > span {

@@ -18,7 +18,13 @@ import PostLikeApi from '../../Apis/PostLikeApi'
 import TokenService from '../../Utils/TokenService'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
 
-function ItemBox({ data, refetch }: { data: ItemDataType; refetch?: any }) {
+function ItemBox({
+	data,
+	refetch,
+}: {
+	data: ItemDataType
+	refetch: () => void
+}) {
 	const navigate = useNavigate()
 
 	const token = TokenService.getAccessToken()

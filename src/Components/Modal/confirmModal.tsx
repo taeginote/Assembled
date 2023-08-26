@@ -20,9 +20,14 @@ function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
 			const commentId = postId
 			mutate(commentId)
 		}
+		if (url === '/admin') {
+			mutate(postId)
+			navigate(url)
+		}
 		if (url === undefined) {
 			navigate('/')
 		}
+
 		document.body.style.overflow = 'auto'
 		setRecoilCounter(false)
 	}

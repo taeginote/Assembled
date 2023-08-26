@@ -8,11 +8,20 @@ import CategoryApi from '../../../Apis/CategoryApi'
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 import { PutCategoryProps } from '../../../Types/apiType'
+import ConfirmModal from '../../../Components/Modal/confirmModal'
+import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
+import { useRecoilState } from 'recoil'
+import { FlexBetweenCSS } from '../../../Styles/common'
+import AdminModal from '../Components/adminModal'
 
 function AdminCategory() {
 	const { data, isLoading, refetch } = useGetCategoryData()
-	const [isChange, setIsChange] = useState<null | number>(null)
+	const [changeCategoryNum, setChangeCategoryNum] = useState<null | number>(
+		null,
+	)
 	const [changeVal, setChangeVal] = useState<null | string>(null)
+	const [adminAddModal, setAdminAddModal] = useState(false)
+	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 
 	const { mutate: changeMutate } = useMutation(
 		(data: PutCategoryProps) => CategoryApi.PutCategory(data),
@@ -32,31 +41,64 @@ function AdminCategory() {
 			onError: () => {},
 		},
 	)
+	const { mutate: PostMutate } = useMutation(
+		(data: Omit<PutCategoryProps, 'id'>) => CategoryApi.PostCategory(data),
+		{
+			onSuccess: () => {
+				refetch()
+			},
+			onError: () => {},
+		},
+	)
 
 	const onClickChangeCateogory = () => {
-		if (changeVal === null) return setIsChange(null)
-		if (changeVal!.trim().length === 0) return setIsChange(null)
+		if (changeVal!.trim().length === 0) return setChangeCategoryNum(null)
 
 		const data = {
 			categoryName: changeVal!,
-			id: isChange!,
+			id: changeCategoryNum!,
 		}
+
 		changeMutate(data)
-		setIsChange(null)
+		setChangeCategoryNum(null)
 		setChangeVal(null)
 	}
 
 	const onClickDeleteCateogory = (idx: number) => {
-		deleteMutate(idx)
+		setChangeCategoryNum(idx)
+		setRecoilCounter(true)
+	}
+
+	const onAddCategory = (e: any) => {
+		setAdminAddModal(false)
+		if (e.target.input.value.trim().length === 0) return
+		PostMutate({
+			categoryName: e.target.input.value.trim(),
+		})
+	}
+
+	const onChangeCategory = (category: Category) => {
+		const { categoryId, categoryName } = category
+		setChangeCategoryNum(categoryId)
+		setChangeVal(categoryName)
 	}
 
 	return (
 		<S.Wrapper>
 			<S.Head>
-				<h4>Assemble 카테고리</h4>
-				<div onClick={() => refetch()}>
-					<Refetch_Icon />
-				</div>
+				<S.HeadLeft>
+					<h4>Assemble 카테고리</h4>
+					<div onClick={() => refetch()}>
+						<Refetch_Icon />
+					</div>
+				</S.HeadLeft>
+				<Button
+					size="normal"
+					variant="default-white"
+					onClick={() => setAdminAddModal(true)}
+				>
+					추가
+				</Button>
 			</S.Head>
 			<S.TableTitle>
 				<S.Row>
@@ -72,33 +114,34 @@ function AdminCategory() {
 						<S.Row>
 							<S.CellId>{category.categoryId}</S.CellId>
 
-							{isChange === category.categoryId ? (
+							{changeCategoryNum === category.categoryId &&
+							changeVal !== null ? (
 								<S.Cell>
 									<input
 										onChange={e => setChangeVal(e.target.value)}
-										value={changeVal ? changeVal : category.categoryName}
+										value={changeVal}
 									/>
 								</S.Cell>
 							) : (
 								<S.Cell>{category.categoryName}</S.Cell>
 							)}
 							<S.CellChangeOrDelete>
-								{isChange !== category.categoryId ? (
+								{changeCategoryNum === category.categoryId &&
+								changeVal !== null ? (
 									<Button
 										size="normal"
 										variant="default-white"
-										onClick={() => setIsChange(category.categoryId)}
+										onClick={onClickChangeCateogory}
 									>
-										수정
+										완료
 									</Button>
 								) : (
 									<Button
 										size="normal"
 										variant="default-white"
-										type="submit"
-										onClick={onClickChangeCateogory}
+										onClick={() => onChangeCategory(category)}
 									>
-										완료
+										수정
 									</Button>
 								)}
 							</S.CellChangeOrDelete>
@@ -114,6 +157,30 @@ function AdminCategory() {
 						</S.Row>
 					</S.Table>
 				))}
+			{recoilCounter && (
+				<ConfirmModal
+					text={'정말로 삭제하시겠습니까?'}
+					url={'/admin'}
+					mutate={deleteMutate}
+					postId={changeCategoryNum}
+				/>
+			)}
+			{adminAddModal && (
+				<AdminModal>
+					<form onSubmit={onAddCategory}>
+						<S.CategoryAddInput id="input" />
+						<S.ButtonWrap>
+							<Button>카테고리 추가</Button>
+							<Button
+								variant="default-white"
+								onClick={() => setAdminAddModal(false)}
+							>
+								취소
+							</Button>
+						</S.ButtonWrap>
+					</form>
+				</AdminModal>
+			)}
 		</S.Wrapper>
 	)
 }
@@ -124,8 +191,12 @@ const Wrapper = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
 const Head = styled.div`
+	${FlexBetweenCSS}
+	margin-bottom: 2rem;
+`
+const HeadLeft = styled.div`
 	${FlexAlignCSS}
-
+	margin-top: 2rem;
 	& > h4 {
 		margin-right: 2rem;
 	}
@@ -179,7 +250,22 @@ const CellChangeOrDelete = styled.div`
 	text-align: center;
 	max-width: 4rem;
 `
-
+const CategoryAddInput = styled.input`
+	border: 2px solid ${({ theme }) => theme.COLOR.main};
+	width: 80%;
+	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+	padding: 1rem;
+	margin: 2rem 0;
+	border-radius: 1rem;
+`
+const ButtonWrap = styled.div`
+	display: flex;
+	justify-content: center;
+	* {
+		margin: 0 2rem;
+	}
+	margin: 0 6rem;
+`
 const S = {
 	Wrapper,
 	Table,
@@ -189,4 +275,7 @@ const S = {
 	CellChangeOrDelete,
 	TableTitle,
 	Head,
+	HeadLeft,
+	ButtonWrap,
+	CategoryAddInput,
 }

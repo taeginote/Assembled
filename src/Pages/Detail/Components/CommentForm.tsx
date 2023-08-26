@@ -13,7 +13,7 @@ import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
 import Ballon from '../../../Components/Ballon/Ballon'
 
 interface CommentFormPropsType {
-	comments: Comment[]
+	comments: any
 	refetch: () => void
 	postId?: number
 	token?: string | null

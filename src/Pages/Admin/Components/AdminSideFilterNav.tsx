@@ -45,6 +45,7 @@ export default AdminSideFilterNav
 
 const Wrapper = styled.div`
 	min-width: 15rem;
+
 	${FlexColumnCSS}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		display: none;

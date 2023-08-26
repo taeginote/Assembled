@@ -14,6 +14,9 @@ const CategoryApi: CategoryApiType = {
 	DeleteCategory(id) {
 		return axiosInstance.delete(`${PATH}/${id}`)
 	},
+	PostCategory(data) {
+		return axiosInstance.post(PATH, data)
+	},
 }
 
 export default CategoryApi
