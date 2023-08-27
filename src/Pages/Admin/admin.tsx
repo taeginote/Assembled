@@ -80,6 +80,9 @@ const Section = styled.div`
 	display: flex;
 	& > span {
 		margin-left: 20rem;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			margin-left: 5rem;
+		}
 	}
 `
 const S = { Wrapper, Box, Header, Section }

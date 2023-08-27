@@ -189,6 +189,9 @@ export default AdminCategory
 const Wrapper = styled.div`
 	width: 50vw;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 100vw;
+	}
 `
 const Head = styled.div`
 	${FlexBetweenCSS}
