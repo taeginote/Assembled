@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
-import { ItemDataType } from '../../../Types/type'
 import {
 	FlexAlignCSS,
 	FlexBetweenCSS,
@@ -10,13 +8,9 @@ import { Person_Icon } from '../../../Icons/Icons'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import Button from '../../../Components/Button/Button'
 import { Question_Icon } from '../../../Icons/Icons'
+import { Content } from '../../../Hooks/Queries/get-list'
 
-function ActivityItemBox({
-	data,
-}: {
-	data: ItemDataType
-	refetch?: () => void
-}) {
+function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 	const {
 		postId,
 		title,

@@ -3,13 +3,14 @@ import { useQuery } from '@tanstack/react-query'
 import PostApi from '../../Apis/PostApi'
 
 export type Comments = {
+	postTitle: string
 	commentId: number
 	contents: string
 	postId: number
-	profile: any
 	userId: number
 	writeDate: string
 	writerNickname: string
+	profile: { filePath: string } | null
 }
 export interface UseDetailType {
 	response: {
@@ -17,7 +18,7 @@ export interface UseDetailType {
 		commentCount: number
 		comments: Comments[]
 		contents: string
-		createdTime: any //이게 와야함
+		createdTime: string
 		expectedPeriod: number
 		hits: number
 		likeStatus: boolean
@@ -29,7 +30,7 @@ export interface UseDetailType {
 		title: string
 		writerId?: string
 		writerNickname: string
-		writerProfileImages: any | null
+		writerProfileImages: { filePath: string } | null
 	}
 	status: number
 	success: boolean

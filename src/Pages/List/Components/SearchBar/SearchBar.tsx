@@ -2,7 +2,12 @@ import { CiSearch } from 'react-icons/ci'
 import styled from 'styled-components'
 
 import { useState } from 'react'
-import { EventTargetType, SearchType } from '../../../../Types/type'
+import {
+	EventTargetType,
+	OnClickType,
+	SearchType,
+	SignUpSubmitData,
+} from '../../../../Types/type'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
 
@@ -25,7 +30,7 @@ function SearchBar({
 
 	const [isView, setIsView] = useState(false)
 
-	const onClickSearch = (e: any) => {
+	const onClickSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setIsView(false)
 		setPage(1)

@@ -19,7 +19,7 @@ export type Content = {
 	title: string
 	writerId: number
 	writerNickname: string
-	writerProfileImages: any
+	writerProfileImages: { filePath: string } | null
 }
 export interface UseListType {
 	response: {

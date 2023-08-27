@@ -54,16 +54,25 @@ const Header = styled.h3`
 	${FlexAlignCSS}
 	justify-content: space-between;
 	padding: 3rem 10rem 3rem;
+
 	margin-bottom: 2rem;
 	box-shadow: 0 4px 10px -5px gray;
-
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		padding: 0;
+	}
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.big};
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			font-size: ${({ theme }) => theme.FONT_SIZE.small};
+		}
 		& > span {
 			font-size: ${({ theme }) => theme.FONT_SIZE.big};
 			color: ${({ theme }) => theme.COLOR.hover};
 			margin-right: 1rem;
 			cursor: pointer;
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+				font-size: ${({ theme }) => theme.FONT_SIZE.small};
+			}
 		}
 	}
 `

@@ -65,14 +65,13 @@ const Wrapper = styled.div`
 `
 const Container = styled.div`
 	${FlexAlignCSS}
-
-	max-width: 50%;
 `
 //스타일 props
 const NavBox = styled.div<{ $state: boolean }>`
 	margin-right: 4rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
 	font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 		margin-right: 2rem;

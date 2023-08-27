@@ -5,24 +5,21 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../../Styles/common'
-import {
-	Person_Icon,
-	Chat_Icon,
-	Pen_Icon,
-	Trash_Icon,
-} from '../../../Icons/Icons'
-import { ItemDataType } from '../../../Types/type'
+import { Chat_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
+
 import Ballon from '../../../Components/Ballon/Ballon'
 import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import { useSetRecoilState } from 'recoil'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
+import { Content } from '../../../Hooks/Queries/get-list'
 // import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 
 function ItemBoxMyPage({
 	data,
 	setPostId,
 }: {
-	data: ItemDataType
+	data: Content
+
 	setPostId: React.Dispatch<React.SetStateAction<number>>
 }) {
 	const navigate = useNavigate()
@@ -47,8 +44,8 @@ function ItemBoxMyPage({
 		setRecoilCounter(true)
 		setPostId(e!)
 	}
-	let period =
-		expectedPeriod === '제한없음' ? expectedPeriod : expectedPeriod + '달뒤'
+	let period: string =
+		expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
 
 	return (
 		<S.Wrapper>

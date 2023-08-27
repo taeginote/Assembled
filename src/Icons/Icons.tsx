@@ -37,6 +37,9 @@ type IconSize = {
 type IconRotate = {
 	rotate?: number
 }
+interface OnClickIconType {
+	onClick: React.MouseEventHandler<SVGSVGElement>
+}
 
 export const Person_Icon = ({ size }: IconSize) => (
 	<BsFillPersonFill size={size} />
@@ -94,17 +97,17 @@ export const Pen_Icon = () => <FaPen size={'17'} color="#777" /> //펜모양
 
 export const Trash_Icon = () => <BsTrash size={'17'} color="#777" /> //쓰레기통 버튼
 
-export const NotFillHeart_Icon = ({ onClick }: any) => (
+export const NotFillHeart_Icon = ({ onClick }: OnClickIconType) => (
 	<AiOutlineHeart size={'23'} onClick={onClick} color={'#f60004'} />
 ) // 빈 하트
-export const FillHeart_Icon = ({ onClick }: any) => (
+export const FillHeart_Icon = ({ onClick }: OnClickIconType) => (
 	<AiFillHeart size={'23'} onClick={onClick} color={'#f60004'} />
 ) // 찬 하트
-export const Hamburger_Icon = ({ onClick }: any) => (
+export const Hamburger_Icon = ({ onClick }: OnClickIconType) => (
 	<GiHamburgerMenu size={'23'} onClick={onClick} color="#FB9B00" />
 ) // 햄버거
 export const Cancel_Icon = () => <MdOutlineCancel size={'17'} color="#777" /> //취소 버튼
-export const Cancel_big_Icon = ({ onClick }: any) => (
+export const Cancel_big_Icon = ({ onClick }: OnClickIconType) => (
 	<RxCross2 size={'35'} color="#FB9B00" onClick={onClick} />
 ) //취소 버튼
 

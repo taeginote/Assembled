@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import UserIdService from '../../../Utils/UserIdService'
 import useGetCommentData from '../../../Hooks/Queries/get-comment'
 import Pagination from '../../../Components/Pagination/Pagination'
@@ -14,8 +13,9 @@ import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import ConfirmModal from '../../../Components/Modal/confirmModal'
 import CommentSkeleton from '../../../Components/Skeleton/CommentSkeleton'
 import MyPageListNoData from '../../../Error/MypageListNoData'
+import { Comments } from '../../../Hooks/Queries/get-detail'
 
-type CommentId = { commentId: any }
+type CommentId = { commentId: number }
 
 function Comment() {
 	const queryClient = useQueryClient()
@@ -67,7 +67,7 @@ function Comment() {
 					) : (
 						<S.Wrapper>
 							<p>작성한 댓글</p>
-							{data?.response?.content.map((el: any, idx: number) => (
+							{data?.response?.content.map((el: Comments, idx: number) => (
 								<S.container>
 									<S.Left
 										onClick={() => navigate(`/Detail?postId=${el.postId}`)}

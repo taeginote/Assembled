@@ -99,7 +99,6 @@ export interface LoginData {
 	email?: string
 	password?: string
 	// 보류
-	response?: any
 }
 
 interface EmailValidation {

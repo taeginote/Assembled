@@ -15,9 +15,10 @@ import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import { useRecoilState } from 'recoil'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PostApi from '../../../Apis/PostApi'
-import { ItemDataType } from '../../../Types/type'
+
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 import MyPageListNoData from '../../../Error/MypageListNoData'
+import { Content } from '../../../Hooks/Queries/get-list'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
@@ -62,11 +63,9 @@ function Wrote() {
 						<S.ListWrap>
 							<p>내가 만든 모임</p>
 							<S.Container>
-								{data?.response?.content.map(
-									(el: ItemDataType, idx: number) => (
-										<ItemBoxMyPage data={el} setPostId={setPostId} key={idx} />
-									),
-								)}
+								{data?.response?.content.map((el: Content, idx: number) => (
+									<ItemBoxMyPage data={el} setPostId={setPostId} key={idx} />
+								))}
 							</S.Container>
 							{data?.response?.content?.length !== 0 && (
 								<Pagination

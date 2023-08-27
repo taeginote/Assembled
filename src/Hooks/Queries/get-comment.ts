@@ -1,19 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import CommentApi from '../../Apis/CommentApi'
+import { Comments } from './get-detail'
 
-type Content = {
-	commentId: number
-	contents: string
-	postId: number
-	profile: []
-	userId: number
-	writeDate: string
-	writerNickname: string
-}
 export interface UseCommentType {
 	response: {
 		totalPages: number
-		content: Content[]
+		content: Comments[]
 	}
 	status: number
 	success: boolean

@@ -7,6 +7,7 @@ import {
 import Banner from '../../Components/Banner'
 import CategoryNav from './Components/CategoryNav/CategoryNav'
 import useGetListData, {
+	Content,
 	categoryType,
 	filterType,
 } from '../../Hooks/Queries/get-list'
@@ -20,7 +21,6 @@ import ListNoData from '../../Error/ListNoData'
 
 import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
 import UpButton from '../../Components/UpButton/upButton'
-import CetegoryCarousel from './Components/categoryCarousel'
 
 function List() {
 	const [searchParams] = useSearchParams()
@@ -83,7 +83,7 @@ function List() {
 							<ListNoData setSearchValue={setSearchValue} />
 						) : (
 							<S.Container>
-								{data?.response?.content?.map((data: any, idx: number) => (
+								{data?.response?.content?.map((data: Content, idx: number) => (
 									<ItemBox data={data} key={idx} refetch={refetch} />
 								))}
 							</S.Container>

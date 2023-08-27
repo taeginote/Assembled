@@ -9,25 +9,6 @@ interface IdxSignature {
 	[key: string]: string
 }
 
-//아이템 데이터 type
-export interface ItemDataType {
-	contents: string
-	hits: number
-	postProfileImages?: IdxSignature | []
-	writerId: number
-	postId?: number
-	title?: string
-	categoryName?: string
-	writerProfileImages?: IdxSignature
-	writerNickname?: string
-	personnelNumber?: string | number
-	expectedPeriod?: number
-	commentCount?: number
-	likes?: number
-	likeStatus?: boolean
-	postStatus: 'PROGRESS' | 'COMPLETED'
-}
-
 //onKey도 쓰이고 target도 쓰이는곳
 export type EventTargetType =
 	| React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>

@@ -7,7 +7,7 @@ interface UseUserInfoType {
 		name: string
 		nickname: string
 		phoneNumber: string
-		profile: any
+		profile: { filePath: string } | null
 		role: string
 		userId: string
 		birthDate: string

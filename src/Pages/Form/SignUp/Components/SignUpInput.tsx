@@ -1,17 +1,35 @@
-import { Controller } from 'react-hook-form'
+import { Control, Controller, FieldValues } from 'react-hook-form'
 import Input from '../../../../Components/Input/Input'
 import HookFormError from '../../../../Components/Error/HookFormError'
 import { styled } from 'styled-components'
 import { FlexAlignCSS } from '../../../../Styles/common'
 
 //보류 Yup 사용하기
+interface ErrorRuleType {
+	required?: {
+		value: boolean
+		message: string
+	}
+	minLength?: {
+		value: number
+		message: string
+	}
+	maxLength?: {
+		value: number
+		message: string
+	}
+	pattern?: {
+		value: any
+		message: string
+	}
+}
 interface SingUpInputProps {
 	name: string
-	control: any
-	errorRules: any
+	control: Control<FieldValues>
+	errorRules: ErrorRuleType
 	Icon?: React.ReactNode
 	placeholder: string
-	onValidation?: any
+	onValidation?: (props: string) => void
 	data?: string
 }
 
@@ -46,7 +64,7 @@ function SignUpInput(props: SingUpInputProps) {
 							<S.ValidationBtn
 								type="button"
 								value="중복확인"
-								onClick={() => onValidation(name)}
+								onClick={() => onValidation!(name)}
 							/>
 						)}
 					</span>

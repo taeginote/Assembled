@@ -2,16 +2,7 @@ import { rest } from 'msw'
 import listData from '../../Data/ListData'
 import CurrentTime from '../../../Utils/CurrentTime'
 import { postRegisterType } from '../../../Types/mswType'
-
-interface Comment {
-	commentId: number
-	contents: string
-	postId: number
-	profile: any
-	userId: number
-	writeDate: string
-	writerNickname: string
-}
+import { Comments } from '../../../Hooks/Queries/get-detail'
 
 interface response {
 	postId: number
@@ -30,7 +21,7 @@ interface response {
 		originalName: string
 	}
 	commentCount: number
-	comments: Comment[]
+	comments: Comments[]
 }
 export const post_Register = [
 	rest.post('/register', (req, res, ctx) => {

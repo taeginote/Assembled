@@ -11,9 +11,10 @@ import { TextareaEventTargetType } from '../../../Types/type'
 import { useState } from 'react'
 import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
 import Ballon from '../../../Components/Ballon/Ballon'
+import { Comments } from '../../../Hooks/Queries/get-detail'
 
 interface CommentFormPropsType {
-	comments: any
+	comments: Comments[]
 	refetch: () => void
 	postId?: number
 	token?: string | null
@@ -31,7 +32,8 @@ function CommentForm({
 	const [changeCommentVal, setChangeCommentVal] = useState<null | string>(null)
 	const [changeViewNum, setChangeViewNum] = useState<null | number>(null)
 
-	const userId = UserIdService.getUserId()
+	const userId = Number(UserIdService.getUserId())
+
 	const AccessToken = TokenService.getAccessToken()
 
 	const { mutate } = useMutation(
@@ -142,7 +144,7 @@ function CommentForm({
 					</>
 				)}
 			</S.Container>
-			{comments.map((comment: any, idx: number) => (
+			{comments.map((comment: Comments, idx: number) => (
 				<S.CommentsList key={idx}>
 					<S.CommentTop>
 						<span>
@@ -156,7 +158,7 @@ function CommentForm({
 							</div>
 						</span>
 						<S.Right>
-							{comment?.userId == userId && (
+							{comment?.userId === userId && (
 								<>
 									{changeViewNum !== comment.commentId ? (
 										<button

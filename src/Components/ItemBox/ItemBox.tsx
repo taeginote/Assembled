@@ -5,7 +5,6 @@ import {
 	FlexColumnCSS,
 } from '../../Styles/common'
 import { useNavigate } from 'react-router-dom'
-import { ItemDataType } from '../../Types/type'
 import {
 	Chat_Icon,
 	FillHeart_Icon,
@@ -17,14 +16,9 @@ import { PostLikeProps } from '../../Types/apiType'
 import PostLikeApi from '../../Apis/PostLikeApi'
 import TokenService from '../../Utils/TokenService'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
+import { Content } from '../../Hooks/Queries/get-list'
 
-function ItemBox({
-	data,
-	refetch,
-}: {
-	data: ItemDataType
-	refetch: () => void
-}) {
+function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 	const navigate = useNavigate()
 
 	const token = TokenService.getAccessToken()
