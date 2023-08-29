@@ -19,6 +19,8 @@ import PostApi from '../../../Apis/PostApi'
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 import MyPageListNoData from '../../../Error/MypageListNoData'
 import { Content } from '../../../Hooks/Queries/get-list'
+import ActivityItemBox from '../Components/ActivityItemBox'
+import GroupJoiStatusModal from '../../../Components/Modal/GroupJoinStatusModal'
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
@@ -87,6 +89,7 @@ function Wrote() {
 					)}
 				</>
 			)}
+			<GroupJoiStatusModal />
 		</S.Wrapper>
 	)
 }
@@ -111,12 +114,14 @@ const ButtonWrap = styled.div`
 	margin-bottom: 3rem;
 `
 const Container = styled.div`
-	width: 145%;
-	${GridCenterCSS}
-	${ColumnNumberCSS(3)};
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	/* ${GridCenterCSS} */
+	/* ${ColumnNumberCSS(1)};
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
 		${ColumnNumberCSS(2)};
-	}
+	} */
 	& > div {
 		width: 100%;
 	}
@@ -124,8 +129,8 @@ const Container = styled.div`
 const ListWrap = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	margin-left: 15rem;
+	/* align-items: center; */
+	margin-left: 10rem;
 	width: 100%;
 
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {

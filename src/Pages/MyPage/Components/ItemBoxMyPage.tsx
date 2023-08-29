@@ -12,6 +12,7 @@ import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import { useSetRecoilState } from 'recoil'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import { Content } from '../../../Hooks/Queries/get-list'
+import Button from '../../../Components/Button/Button'
 // import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 
 function ItemBoxMyPage({
@@ -74,12 +75,29 @@ function ItemBoxMyPage({
 				</p>
 			</S.TopWrap>
 
-			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
-				<S.Period>마감일 | {period}</S.Period>
-				<S.Title>
-					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
-				</S.Title>
-				<S.Category>{categoryName}</S.Category>
+			<S.Container>
+				<S.ContainerLeft onClick={() => navigate(`/Detail?postId=${postId}`)}>
+					<S.Period>마감일 | {period}</S.Period>
+					<S.Title>
+						{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
+					</S.Title>
+					<S.Category>{categoryName}</S.Category>
+				</S.ContainerLeft>
+				<S.ContainerRight>
+					<Button
+						size="big"
+						onClick={() => alert('모임 활동 페이지는 준비중입니다 :)')}
+					>
+						모임 활동
+					</Button>
+					<Button
+						size="big"
+						onClick={() => alert('모임 활동 페이지는 준비중입니다 :)')}
+						variant="default-white"
+					>
+						신청 현황
+					</Button>
+				</S.ContainerRight>
 			</S.Container>
 			<S.UserBox>
 				<div>
@@ -108,17 +126,20 @@ const Wrapper = styled.div`
 	border: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	padding: 3rem;
 	border-radius: 2rem;
-	cursor: pointer;
 	width: 100%;
 	min-width: 18rem;
-	&:hover {
-		transform: scale(1.01);
-		transition: transform 0.2s;
-	}
+	margin-bottom: 5rem;
 `
 const Container = styled.div`
+	${FlexBetweenCSS}
+	align-items: start;
+	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
+	padding-bottom: 2rem;
+`
+const ContainerLeft = styled.div`
 	${FlexColumnCSS}
 	align-items: start;
+	width: 100%;
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
@@ -128,9 +149,15 @@ const Container = styled.div`
 			text-align: start;
 		}
 	}
-	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
-	padding-bottom: 2rem;
+	cursor: pointer;
 `
+const ContainerRight = styled.div`
+	${FlexColumnCSS}
+	* {
+		margin-top: 2rem;
+	}
+`
+
 const UserBox = styled.div`
 	${FlexBetweenCSS}
 	padding: 2rem 0 0 0;
@@ -197,7 +224,7 @@ const TopWrap = styled.div`
 	width: 100%;
 	${FlexBetweenCSS}
 	&>p {
-		width: 25%;
+		width: 10%;
 		${FlexBetweenCSS}
 		&>button {
 			background-color: white;
@@ -229,4 +256,6 @@ const S = {
 	UserImg,
 	Title,
 	TopWrap,
+	ContainerLeft,
+	ContainerRight,
 }

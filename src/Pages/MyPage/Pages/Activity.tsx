@@ -80,7 +80,6 @@ const ListWrap = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 		margin-bottom: 2rem;
-		background-color: red;
 	}
 `
 const Container = styled.div`
