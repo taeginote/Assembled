@@ -3,7 +3,6 @@ import TokenService from '../Utils/TokenService'
 import { childrenType } from '../Types/type'
 import UserIdService from '../Utils/UserIdService'
 import UserInfoService from '../Utils/UserStatusService'
-import { UserInfoType } from '../Pages/Form/Login/Login'
 
 interface AuthContextType {
 	accessToken: string | null
