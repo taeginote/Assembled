@@ -5,7 +5,12 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../../Styles/common'
-import { Chat_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
+import {
+	Chat_Icon,
+	Pen_Icon,
+	Person_Icon,
+	Trash_Icon,
+} from '../../../Icons/Icons'
 
 import Ballon from '../../../Components/Ballon/Ballon'
 import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
@@ -13,14 +18,15 @@ import { useSetRecoilState } from 'recoil'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import { Content } from '../../../Hooks/Queries/get-list'
 import Button from '../../../Components/Button/Button'
-// import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
+import { GroupJoinStatusModalProps } from '../Pages/Wrote'
 
 function ItemBoxMyPage({
 	data,
+	setState,
 	setPostId,
 }: {
 	data: Content
-
+	setState: (state: GroupJoinStatusModalProps) => void | undefined
 	setPostId: React.Dispatch<React.SetStateAction<number>>
 }) {
 	const navigate = useNavigate()
@@ -47,6 +53,14 @@ function ItemBoxMyPage({
 	}
 	let period: string =
 		expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
+
+	const onGroupJoinStatus = () => {
+		setState({
+			view: true,
+			Id: 1,
+		})
+		document.body.style.overflow = 'hidden'
+	}
 
 	return (
 		<S.Wrapper>
@@ -83,21 +97,6 @@ function ItemBoxMyPage({
 					</S.Title>
 					<S.Category>{categoryName}</S.Category>
 				</S.ContainerLeft>
-				<S.ContainerRight>
-					<Button
-						size="big"
-						onClick={() => alert('모임 활동 페이지는 준비중입니다 :)')}
-					>
-						모임 활동
-					</Button>
-					<Button
-						size="big"
-						onClick={() => alert('모임 활동 페이지는 준비중입니다 :)')}
-						variant="default-white"
-					>
-						신청 현황
-					</Button>
-				</S.ContainerRight>
 			</S.Container>
 			<S.UserBox>
 				<div>
@@ -109,12 +108,20 @@ function ItemBoxMyPage({
 					</div>
 				</div>
 				<span>
-					{/* <Person_Icon />
-					<span>{personnelNumber}인</span> */}
+					<Person_Icon />
+					<span>{personnelNumber}인</span>
 					<Chat_Icon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>
 			</S.UserBox>
+			<S.MobileBtnWrap>
+				<Button onClick={() => alert('모임 활동 페이지는 준비중입니다 :)')}>
+					모임 활동
+				</Button>
+				<Button onClick={onGroupJoinStatus} variant="default-white">
+					신청 현황
+				</Button>
+			</S.MobileBtnWrap>
 		</S.Wrapper>
 	)
 }
@@ -131,8 +138,6 @@ const Wrapper = styled.div`
 	margin-bottom: 5rem;
 `
 const Container = styled.div`
-	${FlexBetweenCSS}
-	align-items: start;
 	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	padding-bottom: 2rem;
 `
@@ -151,10 +156,14 @@ const ContainerLeft = styled.div`
 	}
 	cursor: pointer;
 `
-const ContainerRight = styled.div`
-	${FlexColumnCSS}
+
+const MobileBtnWrap = styled.div`
+	display: flex;
 	* {
-		margin-top: 2rem;
+		margin: 2rem 5rem 0 5rem;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			margin: 2rem 2rem 0 2rem;
+		}
 	}
 `
 
@@ -166,9 +175,9 @@ const UserBox = styled.div`
 		${FlexAlignCSS}
 	}
 	& > span {
-		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		/* @media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 			display: none;
-		}
+		} */
 		${FlexAlignCSS}
 		span {
 			margin-right: 1rem;
@@ -226,7 +235,10 @@ const TopWrap = styled.div`
 	&>p {
 		width: 10%;
 		${FlexBetweenCSS}
-		&>button {
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			width: 15%;
+		}
+		& > button {
 			background-color: white;
 			position: relative;
 			& > div {
@@ -257,5 +269,6 @@ const S = {
 	Title,
 	TopWrap,
 	ContainerLeft,
-	ContainerRight,
+
+	MobileBtnWrap,
 }

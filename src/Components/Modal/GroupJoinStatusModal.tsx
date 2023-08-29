@@ -1,48 +1,65 @@
 import { styled } from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
 import Button from '../Button/Button'
+import { Cancel_big_Icon } from '../../Icons/Icons'
+import { FlexBetweenCSS } from '../../Styles/common'
+import { GroupJoinModalTypeProps } from '../../Types/modalType'
 
-function GroupJoiStatusModal() {
+function GroupJoiStatusModal({
+	setState,
+	groupJoinStatusModal,
+}: GroupJoinModalTypeProps) {
+	const onCancelModal = () => {
+		document.body.style.overflow = 'auto'
+		setState({
+			view: false,
+			Id: null,
+		})
+	}
+
+	const TestArr: 0[] = Array(3).fill(0)
 	return (
 		<S.Wrapper>
 			<S.Box>
-				<h4>모임 가입 신청 목록</h4>
+				<S.TitleHead>
+					<h4>모임 가입 신청 목록</h4>
+					<div>
+						<Cancel_big_Icon onClick={onCancelModal} />
+					</div>
+				</S.TitleHead>
 				<S.JoinList>
-					<li>
-						<S.JoinUser>
-							<span>신청자 : </span>짱구
-						</S.JoinUser>
-
-						<S.LiContent>
-							<span>메세지 : </span>
-							<div>
-								안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다. 안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다. 안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-								잘부탁드립니다.
-							</div>
-						</S.LiContent>
-						<S.ButtonWrap>
-							<Button size="normal">수락</Button>
-							<Button size="normal" variant="default-white">
-								거절
-							</Button>
-							<Button size="normal" variant="default-reverse">
-								차단
-							</Button>
-						</S.ButtonWrap>
-					</li>
-					<li>안녕하세요1</li>
-					<li>안녕하세요2</li>
-					<li>안녕하세요3</li>
-
+					{TestArr.map((el, idx: number) => (
+						<li key={idx}>
+							<S.JoinUser>
+								<span>신청자 : </span>짱구
+							</S.JoinUser>
+							<S.LiContent>
+								<span>메세지 : </span>
+								<div>
+									안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다. 안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다. 안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
+									잘부탁드립니다.
+								</div>
+							</S.LiContent>
+							<S.ButtonWrap>
+								<Button size="normal">수락</Button>
+								<Button size="normal" variant="default-white">
+									거절
+								</Button>
+								<Button size="normal" variant="default-reverse">
+									차단
+								</Button>
+							</S.ButtonWrap>
+						</li>
+					))}
 					{/* 데이터 없을때  */}
 					{/* <S.ListNoData>가입 신청한 인원이 없습니다 :)</S.ListNoData> */}
 				</S.JoinList>
@@ -63,9 +80,16 @@ const Wrapper = styled.div`
 	background-color: rgba(0, 0, 0, 0.4);
 	${FlexCenterCSS}
 `
-
+const TitleHead = styled.div`
+	${FlexBetweenCSS}
+	&>div {
+		cursor: pointer;
+	}
+`
 const Box = styled.div`
 	width: 35%;
+	height: 50%;
+	overflow: auto;
 	padding: 2rem 2rem;
 	text-align: start;
 	border-radius: 0.5rem;
@@ -77,10 +101,12 @@ const Box = styled.div`
 		0% {
 			top: -20rem;
 		}
-
 		100% {
-			top: 40%;
+			top: 30%;
 		}
+	}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 90%;
 	}
 `
 const JoinList = styled.ul`
@@ -107,11 +133,9 @@ const LiHead = styled.div``
 const JoinUser = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	color: ${({ theme }) => theme.COLOR.common.gray[200]};
-
 	& > span {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		color: ${({ theme }) => theme.COLOR.button};
-
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 		margin-right: 0.5rem;
 	}
@@ -124,12 +148,12 @@ const LiContent = styled.div`
 	& > span {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		color: ${({ theme }) => theme.COLOR.button};
-		font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 		min-width: 6.5rem;
 	}
 	& > div {
 		height: 10rem;
 		overflow: auto;
+		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 	}
 `
 const S = {
@@ -141,4 +165,5 @@ const S = {
 	LiHead,
 	LiContent,
 	JoinUser,
+	TitleHead,
 }

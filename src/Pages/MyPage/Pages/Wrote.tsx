@@ -19,8 +19,13 @@ import PostApi from '../../../Apis/PostApi'
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 import MyPageListNoData from '../../../Error/MypageListNoData'
 import { Content } from '../../../Hooks/Queries/get-list'
-import ActivityItemBox from '../Components/ActivityItemBox'
+
 import GroupJoiStatusModal from '../../../Components/Modal/GroupJoinStatusModal'
+
+export interface GroupJoinStatusModalProps {
+	view: boolean
+	Id: null | number
+}
 
 function Wrote() {
 	//일단 여기는 itembox를 map 돌릴 예정
@@ -28,9 +33,14 @@ function Wrote() {
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 0)
 	const [postId, setPostId] = useState<number>(1)
+	const [groupJoinStatusModal, setGroupJoinStatusModal] =
+		useState<GroupJoinStatusModalProps>({
+			view: false,
+			Id: null,
+		})
+	const [recoilCounter] = useRecoilState<boolean>(modalViewConfirm)
+
 	const userId = UserIdService.getUserId()
-	const [recoilCounter, setRecoilCounter] =
-		useRecoilState<boolean>(modalViewConfirm)
 	const { data, isLoading } = useGetWroteData(userId, page)
 	const loadingArr: 0[] = Array(12).fill(0)
 	const queryClient = useQueryClient()
@@ -66,7 +76,12 @@ function Wrote() {
 							<p>내가 만든 모임</p>
 							<S.Container>
 								{data?.response?.content.map((el: Content, idx: number) => (
-									<ItemBoxMyPage data={el} setPostId={setPostId} key={idx} />
+									<ItemBoxMyPage
+										data={el}
+										setPostId={setPostId}
+										setState={setGroupJoinStatusModal}
+										key={idx}
+									/>
 								))}
 							</S.Container>
 							{data?.response?.content?.length !== 0 && (
@@ -89,7 +104,12 @@ function Wrote() {
 					)}
 				</>
 			)}
-			<GroupJoiStatusModal />
+			{groupJoinStatusModal.view && (
+				<GroupJoiStatusModal
+					setState={setGroupJoinStatusModal}
+					groupJoinStatusModal={groupJoinStatusModal}
+				/>
+			)}
 		</S.Wrapper>
 	)
 }
@@ -100,13 +120,14 @@ const Wrapper = styled.div`
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 	width: 80%;
 	border-radius: 0.7rem;
+
 	${FlexCenterCSS}
 	&>div {
 		text-align: center;
 		/* line-height: 2.1; */
 	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		width: 85%;
+		width: 90%;
 	}
 `
 const ButtonWrap = styled.div`
@@ -117,11 +138,7 @@ const Container = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	/* ${GridCenterCSS} */
-	/* ${ColumnNumberCSS(1)};
-	@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
-		${ColumnNumberCSS(2)};
-	} */
+
 	& > div {
 		width: 100%;
 	}
@@ -129,13 +146,11 @@ const Container = styled.div`
 const ListWrap = styled.div`
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
 	margin-left: 10rem;
 	width: 100%;
 
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
-		margin-left: 7rem;
-		width: 80%;
+		margin-left: 2.5rem;
 	}
 	& > p {
 		width: 145%;
@@ -143,6 +158,9 @@ const ListWrap = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 		margin-bottom: 2rem;
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			width: 50%;
+		}
 	}
 `
 const S = { Wrapper, Container, ButtonWrap, ListWrap }
