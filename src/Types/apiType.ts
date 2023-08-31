@@ -82,10 +82,16 @@ export interface postJoinProps {
 export interface getJoinListProps {
 	postId: number
 }
+export interface putJoinStatusProps {
+	joinRequestId: number
+	message: string | null
+	status: 'APPROVAL' | 'REJECT' | 'BLOCK'
+}
 
 export interface JoinApiType {
 	postJoin(data: postJoinProps): Promise<AxiosResponse>
 	getJoinList(data: getJoinListProps): Promise<AxiosResponse>
+	PutJoinStatus(data: putJoinStatusProps): Promise<AxiosResponse>
 }
 
 //User api type

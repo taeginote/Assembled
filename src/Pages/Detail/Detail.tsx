@@ -102,7 +102,6 @@ function Detail() {
 	const onJoinMeeting = (e: any) => {
 		setJoinModal(false)
 		document.body.style.overflow = 'auto'
-
 		postJoin({
 			joinRequestMessage:
 				e.target.textarea.value.trim().length === 0

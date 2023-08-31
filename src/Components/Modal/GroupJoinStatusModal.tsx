@@ -4,8 +4,11 @@ import Button from '../Button/Button'
 import { Cancel_big_Icon } from '../../Icons/Icons'
 import { FlexBetweenCSS } from '../../Styles/common'
 import { GroupJoinModalTypeProps } from '../../Types/modalType'
-import useGetJoinListData from '../../Hooks/Queries/get-joinList'
+import useGetJoinListData, { Content } from '../../Hooks/Queries/get-joinList'
 import JoinListModalSkeleton from '../Skeleton/JoinListModalSkeleton'
+import { useMutation } from '@tanstack/react-query'
+import JoinApi from '../../Apis/JoinApi'
+import { putJoinStatusProps } from '../../Types/apiType'
 
 function GroupJoiStatusModal({
 	setState,
@@ -21,9 +24,27 @@ function GroupJoiStatusModal({
 
 	const { data, isLoading } = useGetJoinListData(groupJoinStatusModal.Id!)
 
-	let requestData = data?.response?.content?.find(
-		(el: { status: 'REQUEST' }) => el.status === 'REQUEST',
+	const { mutate: putMudate } = useMutation(
+		(data: putJoinStatusProps) => JoinApi.PutJoinStatus(data),
+		{
+			onSuccess: () => {},
+		},
 	)
+
+	let requestData = data?.response?.find(
+		(el: { status: string }) => el.status === 'REQUEST',
+	)
+
+	const onJoinStatusBtn = (
+		el: Content,
+		status: 'APPROVAL' | 'REJECT' | 'BLOCK',
+	) => {
+		putMudate({
+			joinRequestId: el.joinRequestId,
+			message: el.message,
+			status,
+		})
+	}
 
 	const skeletonArr: 0[] = Array(2).fill(0)
 	return (
@@ -44,41 +65,49 @@ function GroupJoiStatusModal({
 						</>
 					) : (
 						<>
-							{skeletonArr.map((el, idx: number) => (
-								<li key={idx}>
-									<S.JoinUser>
-										<S.JoinUserNickname>
-											<span>신청자 : </span>짱구
-										</S.JoinUserNickname>
-										<S.JoinDate>2019.01.01</S.JoinDate>
-									</S.JoinUser>
-									<S.LiContent>
-										<span>메세지 : </span>
-										<div>
-											안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다. 안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다. 안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.안녕하세요. 잘부탁드립니다.안녕하세요.
-											잘부탁드립니다.
-										</div>
-									</S.LiContent>
-									<S.ButtonWrap>
-										<Button size="normal">수락</Button>
-										<Button size="normal" variant="default-white">
-											거절
-										</Button>
-										<Button size="normal" variant="default-reverse">
-											차단
-										</Button>
-									</S.ButtonWrap>
-								</li>
-							))}
+							{data?.response?.length === 0 ? (
+								<S.ListNo>신청한 인원이 없습니다 :)</S.ListNo>
+							) : (
+								<>
+									{data?.response.map((el: Content, idx: number) => (
+										<li key={idx}>
+											<S.JoinUser>
+												<S.JoinUserNickname>
+													<span>신청자 : </span>
+													{el.nickname}
+												</S.JoinUserNickname>
+												<S.JoinDate>{el.createdDate}</S.JoinDate>
+											</S.JoinUser>
+											<S.LiContent>
+												<span>메세지 : </span>
+												<div>{el.message}</div>
+											</S.LiContent>
+											<S.ButtonWrap>
+												<Button
+													size="normal"
+													onClick={() => onJoinStatusBtn(el, 'APPROVAL')}
+												>
+													수락
+												</Button>
+												<Button
+													size="normal"
+													variant="default-white"
+													onClick={() => onJoinStatusBtn(el, 'REJECT')}
+												>
+													거절
+												</Button>
+												<Button
+													size="normal"
+													variant="default-reverse"
+													onClick={() => onJoinStatusBtn(el, 'BLOCK')}
+												>
+													차단
+												</Button>
+											</S.ButtonWrap>
+										</li>
+									))}
+								</>
+							)}
 						</>
 					)}
 					{/* 데이터 없을때  */}
@@ -139,6 +168,11 @@ const JoinList = styled.ul`
 		margin-top: 2rem;
 	}
 `
+const ListNo = styled.h4`
+	margin-top: 15rem;
+	text-align: center;
+	color: ${({ theme }) => theme.COLOR.common.gray[200]};
+`
 const ButtonWrap = styled.div`
 	text-align: end;
 	margin-top: 2rem;
@@ -196,4 +230,5 @@ const S = {
 	TitleHead,
 	JoinUserNickname,
 	JoinDate,
+	ListNo,
 }

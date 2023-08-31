@@ -10,8 +10,11 @@ const JoinApi: JoinApiType = {
 	},
 	getJoinList({ postId }) {
 		return axiosInstance.get(`${PATH}/${postId}`, {
-			params: { postId, page: 0, size: 4 },
+			params: { postId },
 		})
+	},
+	PutJoinStatus(data) {
+		return axiosInstance.put(PATH, data)
 	},
 }
 

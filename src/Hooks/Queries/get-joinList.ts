@@ -1,20 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { Category } from '../../Pages/List/Components/CategoryNav/CategoryNav'
 import JoinApi from '../../Apis/JoinApi'
 
 export type Content = {
+	createdDate: string
 	joinRequestId: number
-	message: string | null
+	message: null | string
+	nickname: string
 	postId: number
-	status: string
+	status: string //'REQUEST' |
 	userId: number
 }
 export interface UseJoinListType {
-	response: {
-		content: Content[]
-		totalPages: number
-	}
+	response: Content[]
 	status: number
 	success: boolean
 }
@@ -24,13 +22,8 @@ const getJoinListData = async (postId: number) => {
 	return res.data
 }
 
-//수정
-interface UseCategoryType {
-	response: Category[]
-}
-
 const useGetJoinListData = (postId: number) => {
-	const { data, isLoading, refetch } = useQuery<any, boolean>(
+	const { data, isLoading, refetch } = useQuery<UseJoinListType, boolean>(
 		['useGetJoinListData', postId],
 		() => getJoinListData(postId),
 	)
