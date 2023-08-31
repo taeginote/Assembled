@@ -57,7 +57,7 @@ function ItemBoxMyPage({
 	const onGroupJoinStatus = () => {
 		setState({
 			view: true,
-			Id: 1,
+			Id: postId,
 		})
 		document.body.style.overflow = 'hidden'
 	}

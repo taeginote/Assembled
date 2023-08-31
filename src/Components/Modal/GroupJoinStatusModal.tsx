@@ -24,7 +24,6 @@ function GroupJoiStatusModal({
 	let requestData = data?.response?.content?.find(
 		(el: { status: 'REQUEST' }) => el.status === 'REQUEST',
 	)
-	console.log(requestData)
 
 	const skeletonArr: 0[] = Array(2).fill(0)
 	return (

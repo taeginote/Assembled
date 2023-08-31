@@ -102,15 +102,14 @@ function Detail() {
 	const onJoinMeeting = (e: any) => {
 		setJoinModal(false)
 		document.body.style.overflow = 'auto'
-		alert('가입신청 기능은 준비중입니다😀')
 
-		// postJoin({
-		// 	joinRequestMessage:
-		// 		e.target.textarea.value.trim().length === 0
-		// 			? '안녕하세요~ 잘 부탁드립니다~😀'
-		// 			: e.target.textarea.value,
-		// 	postId: postId!,
-		// })
+		postJoin({
+			joinRequestMessage:
+				e.target.textarea.value.trim().length === 0
+					? '안녕하세요~ 잘 부탁드립니다~😀'
+					: e.target.textarea.value,
+			postId: postId!,
+		})
 	}
 
 	const onClickJoinCancel = () => {

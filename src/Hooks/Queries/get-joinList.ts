@@ -20,7 +20,6 @@ export interface UseJoinListType {
 }
 
 const getJoinListData = async (postId: number) => {
-	console.log(postId)
 	const res = await JoinApi.getJoinList({ postId })
 	return res.data
 }
@@ -31,7 +30,6 @@ interface UseCategoryType {
 }
 
 const useGetJoinListData = (postId: number) => {
-	console.log(postId)
 	const { data, isLoading, refetch } = useQuery<any, boolean>(
 		['useGetJoinListData', postId],
 		() => getJoinListData(postId),

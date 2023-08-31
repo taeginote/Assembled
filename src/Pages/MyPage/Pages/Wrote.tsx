@@ -1,9 +1,5 @@
 import styled from 'styled-components'
-import {
-	ColumnNumberCSS,
-	FlexCenterCSS,
-	GridCenterCSS,
-} from '../../../Styles/common'
+import { FlexCenterCSS } from '../../../Styles/common'
 import ItemBoxMyPage from '../Components/ItemBoxMyPage'
 import useGetWroteData from '../../../Hooks/Queries/get-wrote'
 import UserIdService from '../../../Utils/UserIdService'

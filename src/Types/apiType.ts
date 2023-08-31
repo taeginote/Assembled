@@ -79,8 +79,13 @@ export interface postJoinProps {
 	joinRequestMessage: string
 	postId: number
 }
+export interface getJoinListProps {
+	postId: number
+}
+
 export interface JoinApiType {
 	postJoin(data: postJoinProps): Promise<AxiosResponse>
+	getJoinList(data: getJoinListProps): Promise<AxiosResponse>
 }
 
 //User api type

@@ -8,6 +8,11 @@ const JoinApi: JoinApiType = {
 	postJoin(data) {
 		return axiosInstance.post(PATH, data)
 	},
+	getJoinList({ postId }) {
+		return axiosInstance.get(`${PATH}/${postId}`, {
+			params: { postId, page: 0, size: 4 },
+		})
+	},
 }
 
 export default JoinApi
