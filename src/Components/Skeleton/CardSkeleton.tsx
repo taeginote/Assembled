@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 	justify-content: center;
 	position: relative;
 	overflow: hidden;
+	margin-bottom: 2rem;
 `
 const WrapperBox = styled.div`
 	width: 30%;
