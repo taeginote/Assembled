@@ -124,7 +124,8 @@ function Detail() {
 				<S.Container>
 					<S.Top>
 						<span>
-							<h1>{data?.response?.title}</h1>
+							<h1>반가워요.</h1>
+							<h1>우리는 "{data?.response?.title}" 입니다</h1>
 							<S.Profile>
 								<S.UserImg src={profileImg} alt="ProfileImage" />
 								<div>{data?.response?.writerNickname}</div>
@@ -192,7 +193,7 @@ function Detail() {
 							</span>
 						</div>
 					</S.Info>
-					<h3>프로젝트 설명</h3>
+					<h3>모임 설명</h3>
 					<S.Dec>{data?.response?.contents}</S.Dec>
 					{data && (
 						<CommentForm
@@ -325,7 +326,14 @@ const Top = styled.div`
 	display: flex;
 	justify-content: space-between;
 	border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};
+	width: 100%;
+
 	& > span {
+		& > h1 {
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+				font-size: ${({ theme }) => theme.FONT_SIZE.large};
+			}
+		}
 	}
 `
 const TopRight = styled.div`
