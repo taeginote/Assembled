@@ -21,6 +21,7 @@ import ListNoData from '../../Error/ListNoData'
 
 import CardSkeleton from '../../Components/Skeleton/CardSkeleton'
 import UpButton from '../../Components/UpButton/upButton'
+import Footer from '../../Components/Layout/Footer'
 
 function List() {
 	const [searchParams] = useSearchParams()
@@ -100,6 +101,7 @@ function List() {
 					setPage={setPage}
 				/>
 			)}
+			<Footer />
 		</>
 	)
 }
