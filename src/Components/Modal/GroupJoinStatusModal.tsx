@@ -9,11 +9,14 @@ import JoinListModalSkeleton from '../Skeleton/JoinListModalSkeleton'
 import { useMutation } from '@tanstack/react-query'
 import JoinApi from '../../Apis/JoinApi'
 import { putJoinStatusProps } from '../../Types/apiType'
+import { useState } from 'react'
 
 function GroupJoiStatusModal({
 	setState,
 	groupJoinStatusModal,
 }: GroupJoinModalTypeProps) {
+	const [selectTitle, setSelectTitle] = useState<string | null>('REQUEST')
+
 	const onCancelModal = () => {
 		document.body.style.overflow = 'auto'
 		setState({
@@ -22,18 +25,51 @@ function GroupJoiStatusModal({
 		})
 	}
 
-	const { data, isLoading } = useGetJoinListData(groupJoinStatusModal.Id!)
+	const { data, isLoading, refetch } = useGetJoinListData(
+		groupJoinStatusModal.Id!,
+	)
 
 	const { mutate: putMudate } = useMutation(
 		(data: putJoinStatusProps) => JoinApi.PutJoinStatus(data),
 		{
-			onSuccess: () => {},
+			onSuccess: () => {
+				refetch()
+			},
 		},
 	)
 
-	let requestData = data?.response?.find(
-		(el: { status: string }) => el.status === 'REQUEST',
+	const joinData = [
+		{
+			title: '요청',
+			id: 'REQUEST',
+		},
+		{
+			title: '거절',
+			id: 'REJECT',
+		},
+		{
+			title: '수락',
+			id: 'APPROVAL',
+		},
+		{
+			title: '차단',
+			id: 'BLOCK',
+		},
+	]
+
+	let selectListData = data?.response?.filter(
+		(el: { status: string }) => el.status === selectTitle,
 	)
+
+	// let rejectData = data?.response?.filter(
+	// 	(el: { status: string }) => el.status === 'REJECT',
+	// )
+	// let approvalData = data?.response?.filter(
+	// 	(el: { status: string }) => el.status === 'APPROVAL',
+	// )
+	// let blockData = data?.response?.filter(
+	// 	(el: { status: string }) => el.status === 'BLOCK',
+	// )
 
 	const onJoinStatusBtn = (
 		el: Content,
@@ -56,6 +92,16 @@ function GroupJoiStatusModal({
 						<Cancel_big_Icon onClick={onCancelModal} />
 					</div>
 				</S.TitleHead>
+				<S.CategoryList>
+					{joinData.map(el => (
+						<S.Category
+							$status={el.id === selectTitle}
+							onClick={() => setSelectTitle(el.id)}
+						>
+							{el.title}
+						</S.Category>
+					))}
+				</S.CategoryList>
 				<S.JoinList>
 					{isLoading ? (
 						<>
@@ -65,11 +111,11 @@ function GroupJoiStatusModal({
 						</>
 					) : (
 						<>
-							{data?.response?.length === 0 ? (
+							{selectListData?.length === 0 ? (
 								<S.ListNo>신청한 인원이 없습니다 :)</S.ListNo>
 							) : (
 								<>
-									{data?.response.map((el: Content, idx: number) => (
+									{selectListData?.map((el: Content, idx: number) => (
 										<li key={idx}>
 											<S.JoinUser>
 												<S.JoinUserNickname>
@@ -185,6 +231,22 @@ const ListNoData = styled.div`
 	color: ${({ theme }) => theme.COLOR.common.gray[200]};
 `
 const LiHead = styled.div``
+const CategoryList = styled.div`
+	display: flex;
+	color: gray;
+	font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
+`
+const Category = styled.div<{ $status: boolean }>`
+	margin-right: 1rem;
+	padding-bottom: 0.2rem;
+	cursor: pointer;
+	color: ${({ theme, $status }) => $status && 'orange'};
+
+	&:hover {
+		color: orange;
+		border-bottom: 1px solid orange;
+	}
+`
 const JoinUser = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	color: ${({ theme }) => theme.COLOR.common.gray[200]};
@@ -231,4 +293,6 @@ const S = {
 	JoinUserNickname,
 	JoinDate,
 	ListNo,
+	CategoryList,
+	Category,
 }
