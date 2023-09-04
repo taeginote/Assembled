@@ -44,12 +44,12 @@ function GroupJoiStatusModal({
 			id: 'REQUEST',
 		},
 		{
-			title: '거절',
-			id: 'REJECT',
-		},
-		{
 			title: '수락',
 			id: 'APPROVAL',
+		},
+		{
+			title: '거절',
+			id: 'REJECT',
 		},
 		{
 			title: '차단',
@@ -60,16 +60,6 @@ function GroupJoiStatusModal({
 	let selectListData = data?.response?.filter(
 		(el: { status: string }) => el.status === selectTitle,
 	)
-
-	// let rejectData = data?.response?.filter(
-	// 	(el: { status: string }) => el.status === 'REJECT',
-	// )
-	// let approvalData = data?.response?.filter(
-	// 	(el: { status: string }) => el.status === 'APPROVAL',
-	// )
-	// let blockData = data?.response?.filter(
-	// 	(el: { status: string }) => el.status === 'BLOCK',
-	// )
 
 	const onJoinStatusBtn = (
 		el: Content,
@@ -112,7 +102,7 @@ function GroupJoiStatusModal({
 					) : (
 						<>
 							{selectListData?.length === 0 ? (
-								<S.ListNo>신청한 인원이 없습니다 :)</S.ListNo>
+								<S.ListNo>조회할 인원이 없습니다 :)</S.ListNo>
 							) : (
 								<>
 									{selectListData?.map((el: Content, idx: number) => (
@@ -234,17 +224,20 @@ const LiHead = styled.div``
 const CategoryList = styled.div`
 	display: flex;
 	color: gray;
+	margin-top: 1rem;
 	font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 `
 const Category = styled.div<{ $status: boolean }>`
 	margin-right: 1rem;
 	padding-bottom: 0.2rem;
 	cursor: pointer;
-	color: ${({ theme, $status }) => $status && 'orange'};
+
+	color: ${({ theme, $status }) => $status && theme.COLOR.main};
+	border-bottom: 2px solid
+		${({ theme, $status }) => ($status ? theme.COLOR.main : 'none')};
 
 	&:hover {
-		color: orange;
-		border-bottom: 1px solid orange;
+		color: ${({ theme }) => theme.COLOR.main};
 	}
 `
 const JoinUser = styled.div`
