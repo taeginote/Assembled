@@ -48,7 +48,7 @@ function Likes() {
 								))}
 							</S.Container>
 							<Pagination
-								totalPage={1}
+								totalPage={data!.response.totalPages}
 								limit={10}
 								scroll={765}
 								setPage={setPage}
