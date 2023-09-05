@@ -10,7 +10,7 @@ export type Content = {
 	contents: string
 	expectedPeriod: number
 	hits: number
-	likeStatus: false
+	likeStatus: boolean
 	likes: number
 	personnelNumber: number
 	postId: number
