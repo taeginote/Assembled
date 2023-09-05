@@ -15,6 +15,7 @@ import { LoginSubmitData } from '../../../Types/type'
 import { useState } from 'react'
 import { userRole } from '../../../Atoms/UserRole.atom'
 import { useRecoilState } from 'recoil'
+import FindEmailModal from '../../../Components/Modal/FindEmailModal'
 
 export interface UserInfoType {
 	nickname: string
@@ -31,6 +32,7 @@ function Login() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState<string | null>(
 		userRole,
 	)
+	const [findEmailModalView, setFindEmailModalView] = useState<boolean>(false)
 
 	const [loginError, setLoginError] = useState<null | string>(null)
 	const navigate = useNavigate()
@@ -93,12 +95,20 @@ function Login() {
 					<HookFormError>{errors.LoginPW?.message?.toString()}</HookFormError>
 				)}
 				{loginError !== null && <HookFormError>{loginError}</HookFormError>}
+				<S.FindEmail>
+					<div onClick={() => setFindEmailModalView(true)}>
+						이메일을 잊으셨나요?
+					</div>
+				</S.FindEmail>
+				<S.SignUpButton>로그인</S.SignUpButton>
 				<S.GoSignUp>
 					아직 어셈블 계정이 없나요?
 					<S.LinkDesign to={'/Signup'}> 회원가입하기</S.LinkDesign>
 				</S.GoSignUp>
-				<S.SignUpButton>로그인</S.SignUpButton>
 			</S.container>
+			{findEmailModalView && (
+				<FindEmailModal setModalView={setFindEmailModalView} />
+			)}
 		</S.Wrapper>
 	)
 }
@@ -112,6 +122,7 @@ const Wrapper = styled.form`
 `
 const container = styled.div`
 	min-width: 25%;
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		width: 90%;
 	}
@@ -130,7 +141,7 @@ const container = styled.div`
 	align-items: center;
 `
 const SignUpButton = styled(Button)`
-	margin-top: 3rem;
+	margin-top: 2rem;
 `
 const LinkDesign = styled(Link)`
 	text-decoration: none;
@@ -140,5 +151,16 @@ const GoSignUp = styled.div`
 	margin-top: 2rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
+const FindEmail = styled.div`
+	width: 100%;
+	& > div {
+		text-align: start;
+		width: 14rem;
+		margin-top: 1rem;
+		text-decoration: underline;
+		color: ${({ theme }) => theme.COLOR.common.gray[300]};
+		cursor: pointer;
+	}
+`
 
-const S = { Wrapper, container, SignUpButton, GoSignUp, LinkDesign }
+const S = { Wrapper, container, SignUpButton, GoSignUp, LinkDesign, FindEmail }

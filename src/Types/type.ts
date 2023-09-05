@@ -34,6 +34,12 @@ export interface LoginSubmitData {
 	LoginEmail?: string
 	LoginPW?: string
 }
+//리액트 훅 폼 Login Find Email Type
+
+export interface FindEmailSubmitData {
+	name?: string
+	phone?: string
+}
 
 //리액트 훅 폼 SignUp type
 export interface SignUpSubmitData {
