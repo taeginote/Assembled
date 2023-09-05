@@ -7,7 +7,7 @@ import {
 	WidthAutoCSS,
 } from '../../Styles/common'
 import {
-	PostStatus,
+	MeetingStatus,
 	selectDataTeamMember,
 } from './Components/SelectBox/SelectData'
 import { selectDataPeriod } from './Components/SelectBox/SelectData'
@@ -26,7 +26,7 @@ import { useMutation } from '@tanstack/react-query'
 
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
-import PostApi from '../../Apis/PostApi'
+import MeetingApi from '../../Apis/MeetingApi'
 import { PatchRegisterData } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import { useState } from 'react'
@@ -37,7 +37,7 @@ type CategoryName = { categoryName: string }
 
 function ChangeRegister() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
-	const { postId } = useParams()
+	const { meetingId } = useParams()
 	const [modalView, setModalView] = useState(false)
 
 	const {
@@ -47,10 +47,10 @@ function ChangeRegister() {
 	} = useForm()
 	const { data: GetCategoryData } = useGetCategoryData()
 
-	const { data, isLoading, refetch } = useGetDetailData(Number(postId))
+	const { data, isLoading, refetch } = useGetDetailData(Number(meetingId))
 
 	const { mutate } = useMutation(
-		(data: PatchRegisterData) => PostApi.putRegister(data),
+		(data: PatchRegisterData) => MeetingApi.putRegister(data),
 		{
 			onSuccess: () => {
 				setModalView(true)
@@ -70,8 +70,8 @@ function ChangeRegister() {
 			categoryId: categoryId!.categoryId,
 			personnelNumber: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
 			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,
-			postStatus: e.Status,
-			postId: Number(postId),
+			meetingStatus: e.Status,
+			meetingId: Number(meetingId),
 		}
 		mutate(data)
 	}
@@ -116,10 +116,10 @@ function ChangeRegister() {
 							<div>모임 모집 여부 *</div>
 							<SelectInput
 								name="Status"
-								Data={PostStatus}
+								Data={MeetingStatus}
 								control={control}
 								errorMsg="프로젝트 모집 여부를 선택해주세요"
-								datailData={data?.response?.postStatus}
+								datailData={data?.response?.meetingStatus}
 							/>
 						</S.Box>
 					</S.Container>

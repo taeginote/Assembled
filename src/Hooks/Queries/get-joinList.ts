@@ -7,7 +7,7 @@ export type Content = {
 	joinRequestId: number
 	message: null | string
 	nickname: string
-	postId: number
+	meetingId: number
 	status: string //'REQUEST' |
 	userId: number
 }
@@ -17,15 +17,15 @@ export interface UseJoinListType {
 	success: boolean
 }
 
-const getJoinListData = async (postId: number) => {
-	const res = await JoinApi.getJoinList({ postId })
+const getJoinListData = async (meetingId: number) => {
+	const res = await JoinApi.getJoinList({ meetingId })
 	return res.data
 }
 
-const useGetJoinListData = (postId: number) => {
+const useGetJoinListData = (meetingId: number) => {
 	const { data, isLoading, refetch } = useQuery<UseJoinListType, boolean>(
-		['useGetJoinListData', postId],
-		() => getJoinListData(postId),
+		['useGetJoinListData', meetingId],
+		() => getJoinListData(meetingId),
 	)
 
 	return { data, isLoading, refetch }

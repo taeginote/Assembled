@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios'
 import { categoryType, filterType } from '../Hooks/Queries/get-list'
 
-export interface PostCommentProps {
+export interface MeetingCommentProps {
 	contents?: string
-	postId?: number
+	meetingId?: number
 }
 interface GetUserCommentProps {
 	userId: string | null
@@ -15,18 +15,18 @@ export interface PutCommentProps {
 }
 
 export type CommentApiType = {
-	postComment(data: PostCommentProps): Promise<AxiosResponse>
+	meetingComment(data: MeetingCommentProps): Promise<AxiosResponse>
 	getUserComment(params: GetUserCommentProps): Promise<AxiosResponse>
 	deleteComment(params?: number): Promise<AxiosResponse>
 	putComment(data: PutCommentProps): Promise<AxiosResponse>
 }
 
-export interface PostLikeProps {
-	postId?: number | null
+export interface MeetingLikeProps {
+	meetingId?: number | null
 }
 
-export interface PostLikeApiType {
-	PostLike(params: PostLikeProps): Promise<AxiosResponse>
+export interface MeetingLikeApiType {
+	MeetingLike(params: MeetingLikeProps): Promise<AxiosResponse>
 	CancelLike(params?: number): Promise<AxiosResponse>
 }
 
@@ -37,29 +37,29 @@ interface GetListProps {
 	categoryId?: categoryType
 	sort?: filterType
 }
-export interface PostRegisterProps {
+export interface MeetingRegisterProps {
 	categoryId: 1 | number
 	contents?: string
 	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | '제한 없음'
 	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
 	title?: string
 }
-export interface PatchRegisterData extends PostRegisterProps {
-	postStatus?: string
-	postId?: number
+export interface PatchRegisterData extends MeetingRegisterProps {
+	meetingStatus?: string
+	meetingId?: number
 }
 
 interface GetUserWroteProps {
-	postId: string | null
+	meetingId: string | null
 	page: null | number
 }
 
-export interface PostApiType {
+export interface MeetingApiType {
 	getList(params: GetListProps): Promise<AxiosResponse>
-	PostRegister(params: PostRegisterProps): Promise<AxiosResponse>
+	MeetingRegister(params: MeetingRegisterProps): Promise<AxiosResponse>
 	putRegister(params: PatchRegisterData): Promise<AxiosResponse>
-	getDetail(params: PostLikeProps): Promise<AxiosResponse>
-	DeletePost(params?: number): Promise<AxiosResponse>
+	getDetail(params: MeetingLikeProps): Promise<AxiosResponse>
+	DeleteMeeting(params?: number): Promise<AxiosResponse>
 	getUserWrote(params: GetUserWroteProps): Promise<AxiosResponse>
 	getUserLike(params: number): Promise<AxiosResponse>
 }
@@ -71,16 +71,16 @@ export interface CategoryApiType {
 	getCategory(): Promise<AxiosResponse>
 	PutCategory(data: PutCategoryProps): Promise<AxiosResponse>
 	DeleteCategory(id: number): Promise<AxiosResponse>
-	PostCategory(data: Omit<PutCategoryProps, 'id'>): Promise<AxiosResponse>
+	MeetingCategory(data: Omit<PutCategoryProps, 'id'>): Promise<AxiosResponse>
 }
 
 //Join Api
-export interface postJoinProps {
+export interface meetingJoinProps {
 	joinRequestMessage: string
-	postId: number
+	meetingId: number
 }
 export interface getJoinListProps {
-	postId: number
+	meetingId: number
 }
 export interface putJoinStatusProps {
 	joinRequestId: number
@@ -89,7 +89,7 @@ export interface putJoinStatusProps {
 }
 
 export interface JoinApiType {
-	postJoin(data: postJoinProps): Promise<AxiosResponse>
+	meetingJoin(data: meetingJoinProps): Promise<AxiosResponse>
 	getJoinList(data: getJoinListProps): Promise<AxiosResponse>
 	PutJoinStatus(data: putJoinStatusProps): Promise<AxiosResponse>
 }
@@ -131,4 +131,8 @@ export type UserApiType = {
 	PutUserInfo(
 		data: Omit<signUpProps, 'password' | 'email'>,
 	): Promise<AxiosResponse>
+}
+
+export type ActivityApiType = {
+	getActivity(page: number): Promise<AxiosResponse>
 }

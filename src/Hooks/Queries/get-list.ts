@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import PostApi from '../../Apis/PostApi'
+import MeetingApi from '../../Apis/MeetingApi'
 
 export type filterType = null | string
 export type categoryType = 1 | null | number
@@ -13,9 +13,9 @@ export type Content = {
 	likeStatus: boolean
 	likes: number
 	personnelNumber: number
-	postId: number
-	postProfileImages: []
-	postStatus: 'PROGRESS' | 'COMPLETED'
+	meetingId: number
+	meetingProfileImages: []
+	meetingStatus: 'PROGRESS' | 'COMPLETED'
 	title: string
 	writerId: number
 	writerNickname: string
@@ -37,7 +37,7 @@ const getListData = async (
 	sort?: filterType,
 	categoryId?: categoryType,
 ) => {
-	const res = await PostApi.getList({
+	const res = await MeetingApi.getList({
 		page,
 		searchBy,
 		searchQuery,

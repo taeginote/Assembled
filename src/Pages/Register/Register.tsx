@@ -23,8 +23,8 @@ import { useMutation } from '@tanstack/react-query'
 
 import SuccessModal from '../../Components/Modal/successModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
-import PostApi from '../../Apis/PostApi'
-import { PostRegisterProps } from '../../Types/apiType'
+import MeetingApi from '../../Apis/MeetingApi'
+import { MeetingRegisterProps } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
 import { useState } from 'react'
@@ -43,7 +43,7 @@ function Register() {
 	const { data: GetCategoryData } = useGetCategoryData()
 
 	const { mutate } = useMutation(
-		(data: PostRegisterProps) => PostApi.PostRegister(data),
+		(data: MeetingRegisterProps) => MeetingApi.MeetingRegister(data),
 		{
 			onSuccess: () => {
 				setModalView(true)
@@ -59,7 +59,7 @@ function Register() {
 			(el: Category) => el.categoryName === e.Category,
 		)
 
-		const data: PostRegisterProps = {
+		const data: MeetingRegisterProps = {
 			title: e.Title,
 			contents: e.Contents,
 			categoryId: categoryId!.categoryId,

@@ -14,7 +14,7 @@ const CategoryApi: CategoryApiType = {
 	DeleteCategory(id) {
 		return axiosInstance.delete(`${PATH}/${id}`)
 	},
-	PostCategory(data) {
+	MeetingCategory(data) {
 		return axiosInstance.post(PATH, data)
 	},
 }

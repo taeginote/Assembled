@@ -5,12 +5,12 @@ import axiosInstance from './@core'
 const PATH = '/assemble/join'
 
 const JoinApi: JoinApiType = {
-	postJoin(data) {
+	meetingJoin(data) {
 		return axiosInstance.post(PATH, data)
 	},
-	getJoinList({ postId }) {
-		return axiosInstance.get(`${PATH}/${postId}`, {
-			params: { postId },
+	getJoinList({ meetingId }) {
+		return axiosInstance.get(`${PATH}/${meetingId}`, {
+			params: { meetingId },
 		})
 	},
 	PutJoinStatus(data) {

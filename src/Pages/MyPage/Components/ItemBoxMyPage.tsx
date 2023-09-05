@@ -23,15 +23,15 @@ import { GroupJoinStatusModalProps } from '../Pages/Wrote'
 function ItemBoxMyPage({
 	data,
 	setState,
-	setPostId,
+	setMeetingId,
 }: {
 	data: Content
 	setState: (state: GroupJoinStatusModalProps) => void | undefined
-	setPostId: React.Dispatch<React.SetStateAction<number>>
+	setMeetingId: React.Dispatch<React.SetStateAction<number>>
 }) {
 	const navigate = useNavigate()
 	const {
-		postId,
+		meetingId,
 		title,
 		categoryName,
 		// profile,
@@ -40,7 +40,7 @@ function ItemBoxMyPage({
 		expectedPeriod,
 		commentCount,
 		writerProfileImages,
-		postStatus,
+		meetingStatus,
 	} = data
 
 	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
@@ -49,7 +49,7 @@ function ItemBoxMyPage({
 
 	const onDeleteClub = (e?: number) => {
 		setRecoilCounter(true)
-		setPostId(e!)
+		setMeetingId(e!)
 	}
 	let period: string =
 		expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
@@ -57,7 +57,7 @@ function ItemBoxMyPage({
 	const onGroupJoinStatus = () => {
 		setState({
 			view: true,
-			Id: postId,
+			Id: meetingId,
 		})
 		document.body.style.overflow = 'hidden'
 	}
@@ -65,14 +65,14 @@ function ItemBoxMyPage({
 	return (
 		<S.Wrapper>
 			<S.TopWrap>
-				{postStatus === 'PROGRESS' ? (
+				{meetingStatus === 'PROGRESS' ? (
 					<S.Status $state={true}>모집중</S.Status>
 				) : (
 					<S.Status $state={false}>모집완료</S.Status>
 				)}
 				<p>
 					<button
-						onClick={() => navigate(`/register/${postId}`)}
+						onClick={() => navigate(`/register/${meetingId}`)}
 						title="Modify"
 					>
 						<div>
@@ -80,7 +80,7 @@ function ItemBoxMyPage({
 						</div>
 						<Pen_Icon />
 					</button>
-					<button onClick={() => onDeleteClub(postId)} title="Delete">
+					<button onClick={() => onDeleteClub(meetingId)} title="Delete">
 						<div>
 							<Ballon text={'모임 삭제'} />
 						</div>
@@ -90,7 +90,9 @@ function ItemBoxMyPage({
 			</S.TopWrap>
 
 			<S.Container>
-				<S.ContainerLeft onClick={() => navigate(`/Detail?postId=${postId}`)}>
+				<S.ContainerLeft
+					onClick={() => navigate(`/Detail?meetingId=${meetingId}`)}
+				>
 					<S.Period>마감일 | {period}</S.Period>
 					<S.Title>
 						{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}

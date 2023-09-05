@@ -46,7 +46,7 @@ const router = [
 						element: <Register />,
 					},
 					{
-						path: '/register/:postId',
+						path: '/register/:meetingId',
 						element: <ChangeRegister />,
 					},
 					{

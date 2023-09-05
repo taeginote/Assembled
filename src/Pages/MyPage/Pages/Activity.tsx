@@ -9,6 +9,7 @@ import Pagination from '../../../Components/Pagination/Pagination'
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ActivityItemBox from '../Components/ActivityItemBox'
+import useGetActivityData from '../../../Hooks/Queries/get-activity'
 
 function Activity() {
 	//디자인을 위한 test Mock
@@ -22,9 +23,9 @@ function Activity() {
 		likeStatus: false,
 		likes: 0,
 		personnelNumber: '2',
-		postId: 128,
-		postProfileImages: [],
-		postStatus: 'PROGRESS',
+		meetingId: 128,
+		meetingProfileImages: [],
+		meetingStatus: 'PROGRESS',
 		title: '안녕하세요',
 		writerId: 86,
 		writerNickname: 'taek11',
@@ -32,7 +33,9 @@ function Activity() {
 
 	const [searchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
-	const [page, setPage] = useState<number>(pageNumber || 0)
+	const [page, setPage] = useState<number>(pageNumber || 1)
+
+	const { data } = useGetActivityData(page)
 
 	return (
 		<S.Wrapper>
@@ -43,7 +46,12 @@ function Activity() {
 					<ActivityItemBox data={testObject} key={idx} />
 				))}
 
-				<Pagination totalPage={1} limit={10} scroll={765} setPage={setPage} />
+				<Pagination
+					totalPage={data?.response?.totalPages}
+					limit={10}
+					scroll={765}
+					setPage={setPage}
+				/>
 			</S.ListWrap>
 		</S.Wrapper>
 	)

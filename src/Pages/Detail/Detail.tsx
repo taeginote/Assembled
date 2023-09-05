@@ -12,13 +12,13 @@ import {
 	Trash_Icon,
 } from '../../Icons/Icons'
 import Ballon from '../../Components/Ballon/Ballon'
-import PostApi from '../../Apis/PostApi'
+import MeetingApi from '../../Apis/MeetingApi'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import { useRecoilState } from 'recoil'
-import { PostLikeProps, postJoinProps } from '../../Types/apiType'
-import PostLikeApi from '../../Apis/PostLikeApi'
+import { MeetingLikeProps, meetingJoinProps } from '../../Types/apiType'
+import MeetingLikeApi from '../../Apis/MeetingLikeApi'
 import UserIdService from '../../Utils/UserIdService'
 import { FlexCenterCSS } from '../../Styles/common'
 import TokenService from '../../Utils/TokenService'
@@ -39,9 +39,9 @@ function Detail() {
 		useRecoilState<boolean>(modalViewConfirm)
 
 	const UserId = UserIdService.getUserId()
-	let postId: number | null = Number(searchParams.get('postId'))
+	let meetingId: number | null = Number(searchParams.get('meetingId'))
 
-	const { data, isLoading, refetch } = useGetDetailData(postId)
+	const { data, isLoading, refetch } = useGetDetailData(meetingId)
 
 	const profileImg = ProfileImgReturn(
 		data?.response?.writerProfileImages?.filePath,
@@ -49,7 +49,7 @@ function Detail() {
 	const IsMinePage = data?.response?.writerId == UserId ? true : false
 
 	const { mutate } = useMutation(
-		(postId: number) => PostApi.DeletePost(postId),
+		(meetingId: number) => MeetingApi.DeleteMeeting(meetingId),
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries(['useGetListData'])
@@ -58,7 +58,7 @@ function Detail() {
 		},
 	)
 	const { mutate: heartMutate } = useMutation(
-		(likeData: PostLikeProps) => PostLikeApi.PostLike(likeData),
+		(likeData: MeetingLikeProps) => MeetingLikeApi.MeetingLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -67,7 +67,7 @@ function Detail() {
 	)
 
 	const { mutate: cancelMutate } = useMutation(
-		(likeData: number) => PostLikeApi.CancelLike(likeData),
+		(likeData: number) => MeetingLikeApi.CancelLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -75,8 +75,8 @@ function Detail() {
 		},
 	)
 
-	const { mutate: postJoin } = useMutation(
-		(data: postJoinProps) => JoinApi.postJoin(data),
+	const { mutate: meetingJoin } = useMutation(
+		(data: meetingJoinProps) => JoinApi.meetingJoin(data),
 		{
 			onSuccess: () => {
 				refetch()
@@ -86,7 +86,7 @@ function Detail() {
 
 	const onHeart = () => {
 		if (token === null) return
-		heartMutate({ postId })
+		heartMutate({ meetingId })
 	}
 
 	const onDeleteClub = () => {
@@ -102,12 +102,12 @@ function Detail() {
 	const onJoinMeeting = (e: any) => {
 		setJoinModal(false)
 		document.body.style.overflow = 'auto'
-		postJoin({
+		meetingJoin({
 			joinRequestMessage:
 				e.target.textarea.value.trim().length === 0
 					? '안녕하세요~ 잘 부탁드립니다~😀'
 					: e.target.textarea.value,
-			postId: postId!,
+			meetingId: meetingId!,
 		})
 	}
 
@@ -139,7 +139,7 @@ function Detail() {
 									<p>
 										<button
 											title="Modify"
-											onClick={() => navigate(`/register/${postId}`)}
+											onClick={() => navigate(`/register/${meetingId}`)}
 										>
 											<div>
 												<Ballon text={'모임 수정'} />
@@ -162,7 +162,9 @@ function Detail() {
 										{!data?.response?.likeStatus ? (
 											<NotFillHeart_Icon onClick={onHeart} />
 										) : (
-											<FillHeart_Icon onClick={() => cancelMutate(postId!)} />
+											<FillHeart_Icon
+												onClick={() => cancelMutate(meetingId!)}
+											/>
 										)}
 										<div>{data?.response?.likes}</div>
 									</S.WebkHeartBox>
@@ -198,7 +200,7 @@ function Detail() {
 					{data && (
 						<CommentForm
 							comments={data?.response?.comments}
-							postId={postId}
+							meetingId={meetingId}
 							refetch={refetch}
 							token={token}
 						/>
@@ -211,7 +213,7 @@ function Detail() {
 								<div>{data?.response?.likes}</div>
 							</S.HeartBox>
 						) : (
-							<S.HeartBox onClick={() => cancelMutate(postId!)}>
+							<S.HeartBox onClick={() => cancelMutate(meetingId!)}>
 								<FillHeart_Icon />
 								<div>{data?.response?.likes}</div>
 							</S.HeartBox>
@@ -225,7 +227,7 @@ function Detail() {
 					text={'정말로 삭제하시겠습니까?'}
 					url={'/'}
 					mutate={mutate}
-					postId={postId}
+					meetingId={meetingId}
 				/>
 			)}
 			{joinModal && (

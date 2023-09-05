@@ -12,7 +12,7 @@ import { Content } from '../../../Hooks/Queries/get-list'
 
 function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 	const {
-		postId,
+		meetingId,
 		title,
 		categoryName,
 		writerProfileImages,
@@ -28,7 +28,7 @@ function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 
 	/**
 	 * 필요한 데이터
-	 * postStatus (모집중 혹은 모집완료)
+	 * meetingStatus (모집중 혹은 모집완료)
 	 * categoryName (카테고리)
 	 * title (모임 이름)
 	 * 이미지를 담당자 이미지 즉, 방장의 이미지 와 방장 닉네임

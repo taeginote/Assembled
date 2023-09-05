@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import PostApi from '../../Apis/PostApi'
+import MeetingApi from '../../Apis/MeetingApi'
 
 interface IdxSignature {
 	[key: string]: string
@@ -13,9 +13,9 @@ interface Content {
 	likeStatus: boolean
 	likes: number
 	personnelNumber: number
-	postId: number
-	postProfileImages?: IdxSignature
-	postStatus: 'PROGRESS' | 'COMPLETED'
+	meetingId: number
+	meetingProfileImages?: IdxSignature
+	meetingStatus: 'PROGRESS' | 'COMPLETED'
 	title: string
 	writerId: number
 	writerNickname: string
@@ -32,7 +32,7 @@ export interface UseUserLikeType {
 }
 
 const getUserLikeData = async (page: number) => {
-	const res = await PostApi.getUserLike(page)
+	const res = await MeetingApi.getUserLike(page)
 	return res.data
 }
 

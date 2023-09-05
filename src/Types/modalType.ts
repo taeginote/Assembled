@@ -12,7 +12,7 @@ export interface modalTypeFourProps {
 	text: string
 	url?: string
 	mutate?: any //보류
-	postId?: number | null
+	meetingId?: number | null
 }
 export interface GroupJoinModalTypeProps {
 	setState: (state: GroupJoinStatusModalProps) => void | undefined

@@ -42,7 +42,7 @@ function AdminCategory() {
 		},
 	)
 	const { mutate: PostMutate } = useMutation(
-		(data: Omit<PutCategoryProps, 'id'>) => CategoryApi.PostCategory(data),
+		(data: Omit<PutCategoryProps, 'id'>) => CategoryApi.MeetingCategory(data),
 		{
 			onSuccess: () => {
 				refetch()
@@ -162,7 +162,7 @@ function AdminCategory() {
 					text={'정말로 삭제하시겠습니까?'}
 					url={'/admin'}
 					mutate={deleteMutate}
-					postId={changeCategoryNum}
+					meetingId={changeCategoryNum}
 				/>
 			)}
 			{adminAddModal && (

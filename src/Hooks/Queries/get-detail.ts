@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 
-import PostApi from '../../Apis/PostApi'
+import MeetingApi from '../../Apis/MeetingApi'
 
 export type Comments = {
-	postTitle: string
+	meetingTitle: string
 	commentId: number
 	contents: string
-	postId: number
+	meetingId: number
 	userId: number
 	writeDate: string
 	writerNickname: string
@@ -24,9 +24,9 @@ export interface UseDetailType {
 		likeStatus: boolean
 		likes: number
 		personnelNumber: number
-		postId: number
-		postProfileImages: []
-		postStatus: 'PROGRESS' | 'COMPLETED'
+		meetingId: number
+		meetingProfileImages: []
+		meetingStatus: 'PROGRESS' | 'COMPLETED'
 		title: string
 		writerId?: string
 		writerNickname: string
@@ -36,18 +36,18 @@ export interface UseDetailType {
 	success: boolean
 }
 
-const getDetailData = async (postId: number) => {
-	const res = await PostApi.getDetail({ postId })
+const getDetailData = async (meetingId: number) => {
+	const res = await MeetingApi.getDetail({ meetingId })
 
 	return res.data
 }
 
-const useGetDetailData = (postId: number) => {
+const useGetDetailData = (meetingId: number) => {
 	const { data, isLoading, refetch } = useQuery<UseDetailType, boolean>(
-		['useGetDetailData', postId],
-		() => getDetailData(postId),
+		['useGetDetailData', meetingId],
+		() => getDetailData(meetingId),
 		{
-			enabled: !!postId,
+			enabled: !!meetingId,
 		},
 	)
 

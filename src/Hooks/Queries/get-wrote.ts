@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import PostApi from '../../Apis/PostApi'
+import MeetingApi from '../../Apis/MeetingApi'
 
 export type Content = {
 	categoryName: string
@@ -10,9 +10,9 @@ export type Content = {
 	likeStatus: false
 	likes: number
 	personnelNumber: number
-	postId: number
-	postProfileImages: []
-	postStatus: 'PROGRESS' | 'COMPLETED'
+	meetingId: number
+	meetingProfileImages: []
+	meetingStatus: 'PROGRESS' | 'COMPLETED'
 	title: string
 	writerId: number
 	writerNickname: string
@@ -27,15 +27,15 @@ export interface UseWroteType {
 	success: boolean
 }
 
-const getWroteData = async (postId: string | null, page: null | number) => {
-	const res = await PostApi.getUserWrote({ postId, page })
+const getWroteData = async (meetingId: string | null, page: null | number) => {
+	const res = await MeetingApi.getUserWrote({ meetingId, page })
 	return res.data
 }
 
-const useGetWroteData = (postId: string | null, page: null | number) => {
+const useGetWroteData = (meetingId: string | null, page: null | number) => {
 	const { data, isLoading, refetch } = useQuery<UseWroteType, boolean>(
 		['useGetWroteData', page],
-		() => getWroteData(postId, page),
+		() => getWroteData(meetingId, page),
 	)
 
 	return { data, isLoading, refetch }

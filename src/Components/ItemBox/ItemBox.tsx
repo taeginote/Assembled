@@ -12,8 +12,8 @@ import {
 	View_Icon,
 } from '../../Icons/Icons'
 import { useMutation } from '@tanstack/react-query'
-import { PostLikeProps } from '../../Types/apiType'
-import PostLikeApi from '../../Apis/PostLikeApi'
+import { MeetingLikeProps } from '../../Types/apiType'
+import MeetingLikeApi from '../../Apis/MeetingLikeApi'
 import TokenService from '../../Utils/TokenService'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
 import { Content } from '../../Hooks/Queries/get-list'
@@ -24,7 +24,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 	const token = TokenService.getAccessToken()
 
 	const {
-		postId,
+		meetingId,
 		title,
 		categoryName,
 		writerProfileImages,
@@ -32,7 +32,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 		expectedPeriod,
 		commentCount,
 		likeStatus,
-		postStatus, //'PROGRESS' | 'COMPLETED'
+		meetingStatus, //'PROGRESS' | 'COMPLETED'
 		hits,
 	} = data
 
@@ -41,7 +41,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 	let period = expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
 
 	const { mutate } = useMutation(
-		(likeData: PostLikeProps) => PostLikeApi.PostLike(likeData),
+		(likeData: MeetingLikeProps) => MeetingLikeApi.MeetingLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -50,7 +50,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 	)
 
 	const { mutate: cancelMutate } = useMutation(
-		(likeData: number) => PostLikeApi.CancelLike(likeData),
+		(likeData: number) => MeetingLikeApi.CancelLike(likeData),
 		{
 			onSuccess: () => {
 				refetch()
@@ -59,16 +59,16 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 	)
 
 	const onClickNotHeart = (): void => {
-		mutate({ postId })
+		mutate({ meetingId })
 	}
 	const onClickFillHeart = (): void => {
-		cancelMutate(postId!)
+		cancelMutate(meetingId!)
 	}
 
 	return (
 		<S.Wrapper>
 			<S.TopWrap>
-				{postStatus === 'PROGRESS' ? (
+				{meetingStatus === 'PROGRESS' ? (
 					<S.Status $state={true}>모집중</S.Status>
 				) : (
 					<S.Status $state={false}>모집완료</S.Status>
@@ -83,7 +83,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 					</>
 				)}
 			</S.TopWrap>
-			<S.Container onClick={() => navigate(`/Detail?postId=${postId}`)}>
+			<S.Container onClick={() => navigate(`/Detail?meetingId=${meetingId}`)}>
 				<S.Period>마감일 | {period}</S.Period>
 
 				<S.Title>

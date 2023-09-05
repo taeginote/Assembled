@@ -5,7 +5,7 @@ import axiosInstance from './@core'
 const PATH = '/assemble/comment'
 
 const CommentApi: CommentApiType = {
-	postComment(data) {
+	meetingComment(data) {
 		return axiosInstance.post(PATH, data)
 	},
 	getUserComment({ userId, page }) {

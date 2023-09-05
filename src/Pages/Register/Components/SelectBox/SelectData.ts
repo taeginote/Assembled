@@ -56,7 +56,7 @@ export const selectDataPeriod = [
 	},
 ]
 
-export const PostStatus = [
+export const MeetingStatus = [
 	{
 		text: '모집중',
 		value: 'PROGRESS',

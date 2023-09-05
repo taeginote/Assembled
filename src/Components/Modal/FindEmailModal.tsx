@@ -5,12 +5,24 @@ import { Cancel_big_Icon, Name_Icon, Phone_Icon } from '../../Icons/Icons'
 import { FlexAlignCSS } from '../../Styles/common'
 import { FlexColumnCSS } from '../../Styles/common'
 import Button from '../Button/Button'
+import { useState } from 'react'
 
-export interface FindEmailModalTypeProps {
+interface FindEmailModalTypeProps {
 	setModalView: (state: boolean) => void | undefined
 }
 
 function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
+	const [nameAndPhoneVal, setNameAndPhoneVal] = useState<{
+		name: string | null
+		phone: string | null
+	}>({
+		name: null,
+		phone: null,
+	})
+	const onFindEmail = () => {}
+
+	console.log(nameAndPhoneVal)
+
 	return (
 		<S.Wrapper>
 			<S.Box>
@@ -22,18 +34,32 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 				</S.TitleHead>
 				<S.InputWrap>
 					<Name_Icon />
-					<Input placeholder="이름" />
+					<Input
+						placeholder="이름"
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+							setNameAndPhoneVal(prev => ({
+								...prev,
+								name: e.target.value,
+							}))
+						}
+					/>
 				</S.InputWrap>
 
 				<S.InputWrap>
 					<Phone_Icon />
-					<Input placeholder="전화번호" />
+					<Input
+						placeholder="전화번호"
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+							setNameAndPhoneVal(prev => ({
+								...prev,
+								phone: e.target.value,
+							}))
+						}
+					/>
 				</S.InputWrap>
 
 				<S.ButtonWrap>
-					<Button onClick={() => alert('서비스 준비중입니다.')}>
-						이메일 찾기
-					</Button>
+					<Button onClick={onFindEmail}>이메일 찾기</Button>
 				</S.ButtonWrap>
 			</S.Box>
 		</S.Wrapper>

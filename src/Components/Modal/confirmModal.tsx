@@ -7,21 +7,21 @@ import { Question_Icon } from '../../Icons/Icons'
 import { useSetRecoilState } from 'recoil'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 
-function ConfirmModal({ text, url, mutate, postId }: modalTypeFourProps) {
+function ConfirmModal({ text, url, mutate, meetingId }: modalTypeFourProps) {
 	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 	const navigate = useNavigate()
 
 	const onClickClose = () => {
 		if (url === '/myPage' || url === '/') {
-			mutate(postId)
+			mutate(meetingId)
 			navigate(url)
 		}
 		if (url === '/myPage/comment') {
-			const commentId = postId
+			const commentId = meetingId
 			mutate(commentId)
 		}
 		if (url === '/admin') {
-			mutate(postId)
+			mutate(meetingId)
 			navigate(url)
 		}
 		if (url === undefined) {
