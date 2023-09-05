@@ -101,7 +101,7 @@ function List() {
 					setPage={setPage}
 				/>
 			)}
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	)
 }
