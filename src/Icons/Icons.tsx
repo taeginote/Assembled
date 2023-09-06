@@ -38,7 +38,7 @@ type IconRotate = {
 	rotate?: number
 }
 interface OnClickIconType {
-	onClick: React.MouseEventHandler<SVGSVGElement>
+	onClick?: React.MouseEventHandler<SVGSVGElement>
 }
 
 export const Person_Icon = ({ size }: IconSize) => (

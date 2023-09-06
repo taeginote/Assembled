@@ -5,7 +5,7 @@ import MeetingApi from '../../Apis/MeetingApi'
 export type Comments = {
 	meetingName: string
 	commentId: number
-	description: string
+	contents: string
 	meetingId: number
 	userId: number
 	writeDate: string

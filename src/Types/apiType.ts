@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 import { categoryType, filterType } from '../Hooks/Queries/get-list'
 
 export interface MeetingCommentProps {
-	description?: string
+	contents?: string
 	meetingId?: number
 }
 interface GetUserCommentProps {
@@ -11,7 +11,7 @@ interface GetUserCommentProps {
 }
 export interface PutCommentProps {
 	commentId: null | number
-	description: null | string
+	contents: null | string
 }
 
 export type CommentApiType = {
