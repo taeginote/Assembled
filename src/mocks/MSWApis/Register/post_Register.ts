@@ -11,7 +11,7 @@ interface response {
 	categoryName: 'study' | 'project' | string
 	writerNickname: string
 	writeDate: string
-	postStatus: string
+	meetingStatus: string
 	hits: string
 	likes: string
 	personnelNumber: 0 | 2 | 3 | 4 | 5 | 10 | number
@@ -30,8 +30,8 @@ export const post_Register = [
 		const {
 			categoryName,
 			contents,
-			expectedPeriod,
 			personnelNumber,
+			expectedPeriod,
 			title,
 			writerNickname,
 		} = data
@@ -43,7 +43,7 @@ export const post_Register = [
 			categoryName,
 			writerNickname,
 			writeDate: CurrentTime(),
-			postStatus: '모집중',
+			meetingStatus: '모집중',
 			hits: '4',
 			likes: '2',
 			personnelNumber,
