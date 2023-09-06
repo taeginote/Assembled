@@ -25,11 +25,11 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 
 	const {
 		meetingId,
-		title,
+		name,
 		categoryName,
 		writerProfileImages,
 		writerNickname,
-		expectedPeriod,
+
 		commentCount,
 		likeStatus,
 		meetingStatus, //'PROGRESS' | 'COMPLETED'
@@ -37,8 +37,6 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 	} = data
 
 	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
-
-	let period = expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
 
 	const { mutate } = useMutation(
 		(likeData: MeetingLikeProps) => MeetingLikeApi.MeetingLike(likeData),
@@ -84,10 +82,8 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 				)}
 			</S.TopWrap>
 			<S.Container onClick={() => navigate(`/Detail?meetingId=${meetingId}`)}>
-				<S.Period>마감일 | {period}</S.Period>
-
 				<S.Title>
-					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
+					{name && name?.length > 45 ? name?.substr(0, 45) + '...' : name}
 				</S.Title>
 				<S.Category>{categoryName}</S.Category>
 			</S.Container>

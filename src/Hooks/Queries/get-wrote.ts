@@ -5,7 +5,7 @@ export type Content = {
 	categoryName: string
 	commentCount: number
 	description: string
-	expectedPeriod: number
+
 	hits: number
 	likeStatus: false
 	likes: number

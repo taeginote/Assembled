@@ -18,7 +18,7 @@ function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 		writerProfileImages,
 		writerNickname,
 		activityUserCount,
-		expectedPeriod,
+
 		commentCount,
 		likes,
 		likeStatus,

@@ -69,7 +69,7 @@ function ChangeRegister() {
 			description: e.Contents,
 			categoryId: categoryId!.categoryId,
 			activityUserCount: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
-			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,
+
 			meetingStatus: e.Status,
 			meetingId: Number(meetingId),
 		}
@@ -102,16 +102,7 @@ function ChangeRegister() {
 								datailData={data?.response?.activityUserCount}
 							/>
 						</S.Box>
-						<S.Box>
-							<div>총 진행 예정 달 *</div>
-							<SelectInput
-								name="Period"
-								Data={selectDataPeriod}
-								control={control}
-								errorMsg="프로젝트 기간을 선택해주세요."
-								datailData={data?.response?.expectedPeriod}
-							/>
-						</S.Box>
+
 						<S.Box>
 							<div>모임 모집 여부 *</div>
 							<SelectInput

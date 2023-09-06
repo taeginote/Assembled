@@ -40,7 +40,7 @@ interface GetListProps {
 export interface MeetingRegisterProps {
 	categoryId: 1 | number
 	description?: string
-	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | '제한 없음'
+
 	activityUserCount?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
 	name?: string
 }

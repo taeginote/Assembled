@@ -18,7 +18,7 @@ function Activity() {
 		categoryName: '개발/프로그래밍',
 		description:
 			'안녕하세요\n\n안녕하세요\n\n\n안녕하세요\n\n안녕하세요\n안녕하세요\n\n',
-		expectedPeriod: '2',
+
 		hits: 0,
 		likeStatus: false,
 		likes: 0,

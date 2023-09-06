@@ -174,14 +174,6 @@ function Detail() {
 					</S.Top>
 					<S.Info>
 						<div>
-							<div>활동 기간</div>
-							<span>
-								{data?.response?.expectedPeriod === 0
-									? '제한없음'
-									: data?.response?.expectedPeriod + '달'}
-							</span>
-						</div>
-						<div>
 							<div>카테고리</div>
 							<span>{data?.response?.categoryName}</span>
 						</div>

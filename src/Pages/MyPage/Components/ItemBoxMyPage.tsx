@@ -37,7 +37,7 @@ function ItemBoxMyPage({
 		// profile,
 		writerNickname,
 		activityUserCount,
-		expectedPeriod,
+
 		commentCount,
 		writerProfileImages,
 		meetingStatus,
@@ -51,8 +51,6 @@ function ItemBoxMyPage({
 		setRecoilCounter(true)
 		setMeetingId(e!)
 	}
-	let period: string =
-		expectedPeriod === 0 ? '제한없음' : expectedPeriod + '달뒤'
 
 	const onGroupJoinStatus = () => {
 		setState({
@@ -93,7 +91,6 @@ function ItemBoxMyPage({
 				<S.ContainerLeft
 					onClick={() => navigate(`/Detail?meetingId=${meetingId}`)}
 				>
-					<S.Period>마감일 | {period}</S.Period>
 					<S.Title>
 						{name && name?.length > 45 ? name?.substr(0, 45) + '...' : name}
 					</S.Title>
@@ -216,10 +213,7 @@ const Category = styled.span`
 	border-radius: 1rem;
 	margin-top: 2rem;
 `
-const Period = styled.div`
-	color: ${({ theme }) => theme.COLOR.common.gray[300]};
-	margin-top: 2rem;
-`
+
 const Title = styled.div`
 	min-height: 8rem;
 	max-height: 8rem;
@@ -263,7 +257,7 @@ const S = {
 	Wrapper,
 	Status,
 	MainImgContainer,
-	Period,
+
 	Category,
 	Container,
 	UserBox,

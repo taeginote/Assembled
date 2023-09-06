@@ -64,7 +64,6 @@ function Register() {
 			description: e.Contents,
 			categoryId: categoryId!.categoryId,
 			activityUserCount: e.TeamMember,
-			expectedPeriod: e.Period,
 		}
 		mutate(data)
 	}

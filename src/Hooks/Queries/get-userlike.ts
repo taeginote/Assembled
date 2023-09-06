@@ -8,7 +8,7 @@ interface Content {
 	categoryName: string
 	commentCount: number
 	description: string
-	expectedPeriod: number
+
 	hits: number
 	likeStatus: boolean
 	likes: number
