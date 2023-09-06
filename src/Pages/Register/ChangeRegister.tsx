@@ -68,14 +68,13 @@ function ChangeRegister() {
 			name: e.Title,
 			description: e.Contents,
 			categoryId: categoryId!.categoryId,
-			activityUserCount: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
-
 			meetingStatus: e.Status,
 			meetingId: Number(meetingId),
 		}
+
 		mutate(data)
 	}
-
+	console.log(data)
 	return (
 		<>
 			{data !== undefined && (
@@ -90,16 +89,6 @@ function ChangeRegister() {
 								control={control}
 								errorMsg="카테고리를 선택해주세요."
 								datailData={data?.response?.categoryName}
-							/>
-						</S.Box>
-						<S.Box>
-							<div>인원 수 *</div>
-							<SelectInput
-								name="TeamMember"
-								Data={selectDataTeamMember}
-								control={control}
-								errorMsg="인원수를 선택해주세요."
-								datailData={data?.response?.activityUserCount}
 							/>
 						</S.Box>
 
@@ -243,7 +232,7 @@ const Box = styled.div`
 		padding: 1.3rem 1rem;
 		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 		border-radius: 0.5rem;
-		min-height: 17rem;
+		min-height: 27rem;
 		resize: none;
 		:focus {
 			border: 1.5px solid ${({ theme }) => theme.COLOR.sub};

@@ -209,7 +209,7 @@ const Box = styled.div`
 		padding: 1.3rem 1rem;
 		border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 		border-radius: 0.5rem;
-		min-height: 17rem;
+		min-height: 27rem;
 		resize: none;
 		:focus {
 			border: 1.5px solid ${({ theme }) => theme.COLOR.sub};

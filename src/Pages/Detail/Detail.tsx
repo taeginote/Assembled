@@ -129,8 +129,6 @@ function Detail() {
 							<S.Profile>
 								<S.UserImg src={profileImg} alt="ProfileImage" />
 								<div>{data?.response?.writerNickname}</div>
-								<span> | </span>
-								<span>{data?.response?.createdTime?.split('T')[0]}</span>
 							</S.Profile>
 						</span>
 						<>
@@ -174,17 +172,25 @@ function Detail() {
 					</S.Top>
 					<S.Info>
 						<div>
+							<div>설립일</div>
+							<span>{data?.response?.createdTime.split('T')[0]}</span>
+						</div>
+						<div>
 							<div>카테고리</div>
 							<span>{data?.response?.categoryName}</span>
 						</div>
 						<div>
-							<div>모집 인원</div>
+							<div>활동 인원</div>
 
 							<span>
 								{data?.response?.activityUserCount === 0
 									? '제한없음'
 									: data?.response?.activityUserCount + '명'}
 							</span>
+						</div>
+						<div>
+							<div>활동지역</div>
+							<span>준비중) 서울시 강남구</span>
 						</div>
 					</S.Info>
 					<h3>모임 설명</h3>
@@ -311,9 +317,7 @@ const Profile = styled.div`
 		color: ${({ theme }) => theme.COLOR.common.black};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 	}
-	span {
-		margin-left: 2rem;
-	}
+
 	padding: 4rem 0;
 `
 const Top = styled.div`
@@ -419,9 +423,9 @@ const Dec = styled.pre`
 	width: 100%;
 
 	white-space: pre-wrap;
-
 	word-wrap: break-word;
-	margin: 3rem 0 5rem 0;
+	padding: 3rem 0 3rem 0;
+	margin-bottom: 2rem;
 	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 	min-height: 30rem;
 	border-bottom: 3px solid ${({ theme }) => theme.COLOR.common.gray[100]};

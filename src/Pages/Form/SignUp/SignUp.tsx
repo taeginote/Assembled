@@ -149,7 +149,7 @@ function SignUp() {
 		}
 		const data = {
 			email: e.SignUpEmail?.trim() || '',
-			gender: e.Gender,
+			gender: e.Gender!,
 			name: e.SignUpName?.trim() || '',
 			nickname: e.SignUpNickName?.trim() || '',
 			password: e.SignUpPw?.trim() || '',
