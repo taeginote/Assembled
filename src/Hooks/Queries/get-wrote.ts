@@ -4,16 +4,16 @@ import MeetingApi from '../../Apis/MeetingApi'
 export type Content = {
 	categoryName: string
 	commentCount: number
-	contents: string
+	description: string
 	expectedPeriod: number
 	hits: number
 	likeStatus: false
 	likes: number
-	personnelNumber: number
+	activityUserCount: number
 	meetingId: number
 	meetingProfileImages: []
 	meetingStatus: 'PROGRESS' | 'COMPLETED'
-	title: string
+	name: string
 	writerId: number
 	writerNickname: string
 	writerProfileImages: any

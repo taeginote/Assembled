@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 import { categoryType, filterType } from '../Hooks/Queries/get-list'
 
 export interface MeetingCommentProps {
-	contents?: string
+	description?: string
 	meetingId?: number
 }
 interface GetUserCommentProps {
@@ -11,7 +11,7 @@ interface GetUserCommentProps {
 }
 export interface PutCommentProps {
 	commentId: null | number
-	contents: null | string
+	description: null | string
 }
 
 export type CommentApiType = {
@@ -39,10 +39,10 @@ interface GetListProps {
 }
 export interface MeetingRegisterProps {
 	categoryId: 1 | number
-	contents?: string
+	description?: string
 	expectedPeriod?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | '제한 없음'
-	personnelNumber?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
-	title?: string
+	activityUserCount?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
+	name?: string
 }
 export interface PatchRegisterData extends MeetingRegisterProps {
 	meetingStatus?: string

@@ -32,11 +32,11 @@ function ItemBoxMyPage({
 	const navigate = useNavigate()
 	const {
 		meetingId,
-		title,
+		name,
 		categoryName,
 		// profile,
 		writerNickname,
-		personnelNumber,
+		activityUserCount,
 		expectedPeriod,
 		commentCount,
 		writerProfileImages,
@@ -95,7 +95,7 @@ function ItemBoxMyPage({
 				>
 					<S.Period>마감일 | {period}</S.Period>
 					<S.Title>
-						{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
+						{name && name?.length > 45 ? name?.substr(0, 45) + '...' : name}
 					</S.Title>
 					<S.Category>{categoryName}</S.Category>
 				</S.ContainerLeft>
@@ -111,7 +111,7 @@ function ItemBoxMyPage({
 				</div>
 				<span>
 					<Person_Icon />
-					<span>{personnelNumber}인</span>
+					<span>{activityUserCount}인</span>
 					<Chat_Icon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>

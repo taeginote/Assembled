@@ -65,10 +65,10 @@ function ChangeRegister() {
 		)
 
 		const data: PatchRegisterData = {
-			title: e.Title,
-			contents: e.Contents,
+			name: e.Title,
+			description: e.Contents,
 			categoryId: categoryId!.categoryId,
-			personnelNumber: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
+			activityUserCount: e.TeamMember === '제한 없음' ? 0 : e.TeamMember,
 			expectedPeriod: e.Period === '제한 없음' ? 0 : e.Period,
 			meetingStatus: e.Status,
 			meetingId: Number(meetingId),
@@ -99,7 +99,7 @@ function ChangeRegister() {
 								Data={selectDataTeamMember}
 								control={control}
 								errorMsg="인원수를 선택해주세요."
-								datailData={data?.response?.personnelNumber}
+								datailData={data?.response?.activityUserCount}
 							/>
 						</S.Box>
 						<S.Box>
@@ -132,7 +132,7 @@ function ChangeRegister() {
 							rules={{
 								required: '제목을 입력해주세요',
 							}}
-							defaultValue={data?.response?.title}
+							defaultValue={data?.response?.name}
 							render={({ field }) => (
 								<S.Input
 									placeholder="제목을 입력해 주세요"
@@ -155,7 +155,7 @@ function ChangeRegister() {
 							rules={{
 								required: '설명을 입력해 주세요',
 							}}
-							defaultValue={data && data?.response?.contents}
+							defaultValue={data && data?.response?.description}
 							render={({ field }) => (
 								<textarea
 									placeholder="설명을 입력해 주세요"

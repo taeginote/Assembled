@@ -60,10 +60,10 @@ function Register() {
 		)
 
 		const data: MeetingRegisterProps = {
-			title: e.Title,
-			contents: e.Contents,
+			name: e.Title,
+			description: e.Contents,
 			categoryId: categoryId!.categoryId,
-			personnelNumber: e.TeamMember,
+			activityUserCount: e.TeamMember,
 			expectedPeriod: e.Period,
 		}
 		mutate(data)

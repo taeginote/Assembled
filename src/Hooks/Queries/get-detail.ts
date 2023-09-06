@@ -3,9 +3,9 @@ import { useQuery } from '@tanstack/react-query'
 import MeetingApi from '../../Apis/MeetingApi'
 
 export type Comments = {
-	meetingTitle: string
+	meetingName: string
 	commentId: number
-	contents: string
+	description: string
 	meetingId: number
 	userId: number
 	writeDate: string
@@ -17,17 +17,17 @@ export interface UseDetailType {
 		categoryName: string
 		commentCount: number
 		comments: Comments[]
-		contents: string
+		description: string
 		createdTime: string
 		expectedPeriod: number
 		hits: number
 		likeStatus: boolean
 		likes: number
-		personnelNumber: number
+		activityUserCount: number
 		meetingId: number
 		meetingProfileImages: []
 		meetingStatus: 'PROGRESS' | 'COMPLETED'
-		title: string
+		name: string
 		writerId?: string
 		writerNickname: string
 		writerProfileImages: { filePath: string } | null

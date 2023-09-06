@@ -74,7 +74,7 @@ function CommentForm({
 		if (commentsInput?.trim().length === 0) return
 
 		const data: MeetingCommentProps = {
-			contents: commentsInput,
+			description: commentsInput,
 			meetingId,
 		}
 		mutate(data)
@@ -90,7 +90,7 @@ function CommentForm({
 			if (commentsInput?.trim().length === 0) return
 
 			const data: MeetingCommentProps = {
-				contents: commentsInput,
+				description: commentsInput,
 				meetingId,
 			}
 			mutate(data)
@@ -105,7 +105,7 @@ function CommentForm({
 			if (changeCommentVal?.trim().length === 0) return
 			const data: PutCommentProps = {
 				commentId: changeViewNum,
-				contents: changeCommentVal,
+				description: changeCommentVal,
 			}
 			changeMutate(data)
 		}
@@ -194,7 +194,9 @@ function CommentForm({
 					{changeViewNum === comment.commentId ? (
 						<S.ChageCommentTxt
 							value={
-								changeCommentVal === null ? comment.contents : changeCommentVal
+								changeCommentVal === null
+									? comment.description
+									: changeCommentVal
 							}
 							onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 								setChangeCommentVal(e.target.value)
@@ -202,7 +204,7 @@ function CommentForm({
 							onKeyDown={onKeyDownComment}
 						/>
 					) : (
-						<S.CommentBottom>{comment.contents}</S.CommentBottom>
+						<S.CommentBottom>{comment.description}</S.CommentBottom>
 					)}
 				</S.CommentsList>
 			))}

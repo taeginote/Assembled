@@ -73,8 +73,8 @@ function Comment() {
 											navigate(`/Detail?meetingId=${el.meetingId}`)
 										}
 									>
-										<S.Title>{el.meetingTitle}</S.Title>
-										<S.Text>{el.contents}</S.Text>
+										<S.Title>{el.meetingName}</S.Title>
+										<S.Text>{el.description}</S.Text>
 										<S.Time> {el.writeDate.split('T')[0]}</S.Time>
 										<S.SubTime>{el.writeDate.split('T')[1]}</S.SubTime>
 									</S.Left>

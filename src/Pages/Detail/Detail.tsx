@@ -125,7 +125,7 @@ function Detail() {
 					<S.Top>
 						<span>
 							<h1>반가워요.</h1>
-							<h1>우리는 "{data?.response?.title}" 입니다</h1>
+							<h1>우리는 "{data?.response?.name}" 입니다</h1>
 							<S.Profile>
 								<S.UserImg src={profileImg} alt="ProfileImage" />
 								<div>{data?.response?.writerNickname}</div>
@@ -189,14 +189,14 @@ function Detail() {
 							<div>모집 인원</div>
 
 							<span>
-								{data?.response?.personnelNumber === 0
+								{data?.response?.activityUserCount === 0
 									? '제한없음'
-									: data?.response?.personnelNumber + '명'}
+									: data?.response?.activityUserCount + '명'}
 							</span>
 						</div>
 					</S.Info>
 					<h3>모임 설명</h3>
-					<S.Dec>{data?.response?.contents}</S.Dec>
+					<S.Dec>{data?.response?.description}</S.Dec>
 					{data && (
 						<CommentForm
 							comments={data?.response?.comments}

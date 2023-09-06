@@ -13,11 +13,11 @@ import { Content } from '../../../Hooks/Queries/get-list'
 function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 	const {
 		meetingId,
-		title,
+		name,
 		categoryName,
 		writerProfileImages,
 		writerNickname,
-		personnelNumber,
+		activityUserCount,
 		expectedPeriod,
 		commentCount,
 		likes,
@@ -64,7 +64,7 @@ function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 			<S.Container>
 				<S.Period>카테고리 | {categoryName}</S.Period>
 				<S.Title>
-					{title && title?.length > 45 ? title?.substr(0, 45) + '...' : title}
+					{name && name?.length > 45 ? name?.substr(0, 45) + '...' : name}
 				</S.Title>
 				{/* <S.Category>{categoryName}</S.Category> */}
 			</S.Container>
@@ -75,7 +75,7 @@ function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 				</div>
 				<span>
 					<Person_Icon />
-					<span>{personnelNumber}인</span>
+					<span>{activityUserCount}인</span>
 					<Question_Icon />
 					{/* <Chat_Icon size={'20'} />
 					<div>{commentCount}개</div> */}

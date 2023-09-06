@@ -7,16 +7,16 @@ export type categoryType = 1 | null | number
 export type Content = {
 	categoryName: string
 	commentCount: number
-	contents: string
+	description: string
 	expectedPeriod: number
 	hits: number
 	likeStatus: boolean
 	likes: number
-	personnelNumber: number
+	activityUserCount: number
 	meetingId: number
 	meetingProfileImages: []
 	meetingStatus: 'PROGRESS' | 'COMPLETED'
-	title: string
+	name: string
 	writerId: number
 	writerNickname: string
 	writerProfileImages: { filePath: string } | null
