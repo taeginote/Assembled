@@ -98,6 +98,7 @@ export interface JoinApiType {
 
 export interface signUpProps {
 	email: string
+	gender: 'MAN' | 'WOMAN'
 	name: string
 	nickname: string
 	password: string

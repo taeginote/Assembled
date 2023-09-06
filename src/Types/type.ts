@@ -44,6 +44,7 @@ export interface FindEmailSubmitData {
 //리액트 훅 폼 SignUp type
 export interface SignUpSubmitData {
 	SignUpEmail?: string
+	Gender?: 'MAN' | 'WOMAN'
 	SignUpName?: string
 	SignUpNickName?: string
 	SignUpPw?: string

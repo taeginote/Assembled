@@ -128,7 +128,7 @@ function SignUp() {
 			}
 		}
 	}
-
+	console.log(errors)
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
 		if (validationMsg.email.status !== 'success') {
 			return setValidationMsg((prev: ValidationMsg) => ({
@@ -149,6 +149,7 @@ function SignUp() {
 		}
 		const data = {
 			email: e.SignUpEmail?.trim() || '',
+			gender: e.Gender,
 			name: e.SignUpName?.trim() || '',
 			nickname: e.SignUpNickName?.trim() || '',
 			password: e.SignUpPw?.trim() || '',
@@ -156,6 +157,7 @@ function SignUp() {
 			phoneNumber: e.SignUpPhone?.trim() || '',
 			profileImage: formData,
 		}
+		console.log(data)
 
 		mutate(data)
 	}
@@ -182,6 +184,19 @@ function SignUp() {
 						})}
 					/>
 				</S.InputBox>
+
+				<S.SelectBox
+					{...register('Gender', {
+						required: '성별을 선택해주세요',
+					})}
+				>
+					<option value="">(남/여) 선택해주세요</option>
+					<option value="MAN">남</option>
+					<option value="WOMAN">여</option>
+				</S.SelectBox>
+				{errors.Gender && (
+					<HookFormError>{errors.Gender?.message?.toString()}</HookFormError>
+				)}
 				<SignUpInput
 					name="SignUpEmail"
 					control={control}
@@ -329,7 +344,15 @@ const ProfileImg = styled.img`
 	border: 1px solid ${({ theme }) => theme.COLOR.hover};
 	background: ${({ theme }) => theme.COLOR.common.white};
 `
+const SelectBox = styled.select`
+	width: 100%;
+	height: 3rem;
+	border: none;
+	border-bottom: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
 
+	margin-bottom: 1rem;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+`
 const S = {
 	Wrapper,
 	container,
@@ -337,4 +360,5 @@ const S = {
 	InputBox,
 	ImgLabel,
 	ProfileImg,
+	SelectBox,
 }

@@ -7,6 +7,7 @@ const UserApi: UserApiType = {
 	SignUp(data) {
 		const {
 			email,
+			gender,
 			name,
 			nickname,
 			password,
@@ -16,7 +17,7 @@ const UserApi: UserApiType = {
 		} = data
 		return axiosInstance.post(
 			'/assemble/signup' +
-				`?email=${email}&name=${name}&nickname=${nickname}&password=${password}&birthDate=${birthDate}&phoneNumber=${phoneNumber}`,
+				`?email=${email}&gender=${gender}&name=${name}&nickname=${nickname}&password=${password}&birthDate=${birthDate}&phoneNumber=${phoneNumber}`,
 			profileImage,
 			{
 				headers: {
