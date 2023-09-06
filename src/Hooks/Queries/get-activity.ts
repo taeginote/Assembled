@@ -5,7 +5,6 @@ import ActivityApi from '../../Apis/ActivityApi'
 
 const getActivityData = async (page: number) => {
 	const res = await ActivityApi.getActivity(page)
-
 	return res.data
 }
 

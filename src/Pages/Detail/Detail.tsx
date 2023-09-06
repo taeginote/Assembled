@@ -67,7 +67,7 @@ function Detail() {
 	)
 
 	const { mutate: cancelMutate } = useMutation(
-		(likeData: number) => MeetingLikeApi.CancelLike(likeData),
+		(meetingId: number) => MeetingLikeApi.CancelLike(meetingId),
 		{
 			onSuccess: () => {
 				refetch()

@@ -8,8 +8,8 @@ const MeetingLikeApi: MeetingLikeApiType = {
 	MeetingLike(data) {
 		return axiosInstance.post(PATH, data)
 	},
-	CancelLike(data) {
-		return axiosInstance.delete(PATH + '/' + data)
+	CancelLike(meetingId) {
+		return axiosInstance.delete(PATH + '/' + meetingId)
 	},
 }
 
