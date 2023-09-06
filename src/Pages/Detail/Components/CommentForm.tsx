@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useMutation } from '@tanstack/react-query'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
-import { PostCommentProps, PutCommentProps } from '../../../Types/apiType'
+import { MeetingCommentProps, PutCommentProps } from '../../../Types/apiType'
 import CommentApi from '../../../Apis/CommentApi'
 import UserIdService from '../../../Utils/UserIdService'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
@@ -16,14 +16,14 @@ import { Comments } from '../../../Hooks/Queries/get-detail'
 interface CommentFormPropsType {
 	comments: Comments[]
 	refetch: () => void
-	postId?: number
+	meetingId?: number
 	token?: string | null
 }
 
 function CommentForm({
 	comments,
 	refetch,
-	postId,
+	meetingId,
 	token,
 }: CommentFormPropsType) {
 	const [commentsInput, SetCommentsInput] = useState<string | undefined>(
@@ -37,7 +37,7 @@ function CommentForm({
 	const AccessToken = TokenService.getAccessToken()
 
 	const { mutate } = useMutation(
-		(data: PostCommentProps) => CommentApi.postComment(data),
+		(data: MeetingCommentProps) => CommentApi.meetingComment(data),
 		{
 			onSuccess: () => {
 				SetCommentsInput('')
@@ -73,9 +73,9 @@ function CommentForm({
 		if (AccessToken === null) return
 		if (commentsInput?.trim().length === 0) return
 
-		const data: PostCommentProps = {
+		const data: MeetingCommentProps = {
 			contents: commentsInput,
-			postId,
+			meetingId,
 		}
 		mutate(data)
 	}
@@ -89,9 +89,9 @@ function CommentForm({
 			if (AccessToken === null) return
 			if (commentsInput?.trim().length === 0) return
 
-			const data: PostCommentProps = {
+			const data: MeetingCommentProps = {
 				contents: commentsInput,
-				postId,
+				meetingId,
 			}
 			mutate(data)
 		}
