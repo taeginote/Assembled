@@ -128,7 +128,7 @@ function SignUp() {
 			}
 		}
 	}
-	console.log(errors)
+
 	const onSubmit: SubmitHandler<SignUpSubmitData> = e => {
 		if (validationMsg.email.status !== 'success') {
 			return setValidationMsg((prev: ValidationMsg) => ({
@@ -157,7 +157,6 @@ function SignUp() {
 			phoneNumber: e.SignUpPhone?.trim() || '',
 			profileImage: formData,
 		}
-		console.log(data)
 
 		mutate(data)
 	}

@@ -39,9 +39,11 @@ interface GetListProps {
 }
 export interface MeetingRegisterProps {
 	categoryId: 1 | number
+	detailAddress: string
+	lotNumberAddress: string
+	roadNameAddress: string
+	zipCode: number
 	description?: string
-
-	activityUserCount?: 0 | 2 | 3 | 4 | 5 | 10 | '제한 없음'
 	name?: string
 }
 export interface PatchRegisterData extends MeetingRegisterProps {

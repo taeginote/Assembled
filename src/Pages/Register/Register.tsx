@@ -6,8 +6,7 @@ import {
 	TopPadding,
 	WidthAutoCSS,
 } from '../../Styles/common'
-import { selectDataTeamMember } from './Components/SelectBox/SelectData'
-import { selectDataPeriod } from './Components/SelectBox/SelectData'
+
 import { useRecoilState } from 'recoil'
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import {
@@ -63,8 +62,12 @@ function Register() {
 			name: e.Title,
 			description: e.Contents,
 			categoryId: categoryId!.categoryId,
-			activityUserCount: e.TeamMember,
+			detailAddress: '상세 주소',
+			lotNumberAddress: '서울시 강남구',
+			roadNameAddress: '서울시 강남구',
+			zipCode: 10011,
 		}
+
 		mutate(data)
 	}
 
@@ -79,24 +82,6 @@ function Register() {
 						Data={GetCategoryData! && GetCategoryData!.response}
 						control={control}
 						errorMsg="카테고리를 선택해주세요."
-					/>
-				</S.Box>
-				<S.Box>
-					<div>인원 수 *</div>
-					<SelectInput
-						name="TeamMember"
-						Data={selectDataTeamMember}
-						control={control}
-						errorMsg="인원수를 선택해주세요."
-					/>
-				</S.Box>
-				<S.Box>
-					<div>총 진행 예정 달 *</div>
-					<SelectInput
-						name="Period"
-						Data={selectDataPeriod}
-						control={control}
-						errorMsg="프로젝트 기간을 선택해주세요."
 					/>
 				</S.Box>
 			</S.Container>

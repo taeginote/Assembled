@@ -10,7 +10,7 @@ const MeetingApi: MeetingApiType = {
 			params: { page, searchBy, searchQuery, sort, categoryId },
 		})
 	},
-	meetingRegister(data) {
+	MeetingRegister(data) {
 		return axiosInstance.post(PATH, data)
 	},
 	putRegister(data) {

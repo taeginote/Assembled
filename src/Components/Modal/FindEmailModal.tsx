@@ -21,8 +21,6 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 	})
 	const onFindEmail = () => {}
 
-	console.log(nameAndPhoneVal)
-
 	return (
 		<S.Wrapper>
 			<S.Box>
