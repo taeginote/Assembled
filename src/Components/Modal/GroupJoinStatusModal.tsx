@@ -60,7 +60,7 @@ function GroupJoiStatusModal({
 	let selectListData = data?.response?.filter(
 		(el: { status: string }) => el.status === selectTitle,
 	)
-
+	console.log(selectListData)
 	const onJoinStatusBtn = (
 		el: Content,
 		status: 'APPROVAL' | 'REJECT' | 'BLOCK',
@@ -118,28 +118,41 @@ function GroupJoiStatusModal({
 												<span>메세지 : </span>
 												<div>{el.message}</div>
 											</S.LiContent>
-											<S.ButtonWrap>
-												<Button
-													size="normal"
-													onClick={() => onJoinStatusBtn(el, 'APPROVAL')}
-												>
-													수락
-												</Button>
-												<Button
-													size="normal"
-													variant="default-white"
-													onClick={() => onJoinStatusBtn(el, 'REJECT')}
-												>
-													거절
-												</Button>
-												<Button
-													size="normal"
-													variant="default-reverse"
-													onClick={() => onJoinStatusBtn(el, 'BLOCK')}
-												>
-													차단
-												</Button>
-											</S.ButtonWrap>
+											{el.status === 'REQUEST' && (
+												<S.ButtonWrap>
+													<Button
+														size="normal"
+														onClick={() => onJoinStatusBtn(el, 'APPROVAL')}
+													>
+														수락
+													</Button>
+													<Button
+														size="normal"
+														variant="default-white"
+														onClick={() => onJoinStatusBtn(el, 'REJECT')}
+													>
+														거절
+													</Button>
+													<Button
+														size="normal"
+														variant="default-reverse"
+														onClick={() => onJoinStatusBtn(el, 'BLOCK')}
+													>
+														차단
+													</Button>
+												</S.ButtonWrap>
+											)}
+											{el.status === 'BLOCK' && (
+												<S.ButtonWrap>
+													<Button
+														size="normal"
+														variant="default-reverse"
+														onClick={() => onJoinStatusBtn(el, 'REJECT')}
+													>
+														해제
+													</Button>
+												</S.ButtonWrap>
+											)}
 										</li>
 									))}
 								</>

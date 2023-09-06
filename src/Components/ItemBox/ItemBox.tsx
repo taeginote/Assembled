@@ -29,10 +29,9 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 		categoryName,
 		writerProfileImages,
 		writerNickname,
-
 		commentCount,
 		likeStatus,
-		meetingStatus, //'PROGRESS' | 'COMPLETED'
+		meetingStatus,
 		hits,
 	} = data
 
