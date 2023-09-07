@@ -7,8 +7,10 @@ const PATH = '/assemble/activity'
 const ActivityApi: ActivityApiType = {
 	getActivity(page) {
 		return axiosInstance.get(PATH + '/meeting', {
-			page,
-			size: 4,
+			params: {
+				page,
+				size: 4,
+			},
 		})
 	},
 }

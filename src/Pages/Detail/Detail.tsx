@@ -216,7 +216,18 @@ function Detail() {
 								<div>{data?.response?.likes}</div>
 							</S.HeartBox>
 						)}
-						<S.JoinButton onClick={onClickJoinBtn}>가입 신청</S.JoinButton>
+						{data?.response?.joinRequest ? (
+							<S.JoinButton
+								onClick={() => alert('준비중입니다.')}
+								variant="default-white"
+							>
+								신청 취소
+							</S.JoinButton>
+						) : (
+							<S.JoinButton onClick={onClickJoinBtn} $status={true}>
+								가입 신청
+							</S.JoinButton>
+						)}
 					</S.FloatBox>
 				</S.Container>
 			)}
@@ -290,10 +301,11 @@ const HeartBox = styled.div`
 	}
 	cursor: pointer;
 `
-const JoinButton = styled(Button)`
+const JoinButton = styled(Button)<{ $status: true }>`
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
 	margin-top: 1rem;
-	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[100]};
+	border: 1px solid
+		${({ theme, $status }) => ($status ? 'none' : theme.COLOR.common.gray[400])};
 	border-radius: 1rem;
 	height: 5rem;
 `
@@ -421,7 +433,6 @@ const Info = styled.div`
 `
 const Dec = styled.pre`
 	width: 100%;
-
 	white-space: pre-wrap;
 	word-wrap: break-word;
 	padding: 3rem 0 3rem 0;

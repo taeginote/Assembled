@@ -10,42 +10,35 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ActivityItemBox from '../Components/ActivityItemBox'
 import useGetActivityData from '../../../Hooks/Queries/get-activity'
+import { Content } from '../../../Hooks/Queries/get-list'
+import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 
 function Activity() {
-	//디자인을 위한 test Mock
-	const testArr: number[] = [1, 1, 1]
-	const testObject = {
-		categoryName: '개발/프로그래밍',
-		description:
-			'안녕하세요\n\n안녕하세요\n\n\n안녕하세요\n\n안녕하세요\n안녕하세요\n\n',
-
-		hits: 0,
-		likeStatus: false,
-		likes: 0,
-		activityUserCount: '2',
-		meetingId: 128,
-		meetingProfileImages: [],
-		meetingStatus: 'PROGRESS',
-		title: '안녕하세요',
-		writerId: 86,
-		writerNickname: 'taek11',
-	}
-
 	const [searchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 1)
 
-	const { data } = useGetActivityData(page)
+	const { data, isLoading } = useGetActivityData(page)
+
+	const loadingArr: 0[] = Array(4).fill(0)
 
 	return (
 		<S.Wrapper>
 			<S.ListWrap>
-				<p>내가 활동중인 모임 (준비중)</p>
-
-				{testArr.map((el, idx: number) => (
-					<ActivityItemBox data={testObject} key={idx} />
-				))}
-
+				<p>내가 활동중인 모임 </p>
+				{isLoading ? (
+					<>
+						{loadingArr.map((el: 0, idx: number) => (
+							<CardSkeleton key={idx} />
+						))}
+					</>
+				) : (
+					<>
+						{data?.response?.content.map((el: Content, idx: number) => (
+							<ActivityItemBox data={el} key={idx} />
+						))}
+					</>
+				)}
 				<Pagination
 					totalPage={data?.response?.totalPages}
 					limit={10}

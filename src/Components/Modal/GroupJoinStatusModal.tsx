@@ -60,7 +60,7 @@ function GroupJoiStatusModal({
 	let selectListData = data?.response?.filter(
 		(el: { status: string }) => el.status === selectTitle,
 	)
-	console.log(selectListData)
+
 	const onJoinStatusBtn = (
 		el: Content,
 		status: 'APPROVAL' | 'REJECT' | 'BLOCK',

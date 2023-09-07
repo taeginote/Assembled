@@ -19,7 +19,7 @@ export interface UseDetailType {
 		comments: Comments[]
 		description: string
 		createdTime: string
-
+		joinRequest: boolean
 		hits: number
 		likeStatus: boolean
 		likes: number
