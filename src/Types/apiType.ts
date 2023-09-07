@@ -95,6 +95,7 @@ export interface JoinApiType {
 	getJoinList(data: getJoinListProps): Promise<AxiosResponse>
 	putJoinStatus(data: putJoinStatusProps): Promise<AxiosResponse>
 	putmeetingJoinCancel(props: number): Promise<AxiosResponse>
+	getMyJoinRequestList(props: number): Promise<AxiosResponse>
 }
 
 //User api type

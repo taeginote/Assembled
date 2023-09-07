@@ -1,5 +1,4 @@
 import { styled } from 'styled-components'
-
 import {
 	ColumnNumberCSS,
 	FlexCenterCSS,
@@ -8,48 +7,61 @@ import {
 import Pagination from '../../../Components/Pagination/Pagination'
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import ActivityItemBox from '../Components/ActivityItemBox'
-import useGetActivityData from '../../../Hooks/Queries/get-activity'
-import { Content } from '../../../Hooks/Queries/get-list'
+import MyPageListNoData from '../../../Error/MypageListNoData'
+import useGetMyJoinRequestListData from '../../../Hooks/Queries/get-myjoinRequestList'
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
+import JoinRequestItemBox from '../Components/JoinRequestItemBox'
 
-function Activity() {
+function JoinRequest() {
+	//디자인을 위한 test Mock
 	const [searchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
-	const [page, setPage] = useState<number>(pageNumber || 1)
+	const [page, setPage] = useState<number>(pageNumber || 0)
 
-	const { data, isLoading } = useGetActivityData(page)
+	const loadingArr: 0[] = Array(12).fill(0)
 
-	const loadingArr: 0[] = Array(4).fill(0)
+	const { data, isLoading } = useGetMyJoinRequestListData(page)
 
 	return (
 		<S.Wrapper>
-			<S.ListWrap>
-				<p>내가 활동중인 모임 </p>
-				{isLoading ? (
-					<>
-						{loadingArr.map((el: 0, idx: number) => (
-							<CardSkeleton key={idx} />
-						))}
-					</>
-				) : (
-					<>
-						{data?.response?.content.map((el: Content, idx: number) => (
-							<ActivityItemBox data={el} key={idx} />
-						))}
-						<Pagination
-							totalPage={data?.response?.totalPages!}
-							limit={10}
-							scroll={765}
-							setPage={setPage}
-						/>
-					</>
-				)}
-			</S.ListWrap>
+			{data?.response?.content?.length === 0 ? (
+				<S.ListWrap>
+					<MyPageListNoData comment={'좋아요한 모임이 없습니다.'} />
+				</S.ListWrap>
+			) : (
+				<>
+					<S.ListWrap>
+						<p>내가 가입 신청한 모임</p>
+						<>
+							{isLoading ? (
+								<S.Container>
+									{loadingArr.map((el: 0, idx: number) => (
+										<CardSkeleton key={idx} />
+									))}
+								</S.Container>
+							) : (
+								<>
+									<S.Container>
+										{data?.response?.content?.map((el, idx: number) => (
+											<JoinRequestItemBox data={el} key={idx} />
+										))}
+									</S.Container>
+									<Pagination
+										totalPage={data!.response.totalPages}
+										limit={10}
+										scroll={765}
+										setPage={setPage}
+									/>
+								</>
+							)}
+						</>
+					</S.ListWrap>
+				</>
+			)}
 		</S.Wrapper>
 	)
 }
-export default Activity
+export default JoinRequest
 
 const Wrapper = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
@@ -59,6 +71,7 @@ const Wrapper = styled.div`
 	${FlexCenterCSS}
 	&>div {
 		text-align: center;
+		/* line-height: 2.1; */
 	}
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		width: 90%;
@@ -68,15 +81,14 @@ const ListWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-left: 10rem;
-	width: 100%;
+	margin-left: 15rem;
+	width: 80%;
+
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		margin-left: 4.5rem;
 	}
 	& > p {
-		margin-left: 14rem;
-		width: 100%;
-		margin-right: 14rem;
+		width: 118%;
 		text-align: start;
 		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};

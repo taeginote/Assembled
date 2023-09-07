@@ -16,6 +16,7 @@ import Likes from '../Pages/MyPage/Pages/Likes'
 import Activity from '../Pages/MyPage/Pages/Activity'
 import Admin from '../Pages/Admin/admin'
 import AdminCategory from '../Pages/Admin/Pages/AdminCategory'
+import JoinRequest from '../Pages/MyPage/Pages/JoinRequest'
 
 const router = [
 	{
@@ -64,6 +65,10 @@ const router = [
 							{
 								path: 'meeting/likes',
 								element: <Likes />,
+							},
+							{
+								path: 'meeting/join',
+								element: <JoinRequest />,
 							},
 							{
 								path: 'comment',

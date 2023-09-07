@@ -35,6 +35,10 @@ function SideFilterNav() {
 					name: '내가 관심있는 모임',
 					url: '/meeting/likes',
 				},
+				{
+					name: '내가 가입 신청한 모임',
+					url: '/meeting/join',
+				},
 			],
 		},
 		{
