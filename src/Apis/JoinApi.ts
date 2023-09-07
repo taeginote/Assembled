@@ -19,6 +19,11 @@ const JoinApi: JoinApiType = {
 	putmeetingJoinCancel(meetingId) {
 		return axiosInstance.put(PATH + `/cancel/${meetingId}`)
 	},
+	getMyJoinRequestList(page) {
+		return axiosInstance.get(`${PATH}`, {
+			params: { page, size: 12 },
+		})
+	},
 }
 
 export default JoinApi
