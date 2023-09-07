@@ -30,7 +30,7 @@ function GroupJoiStatusModal({
 	)
 
 	const { mutate: putMudate } = useMutation(
-		(data: putJoinStatusProps) => JoinApi.PutJoinStatus(data),
+		(data: putJoinStatusProps) => JoinApi.putJoinStatus(data),
 		{
 			onSuccess: () => {
 				refetch()

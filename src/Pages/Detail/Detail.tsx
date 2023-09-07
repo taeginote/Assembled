@@ -83,6 +83,14 @@ function Detail() {
 			},
 		},
 	)
+	const { mutate: meetingJoinCancel } = useMutation(
+		(meetingId: number) => JoinApi.putmeetingJoinCancel(meetingId),
+		{
+			onSuccess: () => {
+				refetch()
+			},
+		},
+	)
 
 	const onHeart = () => {
 		if (token === null) return
@@ -218,7 +226,7 @@ function Detail() {
 						)}
 						{data?.response?.joinRequest ? (
 							<S.JoinButton
-								onClick={() => alert('준비중입니다.')}
+								onClick={() => meetingJoinCancel(data?.response?.meetingId)}
 								variant="default-white"
 							>
 								신청 취소
@@ -301,7 +309,7 @@ const HeartBox = styled.div`
 	}
 	cursor: pointer;
 `
-const JoinButton = styled(Button)<{ $status: true }>`
+const JoinButton = styled(Button)<{ $status?: true }>`
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
 	margin-top: 1rem;
 	border: 1px solid

@@ -13,8 +13,11 @@ const JoinApi: JoinApiType = {
 			params: { meetingId },
 		})
 	},
-	PutJoinStatus(data) {
+	putJoinStatus(data) {
 		return axiosInstance.put(PATH, data)
+	},
+	putmeetingJoinCancel(meetingId) {
+		return axiosInstance.put(PATH + `/cancel/${meetingId}`)
 	},
 }
 
