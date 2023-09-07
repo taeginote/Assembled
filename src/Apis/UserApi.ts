@@ -58,17 +58,18 @@ const UserApi: UserApiType = {
 		})
 	},
 	PutUserInfo(data) {
-		const { birthDate, name, nickname, phoneNumber, profileImage } = data
+		const { birthDate, name, nickname, phoneNumber } = data
 		return axiosInstance.put(
 			'/assemble/user' +
 				`?birthDate=${birthDate}&name=${name}&nickname=${nickname}&phoneNumber=${phoneNumber}`,
-			profileImage,
-			{
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			},
 		)
+	},
+	PutProfileImg(profileImage) {
+		return axiosInstance.put('/assemble/user/profile', profileImage, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		})
 	},
 }
 

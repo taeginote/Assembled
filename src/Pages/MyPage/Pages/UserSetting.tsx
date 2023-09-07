@@ -46,13 +46,22 @@ function UserSetting() {
 	const profileImg = ProfileImgReturn(data?.response?.profile?.filePath)
 
 	const { mutate } = useMutation(
-		(data: Omit<signUpProps, 'password' | 'email'>) =>
-			UserApi.PutUserInfo(data),
+		(
+			data: Omit<signUpProps, 'password' | 'email' | 'gender' | 'profileImage'>,
+		) => UserApi.PutUserInfo(data),
 		{
 			onSuccess: () => {
 				setSuccessModal(true)
 				refetch()
 			},
+			onError: () => {},
+		},
+	)
+	const { mutate: ImgMutate } = useMutation(
+		(profileImage: Pick<signUpProps, 'profileImage'>) =>
+			UserApi.PutProfileImg(profileImage),
+		{
+			onSuccess: () => {},
 			onError: () => {},
 		},
 	)
@@ -70,16 +79,18 @@ function UserSetting() {
 	}
 
 	const onSubmit: SubmitHandler<UserInfoSubmitData> = e => {
-		let formData: any = new FormData()
-		formData.append('profileImage', imgFile)
 		const data = {
 			name: e.SignUpName?.trim() || '',
 			nickname: e.EditNickName?.trim() || '',
 			birthDate: e.SignUpBirthday?.trim() || '',
 			phoneNumber: e.SignUpPhone?.trim() || '',
-			profileImage: formData,
 		}
 		mutate(data)
+
+		if (imgFile === undefined) return
+		let formData: any = new FormData()
+		formData.append('profileImage', imgFile)
+		ImgMutate(formData)
 	}
 
 	return (

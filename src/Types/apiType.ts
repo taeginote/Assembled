@@ -132,8 +132,9 @@ export type UserApiType = {
 	deletewithdrawal(): Promise<AxiosResponse>
 	getUserInfo(data: string | null): Promise<AxiosResponse>
 	PutUserInfo(
-		data: Omit<signUpProps, 'password' | 'email'>,
+		data: Omit<signUpProps, 'password' | 'email' | 'gender' | 'profileImage'>,
 	): Promise<AxiosResponse>
+	PutProfileImg(data: Pick<signUpProps, 'profileImage'>): Promise<AxiosResponse>
 }
 
 export type ActivityApiType = {
