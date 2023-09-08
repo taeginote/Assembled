@@ -1,5 +1,4 @@
 import { styled } from 'styled-components'
-
 import {
 	ColumnNumberCSS,
 	FlexCenterCSS,
@@ -12,6 +11,7 @@ import ActivityItemBox from '../Components/ActivityItemBox'
 import useGetActivityData from '../../../Hooks/Queries/get-activity'
 import { Content } from '../../../Hooks/Queries/get-list'
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
+import MyPageListNoData from '../../../Error/MypageListNoData'
 
 function Activity() {
 	const [searchParams] = useSearchParams()
@@ -34,15 +34,23 @@ function Activity() {
 					</>
 				) : (
 					<>
-						{data?.response?.content.map((el: Content, idx: number) => (
-							<ActivityItemBox data={el} key={idx} />
-						))}
-						<Pagination
-							totalPage={data?.response?.totalPages!}
-							limit={10}
-							scroll={765}
-							setPage={setPage}
-						/>
+						{data?.response?.content.length === 0 ? (
+							<>
+								<MyPageListNoData comment={'활동중인 모임이 없습니다.'} />
+							</>
+						) : (
+							<>
+								{data?.response?.content.map((el: Content, idx: number) => (
+									<ActivityItemBox data={el} key={idx} />
+								))}
+								<Pagination
+									totalPage={data?.response?.totalPages!}
+									limit={10}
+									scroll={765}
+									setPage={setPage}
+								/>
+							</>
+						)}
 					</>
 				)}
 			</S.ListWrap>

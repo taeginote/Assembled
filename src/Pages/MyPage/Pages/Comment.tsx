@@ -67,7 +67,7 @@ function Comment() {
 						<S.Wrapper>
 							<p>작성한 댓글</p>
 							{data?.response?.content.map((el: Comments, idx: number) => (
-								<S.container>
+								<S.container key={idx}>
 									<S.Left
 										onClick={() =>
 											navigate(`/Detail?meetingId=${el.meetingId}`)

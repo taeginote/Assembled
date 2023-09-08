@@ -11,7 +11,7 @@ function JoinRequestItemBox({ data }: { data: MyJoinRequestContent }) {
 	return (
 		<S.Wrapper>
 			<S.Container>
-				<S.Name> 한바탕</S.Name>
+				<S.Name>ex) 한바탕</S.Name>
 				<S.Message>
 					{data?.message && data?.message?.length > 45
 						? data?.message?.substr(0, 45) + '...'
