@@ -49,10 +49,19 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 			const { response }: any = res?.data
 		} catch (err: any) {
 			const error = err?.response.data.error
+
 			if (error.status === 400) {
 				setErrorStatus({
 					status: 'error',
 					message: error.message,
+				})
+			}
+
+			//성공 처리가 없어서 예시로 500으로 처리한거입니다. 변경 예정
+			if (error.status === 500) {
+				setErrorStatus({
+					status: 'success',
+					message: 'qoals@qoals.com',
 				})
 			}
 		}
@@ -89,30 +98,38 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 						<Cancel_big_Icon onClick={() => setModalView(false)} />
 					</div>
 				</S.TitleHead>
-				<S.InputWrap>
-					<Name_Icon />
-					<Input placeholder="이름" id="name" onChange={onChangeInputVal} />
-				</S.InputWrap>
-
-				<S.InputWrap>
-					<Phone_Icon />
-					<Input
-						placeholder="전화번호"
-						maxlength="11"
-						id="phoneNumber"
-						onChange={onChangeInputVal}
-					/>
-				</S.InputWrap>
-				<S.ErrorWrap>
-					{errorStatus.status === 'error' && (
-						<HookFormError>{errorStatus.message}</HookFormError>
-					)}
-				</S.ErrorWrap>
-				<S.ButtonWrap>
-					<Button type="button" onClick={onFindEmail}>
-						이메일 찾기
-					</Button>
-				</S.ButtonWrap>
+				{errorStatus.status !== 'success' ? (
+					<>
+						<S.InputWrap>
+							<Name_Icon />
+							<Input placeholder="이름" id="name" onChange={onChangeInputVal} />
+						</S.InputWrap>
+						<S.InputWrap>
+							<Phone_Icon />
+							<Input
+								placeholder="전화번호"
+								maxlength="11"
+								id="phoneNumber"
+								onChange={onChangeInputVal}
+							/>
+						</S.InputWrap>
+						<S.ErrorWrap>
+							{errorStatus.status === 'error' && (
+								<HookFormError>{errorStatus.message}</HookFormError>
+							)}
+						</S.ErrorWrap>
+						<S.ButtonWrap>
+							<Button type="button" onClick={onFindEmail}>
+								이메일 찾기
+							</Button>
+						</S.ButtonWrap>
+					</>
+				) : (
+					<S.SuccessEmail>
+						<S.Title>사용자의 정보로 가입된 이메일입니다.</S.Title>
+						이메일 : <span>taegi@naver.com</span>
+					</S.SuccessEmail>
+				)}
 			</S.Box>
 		</S.Wrapper>
 	)
@@ -173,5 +190,29 @@ const ErrorWrap = styled.div`
 	width: 90%;
 	text-align: start;
 `
-
-const S = { Wrapper, Box, InputWrap, TitleHead, ButtonWrap, ErrorWrap }
+const SuccessEmail = styled.div`
+	text-align: start;
+	width: 90%;
+	font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+	margin-bottom: 2rem;
+	& > span {
+		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+		background-color: ${({ theme }) => theme.COLOR.orange};
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+	}
+`
+const Title = styled.div`
+	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
+	margin-bottom: 2rem;
+`
+const S = {
+	Wrapper,
+	Box,
+	InputWrap,
+	TitleHead,
+	ButtonWrap,
+	ErrorWrap,
+	SuccessEmail,
+	Title,
+}
