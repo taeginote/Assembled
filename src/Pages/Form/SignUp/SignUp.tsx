@@ -313,7 +313,7 @@ const container = styled.div`
 	}
 `
 const SignUpButton = styled(Button)`
-	margin-top: 2rem;
+	margin: 2rem 0 5rem 0;
 `
 const InputBox = styled.div`
 	${FlexAlignCSS}
