@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { childrenType } from '../../Types/type'
+import { childrenType } from '../Types/type'
 
 function HookFormError(props: childrenType & { status?: boolean | string }) {
 	const { children, status = 'error' } = props
