@@ -5,7 +5,7 @@ import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import HookFormError from '../../../Components/Error/HookFormError'
+import HookFormError from '../../../Error/HookFormError'
 import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
 import { useAuth } from '../../../Contexts/auth'
@@ -15,7 +15,7 @@ import { LoginSubmitData } from '../../../Types/type'
 import { useState } from 'react'
 import { userRole } from '../../../Atoms/UserRole.atom'
 import { useRecoilState } from 'recoil'
-import FindEmailModal from '../../../Components/Modal/FindEmailModal'
+import FindEmailModal from './Components/FindEmailModal'
 
 export interface UserInfoType {
 	nickname: string

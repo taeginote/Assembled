@@ -15,7 +15,7 @@ import {
 	SubmitHandler,
 	useForm,
 } from 'react-hook-form'
-import HookFormError from '../../Components/Error/HookFormError'
+import HookFormError from '../../Error/HookFormError'
 import Button from '../../Components/Button/Button'
 import SelectInput from './Components/SelectBox/SelectInput'
 import { useMutation } from '@tanstack/react-query'

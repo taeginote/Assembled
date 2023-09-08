@@ -1,6 +1,6 @@
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import Input from '../../../../Components/Input/Input'
-import HookFormError from '../../../../Components/Error/HookFormError'
+import HookFormError from '../../../../Error/HookFormError'
 import { styled } from 'styled-components'
 import { FlexAlignCSS } from '../../../../Styles/common'
 

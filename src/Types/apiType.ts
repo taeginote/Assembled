@@ -124,6 +124,10 @@ interface EmailValidation {
 interface NicknameValidation {
 	nickname?: string
 }
+export interface FindEmailProp {
+	name: string
+	phoneNumber: string
+}
 
 export type UserApiType = {
 	SignUp(data: signUpProps): Promise<AxiosResponse>
@@ -138,6 +142,7 @@ export type UserApiType = {
 		data: Omit<signUpProps, 'password' | 'email' | 'gender' | 'profileImage'>,
 	): Promise<AxiosResponse>
 	PutProfileImg(data: Pick<signUpProps, 'profileImage'>): Promise<AxiosResponse>
+	getFindEmail(datas: FindEmailProp): Promise<AxiosResponse>
 }
 
 export type ActivityApiType = {

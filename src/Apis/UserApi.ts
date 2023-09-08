@@ -71,6 +71,13 @@ const UserApi: UserApiType = {
 			},
 		})
 	},
+	getFindEmail(data) {
+		const { name, phoneNumber } = data
+
+		return axiosInstance.get('/assemble/user/email', {
+			params: { name, phoneNumber },
+		})
+	},
 }
 
 export default UserApi

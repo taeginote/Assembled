@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
 import { Control, Controller, FieldValues } from 'react-hook-form'
-import HookFormError from '../../../../Components/Error/HookFormError'
+import HookFormError from '../../../../Error/HookFormError'
 
 interface Option {
 	value?: number | string

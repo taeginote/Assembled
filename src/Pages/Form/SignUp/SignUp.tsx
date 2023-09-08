@@ -10,7 +10,7 @@ import Button from '../../../Components/Button/Button'
 import Notice from './Components/Notice'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { HookFormRule } from '../../../Consts/HookFormRule'
-import HookFormError from '../../../Components/Error/HookFormError'
+import HookFormError from '../../../Error/HookFormError'
 import NotificationModal from '../../../Components/Modal/NotificationModal'
 import { useRecoilState } from 'recoil'
 import { modalViewNotification } from '../../../Atoms/modalView.atom'
@@ -77,9 +77,7 @@ function SignUp() {
 		}))
 	}, [watchNickName])
 
-	const [recoilCounter, setRecoilCounter] = useRecoilState<boolean>(
-		modalViewNotification,
-	)
+	const [recoilCounter] = useRecoilState<boolean>(modalViewNotification)
 	const [successModal, setSuccessModal] = useState(false)
 
 	// profileImage 추가해야함
@@ -142,7 +140,7 @@ function SignUp() {
 				nickname: { status: 'error', message: '닉네임 중복확인 해주세요' },
 			}))
 		}
-		//이미지 타입 재정비해야함
+
 		let formData: FormData = new FormData()
 		if (imgFile instanceof File) {
 			formData.append('profileImage', imgFile)
