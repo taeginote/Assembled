@@ -17,6 +17,9 @@ const CategoryApi: CategoryApiType = {
 	MeetingCategory(data) {
 		return axiosInstance.post(PATH, data)
 	},
+	getAdminCategory() {
+		return axiosInstance.get(PATH + '/admin')
+	},
 }
 
 export default CategoryApi

@@ -74,6 +74,7 @@ export interface CategoryApiType {
 	PutCategory(data: PutCategoryProps): Promise<AxiosResponse>
 	DeleteCategory(id: number): Promise<AxiosResponse>
 	MeetingCategory(data: Omit<PutCategoryProps, 'id'>): Promise<AxiosResponse>
+	getAdminCategory(): Promise<AxiosResponse>
 }
 
 //Join Api

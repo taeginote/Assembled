@@ -1,5 +1,4 @@
 import { styled } from 'styled-components'
-import useGetCategoryData from '../../../Hooks/Queries/get-category'
 import { Category } from '../../List/Components/CategoryNav/CategoryNav'
 import Button from '../../../Components/Button/Button'
 import { Refetch_Icon } from '../../../Icons/Icons'
@@ -13,9 +12,11 @@ import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
 import { useRecoilState } from 'recoil'
 import { FlexBetweenCSS } from '../../../Styles/common'
 import AdminModal from '../Components/adminModal'
+import useGetAdminCategoryData from '../../../Hooks/Queries/get-adminCategory'
+import LoadingPage from '../../../Components/LoadingPage/Loading'
 
 function AdminCategory() {
-	const { data, isLoading, refetch } = useGetCategoryData()
+	const { data, isLoading, refetch } = useGetAdminCategoryData()
 	const [changeCategoryNum, setChangeCategoryNum] = useState<null | number>(
 		null,
 	)
@@ -84,104 +85,109 @@ function AdminCategory() {
 	}
 
 	return (
-		<S.Wrapper>
-			<S.Head>
-				<S.HeadLeft>
-					<h4>Assemble 카테고리</h4>
-					<div onClick={() => refetch()}>
-						<Refetch_Icon />
-					</div>
-				</S.HeadLeft>
-				<Button
-					size="normal"
-					variant="default-white"
-					onClick={() => setAdminAddModal(true)}
-				>
-					추가
-				</Button>
-			</S.Head>
-			<S.TableTitle>
-				<S.Row>
-					<S.CellId>카테고리 ID</S.CellId>
-					<S.Cell>카테고리 Name</S.Cell>
-					<S.CellChangeOrDelete>카테고리 수정</S.CellChangeOrDelete>
-					<S.CellChangeOrDelete>카테고리 삭제</S.CellChangeOrDelete>
-				</S.Row>
-			</S.TableTitle>
-			{!isLoading &&
-				data?.response.map((category: Category, idx: number) => (
-					<S.Table $isEven={idx % 2 === 1} key={idx}>
+		<>
+			{isLoading ? (
+				<LoadingPage />
+			) : (
+				<S.Wrapper>
+					<S.Head>
+						<S.HeadLeft>
+							<h4>Assemble 카테고리</h4>
+							<div onClick={() => refetch()}>
+								<Refetch_Icon />
+							</div>
+						</S.HeadLeft>
+						<Button
+							size="normal"
+							variant="default-white"
+							onClick={() => setAdminAddModal(true)}
+						>
+							추가
+						</Button>
+					</S.Head>
+					<S.TableTitle>
 						<S.Row>
-							<S.CellId>{category.categoryId}</S.CellId>
+							<S.CellId>카테고리 ID</S.CellId>
+							<S.Cell>카테고리 Name</S.Cell>
+							<S.CellChangeOrDelete>카테고리 수정</S.CellChangeOrDelete>
+							<S.CellChangeOrDelete>카테고리 삭제</S.CellChangeOrDelete>
+						</S.Row>
+					</S.TableTitle>
+					{data?.response.map((category: Category, idx: number) => (
+						<S.Table $isEven={idx % 2 === 1} key={idx}>
+							<S.Row>
+								<S.CellId>{category.categoryId}</S.CellId>
 
-							{changeCategoryNum === category.categoryId &&
-							changeVal !== null ? (
-								<S.Cell>
-									<input
-										onChange={e => setChangeVal(e.target.value)}
-										value={changeVal}
-									/>
-								</S.Cell>
-							) : (
-								<S.Cell>{category.categoryName}</S.Cell>
-							)}
-							<S.CellChangeOrDelete>
 								{changeCategoryNum === category.categoryId &&
 								changeVal !== null ? (
-									<Button
-										size="normal"
-										variant="default-white"
-										onClick={onClickChangeCateogory}
-									>
-										완료
-									</Button>
+									<S.Cell>
+										<input
+											onChange={e => setChangeVal(e.target.value)}
+											value={changeVal}
+										/>
+									</S.Cell>
 								) : (
+									<S.Cell>{category.categoryName}</S.Cell>
+								)}
+								<S.CellChangeOrDelete>
+									{changeCategoryNum === category.categoryId &&
+									changeVal !== null ? (
+										<Button
+											size="normal"
+											variant="default-white"
+											onClick={onClickChangeCateogory}
+										>
+											완료
+										</Button>
+									) : (
+										<Button
+											size="normal"
+											variant="default-white"
+											onClick={() => onChangeCategory(category)}
+										>
+											수정
+										</Button>
+									)}
+								</S.CellChangeOrDelete>
+								<S.CellChangeOrDelete>
 									<Button
 										size="normal"
 										variant="default-white"
-										onClick={() => onChangeCategory(category)}
+										onClick={() => onClickDeleteCateogory(category.categoryId)}
 									>
-										수정
+										삭제
 									</Button>
-								)}
-							</S.CellChangeOrDelete>
-							<S.CellChangeOrDelete>
-								<Button
-									size="normal"
-									variant="default-white"
-									onClick={() => onClickDeleteCateogory(category.categoryId)}
-								>
-									삭제
-								</Button>
-							</S.CellChangeOrDelete>
-						</S.Row>
-					</S.Table>
-				))}
-			{recoilCounter && (
-				<ConfirmModal
-					text={'정말로 삭제하시겠습니까?'}
-					url={'/admin'}
-					mutate={deleteMutate}
-					meetingId={changeCategoryNum}
-				/>
+								</S.CellChangeOrDelete>
+							</S.Row>
+						</S.Table>
+					))}
+					{recoilCounter && (
+						<ConfirmModal
+							text={'정말로 삭제하시겠습니까?'}
+							url={'/admin'}
+							mutate={deleteMutate}
+							meetingId={changeCategoryNum}
+						/>
+					)}
+					{adminAddModal && (
+						<AdminModal>
+							<form onSubmit={onAddCategory}>
+								<S.CategoryAddInput id="input" />
+								<S.ButtonWrap>
+									<Button>카테고리 추가</Button>
+									<Button
+										variant="default-white"
+										onClick={() => setAdminAddModal(false)}
+									>
+										취소
+									</Button>
+								</S.ButtonWrap>
+							</form>
+						</AdminModal>
+					)}
+				</S.Wrapper>
 			)}
-			{adminAddModal && (
-				<AdminModal>
-					<form onSubmit={onAddCategory}>
-						<S.CategoryAddInput id="input" />
-						<S.ButtonWrap>
-							<Button>카테고리 추가</Button>
-							<Button
-								variant="default-white"
-								onClick={() => setAdminAddModal(false)}
-							>
-								취소
-							</Button>
-						</S.ButtonWrap>
-					</form>
-				</AdminModal>
-			)}
-		</S.Wrapper>
+		</>
 	)
 }
 export default AdminCategory
