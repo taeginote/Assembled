@@ -8,7 +8,7 @@ const UserStatusService = {
 		localStorage.removeItem(TOKEN_KEY)
 	},
 	setUserStatus(userStatus: string) {
-		localStorage.setItem(TOKEN_KEY, JSON.stringify(userStatus))
+		localStorage.setItem(TOKEN_KEY, userStatus)
 	},
 }
 
