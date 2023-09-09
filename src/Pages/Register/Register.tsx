@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {
 	ColumnNumberCSS,
+	FlexAlignCSS,
 	FlexColumnCSS,
 	GridCenterCSS,
 	TopPadding,
@@ -26,20 +27,37 @@ import MeetingApi from '../../Apis/MeetingApi'
 import { MeetingRegisterProps } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
 import UserIdService from '../../Utils/UserIdService'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Category } from '../List/Components/CategoryNav/CategoryNav'
+import DaumPostAddress from '../../Components/Map/DaumPostAddress'
+
+export interface ResultAddressType {
+	zipCode: number
+	roadNameAddress: string
+	lotNumberAddress: string
+	detailAddress: string
+}
 
 function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
-
 	const [modalView, setModalView] = useState(false)
+	const [mapModalView, setMapModalView] = useState(false)
+	const [resultAddress, setResultAddress] = useState<null | ResultAddressType>(
+		null,
+	)
 
 	const {
+		register,
+		setValue,
 		handleSubmit,
 		formState: { errors },
 		control,
 	} = useForm()
 	const { data: GetCategoryData } = useGetCategoryData()
+
+	if (resultAddress) {
+		setValue('Address', resultAddress)
+	}
 
 	const { mutate } = useMutation(
 		(data: MeetingRegisterProps) => MeetingApi.MeetingRegister(data),
@@ -62,10 +80,7 @@ function Register() {
 			name: e.Title,
 			description: e.Contents,
 			categoryId: categoryId!.categoryId,
-			detailAddress: '상세 주소',
-			lotNumberAddress: '서울시 강남구',
-			roadNameAddress: '서울시 강남구',
-			zipCode: 10011,
+			...resultAddress,
 		}
 
 		mutate(data)
@@ -85,7 +100,24 @@ function Register() {
 					/>
 				</S.Box>
 			</S.Container>
-
+			<S.MapWrap>
+				<div>모임 활동 지역 *</div>
+				<S.MapBox>
+					<Input
+						placeholder="모임활동 지역을 선택해주세요"
+						value={resultAddress ? resultAddress.detailAddress! : ''}
+						{...register('Address', {
+							required: '모임활동 지역을 선택해주세요',
+						})}
+					/>
+					<S.StyleButton type="button" onClick={() => setMapModalView(true)}>
+						주소찾기
+					</S.StyleButton>
+				</S.MapBox>
+				{errors.Address && (
+					<HookFormError>{errors.Address?.message?.toString()}</HookFormError>
+				)}
+			</S.MapWrap>
 			<S.Box>
 				<div>모임 이름 *</div>
 				<Controller
@@ -97,7 +129,6 @@ function Register() {
 					render={({ field }) => (
 						<S.Input
 							placeholder="정하고싶은 모임의 이름을 입력해주세요"
-							$status={field.value === undefined}
 							value={field.value}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 								field.onChange(e.target.value)
@@ -120,7 +151,6 @@ function Register() {
 					render={({ field }) => (
 						<textarea
 							placeholder="모임에 대한 설명을 입력해 주세요"
-							// status={field.value === undefined}
 							value={field.value}
 							onChange={e => field.onChange(e.target.value)}
 						/>
@@ -146,6 +176,12 @@ function Register() {
 			</span>
 			{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
 			{modalView && <SuccessModal text={'등록 성공'} setState={setModalView} />}
+			{mapModalView && (
+				<DaumPostAddress
+					setModalView={setMapModalView}
+					setResultModal={setResultAddress}
+				/>
+			)}
 		</S.Wrapper>
 	)
 }
@@ -164,7 +200,7 @@ const Wrapper = styled.form`
 	}
 	& > span {
 		text-align: end;
-		margin-top: 3rem;
+		margin: 3rem 0;
 		display: flex;
 		justify-content: end;
 		* {
@@ -216,15 +252,14 @@ const Box = styled.div`
 		}
 	}
 `
-const Input = styled.input<{ $status: boolean }>`
+const Input = styled.input`
 	font-size: ${({ theme }) => theme.FONT_SIZE.small};
 	width: 100%;
 	margin-bottom: 0.5rem;
 	padding: 1.3rem 1rem;
 	border-radius: 0.5rem;
 	border: 1px solid ${({ theme }) => theme.COLOR.common.gray[400]};
-	color: ${({ theme, $status }) =>
-		$status ? theme.COLOR.common.gray[200] : 'black'};
+
 	:focus {
 		border: 1px solid ${({ theme }) => theme.COLOR.sub};
 	}
@@ -260,7 +295,20 @@ const DivBtn1 = styled.div`
 		opacity: 0.4;
 	}
 `
-
+const MapWrap = styled.div`
+	width: 50%;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 100%;
+	}
+`
+const StyleButton = styled(Button)`
+	width: 20%;
+`
+const MapBox = styled.div`
+	margin-top: 1rem;
+	${FlexAlignCSS}
+	align-items: start;
+`
 const S = {
 	Container,
 	Wrapper,
@@ -269,4 +317,7 @@ const S = {
 	DivBtn,
 	DivBtn1,
 	Input,
+	MapBox,
+	MapWrap,
+	StyleButton,
 }
