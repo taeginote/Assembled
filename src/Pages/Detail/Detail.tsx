@@ -198,7 +198,7 @@ function Detail() {
 						</div>
 						<div>
 							<div>활동지역</div>
-							<span>준비중) 서울시 강남구</span>
+							<span>{data?.response?.roadNameAddress}</span>
 						</div>
 					</S.Info>
 					<h3>모임 설명</h3>

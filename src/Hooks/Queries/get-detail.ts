@@ -31,6 +31,7 @@ export interface UseDetailType {
 		writerId?: string
 		writerNickname: string
 		writerProfileImages: { filePath: string } | null
+		roadNameAddress: string
 	}
 	status: number
 	success: boolean
