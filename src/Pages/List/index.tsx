@@ -33,7 +33,7 @@ function List() {
 	const [searchValue, setSearchValue] = useState<string>('')
 	const [selectVal, setSelectVal] = useState({
 		title: '제목',
-		value: 'title',
+		value: 'name',
 	})
 	let searchBy: string = selectVal.value
 	let searchQuery: string = searchValue

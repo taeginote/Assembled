@@ -13,7 +13,7 @@ import { DownIcon } from '../../../../Icons/Icons'
 
 export type DataType = {
 	title: '제목' | '내용' | '작성자'
-	value: 'title' | 'contents' | 'writer'
+	value: 'name' | 'contents' | 'writer'
 }
 
 function SearchBar({
@@ -23,7 +23,7 @@ function SearchBar({
 	setPage,
 }: SearchType) {
 	const Data: DataType[] = [
-		{ title: '제목', value: 'title' },
+		{ title: '제목', value: 'name' },
 		{ title: '내용', value: 'contents' },
 		{ title: '작성자', value: 'writer' },
 	]
