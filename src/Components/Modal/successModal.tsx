@@ -55,6 +55,9 @@ const Box = styled.div`
 	background-color: ${({ theme }) => theme.COLOR.common.white};
 	animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 	position: fixed;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 80%;
+	}
 	@keyframes fadeIn {
 		0% {
 			top: -20rem;
