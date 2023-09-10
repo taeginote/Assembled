@@ -88,6 +88,7 @@ function Hamburger() {
 	const { mutate } = useMutation(() => UserApi.postLogout(), {
 		onSuccess: () => {
 			auth.logout()
+			setIsView(false)
 		},
 	})
 
