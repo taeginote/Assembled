@@ -48,6 +48,7 @@ function Login() {
 					res.data.response.token.accessToken,
 					res.data.response.userId,
 					role,
+					nickname,
 				)
 			}
 			navigate('/')

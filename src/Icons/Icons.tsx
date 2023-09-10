@@ -9,6 +9,7 @@ import {
 	AiFillHeart,
 	AiOutlineHeart,
 	AiOutlineUndo,
+	AiOutlineHome,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -19,12 +20,12 @@ import {
 	BsTrash,
 	BsDot,
 } from 'react-icons/bs'
-import { BiUser, BiHappy, BiChevronsUp } from 'react-icons/bi'
+import { BiUser, BiHappy, BiChevronsUp, BiLogOut } from 'react-icons/bi'
 import { MdOutlineCancel, MdOutlineToday } from 'react-icons/md'
 import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
 import { FaQuestion, FaPen } from 'react-icons/fa'
-import { IoIosAirplane } from 'react-icons/io'
+import { IoIosAirplane, IoIosArrowForward } from 'react-icons/io'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { RxCross2 } from 'react-icons/rx'
 import { HiOutlinePlus } from 'react-icons/hi'
@@ -110,6 +111,9 @@ export const Cancel_Icon = () => <MdOutlineCancel size={'17'} color="#777" /> //
 export const Cancel_big_Icon = ({ onClick }: OnClickIconType) => (
 	<RxCross2 size={'35'} color="#FB9B00" onClick={onClick} />
 ) //취소 버튼
+export const Cancel_Black_Icon = ({ onClick }: OnClickIconType) => (
+	<RxCross2 size={'30'} onClick={onClick} />
+) //취소 버튼
 
 export const Dot_Icon = () => <BsDot size={'35'} color="#FB9B00" />
 //점
@@ -123,3 +127,16 @@ export const Up_Icon = () => <BiChevronsUp size={'40'} color="#FDD19B" />
 export const View_Icon = () => <GrView size={'15'} />
 
 export const Refetch_Icon = () => <AiOutlineUndo size={'23'} />
+
+export const Home_Icon = ({ onClick }: OnClickIconType) => (
+	<AiOutlineHome size={'23'} onClick={onClick} />
+)
+export const Arrow_Icon = ({ rotate }: IconRotate) => (
+	<IoIosArrowForward
+		size={'23'}
+		style={{ transform: `rotate(${rotate}deg)` }}
+	/>
+)
+export const LogOut_Icon = ({ onClick }: OnClickIconType) => (
+	<BiLogOut size={'23'} onClick={onClick} />
+)

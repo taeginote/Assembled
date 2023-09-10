@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { DownIcon } from '../../../../Icons/Icons'
 
-type eventType = {
+export type eventType = {
 	name: string
 	url: string
 }
