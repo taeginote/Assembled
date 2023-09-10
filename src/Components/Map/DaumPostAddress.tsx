@@ -56,7 +56,7 @@ const Wrapper = styled.div`
 
 const Box = styled.div`
 	width: 45rem;
-	padding: 2rem 0;
+	padding: 0.5rem 0;
 	text-align: center;
 	${FlexColumnCSS}
 	align-items: center;
@@ -69,13 +69,16 @@ const Box = styled.div`
 	}
 	animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 	position: fixed;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 80%;
+	}
 	@keyframes fadeIn {
 		0% {
 			top: -20rem;
 		}
 
 		100% {
-			top: 30%;
+			top: 13%;
 		}
 	}
 `
