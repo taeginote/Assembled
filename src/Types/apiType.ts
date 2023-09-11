@@ -147,4 +147,5 @@ export type UserApiType = {
 
 export type ActivityApiType = {
 	getActivity(page: number): Promise<AxiosResponse>
+	getActivityUser(meetingId: number): Promise<AxiosResponse>
 }
