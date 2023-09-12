@@ -15,23 +15,36 @@ interface ActivityUserProps {
 function ActivityUserListModal({ meetingId, setState }: ActivityUserProps) {
 	const { data, isLoading } = useGetActivityUserData(meetingId)
 
+	const onCancelModal = () => {
+		setState(false)
+		document.body.style.overflow = 'auto'
+	}
 	return (
 		<S.Wrapper>
 			<S.Box>
 				<S.TitleHead>
 					<h4>활동중인 멤버들</h4>
 					<div>
-						<Cancel_big_Icon onClick={() => setState(false)} />
+						<Cancel_big_Icon onClick={onCancelModal} />
 					</div>
 				</S.TitleHead>
 
-				{!isLoading &&
-					data?.response.content.map((el, idx) => (
-						<S.User key={idx}>
-							<S.UserImg src={ProfileImgReturn(el?.profile?.filePath)} />
-							{el.nickname}
-						</S.User>
-					))}
+				<S.UserListWrap>
+					{!isLoading &&
+						data?.response.content.map((el, idx) => (
+							<S.User key={idx}>
+								<S.UserImgBox>
+									<S.KingImg
+										src="assets/img/king.png"
+										alt="king"
+										$isKing={idx === 0}
+									/>
+									<S.UserImg src={ProfileImgReturn(el?.profile?.filePath)} />
+								</S.UserImgBox>
+								{el.nickname}
+							</S.User>
+						))}
+				</S.UserListWrap>
 			</S.Box>
 		</S.Wrapper>
 	)
@@ -94,10 +107,38 @@ const User = styled.div`
 	${FlexAlignCSS}
 	margin-top: 1rem;
 `
+const UserImgBox = styled.div`
+	position: relative;
+`
+const KingImg = styled.img<{ $isKing: boolean }>`
+	display: ${({ theme, $isKing }) => ($isKing ? 'block' : 'none')};
+	width: 5rem;
+	height: 5rem;
+	top: -3rem;
+	right: 1rem;
+	position: absolute;
+	z-index: 1;
+`
 const UserImg = styled.img`
 	width: 4rem;
 	height: 4rem;
 	border-radius: 50%;
 	margin-right: 1.5rem;
+	z-index: 5;
 `
-const S = { Wrapper, Text, Box, TitleHead, User, UserImg }
+const UserListWrap = styled.div`
+	padding-top: 1rem;
+	max-height: 30rem;
+	overflow: auto;
+`
+const S = {
+	Wrapper,
+	Text,
+	Box,
+	TitleHead,
+	User,
+	UserImg,
+	UserImgBox,
+	KingImg,
+	UserListWrap,
+}

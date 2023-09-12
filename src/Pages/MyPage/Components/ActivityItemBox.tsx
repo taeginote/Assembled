@@ -51,6 +51,7 @@ function ActivityItemBox({
 	const onViewActivityUser = () => {
 		setMeetingId(meetingId)
 		setUserListModal(true)
+		document.body.style.overflow = 'hidden'
 	}
 	const profileImg = ProfileImgReturn(writerProfileImages?.fileFullPath)
 

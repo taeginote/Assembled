@@ -126,6 +126,10 @@ function Detail() {
 		setJoinModal(false)
 		document.body.style.overflow = 'auto'
 	}
+	const onActivityUserList = () => {
+		setUserListModal(true)
+		document.body.style.overflow = 'hidden'
+	}
 
 	return (
 		<S.Wrapper>
@@ -192,7 +196,7 @@ function Detail() {
 						</div>
 						<div>
 							<div>활동 인원</div>
-							<S.ActivityUserSpan onClick={() => setUserListModal(true)}>
+							<S.ActivityUserSpan onClick={onActivityUserList}>
 								{data?.response?.activityUserCount === 0
 									? '제한없음'
 									: data?.response?.activityUserCount + '명'}
