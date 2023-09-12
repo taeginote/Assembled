@@ -13,6 +13,13 @@ const ActivityApi: ActivityApiType = {
 			},
 		})
 	},
+	getActivityUser(meetingId) {
+		return axiosInstance.get(PATH + `/user/${meetingId}`, {
+			params: {
+				page: 0,
+			},
+		})
+	},
 }
 
 export default ActivityApi

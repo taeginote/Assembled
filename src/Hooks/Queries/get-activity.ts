@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-
 import ActivityApi from '../../Apis/ActivityApi'
 import { UseListType } from './get-list'
 
