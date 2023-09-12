@@ -10,6 +10,7 @@ import {
 	AiOutlineHeart,
 	AiOutlineUndo,
 	AiOutlineHome,
+	AiOutlineQuestionCircle,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -139,4 +140,11 @@ export const Arrow_Icon = ({ rotate }: IconRotate) => (
 )
 export const LogOut_Icon = ({ onClick }: OnClickIconType) => (
 	<BiLogOut size={'23'} onClick={onClick} />
+)
+export const UserQuestion_Icon = () => (
+	<AiOutlineQuestionCircle
+		size={'21'}
+		style={{ marginLeft: '1rem' }}
+		color="#FB9B00"
+	/>
 )

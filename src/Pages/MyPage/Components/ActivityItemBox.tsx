@@ -4,13 +4,26 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../../Styles/common'
-import { Person_Icon } from '../../../Icons/Icons'
+import { Chat_Icon, Person_Icon, UserQuestion_Icon } from '../../../Icons/Icons'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import Button from '../../../Components/Button/Button'
-import { Question_Icon } from '../../../Icons/Icons'
-import { Content } from '../../../Hooks/Queries/get-list'
 
-function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
+import { Content } from '../../../Hooks/Queries/get-list'
+import ActivityUserListModal from '../../../Components/Modal/ActivityUserListModal'
+import Ballon from '../../../Components/Ballon/Ballon'
+
+interface ActivityItemBoxProps {
+	data: Content
+	setMeetingId: (state: number) => void
+	setUserListModal: (state: boolean) => void
+	refetch?: () => void
+}
+
+function ActivityItemBox({
+	data,
+	setMeetingId,
+	setUserListModal,
+}: ActivityItemBoxProps) {
 	const {
 		meetingId,
 		name,
@@ -24,19 +37,6 @@ function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 		likeStatus,
 	} = data
 
-	// const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
-
-	/**
-	 * 필요한 데이터
-	 * meetingStatus (모집중 혹은 모집완료)
-	 * categoryName (카테고리)
-	 * title (모임 이름)
-	 * 이미지를 담당자 이미지 즉, 방장의 이미지 와 방장 닉네임
-	 * 현 활동하고 있는 인원 수
-	 * 페이지네이션 ( 다양한 모임에 활동중인 사람이 있을수있습니다. 저는 한 페이지에 4개를 받을 예정입니다.)
-	 *  */
-
-	//Member Test Array
 	const memberTestArray = [
 		{
 			name: '신형만',
@@ -48,6 +48,10 @@ function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 		},
 	]
 
+	const onViewActivityUser = () => {
+		setMeetingId(meetingId)
+		setUserListModal(true)
+	}
 	const profileImg = ProfileImgReturn(writerProfileImages?.fileFullPath)
 
 	return (
@@ -71,22 +75,23 @@ function ActivityItemBox({ data }: { data: Content; refetch?: () => void }) {
 			<S.UserBox>
 				<div>
 					<S.UserImg src={profileImg} alt="UserImage" />
-					<div>담당자 | {writerNickname}</div>
+					<div>{writerNickname}</div>
 				</div>
+
 				<span>
 					<Person_Icon />
-					<span>{activityUserCount}인</span>
-					<Question_Icon />
-					{/* <Chat_Icon size={'20'} />
-					<div>{commentCount}개</div> */}
-					<div>
-						{memberTestArray.map(el => (
-							<S.UserList>
-								<S.UserImg src={el.url} />
-								<div>{el.name}</div>
-							</S.UserList>
-						))}
-					</div>
+					<span>
+						{activityUserCount}인
+						<S.BallonWrap onClick={onViewActivityUser}>
+							<UserQuestion_Icon />
+							<div>
+								<Ballon text={'멤버 구경'} />
+							</div>
+						</S.BallonWrap>
+					</span>
+
+					<Chat_Icon size={'20'} />
+					<span>{commentCount}개</span>
 				</span>
 			</S.UserBox>
 		</S.Wrapper>
@@ -130,24 +135,20 @@ const UserBox = styled.div`
 		${FlexAlignCSS}
 	}
 	& > span {
-		position: relative;
-		& > div {
-			display: none;
-			position: absolute;
-			min-width: 10rem;
-			right: -3rem;
-			top: -9.5rem;
-			border-radius: 0.5rem;
-			background-color: ${({ theme }) => theme.COLOR.common.gray[100]};
-		}
-		&:hover {
-			& > div {
-				display: block;
-			}
-		}
 		${FlexAlignCSS}
-		&>span {
-			margin: 0 0.5rem;
+
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			margin-top: 1rem;
+			width: 100%;
+			text-align: end;
+			display: flex;
+			justify-content: end;
+		}
+		& > span {
+			${FlexAlignCSS}
+		}
+		* {
+			margin-left: 0.5rem;
 		}
 	}
 `
@@ -193,13 +194,23 @@ const TopWrap = styled.div`
 	width: 100%;
 	${FlexBetweenCSS}
 `
-const UserList = styled.div`
-	display: flex;
+const BallonWrap = styled.div`
+	margin-right: 1rem;
+	margin-top: 0.5rem;
+	position: relative;
 
-	min-width: 10rem;
-	align-items: center;
-	padding: 0.5rem 1rem;
-	${FlexAlignCSS}
+	& > div {
+		display: none;
+	}
+	cursor: pointer;
+	&:hover {
+		& > div {
+			display: block;
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+				display: none;
+			}
+		}
+	}
 `
 
 const S = {
@@ -213,5 +224,5 @@ const S = {
 	UserImg,
 	Title,
 	TopWrap,
-	UserList,
+	BallonWrap,
 }

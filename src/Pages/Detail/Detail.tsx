@@ -10,6 +10,7 @@ import {
 	NotFillHeart_Icon,
 	Pen_Icon,
 	Trash_Icon,
+	UserQuestion_Icon,
 } from '../../Icons/Icons'
 import Ballon from '../../Components/Ballon/Ballon'
 import MeetingApi from '../../Apis/MeetingApi'
@@ -27,6 +28,7 @@ import { FlexColumnCSS } from '../../Styles/common'
 import JoinModal from '../../Components/Modal/joinModal'
 import { useState } from 'react'
 import JoinApi from '../../Apis/JoinApi'
+import ActivityUserListModal from '../../Components/Modal/ActivityUserListModal'
 
 function Detail() {
 	const navigate = useNavigate()
@@ -35,6 +37,7 @@ function Detail() {
 
 	const [searchParams] = useSearchParams()
 	const [joinModal, setJoinModal] = useState(false)
+	const [userListModal, setUserListModal] = useState(false)
 	const [recoilCounter, setRecoilCounter] =
 		useRecoilState<boolean>(modalViewConfirm)
 
@@ -189,12 +192,15 @@ function Detail() {
 						</div>
 						<div>
 							<div>활동 인원</div>
-
-							<span>
+							<S.ActivityUserSpan onClick={() => setUserListModal(true)}>
 								{data?.response?.activityUserCount === 0
 									? '제한없음'
 									: data?.response?.activityUserCount + '명'}
-							</span>
+								<UserQuestion_Icon />
+								<div>
+									<Ballon text={'멤버 구경'} />
+								</div>
+							</S.ActivityUserSpan>
 						</div>
 						<div>
 							<div>활동지역</div>
@@ -262,6 +268,12 @@ function Detail() {
 						</S.ButtonWrap>
 					</S.JoinModalWrap>
 				</JoinModal>
+			)}
+			{userListModal && (
+				<ActivityUserListModal
+					meetingId={meetingId}
+					setState={setUserListModal}
+				/>
 			)}
 		</S.Wrapper>
 	)
@@ -436,7 +448,34 @@ const Info = styled.div`
 			grid-column-end: 11;
 			font-size: 2rem;
 			font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
+			display: flex;
+			align-items: center;
 		}
+	}
+`
+const ActivityUserSpan = styled.span`
+	grid-column-start: 4;
+	grid-column-end: 11;
+	font-size: 2rem;
+	font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
+	display: flex;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+	&:hover {
+		& > div {
+			display: block;
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+				display: none;
+			}
+		}
+	}
+	& > div {
+		position: absolute;
+		display: none;
+		background-color: red;
+		right: 87%;
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	}
 `
 const Dec = styled.pre`
@@ -490,4 +529,5 @@ const S = {
 	JoinText,
 	WebkHeartBox,
 	JoinModalWrap,
+	ActivityUserSpan,
 }

@@ -12,12 +12,14 @@ import useGetActivityData from '../../../Hooks/Queries/get-activity'
 import { Content } from '../../../Hooks/Queries/get-list'
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 import MyPageListNoData from '../../../Error/MypageListNoData'
+import ActivityUserListModal from '../../../Components/Modal/ActivityUserListModal'
 
 function Activity() {
 	const [searchParams] = useSearchParams()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 1)
-
+	const [userListModal, setUserListModal] = useState(false)
+	const [meetingId, setMeetingId] = useState<null | number>(null)
 	const { data, isLoading } = useGetActivityData(page)
 
 	const loadingArr: 0[] = Array(4).fill(0)
@@ -41,7 +43,12 @@ function Activity() {
 						) : (
 							<>
 								{data?.response?.content.map((el: Content, idx: number) => (
-									<ActivityItemBox data={el} key={idx} />
+									<ActivityItemBox
+										data={el}
+										key={idx}
+										setMeetingId={setMeetingId}
+										setUserListModal={setUserListModal}
+									/>
 								))}
 								<Pagination
 									totalPage={data?.response?.totalPages!}
@@ -54,6 +61,12 @@ function Activity() {
 					</>
 				)}
 			</S.ListWrap>
+			{userListModal && (
+				<ActivityUserListModal
+					meetingId={meetingId}
+					setState={setUserListModal}
+				/>
+			)}
 		</S.Wrapper>
 	)
 }
