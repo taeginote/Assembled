@@ -6,27 +6,44 @@ import {
 } from '../../../Styles/common'
 import Pagination from '../../../Components/Pagination/Pagination'
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ActivityItemBox from '../Components/ActivityItemBox'
 import useGetActivityData from '../../../Hooks/Queries/get-activity'
 import { Content } from '../../../Hooks/Queries/get-list'
 import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 import MyPageListNoData from '../../../Error/MypageListNoData'
 import ActivityUserListModal from '../../../Components/Modal/ActivityUserListModal'
+import UserNickNameService from '../../../Utils/UserNickNameService'
+import { Arrow_Icon } from '../../../Icons/Icons'
+import { FlexAlignCSS } from '../../../Styles/common'
+import Ballon from '../../../Components/Ballon/Ballon'
 
 function Activity() {
 	const [searchParams] = useSearchParams()
+	const navigate = useNavigate()
 	let pageNumber: number | null = Number(searchParams.get('page'))
 	const [page, setPage] = useState<number>(pageNumber || 1)
 	const [userListModal, setUserListModal] = useState(false)
 	const [meetingId, setMeetingId] = useState<null | number>(null)
 	const { data, isLoading } = useGetActivityData(page)
-
+	const userNickName = UserNickNameService.getNickName()
 	const loadingArr: 0[] = Array(4).fill(0)
 
 	return (
 		<S.Wrapper>
 			<S.ListWrap>
+				<S.UserNickName>
+					{userNickName}
+					<span>님</span>
+					<S.UserArrowIconWrap
+						onClick={() => navigate('/myPage/setting/userSetting')}
+					>
+						<Arrow_Icon rotate={0} />
+						<div>
+							<Ballon text="내정보" />
+						</div>
+					</S.UserArrowIconWrap>
+				</S.UserNickName>
 				<p>내가 활동중인 모임 </p>
 				{isLoading ? (
 					<>
@@ -63,7 +80,7 @@ function Activity() {
 			</S.ListWrap>
 			{userListModal && (
 				<ActivityUserListModal
-					meetingId={meetingId}
+					meetingId={meetingId!}
 					setState={setUserListModal}
 				/>
 			)}
@@ -104,6 +121,33 @@ const ListWrap = styled.div`
 		margin-bottom: 2rem;
 	}
 `
+const UserNickName = styled.div`
+	width: 100%;
+	text-align: start;
+	margin-bottom: 2rem;
+	& > span {
+		font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
+	}
+	${FlexAlignCSS}
+`
+const UserArrowIconWrap = styled.div`
+	cursor: pointer;
+	${FlexAlignCSS}
+	position: relative;
+	&:hover {
+		& > div {
+			display: block;
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+				display: none;
+			}
+		}
+	}
+	& > div {
+		display: none;
+		font-size: ${({ theme }) => theme.FONT_SIZE.small};
+	}
+`
 const Container = styled.div`
 	width: 118%;
 	${GridCenterCSS}
@@ -115,4 +159,5 @@ const Container = styled.div`
 		width: 100%;
 	}
 `
-const S = { ListWrap, Container, Wrapper }
+
+const S = { ListWrap, Container, Wrapper, UserNickName, UserArrowIconWrap }
