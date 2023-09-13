@@ -7,8 +7,9 @@ export interface MyJoinRequestContent {
 	meetingId: number
 	message: string
 	nickname: string
-	status: string //보류 이거 CANCEL...
+	status: 'APPROVAL' | 'REJECT' | 'CANCEL' | 'REQUEST'
 	userId: number
+	meetingName: string
 }
 
 interface UseMyJoinRequestListType {

@@ -26,7 +26,7 @@ function JoinRequest() {
 		<S.Wrapper>
 			{data?.response?.content?.length === 0 ? (
 				<S.ListWrap>
-					<MyPageListNoData comment={'좋아요한 모임이 없습니다.'} />
+					<MyPageListNoData comment={'가입신청한 모임이 없습니다.'} />
 				</S.ListWrap>
 			) : (
 				<>

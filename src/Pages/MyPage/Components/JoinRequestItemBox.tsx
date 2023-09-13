@@ -6,18 +6,30 @@ import {
 	FlexColumnCSS,
 } from '../../../Styles/common'
 import { MyJoinRequestContent } from '../../../Hooks/Queries/get-myjoinRequestList'
+import { useNavigate } from 'react-router-dom'
 
 function JoinRequestItemBox({ data }: { data: MyJoinRequestContent }) {
+	const navigate = useNavigate()
+	//'REQUEST|'APPROVAL'|'REJECT'|'CANCEL'
+
 	return (
-		<S.Wrapper>
+		<S.Wrapper onClick={() => navigate(`/Detail?meetingId=${data.meetingId}`)}>
 			<S.Container>
-				<S.Name>ex) 한바탕</S.Name>
+				<S.Name>{data.meetingName}</S.Name>
 				<S.Message>
 					{data?.message && data?.message?.length > 45
 						? data?.message?.substr(0, 45) + '...'
 						: data?.message}
 				</S.Message>
-				<S.Status>모집완료</S.Status>
+				<S.Status $status={data.status}>
+					{data.status === 'REQUEST'
+						? '지원중'
+						: data.status === 'APPROVAL'
+						? '가입완료'
+						: data.status === 'REJECT'
+						? '가입거절'
+						: '취소'}
+				</S.Status>
 			</S.Container>
 			<S.UserBox>
 				<div>
@@ -39,7 +51,6 @@ const Wrapper = styled.div`
 	border: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
 	padding: 3rem;
 	border-radius: 2rem;
-
 	cursor: pointer;
 	width: 100%;
 	min-width: 25rem;
@@ -82,10 +93,21 @@ const UserBox = styled.div`
 	}
 `
 
-const Status = styled.span`
-	background-color: ${({ theme }) => theme.COLOR.orange};
-	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-	color: ${({ theme }) => theme.COLOR.hover};
+const Status = styled.span<{ $status: string }>`
+	background-color: ${({ theme, $status }) =>
+		$status === 'APPROVAL'
+			? theme.COLOR.main //main
+			: $status === 'REQUEST'
+			? theme.COLOR.admin //admin //font black
+			: $status === 'REJECT'
+			? theme.COLOR.error //error
+			: theme.COLOR.admin}; //admin //font black
+
+	font-size: ${({ theme, $status }) =>
+		$status === 'REQUEST' || $status === 'REQUEST'
+			? theme.COLOR.common.white
+			: theme.COLOR.button};
+	color: ${({ theme }) => theme.COLOR.common.white};
 	padding: 0.1rem 0.7rem;
 	text-align: center;
 	border-radius: 1rem;
