@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom'
 
 function JoinRequestItemBox({ data }: { data: MyJoinRequestContent }) {
 	const navigate = useNavigate()
-	//'REQUEST|'APPROVAL'|'REJECT'|'CANCEL'
 
 	return (
 		<S.Wrapper onClick={() => navigate(`/Detail?meetingId=${data.meetingId}`)}>
@@ -31,15 +30,6 @@ function JoinRequestItemBox({ data }: { data: MyJoinRequestContent }) {
 						: '취소'}
 				</S.Status>
 			</S.Container>
-			<S.UserBox>
-				<div>
-					<div>
-						{data?.nickname && data?.nickname?.length > 7
-							? data?.nickname?.substr(0, 7) + '...'
-							: data?.nickname}
-					</div>
-				</div>
-			</S.UserBox>
 		</S.Wrapper>
 	)
 }
@@ -75,8 +65,6 @@ const Container = styled.div`
 			font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 		}
 	}
-	border-bottom: 2px solid ${({ theme }) => theme.COLOR.common.gray[100]};
-	padding-bottom: 2rem;
 `
 const Name = styled.div`
 	width: 100%;
@@ -85,29 +73,28 @@ const Name = styled.div`
 	margin-bottom: 2rem;
 	padding-bottom: 1rem;
 `
-const UserBox = styled.div`
-	${FlexBetweenCSS}
-	padding: 2rem 0 0 0;
-	& > div {
-		${FlexAlignCSS}
-	}
-`
 
 const Status = styled.span<{ $status: string }>`
 	background-color: ${({ theme, $status }) =>
 		$status === 'APPROVAL'
 			? theme.COLOR.main //main
 			: $status === 'REQUEST'
-			? theme.COLOR.admin //admin //font black
+			? theme.COLOR.common.white //admin //font black
 			: $status === 'REJECT'
 			? theme.COLOR.error //error
 			: theme.COLOR.admin}; //admin //font black
 
 	font-size: ${({ theme, $status }) =>
-		$status === 'REQUEST' || $status === 'REQUEST'
+		$status === 'REQUEST' || $status === 'CANCEL'
 			? theme.COLOR.common.white
 			: theme.COLOR.button};
-	color: ${({ theme }) => theme.COLOR.common.white};
+	color: ${({ theme, $status }) =>
+		$status === 'REQUEST' || $status === 'CANCEL'
+			? theme.COLOR.common.black
+			: theme.COLOR.common.white};
+	border: 1px solid
+		${({ theme, $status }) =>
+			$status === 'REQUEST' ? theme.COLOR.common.black : 'none'};
 	padding: 0.1rem 0.7rem;
 	text-align: center;
 	border-radius: 1rem;
@@ -124,6 +111,6 @@ const S = {
 	Name,
 	Status,
 	Container,
-	UserBox,
+
 	Message,
 }
