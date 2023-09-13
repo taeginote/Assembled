@@ -130,6 +130,9 @@ const UserNickName = styled.div`
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
 	}
 	${FlexAlignCSS}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		display: none;
+	}
 `
 const UserArrowIconWrap = styled.div`
 	cursor: pointer;
@@ -138,7 +141,7 @@ const UserArrowIconWrap = styled.div`
 	&:hover {
 		& > div {
 			display: block;
-			@media screen and (max-width: ${({ theme }) => theme.MEDIA.tablet}) {
+			@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 				display: none;
 			}
 		}

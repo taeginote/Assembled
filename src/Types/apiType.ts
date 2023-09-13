@@ -129,6 +129,9 @@ export interface FindEmailProp {
 	phoneNumber: string
 	birthDate: string
 }
+export interface FindPasswordProp extends FindEmailProp {
+	email: string
+}
 
 export type UserApiType = {
 	SignUp(data: signUpProps): Promise<AxiosResponse>
@@ -144,6 +147,8 @@ export type UserApiType = {
 	): Promise<AxiosResponse>
 	PutProfileImg(data: Pick<signUpProps, 'profileImage'>): Promise<AxiosResponse>
 	getFindEmail(datas: FindEmailProp): Promise<AxiosResponse>
+	postFindPassword(datas: FindPasswordProp): Promise<AxiosResponse>
+	putChangePassword(data: LoginData): Promise<AxiosResponse>
 }
 
 export type ActivityApiType = {

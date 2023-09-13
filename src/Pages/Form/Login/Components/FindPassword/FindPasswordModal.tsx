@@ -1,29 +1,38 @@
 import styled from 'styled-components'
-import { FlexBetweenCSS, FlexCenterCSS } from '../../../../Styles/common'
-import Input from '../../../../Components/Input/Input'
+import {
+	FlexAlignCSS,
+	FlexBetweenCSS,
+	FlexCenterCSS,
+	FlexColumnCSS,
+} from '../../../../../Styles/common'
+import Button from '../../../../../Components/Button/Button'
 import {
 	Cancel_big_Icon,
 	Date_Icon,
+	Email_Icon,
 	Name_Icon,
 	Phone_Icon,
-} from '../../../../Icons/Icons'
-import { FlexAlignCSS } from '../../../../Styles/common'
-import { FlexColumnCSS } from '../../../../Styles/common'
-import Button from '../../../../Components/Button/Button'
+} from '../../../../../Icons/Icons'
+import Input from '../../../../../Components/Input/Input'
 import { useState } from 'react'
-import UserApi from '../../../../Apis/UserApi'
-import HookFormError from '../../../../Error/HookFormError'
+import HookFormError from '../../../../../Error/HookFormError'
+import UserApi from '../../../../../Apis/UserApi'
+import ChangePassword from './ChangePassword'
+import { useMutation } from '@tanstack/react-query'
+import { FindPasswordProp } from '../../../../../Types/apiType'
 
 interface FindEmailModalTypeProps {
 	setModalView: (state: boolean) => void | undefined
 }
 
-function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
-	const [nameAndPhoneVal, setNameAndPhoneVal] = useState<{
+function FindPasswordModal({ setModalView }: FindEmailModalTypeProps) {
+	const [passwordVal, setPasswordVal] = useState<{
+		email: string
 		name: string
 		phoneNumber: string
 		birthDate: string
 	}>({
+		email: '',
 		name: '',
 		phoneNumber: '',
 		birthDate: '',
@@ -36,76 +45,81 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 		message: null,
 	})
 	const [successStatus, setSuccessStatus] = useState<{
-		isSuccess: boolean
-		data: any
+		isFind: boolean
+		token: string | null
 	}>({
-		isSuccess: false,
-		data: null,
+		isFind: false,
+		token: null,
 	})
 
-	const onFindEmail = async () => {
+	const { mutate } = useMutation(
+		(data: FindPasswordProp) => UserApi.postFindPassword(data),
+		{
+			onSuccess: res => {
+				setSuccessStatus(prev => ({
+					isFind: true,
+					token: res.data.response.token,
+				}))
+			},
+			onError: (err: any) => {
+				const error = err?.response.data.error
+
+				if (error.status === 404) {
+					setErrorStatus({
+						isError: true,
+						message: '잘못된 회원 정보입니다.',
+					})
+				}
+			},
+		},
+	)
+
+	const FindPassword = async () => {
 		if (
-			nameAndPhoneVal.name?.length === 0 ||
-			nameAndPhoneVal.phoneNumber?.length === 0 ||
-			nameAndPhoneVal.birthDate?.length === 0
+			passwordVal.email.length === 0 ||
+			passwordVal.name?.length === 0 ||
+			passwordVal.phoneNumber?.length === 0 ||
+			passwordVal.birthDate?.length === 0
 		)
 			return setErrorStatus({
 				isError: true,
-				message: '이름, 전화번호, 생년월일 모두 입력해주세요',
+				message: '이메일, 이름, 전화번호, 생년월일 모두 입력해주세요',
 			})
-		if (nameAndPhoneVal.phoneNumber?.length !== 11)
+		if (passwordVal.phoneNumber?.length !== 11)
 			return setErrorStatus({
 				isError: true,
 				message: '전화번호 11자리 입력해주세요',
 			})
-		if (nameAndPhoneVal.birthDate?.length !== 8)
+		if (passwordVal.birthDate?.length !== 8)
 			return setErrorStatus({
 				isError: true,
 				message: '생년월일 8자리 입력해주세요',
 			})
 
-		try {
-			const res = await UserApi.getFindEmail(nameAndPhoneVal)
-			const { response }: any = res?.data
-
-			if (response.length === 0)
-				return setErrorStatus({
-					isError: true,
-					message: '가입한 이메일이 없습니다.',
-				})
-			setSuccessStatus({
-				isSuccess: true,
-				data: response,
-			})
-		} catch (err: any) {
-			const error = err?.response.data.error
-
-			if (error.status === 400) {
-				setErrorStatus({
-					isError: true,
-					message: error.message,
-				})
-			}
-
-			//성공 처리가 없어서 예시로 500으로 처리한거입니다. 변경 예정
-		}
+		mutate(passwordVal)
 	}
 
 	const onChangeInputVal = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.id === 'email') {
+			setPasswordVal(prev => ({
+				...prev,
+				email: e.target.value,
+			}))
+		}
 		if (e.target.id === 'name') {
-			setNameAndPhoneVal(prev => ({
+			setPasswordVal(prev => ({
 				...prev,
 				name: e.target.value,
 			}))
 		}
 		if (e.target.id === 'phoneNumber') {
-			setNameAndPhoneVal(prev => ({
+			setPasswordVal(prev => ({
 				...prev,
 				phoneNumber: e.target.value,
 			}))
 		}
 		if (e.target.id === 'birthDate') {
-			setNameAndPhoneVal(prev => ({
+			setPasswordVal(prev => ({
 				...prev,
 				birthDate: e.target.value,
 			}))
@@ -115,17 +129,30 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 			message: null,
 		})
 	}
+
 	return (
 		<S.Wrapper>
 			<S.Box>
 				<S.TitleHead>
-					<h4>이메일 찾기</h4>
+					<h4>
+						{successStatus.isFind === false
+							? '비밀번호 찾기'
+							: '비밀번호 재설정'}
+					</h4>
 					<div>
 						<Cancel_big_Icon onClick={() => setModalView(false)} />
 					</div>
 				</S.TitleHead>
-				{successStatus.isSuccess !== true ? (
+				{successStatus.isFind === false ? (
 					<>
+						<S.InputWrap>
+							<Email_Icon />
+							<Input
+								placeholder="이메일"
+								id="email"
+								onChange={onChangeInputVal}
+							/>
+						</S.InputWrap>
 						<S.InputWrap>
 							<Name_Icon />
 							<Input placeholder="이름" id="name" onChange={onChangeInputVal} />
@@ -148,32 +175,30 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 								onChange={onChangeInputVal}
 							/>
 						</S.InputWrap>
+
 						<S.ErrorWrap>
 							{errorStatus.isError === true && (
 								<HookFormError>{errorStatus.message}</HookFormError>
 							)}
 						</S.ErrorWrap>
 						<S.ButtonWrap>
-							<Button type="button" onClick={onFindEmail}>
-								이메일 찾기
+							<Button type="button" onClick={FindPassword}>
+								비밀번호 찾기
 							</Button>
 						</S.ButtonWrap>
 					</>
 				) : (
-					<S.SuccessEmail>
-						<S.Title>사용자의 정보로 가입된 이메일들 입니다.</S.Title>
-						{successStatus.data.map((el: { email: string }, idx: number) => (
-							<S.Email key={idx}>
-								{idx + 1}. {el.email}
-							</S.Email>
-						))}
-					</S.SuccessEmail>
+					<ChangePassword
+						setModalView={setModalView}
+						token={successStatus.token!}
+					/>
 				)}
 			</S.Box>
 		</S.Wrapper>
 	)
 }
-export default FindEmailModal
+
+export default FindPasswordModal
 
 const Wrapper = styled.div`
 	position: fixed;

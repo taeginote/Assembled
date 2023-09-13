@@ -78,6 +78,12 @@ const UserApi: UserApiType = {
 			params: { name, phoneNumber, birthDate },
 		})
 	},
+	postFindPassword(data) {
+		return axiosInstance.post('/assemble/user/validation', data)
+	},
+	putChangePassword(data) {
+		return axiosInstance.put('/assemble/user/password', data)
+	},
 }
 
 export default UserApi

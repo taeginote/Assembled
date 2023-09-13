@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import Input from '../../../Components/Input/Input'
-import { FlexColumnCSS, TopPadding } from '../../../Styles/common'
+import {
+	FlexBetweenCSS,
+	FlexColumnCSS,
+	TopPadding,
+} from '../../../Styles/common'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
@@ -15,6 +19,8 @@ import { LoginSubmitData } from '../../../Types/type'
 import { useState } from 'react'
 import { userRole } from '../../../Atoms/UserRole.atom'
 import { useRecoilState } from 'recoil'
+
+import FindPasswordModal from './Components/FindPassword/FindPasswordModal'
 import FindEmailModal from './Components/FindEmailModal'
 
 export interface UserInfoType {
@@ -33,6 +39,8 @@ function Login() {
 		userRole,
 	)
 	const [findEmailModalView, setFindEmailModalView] = useState<boolean>(false)
+	const [findPasswordModalView, setFindPasswordModalView] =
+		useState<boolean>(false)
 
 	const [loginError, setLoginError] = useState<null | string>(null)
 	const navigate = useNavigate()
@@ -71,7 +79,6 @@ function Login() {
 		<S.Wrapper onSubmit={handleSubmit(onSubmit)}>
 			<S.container>
 				<h3>로그인</h3>
-
 				<span>
 					<Email_Icon />
 					<Input
@@ -100,7 +107,11 @@ function Login() {
 					<div onClick={() => setFindEmailModalView(true)}>
 						이메일을 잊으셨나요?
 					</div>
+					<div onClick={() => setFindPasswordModalView(true)}>
+						비밀번호 찾기
+					</div>
 				</S.FindEmail>
+
 				<S.SignUpButton>로그인</S.SignUpButton>
 				<S.GoSignUp>
 					아직 어셈블 계정이 없나요?
@@ -109,6 +120,9 @@ function Login() {
 			</S.container>
 			{findEmailModalView && (
 				<FindEmailModal setModalView={setFindEmailModalView} />
+			)}
+			{findPasswordModalView && (
+				<FindPasswordModal setModalView={setFindPasswordModalView} />
 			)}
 		</S.Wrapper>
 	)
@@ -154,9 +168,10 @@ const GoSignUp = styled.div`
 `
 const FindEmail = styled.div`
 	width: 100%;
+	${FlexBetweenCSS}
 	& > div {
 		text-align: start;
-		width: 14rem;
+
 		margin-top: 1rem;
 		text-decoration: underline;
 		color: ${({ theme }) => theme.COLOR.common.gray[300]};
