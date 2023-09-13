@@ -31,7 +31,7 @@ function ActivityUserListModal({ meetingId, setState }: ActivityUserProps) {
 
 				<S.UserListWrap>
 					{!isLoading &&
-						data?.response.content.map((el, idx) => (
+						data?.response.map((el, idx: number) => (
 							<S.User key={idx}>
 								<S.UserImgBox>
 									<S.KingImg

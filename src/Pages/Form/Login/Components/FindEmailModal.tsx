@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 import { FlexBetweenCSS, FlexCenterCSS } from '../../../../Styles/common'
 import Input from '../../../../Components/Input/Input'
-import { Cancel_big_Icon, Name_Icon, Phone_Icon } from '../../../../Icons/Icons'
+import {
+	Cancel_big_Icon,
+	Date_Icon,
+	Name_Icon,
+	Phone_Icon,
+} from '../../../../Icons/Icons'
 import { FlexAlignCSS } from '../../../../Styles/common'
 import { FlexColumnCSS } from '../../../../Styles/common'
 import Button from '../../../../Components/Button/Button'
@@ -17,53 +22,67 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 	const [nameAndPhoneVal, setNameAndPhoneVal] = useState<{
 		name: string
 		phoneNumber: string
+		birthDate: string
 	}>({
 		name: '',
 		phoneNumber: '',
+		birthDate: '',
 	})
 	const [errorStatus, setErrorStatus] = useState<{
-		status: null | 'error' | 'success'
+		isError: boolean
 		message: null | string
 	}>({
-		status: null,
+		isError: false,
 		message: null,
+	})
+	const [successStatus, setSuccessStatus] = useState<{
+		isSuccess: boolean
+		data: any
+	}>({
+		isSuccess: false,
+		data: [],
 	})
 
 	const onFindEmail = async () => {
 		if (
 			nameAndPhoneVal.name?.length === 0 ||
-			nameAndPhoneVal.phoneNumber?.length === 0
+			nameAndPhoneVal.phoneNumber?.length === 0 ||
+			nameAndPhoneVal.birthDate?.length === 0
 		)
 			return setErrorStatus({
-				status: 'error',
-				message: '이름, 전화번호 둘다 입력해주세요',
+				isError: true,
+				message: '이름, 전화번호, 생년월일 모두 입력해주세요',
 			})
 		if (nameAndPhoneVal.phoneNumber?.length !== 11)
 			return setErrorStatus({
-				status: 'error',
+				isError: true,
 				message: '전화번호 11자리 입력해주세요',
+			})
+		if (nameAndPhoneVal.birthDate?.length !== 8)
+			return setErrorStatus({
+				isError: true,
+				message: '생년월일 8자리 입력해주세요',
 			})
 
 		try {
 			const res = await UserApi.getFindEmail(nameAndPhoneVal)
 			const { response }: any = res?.data
+
+			setSuccessStatus({
+				isSuccess: true,
+				data: response,
+			})
 		} catch (err: any) {
 			const error = err?.response.data.error
 
 			if (error.status === 400) {
 				setErrorStatus({
-					status: 'error',
+					isError: true,
 					message: error.message,
 				})
 			}
 
 			//성공 처리가 없어서 예시로 500으로 처리한거입니다. 변경 예정
-			if (error.status === 500) {
-				setErrorStatus({
-					status: 'success',
-					message: 'qoals@qoals.com',
-				})
-			}
 		}
 	}
 
@@ -74,7 +93,7 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 				name: e.target.value,
 			}))
 			setErrorStatus({
-				status: null,
+				isError: false,
 				message: null,
 			})
 		}
@@ -84,7 +103,17 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 				phoneNumber: e.target.value,
 			}))
 			setErrorStatus({
-				status: null,
+				isError: false,
+				message: null,
+			})
+		}
+		if (e.target.id === 'birthDate') {
+			setNameAndPhoneVal(prev => ({
+				...prev,
+				birthDate: e.target.value,
+			}))
+			setErrorStatus({
+				isError: false,
 				message: null,
 			})
 		}
@@ -98,7 +127,7 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 						<Cancel_big_Icon onClick={() => setModalView(false)} />
 					</div>
 				</S.TitleHead>
-				{errorStatus.status !== 'success' ? (
+				{successStatus.isSuccess !== true ? (
 					<>
 						<S.InputWrap>
 							<Name_Icon />
@@ -107,14 +136,23 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 						<S.InputWrap>
 							<Phone_Icon />
 							<Input
-								placeholder="전화번호"
+								placeholder="휴대폰 번호를 -없이 입력해주세요"
 								maxlength="11"
 								id="phoneNumber"
 								onChange={onChangeInputVal}
 							/>
 						</S.InputWrap>
+						<S.InputWrap>
+							<Date_Icon />
+							<Input
+								placeholder="생년월일(8자리) ex) 19980505"
+								maxlength="8"
+								id="birthDate"
+								onChange={onChangeInputVal}
+							/>
+						</S.InputWrap>
 						<S.ErrorWrap>
-							{errorStatus.status === 'error' && (
+							{errorStatus.isError === true && (
 								<HookFormError>{errorStatus.message}</HookFormError>
 							)}
 						</S.ErrorWrap>
@@ -126,8 +164,12 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 					</>
 				) : (
 					<S.SuccessEmail>
-						<S.Title>사용자의 정보로 가입된 이메일입니다.</S.Title>
-						이메일 : <span>taegi@naver.com</span>
+						<S.Title>사용자의 정보로 가입된 이메일들 입니다.</S.Title>
+						{successStatus.data.map((el: any, idx: number) => (
+							<S.Email key={idx}>
+								{idx + 1}. {el.email}
+							</S.Email>
+						))}
 					</S.SuccessEmail>
 				)}
 			</S.Box>
@@ -207,7 +249,10 @@ const SuccessEmail = styled.div`
 `
 const Title = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
+`
+const Email = styled.div`
+	margin: 1rem 0;
 `
 const S = {
 	Wrapper,
@@ -218,4 +263,5 @@ const S = {
 	ErrorWrap,
 	SuccessEmail,
 	Title,
+	Email,
 }

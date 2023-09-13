@@ -127,6 +127,7 @@ interface NicknameValidation {
 export interface FindEmailProp {
 	name: string
 	phoneNumber: string
+	birthDate: string
 }
 
 export type UserApiType = {

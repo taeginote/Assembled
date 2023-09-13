@@ -9,9 +9,7 @@ interface Content {
 	userId: number
 }
 interface ActivityUserType {
-	response: {
-		content: Content[]
-	}
+	response: Content[]
 }
 
 const getActivityUserData = async (meetingId: number) => {
