@@ -8,6 +8,7 @@ function Error404() {
 	return (
 		<S.Wrapper>
 			<div>
+				<S.ErrorLogo src="/assets/img/404.png" alt="404errorImg" />
 				<S.ErrorTitle>페이지를 찾지 못했습니다.</S.ErrorTitle>
 				<div>
 					<S.StyledButton onClick={() => navigate('/')}>
@@ -23,9 +24,13 @@ const Wrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
 	${FlexCenterCSS}
-	&>div {
+	& > div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		margin-bottom: 7rem;
 		& > div {
+			width: 100%;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -44,4 +49,8 @@ const ErrorTitle = styled.div`
 const StyledButton = styled(Button)`
 	width: 80%;
 `
-const S = { Wrapper, ErrorTitle, StyledButton }
+const ErrorLogo = styled.img`
+	width: 40rem;
+	height: 25rem;
+`
+const S = { Wrapper, ErrorTitle, StyledButton, ErrorLogo }

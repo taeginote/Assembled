@@ -21,10 +21,7 @@ const useGetAdminCategoryData = () => {
 		() => getAdminCategoryData(),
 		{
 			onError: (error: any) => {
-				if (error.response.data.status === 405) {
-					navigate('/')
-					alert('관리자 권한이 없습니다.')
-				}
+				if (error.response.data.status === 405) return navigate('/그러지마세요')
 			},
 		},
 	)
