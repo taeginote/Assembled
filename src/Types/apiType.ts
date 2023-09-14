@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { categoryType, filterType } from '../Hooks/Queries/get-list'
+import { postLogInData } from './mswType'
 
 export interface MeetingCommentProps {
 	contents?: string
@@ -149,6 +150,9 @@ export type UserApiType = {
 	getFindEmail(datas: FindEmailProp): Promise<AxiosResponse>
 	postFindPassword(datas: FindPasswordProp): Promise<AxiosResponse>
 	putChangePassword(data: LoginData): Promise<AxiosResponse>
+	postLoginFindPassword(
+		data: Pick<postLogInData, 'password'>,
+	): Promise<AxiosResponse>
 }
 
 export type ActivityApiType = {

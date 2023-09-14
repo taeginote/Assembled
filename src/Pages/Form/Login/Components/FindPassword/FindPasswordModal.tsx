@@ -10,6 +10,7 @@ import {
 	Cancel_big_Icon,
 	Date_Icon,
 	Email_Icon,
+	Lock_Icon,
 	Name_Icon,
 	Phone_Icon,
 } from '../../../../../Icons/Icons'
@@ -20,22 +21,26 @@ import UserApi from '../../../../../Apis/UserApi'
 import ChangePassword from './ChangePassword'
 import { useMutation } from '@tanstack/react-query'
 import { FindPasswordProp } from '../../../../../Types/apiType'
+import { postLogInData } from '../../../../../Types/mswType'
 
 interface FindEmailModalTypeProps {
 	setModalView: (state: boolean) => void | undefined
+	isLogin: boolean
 }
 
-function FindPasswordModal({ setModalView }: FindEmailModalTypeProps) {
+function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 	const [passwordVal, setPasswordVal] = useState<{
 		email: string
 		name: string
 		phoneNumber: string
 		birthDate: string
+		PwBeforeChange: string
 	}>({
 		email: '',
 		name: '',
 		phoneNumber: '',
 		birthDate: '',
+		PwBeforeChange: '',
 	})
 	const [errorStatus, setErrorStatus] = useState<{
 		isError: boolean
@@ -73,8 +78,29 @@ function FindPasswordModal({ setModalView }: FindEmailModalTypeProps) {
 			},
 		},
 	)
+	const { mutate: LoginFindPw } = useMutation(
+		(data: Pick<postLogInData, 'password'>) =>
+			UserApi.postLoginFindPassword(data),
+		{
+			onSuccess: res => {
+				setSuccessStatus(() => ({
+					isFind: true,
+					token: res.data.response.token,
+				}))
+			},
+			onError: (err: any) => {
+				const error = err?.response.data.error
+				if (error.status === 400) {
+					setErrorStatus({
+						isError: true,
+						message: error.message,
+					})
+				}
+			},
+		},
+	)
 
-	const FindPassword = async () => {
+	const FindPassword = () => {
 		if (
 			passwordVal.email.length === 0 ||
 			passwordVal.name?.length === 0 ||
@@ -97,6 +123,28 @@ function FindPasswordModal({ setModalView }: FindEmailModalTypeProps) {
 			})
 
 		mutate(passwordVal)
+	}
+	const LoginFindPassword = () => {
+		if (passwordVal.PwBeforeChange.length === 0)
+			return setErrorStatus({
+				isError: true,
+				message: '기존 비밀번호를 입력해주세요',
+			})
+
+		LoginFindPw({ password: passwordVal.PwBeforeChange })
+	}
+	const onKeyDownChangePw = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.nativeEvent.isComposing) return
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			if (passwordVal.PwBeforeChange.length === 0)
+				return setErrorStatus({
+					isError: true,
+					message: '기존 비밀번호를 입력해주세요',
+				})
+
+			LoginFindPw({ password: passwordVal.PwBeforeChange })
+		}
 	}
 
 	const onChangeInputVal = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +172,12 @@ function FindPasswordModal({ setModalView }: FindEmailModalTypeProps) {
 				birthDate: e.target.value,
 			}))
 		}
+		if (e.target.id === 'PwBeforeChange') {
+			setPasswordVal(prev => ({
+				...prev,
+				PwBeforeChange: e.target.value,
+			}))
+		}
 		setErrorStatus({
 			isError: false,
 			message: null,
@@ -145,47 +199,76 @@ function FindPasswordModal({ setModalView }: FindEmailModalTypeProps) {
 				</S.TitleHead>
 				{successStatus.isFind === false ? (
 					<>
-						<S.InputWrap>
-							<Email_Icon />
-							<Input
-								placeholder="이메일"
-								id="email"
-								onChange={onChangeInputVal}
-							/>
-						</S.InputWrap>
-						<S.InputWrap>
-							<Name_Icon />
-							<Input placeholder="이름" id="name" onChange={onChangeInputVal} />
-						</S.InputWrap>
-						<S.InputWrap>
-							<Phone_Icon />
-							<Input
-								placeholder="휴대폰 번호를 -없이 입력해주세요"
-								maxlength="11"
-								id="phoneNumber"
-								onChange={onChangeInputVal}
-							/>
-						</S.InputWrap>
-						<S.InputWrap>
-							<Date_Icon />
-							<Input
-								placeholder="생년월일(8자리) ex) 19980505"
-								maxlength="8"
-								id="birthDate"
-								onChange={onChangeInputVal}
-							/>
-						</S.InputWrap>
-
-						<S.ErrorWrap>
-							{errorStatus.isError === true && (
-								<HookFormError>{errorStatus.message}</HookFormError>
-							)}
-						</S.ErrorWrap>
-						<S.ButtonWrap>
-							<Button type="button" onClick={FindPassword}>
-								비밀번호 찾기
-							</Button>
-						</S.ButtonWrap>
+						{isLogin ? (
+							<>
+								<S.InputWrap>
+									<Lock_Icon />
+									<Input
+										placeholder="기존 비밀번호를 입력해주세요"
+										id="PwBeforeChange"
+										onChange={onChangeInputVal}
+										onKeyDown={onKeyDownChangePw}
+									/>
+								</S.InputWrap>
+								<S.ErrorWrap>
+									{errorStatus.isError === true && (
+										<HookFormError>{errorStatus.message}</HookFormError>
+									)}
+								</S.ErrorWrap>
+								<S.ButtonWrap>
+									<Button type="button" onClick={LoginFindPassword}>
+										새비밀번호 변경
+									</Button>
+								</S.ButtonWrap>
+							</>
+						) : (
+							<>
+								<S.InputWrap>
+									<Email_Icon />
+									<Input
+										placeholder="이메일"
+										id="email"
+										onChange={onChangeInputVal}
+									/>
+								</S.InputWrap>
+								<S.InputWrap>
+									<Name_Icon />
+									<Input
+										placeholder="이름"
+										id="name"
+										onChange={onChangeInputVal}
+									/>
+								</S.InputWrap>
+								<S.InputWrap>
+									<Phone_Icon />
+									<Input
+										placeholder="휴대폰 번호를 -없이 입력해주세요"
+										maxlength="11"
+										id="phoneNumber"
+										onChange={onChangeInputVal}
+									/>
+								</S.InputWrap>
+								<S.InputWrap>
+									<Date_Icon />
+									<Input
+										placeholder="생년월일(8자리) ex) 19980505"
+										maxlength="8"
+										id="birthDate"
+										onChange={onChangeInputVal}
+									/>
+								</S.InputWrap>
+								<S.ErrorWrap>
+									{errorStatus.isError === true && (
+										<HookFormError>{errorStatus.message}</HookFormError>
+									)}
+								</S.ErrorWrap>
+								<S.ButtonWrap>
+									<Button type="button" onClick={FindPassword}>
+										비밀번호 찾기
+									</Button>
+								</S.ButtonWrap>
+							</>
+						)}
 					</>
 				) : (
 					<ChangePassword

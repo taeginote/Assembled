@@ -1,7 +1,7 @@
 //msw type
 
 //post_Login
-interface postLogInData {
+export interface postLogInData {
 	email: string
 	password: string
 }

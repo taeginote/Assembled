@@ -122,7 +122,10 @@ function Login() {
 				<FindEmailModal setModalView={setFindEmailModalView} />
 			)}
 			{findPasswordModalView && (
-				<FindPasswordModal setModalView={setFindPasswordModalView} />
+				<FindPasswordModal
+					setModalView={setFindPasswordModalView}
+					isLogin={false}
+				/>
 			)}
 		</S.Wrapper>
 	)

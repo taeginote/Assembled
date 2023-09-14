@@ -84,6 +84,9 @@ const UserApi: UserApiType = {
 	putChangePassword(data) {
 		return axiosInstance.put('/assemble/user/password', data)
 	},
+	postLoginFindPassword(data) {
+		return axiosInstance.post('/assemble/password/validation', data)
+	},
 }
 
 export default UserApi
