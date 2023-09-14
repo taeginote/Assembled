@@ -55,15 +55,17 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 		},
 	)
 
-	const onClickNotHeart = (): void => {
+	const onClickNotHeart = (event: MouseEvent): void => {
+		event.stopPropagation()
 		mutate({ meetingId })
 	}
-	const onClickFillHeart = (): void => {
+	const onClickFillHeart = (event: MouseEvent): void => {
+		event.stopPropagation()
 		cancelMutate(meetingId!)
 	}
 
 	return (
-		<S.Wrapper>
+		<S.Wrapper onClick={() => navigate(`/Detail?meetingId=${meetingId}`)}>
 			<S.TopWrap>
 				{meetingStatus === 'PROGRESS' ? (
 					<S.Status $state={true}>모집중</S.Status>
@@ -80,7 +82,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 					</>
 				)}
 			</S.TopWrap>
-			<S.Container onClick={() => navigate(`/Detail?meetingId=${meetingId}`)}>
+			<S.Container>
 				<S.Title>
 					{name && name?.length > 45 ? name?.substr(0, 45) + '...' : name}
 				</S.Title>
@@ -200,6 +202,7 @@ const UserImg = styled.img`
 const TopWrap = styled.div`
 	width: 100%;
 	${FlexBetweenCSS}
+	z-index: 100;
 `
 
 const S = {
