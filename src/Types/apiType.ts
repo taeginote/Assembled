@@ -100,6 +100,14 @@ export interface JoinApiType {
 	getMyJoinRequestList(props: number): Promise<AxiosResponse>
 }
 
+export interface SearchAddressProps {
+	accessToken: string
+	cd?: string
+}
+export interface MapApiType {
+	getAccessToken(): Promise<AxiosResponse>
+	getSearchAddress(data: SearchAddressProps): Promise<AxiosResponse>
+}
 //User api type
 
 export interface signUpProps {

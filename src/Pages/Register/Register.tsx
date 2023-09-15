@@ -30,6 +30,7 @@ import UserIdService from '../../Utils/UserIdService'
 import { useEffect, useState } from 'react'
 import { Category } from '../List/Components/CategoryNav/CategoryNav'
 import DaumPostAddress from '../../Components/Map/DaumPostAddress'
+import SearchAddress from '../../Components/Map/SearchAddress'
 
 export interface ResultAddressType {
 	zipCode: number
@@ -182,6 +183,7 @@ function Register() {
 					setResultModal={setResultAddress}
 				/>
 			)}
+			<SearchAddress />
 		</S.Wrapper>
 	)
 }

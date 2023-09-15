@@ -17,6 +17,7 @@ import Activity from '../Pages/MyPage/Pages/Activity'
 import Admin from '../Pages/Admin/admin'
 import AdminCategory from '../Pages/Admin/Pages/AdminCategory'
 import JoinRequest from '../Pages/MyPage/Pages/JoinRequest'
+import MeetingActivity from '../Pages/Activity'
 
 const router = [
 	{
@@ -83,6 +84,11 @@ const router = [
 								element: <UserSetting />,
 							},
 						],
+					},
+					{
+						path: '/activity',
+						element: <MeetingActivity />,
+						children: [],
 					},
 				],
 			},
