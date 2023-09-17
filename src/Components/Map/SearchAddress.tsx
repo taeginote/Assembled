@@ -41,6 +41,7 @@ const SearchAddress = () => {
 	})
 
 	const { data } = useGetAccessTokenData()
+	console.log(data?.result?.accessToken)
 	const {
 		data: getAddress,
 		isLoading,
@@ -66,7 +67,7 @@ const SearchAddress = () => {
 	}
 	useEffect(() => {
 		refetch()
-	}, [sido])
+	}, [sido, data])
 	return (
 		<S.Wrapper>
 			<S.Box>
