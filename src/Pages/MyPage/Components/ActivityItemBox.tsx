@@ -31,29 +31,16 @@ function ActivityItemBox({
 		writerProfileImages,
 		writerNickname,
 		activityUserCount,
-
 		commentCount,
-		likes,
-		likeStatus,
 	} = data
-
-	const memberTestArray = [
-		{
-			name: '신형만',
-			url: 'https://i.namu.wiki/i/PAC1nP5VNDcG0B85hshoIAWaJJqoPgRHwkNMvAnBG6LSZuSiTq5pwtqGk-cjERXIlOKWwTGZOFfxLfrjPxE-Bg.webp',
-		},
-		{
-			name: '문',
-			url: 'https://i.namu.wiki/i/x3gcnscPd_zCtI0mRZSjo9oqknbbwGAq19WLTDYuRNpCYPa7XBLkGNvt6BxjmCrHxYaaQe2_-kukiiuIPo9CBA.webp',
-		},
-	]
 
 	const onViewActivityUser = () => {
 		setMeetingId(meetingId)
 		setUserListModal(true)
 		document.body.style.overflow = 'hidden'
 	}
-	const profileImg = ProfileImgReturn(writerProfileImages?.fileFullPath)
+
+	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
 
 	return (
 		<S.Wrapper>
