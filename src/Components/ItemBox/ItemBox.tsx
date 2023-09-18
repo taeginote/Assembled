@@ -125,11 +125,13 @@ const Wrapper = styled.div`
 	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
 		min-width: 100%;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ss};
+		padding: 1.5rem 1.5rem;
 	}
 `
 const Container = styled.div`
 	${FlexColumnCSS}
 	align-items: start;
+
 	& > div {
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
@@ -142,13 +144,17 @@ const Container = styled.div`
 	padding-bottom: 2rem;
 `
 const UserBox = styled.div`
-	${FlexBetweenCSS}
 	padding: 2rem 0 0 0;
+
 	& > div {
 		${FlexAlignCSS}
+		width: 100%;
 	}
 
 	& > span {
+		@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+			display: none;
+		}
 		${FlexAlignCSS}
 		span {
 			margin-right: 1rem;

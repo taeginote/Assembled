@@ -48,13 +48,6 @@ function List() {
 	)
 	const totalPage: number | undefined = data?.response?.totalPages
 
-	useEffect(() => {
-		if (pageNumber !== 0) return
-		if (pageNumber === 0) {
-			setPage(1)
-		}
-	}, [pageNumber])
-
 	return (
 		<>
 			<S.Wrapper>
