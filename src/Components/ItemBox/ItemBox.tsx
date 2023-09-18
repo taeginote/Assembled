@@ -145,7 +145,7 @@ const Container = styled.div`
 `
 const UserBox = styled.div`
 	padding: 2rem 0 0 0;
-
+	display: flex;
 	& > div {
 		${FlexAlignCSS}
 		width: 100%;
