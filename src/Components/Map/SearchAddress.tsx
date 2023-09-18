@@ -8,6 +8,8 @@ import useGetSearchAddressData, {
 	getSearchAddressList,
 } from '../../Hooks/Queries/get-mapSearchAddress'
 import { useEffect, useState } from 'react'
+import CommentSkeleton from '../Skeleton/CommentSkeleton'
+import SearchAddressModalSkeleton from '../Skeleton/SearchAddressModalSkeleton'
 
 interface stateSido {
 	name?: string
@@ -25,7 +27,7 @@ const SearchAddress = ({
 		name: undefined,
 		cd: undefined,
 	})
-
+	const loadingArr: 0[] = Array(10).fill(0)
 	const { data } = useGetAccessTokenData()
 
 	const {
@@ -68,12 +70,17 @@ const SearchAddress = ({
 					</S.Back>
 				)}
 				<S.ListWrap>
-					{!isLoading &&
-						getAddress?.result.map((el: getSearchAddressList, idx: number) => (
-							<S.List key={idx} onClick={() => onSido(el)}>
-								{el.full_addr}
-							</S.List>
-						))}
+					{isLoading
+						? loadingArr.map((el: 0, idx: number) => (
+								<SearchAddressModalSkeleton key={idx} />
+						  ))
+						: getAddress?.result.map(
+								(el: getSearchAddressList, idx: number) => (
+									<S.List key={idx} onClick={() => onSido(el)}>
+										{el.full_addr}
+									</S.List>
+								),
+						  )}
 				</S.ListWrap>
 			</S.Box>
 		</S.Wrapper>
@@ -158,4 +165,10 @@ const Back = styled.div`
 		cursor: pointer;
 	}
 `
-const S = { Wrapper, Box, Top, List, Back, ListWrap }
+const Wait = styled.div`
+	background-color: yellow;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xslarge};
+	min-height: 40rem;
+	${FlexCenterCSS}
+`
+const S = { Wrapper, Box, Top, List, Back, ListWrap, Wait }

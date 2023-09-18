@@ -45,7 +45,7 @@ function Detail() {
 	let meetingId: number | null = Number(searchParams.get('meetingId'))
 
 	const { data, isLoading, refetch } = useGetDetailData(meetingId)
-	console.log(data?.response)
+
 	const profileImg = ProfileImgReturn(
 		data?.response?.writerProfileImages?.filePath,
 	)
