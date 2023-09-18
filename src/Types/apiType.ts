@@ -40,10 +40,7 @@ interface GetListProps {
 }
 export interface MeetingRegisterProps {
 	categoryId: 1 | number
-	detailAddress?: string
-	lotNumberAddress?: string
-	roadNameAddress?: string
-	zipCode?: number
+	address?: string
 	description?: string
 	name?: string
 }
