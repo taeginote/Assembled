@@ -13,7 +13,7 @@ import { useRecoilState } from 'recoil'
 import { FlexBetweenCSS } from '../../../Styles/common'
 import AdminModal from '../Components/adminModal'
 import useGetAdminCategoryData from '../../../Hooks/Queries/get-adminCategory'
-import LoadingPage from '../../../Components/LoadingPage/Loading'
+import LoadingPage from '../../../Components/Spinner/Spinner'
 
 function AdminCategory() {
 	const { data, isLoading, refetch } = useGetAdminCategoryData()

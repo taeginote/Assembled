@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ColumnNumberCSS, FlexAlignCSS, TopPadding } from '../../Styles/common'
 import useGetDetailData from '../../Hooks/Queries/get-detail'
-import LoadingPage from '../../Components/LoadingPage/Loading'
+import LoadingPage from '../../Components/Spinner/Spinner'
 import CommentForm from './Components/CommentForm'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
