@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import {
 	ColumnNumberCSS,
-	FlexAlignCSS,
 	FlexColumnCSS,
 	GridCenterCSS,
 	TopPadding,
@@ -39,20 +38,19 @@ function ChangeRegister() {
 	const { meetingId } = useParams()
 	const [modalView, setModalView] = useState(false)
 	const [mapModalView, setMapModalView] = useState(false)
-	const [resultAddress, setResultAddress] = useState<undefined | string>(
-		undefined,
-	)
 
 	const {
 		handleSubmit,
 		formState: { errors },
 		control,
-		register,
-		setValue,
 	} = useForm()
 	const { data: GetCategoryData } = useGetCategoryData()
 
-	const { data, refetch } = useGetDetailData(Number(meetingId))
+	const { data } = useGetDetailData(Number(meetingId))
+
+	const [resultAddress, setResultAddress] = useState<undefined | string>(
+		undefined,
+	)
 
 	const { mutate } = useMutation(
 		(data: PatchRegisterData) => MeetingApi.putRegister(data),
@@ -64,8 +62,8 @@ function ChangeRegister() {
 		},
 	)
 
-	if (resultAddress) {
-		setValue('Address', resultAddress)
+	if (resultAddress === undefined && data) {
+		setResultAddress(data?.response?.address)
 	}
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
@@ -74,6 +72,7 @@ function ChangeRegister() {
 		)
 
 		const data: PatchRegisterData = {
+			address: resultAddress,
 			name: e.Title,
 			description: e.Contents,
 			categoryId: categoryId!.categoryId,
@@ -105,10 +104,7 @@ function ChangeRegister() {
 							<S.MapBox>
 								<Input
 									placeholder="모임활동 지역을 선택해주세요"
-									value={resultAddress ? resultAddress : ''}
-									{...register('Address', {
-										required: '모임활동 지역을 선택해주세요',
-									})}
+									value={resultAddress}
 								/>
 								<S.StyleButton
 									type="button"
@@ -117,11 +113,6 @@ function ChangeRegister() {
 									주소찾기
 								</S.StyleButton>
 							</S.MapBox>
-							{errors.Address && (
-								<HookFormError>
-									{errors.Address?.message?.toString()}
-								</HookFormError>
-							)}
 						</S.MapWrap>
 
 						<S.Box>
