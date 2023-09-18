@@ -2,18 +2,13 @@ import { CiSearch } from 'react-icons/ci'
 import styled from 'styled-components'
 
 import { useState } from 'react'
-import {
-	EventTargetType,
-	OnClickType,
-	SearchType,
-	SignUpSubmitData,
-} from '../../../../Types/type'
+import { EventTargetType, SearchType } from '../../../../Types/type'
 import { FlexBetweenCSS } from '../../../../Styles/common'
 import { DownIcon } from '../../../../Icons/Icons'
 
 export type DataType = {
 	title: '제목' | '내용' | '작성자'
-	value: 'name' | 'contents' | 'writer'
+	value: 'name' | 'description' | 'writer'
 }
 
 function SearchBar({
@@ -24,7 +19,7 @@ function SearchBar({
 }: SearchType) {
 	const Data: DataType[] = [
 		{ title: '제목', value: 'name' },
-		{ title: '내용', value: 'contents' },
+		{ title: '내용', value: 'description' },
 		{ title: '작성자', value: 'writer' },
 	]
 
