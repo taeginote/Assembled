@@ -217,9 +217,10 @@ const Wrapper = styled.form`
 	}
 	& > span {
 		text-align: end;
-		margin-top: 3rem;
+		margin: 3rem 0;
 		display: flex;
 		justify-content: end;
+
 		* {
 			margin-left: 1rem;
 		}
