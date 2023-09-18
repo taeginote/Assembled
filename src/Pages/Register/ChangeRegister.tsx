@@ -1,16 +1,14 @@
 import styled from 'styled-components'
 import {
 	ColumnNumberCSS,
+	FlexAlignCSS,
 	FlexColumnCSS,
 	GridCenterCSS,
 	TopPadding,
 	WidthAutoCSS,
 } from '../../Styles/common'
-import {
-	MeetingStatus,
-	selectDataTeamMember,
-} from './Components/SelectBox/SelectData'
-import { selectDataPeriod } from './Components/SelectBox/SelectData'
+import { MeetingStatus } from './Components/SelectBox/SelectData'
+
 import { useRecoilState } from 'recoil'
 import ConfirmModal from '../../Components/Modal/confirmModal'
 import {
@@ -32,6 +30,7 @@ import useGetCategoryData from '../../Hooks/Queries/get-category'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useGetDetailData from '../../Hooks/Queries/get-detail'
+import SearchAddress from '../../Components/Map/SearchAddress'
 
 type CategoryName = { categoryName: string }
 
@@ -39,15 +38,21 @@ function ChangeRegister() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 	const { meetingId } = useParams()
 	const [modalView, setModalView] = useState(false)
+	const [mapModalView, setMapModalView] = useState(false)
+	const [resultAddress, setResultAddress] = useState<undefined | string>(
+		undefined,
+	)
 
 	const {
 		handleSubmit,
 		formState: { errors },
 		control,
+		register,
+		setValue,
 	} = useForm()
 	const { data: GetCategoryData } = useGetCategoryData()
 
-	const { data, isLoading, refetch } = useGetDetailData(Number(meetingId))
+	const { data, refetch } = useGetDetailData(Number(meetingId))
 
 	const { mutate } = useMutation(
 		(data: PatchRegisterData) => MeetingApi.putRegister(data),
@@ -58,6 +63,10 @@ function ChangeRegister() {
 			onError: () => {},
 		},
 	)
+
+	if (resultAddress) {
+		setValue('Address', resultAddress)
+	}
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
 		let categoryId = GetCategoryData?.response.find(
@@ -91,6 +100,29 @@ function ChangeRegister() {
 								datailData={data?.response?.categoryName}
 							/>
 						</S.Box>
+						<S.MapWrap>
+							<div>모임 활동 지역 *</div>
+							<S.MapBox>
+								<Input
+									placeholder="모임활동 지역을 선택해주세요"
+									value={resultAddress ? resultAddress : ''}
+									{...register('Address', {
+										required: '모임활동 지역을 선택해주세요',
+									})}
+								/>
+								<S.StyleButton
+									type="button"
+									onClick={() => setMapModalView(true)}
+								>
+									주소찾기
+								</S.StyleButton>
+							</S.MapBox>
+							{errors.Address && (
+								<HookFormError>
+									{errors.Address?.message?.toString()}
+								</HookFormError>
+							)}
+						</S.MapWrap>
 
 						<S.Box>
 							<div>모임 모집 여부 *</div>
@@ -168,6 +200,12 @@ function ChangeRegister() {
 					{modalView && (
 						<SuccessModal text={'수정 성공'} setState={setModalView} />
 					)}
+					{mapModalView && (
+						<SearchAddress
+							setModalView={setMapModalView}
+							setResultAddress={setResultAddress}
+						/>
+					)}
 				</S.Wrapper>
 			)}
 		</>
@@ -202,6 +240,9 @@ const Wrapper = styled.form`
 const Container = styled.div`
 	${GridCenterCSS}
 	${ColumnNumberCSS(2)}
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		${ColumnNumberCSS(1)}
+	}
 `
 const Title = styled.h3`
 	margin-bottom: 3rem;
@@ -281,7 +322,24 @@ const DivBtn1 = styled.div`
 		opacity: 0.4;
 	}
 `
-
+const MapWrap = styled.div`
+	width: 100%;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		width: 100%;
+	}
+	& > div {
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	}
+	margin-bottom: 2rem;
+`
+const StyleButton = styled(Button)`
+	width: 20%;
+`
+const MapBox = styled.div`
+	display: flex;
+	align-items: start;
+	margin-top: 0.5rem;
+`
 const S = {
 	Container,
 	Wrapper,
@@ -290,4 +348,7 @@ const S = {
 	DivBtn,
 	DivBtn1,
 	Input,
+	MapWrap,
+	StyleButton,
+	MapBox,
 }

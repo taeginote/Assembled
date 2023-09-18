@@ -26,10 +26,9 @@ import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 import MeetingApi from '../../Apis/MeetingApi'
 import { MeetingRegisterProps } from '../../Types/apiType'
 import useGetCategoryData from '../../Hooks/Queries/get-category'
-import UserIdService from '../../Utils/UserIdService'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Category } from '../List/Components/CategoryNav/CategoryNav'
-import DaumPostAddress from '../../Components/Map/DaumPostAddress'
+
 import SearchAddress from '../../Components/Map/SearchAddress'
 
 export interface ResultAddressType {
@@ -43,8 +42,8 @@ function Register() {
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 	const [modalView, setModalView] = useState(false)
 	const [mapModalView, setMapModalView] = useState(false)
-	const [resultAddress, setResultAddress] = useState<null | ResultAddressType>(
-		null,
+	const [resultAddress, setResultAddress] = useState<undefined | string>(
+		undefined,
 	)
 
 	const {
@@ -71,8 +70,6 @@ function Register() {
 	)
 
 	const onSubmit: SubmitHandler<FieldValues> = e => {
-		const writer = UserIdService.getUserId()
-
 		let categoryId = GetCategoryData?.response.find(
 			(el: Category) => el.categoryName === e.Category,
 		)
@@ -106,7 +103,7 @@ function Register() {
 				<S.MapBox>
 					<Input
 						placeholder="모임활동 지역을 선택해주세요"
-						value={resultAddress ? resultAddress.detailAddress! : ''}
+						value={resultAddress ? resultAddress : ''}
 						{...register('Address', {
 							required: '모임활동 지역을 선택해주세요',
 						})}
@@ -177,13 +174,13 @@ function Register() {
 			</span>
 			{recoilCounter && <ConfirmModal text={'등록을 취소하시겠습니까?'} />}
 			{modalView && <SuccessModal text={'등록 성공'} setState={setModalView} />}
+
 			{mapModalView && (
-				<DaumPostAddress
+				<SearchAddress
 					setModalView={setMapModalView}
-					setResultModal={setResultAddress}
+					setResultAddress={setResultAddress}
 				/>
 			)}
-			<SearchAddress />
 		</S.Wrapper>
 	)
 }
