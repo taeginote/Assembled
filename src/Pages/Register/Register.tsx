@@ -78,10 +78,7 @@ function Register() {
 			name: e.Title,
 			description: e.Contents,
 			categoryId: categoryId!.categoryId,
-			detailAddress: resultAddress,
-			lotNumberAddress: resultAddress,
-			roadNameAddress: resultAddress,
-			zipCode: 10011,
+			address: resultAddress,
 		}
 
 		mutate(data)
