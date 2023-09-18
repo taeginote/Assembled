@@ -45,7 +45,7 @@ function Detail() {
 	let meetingId: number | null = Number(searchParams.get('meetingId'))
 
 	const { data, isLoading, refetch } = useGetDetailData(meetingId)
-
+	console.log(data?.response)
 	const profileImg = ProfileImgReturn(
 		data?.response?.writerProfileImages?.filePath,
 	)
@@ -107,7 +107,6 @@ function Detail() {
 	const onClickJoinBtn = () => {
 		setJoinModal(true)
 		document.body.style.overflow = 'hidden'
-		//document.body.style.overflow = "unset"; //스크롤바가 사라졌다가 다시 나타나면서 가로가 변형된다. //스크롤 방지 해제
 	}
 
 	const onJoinMeeting = (e: any) => {
@@ -168,8 +167,12 @@ function Detail() {
 									</p>
 								)}
 								<div>
-									<S.JoinButton size="big" onClick={onClickJoinBtn}>
-										가입 신청
+									<S.JoinButton
+										size="big"
+										onClick={onClickJoinBtn}
+										disabled={data?.response?.activity}
+									>
+										{data?.response?.activity ? '가입 중' : '가입 신청'}
 									</S.JoinButton>
 									<S.WebkHeartBox>
 										{!data?.response?.likeStatus ? (
@@ -242,8 +245,12 @@ function Detail() {
 								신청 취소
 							</S.JoinButton>
 						) : (
-							<S.JoinButton onClick={onClickJoinBtn} $status={true}>
-								가입 신청
+							<S.JoinButton
+								onClick={onClickJoinBtn}
+								$status={true}
+								disabled={data?.response?.activity}
+							>
+								{data?.response?.activity ? '가입 중' : '가입 신청'}
 							</S.JoinButton>
 						)}
 					</S.FloatBox>
