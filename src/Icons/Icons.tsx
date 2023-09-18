@@ -23,7 +23,7 @@ import {
 } from 'react-icons/bs'
 import { BiUser, BiHappy, BiChevronsUp, BiLogOut } from 'react-icons/bi'
 import { MdOutlineCancel, MdOutlineToday } from 'react-icons/md'
-import { RiUser5Line, RiComputerLine } from 'react-icons/ri'
+import { RiUser5Line, RiComputerLine, RiArrowGoBackLine } from 'react-icons/ri'
 import { FiBook } from 'react-icons/fi'
 import { FaQuestion, FaPen } from 'react-icons/fa'
 import { IoIosAirplane, IoIosArrowForward } from 'react-icons/io'
@@ -148,3 +148,4 @@ export const UserQuestion_Icon = () => (
 		color="#FB9B00"
 	/>
 )
+export const Back_Icon = () => <RiArrowGoBackLine size={'20'} />

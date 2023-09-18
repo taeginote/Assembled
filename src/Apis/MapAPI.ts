@@ -8,8 +8,8 @@ const MapApi: MapApiType = {
 	getAccessToken() {
 		return axios.get(`${PATH}/auth/authentication.json`, {
 			params: {
-				consumer_key: '33e5cb9d36b840a6a7e5',
-				consumer_secret: 'c51d734855884b70b795',
+				consumer_key: process.env.REACT_APP_MAP_KEY,
+				consumer_secret: process.env.REACT_APP_MAP_SECRET,
 			},
 		})
 	},

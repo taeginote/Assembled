@@ -1,89 +1,80 @@
-//https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json?consumer_key=33e5cb9d36b840a6a7e5&consumer_secret=c51d734855884b70b795
-//consumer_key=33e5cb9d36b840a6a7e5
-//consumer_secret=c51d734855884b70b795
-
-//accessToken OAuth 인증키 API 호출 시 사용
-// accessTimeout 1970년 1월1일 0시부터 현재까지의 초
-
-//https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json
-//필수 accessToken
-//cd는
-
 import { styled } from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { Cancel_big_Icon } from '../../Icons/Icons'
+import { Back_Icon, Cancel_big_Icon } from '../../Icons/Icons'
 import { FlexBetweenCSS } from '../../Styles/common'
 import { FlexColumnCSS } from '../../Styles/common'
 import useGetAccessTokenData from '../../Hooks/Queries/get-mapAccessToken'
-import useGetSearchAddressData from '../../Hooks/Queries/get-mapSearchAddress'
+import useGetSearchAddressData, {
+	getSearchAddressList,
+} from '../../Hooks/Queries/get-mapSearchAddress'
 import { useEffect, useState } from 'react'
 
 interface stateSido {
-	previousSido: {
-		name?: string
-		cd?: string
-	}
-	currentSido: {
-		name?: string
-		cd?: string
-	}
+	name?: string
+	cd?: string
 }
-const SearchAddress = () => {
+interface MapModalPropType {
+	setModalView: (state: boolean) => void | undefined
+	setResultAddress: (state: string) => void | undefined
+}
+const SearchAddress = ({
+	setModalView,
+	setResultAddress,
+}: MapModalPropType) => {
 	const [sido, setSido] = useState<stateSido>({
-		previousSido: {
-			name: undefined,
-			cd: undefined,
-		},
-		currentSido: {
-			name: undefined,
-			cd: undefined,
-		},
+		name: undefined,
+		cd: undefined,
 	})
 
 	const { data } = useGetAccessTokenData()
-	console.log(data?.result?.accessToken)
+
 	const {
 		data: getAddress,
 		isLoading,
 		refetch,
 	} = useGetSearchAddressData({
-		accessToken: data?.result?.accessToken,
-		cd: sido.currentSido.cd,
+		accessToken: data?.result?.accessToken!,
+		cd: sido.cd,
 	})
-	console.log({ sido })
 
 	const onSido = (el: { full_addr: string; cd: string }) => {
-		console.log(el)
-		setSido(prev => ({
-			previousSido: { name: prev.currentSido.name, cd: prev.currentSido.cd },
-			currentSido: { name: el.full_addr, cd: el.cd },
-		}))
+		if (el.cd.length === 2) {
+			setSido({ name: el.full_addr, cd: el.cd })
+		} else {
+			setResultAddress(el.full_addr)
+			setModalView(false)
+		}
 	}
+
 	const onBackSido = () => {
-		setSido(prev => ({
-			previousSido: { name: undefined, cd: undefined },
-			currentSido: { name: prev.previousSido.name, cd: prev.previousSido.cd },
-		}))
+		setSido({ name: undefined, cd: undefined })
 	}
 	useEffect(() => {
 		refetch()
-	}, [sido, data])
+	}, [sido])
 	return (
 		<S.Wrapper>
 			<S.Box>
 				<S.Top>
-					<div>모임 활동 지역</div>
-					<Cancel_big_Icon />
+					<div>모임 활동 지역을 선택해주세요</div>
+					<Cancel_big_Icon onClick={() => setModalView(false)} />
 				</S.Top>
-				<button onClick={onBackSido}>{sido.previousSido.name}</button>
-				<>
+				{sido.name && (
+					<S.Back onClick={onBackSido}>
+						<div>
+							{sido.name}
+							<Back_Icon />
+						</div>
+					</S.Back>
+				)}
+				<S.ListWrap>
 					{!isLoading &&
-						getAddress?.result.map((el: any, idx: number) => (
+						getAddress?.result.map((el: getSearchAddressList, idx: number) => (
 							<S.List key={idx} onClick={() => onSido(el)}>
 								{el.full_addr}
 							</S.List>
 						))}
-				</>
+				</S.ListWrap>
 			</S.Box>
 		</S.Wrapper>
 	)
@@ -136,13 +127,35 @@ const Top = styled.div`
 	width: 95%;
 	margin-bottom: 0.5rem;
 `
+const ListWrap = styled.div`
+	width: 100%;
+	text-align: start;
+	max-height: 40rem;
+	overflow: auto;
+`
 const List = styled.div`
 	&:hover {
 		background-color: orange;
 	}
 	cursor: pointer;
-	text-align: start;
+
 	padding: 0.5rem 0 0.5rem 2rem;
-	width: 100%;
 `
-const S = { Wrapper, Box, Top, List }
+const Back = styled.div`
+	width: 91%;
+	margin: 1rem 0;
+
+	& > div {
+		margin-right: 1rem;
+		display: flex;
+		align-items: center;
+		& > * {
+			margin-left: 1rem;
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+`
+const S = { Wrapper, Box, Top, List, Back, ListWrap }
