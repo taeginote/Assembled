@@ -110,7 +110,12 @@ export const Hamburger_Icon = ({ onClick }: OnClickIconType) => (
 ) // 햄버거
 export const Cancel_Icon = () => <MdOutlineCancel size={'17'} color="#777" /> //취소 버튼
 export const Cancel_big_Icon = ({ onClick }: OnClickIconType) => (
-	<RxCross2 size={'35'} color="#FB9B00" onClick={onClick} />
+	<RxCross2
+		size={'35'}
+		color="#FB9B00"
+		onClick={onClick}
+		style={{ cursor: 'Pointer' }}
+	/>
 ) //취소 버튼
 export const Cancel_Black_Icon = ({ onClick }: OnClickIconType) => (
 	<RxCross2 size={'30'} onClick={onClick} />
