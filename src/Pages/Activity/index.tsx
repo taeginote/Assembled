@@ -1,11 +1,18 @@
 import { styled } from 'styled-components'
 import { FlexAlignCSS, TopPadding } from '../../Styles/common'
+import ActivitySideFilterNav from './Components/ActivitySideFilterNav'
+
+import { Outlet } from 'react-router-dom'
 
 function MeetingActivity() {
 	return (
 		<S.Wrapper>
-			<S.Left>d</S.Left>
-			<S.Right>d</S.Right>
+			<S.Left>
+				<ActivitySideFilterNav />
+			</S.Left>
+			<S.Right>
+				<Outlet />
+			</S.Right>
 		</S.Wrapper>
 	)
 }
@@ -16,15 +23,15 @@ const Wrapper = styled.div`
 `
 const Left = styled.div`
 	${TopPadding}
-	width: 20%;
+	width: 13%;
 	min-height: 100vh;
-	background-color: yellow;
+	background-color: ${({ theme }) => theme.COLOR.orange};
 `
+
 const Right = styled.div`
 	${TopPadding}
-	width: 80%;
+	width: 97%;
 	min-height: 100vh;
-	background-color: blue;
 `
 
 const S = { Wrapper, Left, Right }
