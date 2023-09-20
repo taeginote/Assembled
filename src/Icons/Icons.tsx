@@ -38,6 +38,7 @@ type IconSize = {
 
 type IconRotate = {
 	rotate?: number
+	onClick?: React.MouseEventHandler<SVGSVGElement>
 }
 interface OnClickIconType {
 	onClick?: React.MouseEventHandler<SVGSVGElement>
@@ -137,10 +138,11 @@ export const Refetch_Icon = () => <AiOutlineUndo size={'23'} />
 export const Home_Icon = ({ onClick }: OnClickIconType) => (
 	<AiOutlineHome size={'23'} onClick={onClick} />
 )
-export const Arrow_Icon = ({ rotate }: IconRotate) => (
+export const Arrow_Icon = ({ rotate, onClick }: IconRotate) => (
 	<IoIosArrowForward
 		size={'23'}
-		style={{ transform: `rotate(${rotate}deg)` }}
+		onClick={onClick}
+		style={{ transform: `rotate(${rotate}deg)`, cursor: 'Pointer' }}
 	/>
 )
 export const LogOut_Icon = ({ onClick }: OnClickIconType) => (
