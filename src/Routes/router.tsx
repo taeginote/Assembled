@@ -19,7 +19,7 @@ import AdminCategory from '../Pages/Admin/Pages/AdminCategory'
 import JoinRequest from '../Pages/MyPage/Pages/JoinRequest'
 import MeetingActivity from '../Pages/Activity'
 import ChattingPage from '../Pages/Activity/Components/ChattingPage'
-import DatePage from '../Pages/Activity/Components/DatePage'
+import DatePage from '../Pages/Activity/Components/DatePage/DatePage'
 
 const router = [
 	{

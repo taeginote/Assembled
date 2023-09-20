@@ -1,10 +1,12 @@
 import { styled } from 'styled-components'
+import DateViewComponents from './DateViewComponents'
 
 function DatePage() {
 	return (
 		<S.Wrapper>
+			<S.Title>달력</S.Title>
 			<S.Date>
-				<S.Title>달력</S.Title>
+				<DateViewComponents />
 			</S.Date>
 		</S.Wrapper>
 	)
@@ -14,8 +16,6 @@ export default DatePage
 const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
-	display: flex;
-	justify-content: center;
 `
 const Date = styled.div`
 	width: 100%;

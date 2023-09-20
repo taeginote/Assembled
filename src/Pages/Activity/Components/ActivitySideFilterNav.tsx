@@ -5,7 +5,7 @@ function ActivitySideFilterNav() {
 	const { pathname } = useLocation()
 
 	const currentPage = pathname.split('/')[2]
-	console.log(currentPage)
+
 	const list = [
 		{
 			name: '채팅',
