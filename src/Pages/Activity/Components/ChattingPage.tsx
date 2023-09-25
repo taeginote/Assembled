@@ -31,6 +31,7 @@ function ChattingPage() {
 					<S.ChatList key={idx}>
 						<S.UserImg src={ProfileImgReturn(undefined)} />
 						<S.ChattingContent>안녕하세요~~</S.ChattingContent>
+						<S.Time>16:00</S.Time>
 					</S.ChatList>
 				))}
 			</S.ChattingZone>
@@ -128,6 +129,12 @@ const IconWrapper = styled.div`
 	bottom: 4rem;
 	right: 9rem;
 `
+const Time = styled.div`
+	font-size: ${({ theme }) => theme.FONT_SIZE.ss};
+	margin-top: 0.8rem;
+	margin-left: 0.3rem;
+	color: ${({ theme }) => theme.COLOR.common.gray[300]};
+`
 const S = {
 	Wrapper,
 	Chatting,
@@ -139,4 +146,5 @@ const S = {
 	InputChatting,
 	InputWrapper,
 	IconWrapper,
+	Time,
 }
