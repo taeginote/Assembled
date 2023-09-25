@@ -87,6 +87,9 @@ const UserApi: UserApiType = {
 	postLoginFindPassword(data) {
 		return axiosInstance.post('/assemble/password/validation', data)
 	},
+	postKakaoLogIn(data) {
+		return axiosInstance.post('/assemble/oauth', data)
+	},
 }
 
 export default UserApi
