@@ -30,7 +30,7 @@ function App() {
 							<RouterProvider router={RouterObject} />
 						</ThemeProvider>
 					</RecoilRoot>
-					<ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+					{/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right" /> */}
 				</QueryClientProvider>
 			</AuthProvider>
 		</>
