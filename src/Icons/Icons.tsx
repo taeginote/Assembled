@@ -11,6 +11,7 @@ import {
 	AiOutlineUndo,
 	AiOutlineHome,
 	AiOutlineQuestionCircle,
+	AiOutlineSend,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -156,3 +157,6 @@ export const UserQuestion_Icon = () => (
 	/>
 )
 export const Back_Icon = () => <RiArrowGoBackLine size={'20'} />
+export const Send_Icon = () => (
+	<AiOutlineSend size={'25'} style={{ cursor: 'Pointer' }} />
+)
