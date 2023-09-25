@@ -158,6 +158,7 @@ export type UserApiType = {
 	postLoginFindPassword(
 		data: Pick<postLogInData, 'password'>,
 	): Promise<AxiosResponse>
+	postKakaoLogIn(data: string): Promise<AxiosResponse>
 }
 
 export type ActivityApiType = {
