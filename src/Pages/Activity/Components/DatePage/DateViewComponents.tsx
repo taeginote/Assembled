@@ -5,28 +5,59 @@ import { useState } from 'react'
 
 function DateViewComponents() {
 	let date: Date = new Date() //현 날짜 시간
-	let today: number = date.getDate() //today
-	let [currentMonth, setCurrentMonth] = useState<number>(date.getMonth() + 1) //currentMonth는 0부터 시작 그래서 +1해줘야함
-	let [currentYear, setCurrentYear] = useState<number>(date.getFullYear()) //이번년도
+	const [currentMonth, setCurrentMonth] = useState<number>(date.getMonth() + 1)
+	const [currentYear, setCurrentYear] = useState<number>(date.getFullYear())
+
+	let lastDayOfMonthDate = new Date(currentYear, currentMonth, 0).getDate() //이번 달 마지막 일자 ex) 30
+	let lastDayOfMonthDay = new Date(currentYear, currentMonth, 0).getDay() //이번 달 마지막 일자 요일 ex)일요일
+
+	let monthArr: (number | null)[][] = [[], [], [], [], []]
+	let totalDate = lastDayOfMonthDate
+
+	//마지막 주
+	for (let lastWeek = lastDayOfMonthDay; lastWeek >= 0; lastWeek--) {
+		monthArr[4].unshift(totalDate)
+		totalDate -= 1
+	}
+
+	//중간 주
+	for (let middleOfMonth = 3; middleOfMonth >= 1; middleOfMonth--) {
+		for (let week = 7; week >= 1; week--) {
+			monthArr[middleOfMonth].unshift(totalDate)
+			totalDate -= 1
+		}
+	}
+
+	//첫 주
+	for (let fistWeek = 7; fistWeek >= 1; fistWeek--) {
+		if (totalDate === 0) {
+			monthArr[0].unshift(null)
+		} else {
+			monthArr[0].unshift(totalDate)
+			totalDate -= 1
+		}
+	}
 
 	const onPrevious = () => {
 		//월 previous
+		let month = currentMonth
+		month -= 1
+		if (month === 0)
+			return setCurrentMonth(12), setCurrentYear(prev => (prev -= 1))
+		setCurrentMonth(prev => (prev -= 1))
 	}
 	const onNext = () => {
 		//월 next
+		let month = currentMonth
+		month += 1
+		if (month === 13)
+			return setCurrentMonth(1), setCurrentYear(prev => (prev += 1))
+		setCurrentMonth(prev => (prev += 1))
 	}
-
-	const testArr = [
-		[1, 2, 3, 4, 5, 6, 7],
-		[8, 9, 10, 11, 12, 13, 14],
-		[15, 16, 17, 18, 19, 20, 21],
-		[22, 23, 24, 25, 26, 27, 28],
-	]
-	//일단 달력을 위해서는 주단위 큰 배열 아래 0,1,2,3 안에 일이 들어가야한다.
-	//즉, 두개의 배열에서 도는 형식 제일 큰거는 tr을 생성하고 그 아래는 th
 
 	return (
 		<S.Wrapper>
+			<h1>{currentYear}</h1>
 			<S.Month>
 				<Arrow_Icon rotate={180} onClick={onPrevious} />
 				<div>{currentMonth}월달</div>
@@ -42,10 +73,17 @@ function DateViewComponents() {
 					<S.FirstTh>금요일</S.FirstTh>
 					<S.FirstTh>토요일</S.FirstTh>
 				</tr>
-				{testArr.map((month, idx: number) => (
+				{monthArr.map((month, idx: number) => (
 					<tr key={idx}>
 						{month.map((day, idx: number) => (
-							<S.Th>{day}</S.Th>
+							<S.Th
+								key={idx}
+								$isStatus={
+									date.getMonth() + 1 === currentMonth && date.getDate() === day
+								}
+							>
+								{day}
+							</S.Th>
 						))}
 					</tr>
 				))}
@@ -57,6 +95,9 @@ export default DateViewComponents
 
 const Wrapper = styled.div`
 	margin-top: 5rem;
+	& > h1 {
+		text-align: center;
+	}
 `
 const Month = styled.div`
 	width: 100%;
@@ -70,8 +111,6 @@ const Month = styled.div`
 `
 const Table = styled.table`
 	margin: auto;
-	/* border-top: 1px solid black; */
-	/* border-left: 1px solid black; */
 `
 const FirstTh = styled.th`
 	vertical-align: top;
@@ -80,7 +119,7 @@ const FirstTh = styled.th`
 	text-align: center;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
-const Th = styled.th`
+const Th = styled.th<{ $isStatus: boolean }>`
 	&:hover {
 		background-color: ${({ theme }) => theme.COLOR.sub};
 	}
@@ -89,6 +128,7 @@ const Th = styled.th`
 	height: 8rem;
 	text-align: center;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	background-color: ${({ theme, $isStatus }) => $isStatus && theme.COLOR.sub};
 `
 
 const S = { Wrapper, Month, Table, Th, FirstTh }
