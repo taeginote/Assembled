@@ -128,6 +128,7 @@ export const Dot_Icon = () => <BsDot size={'35'} color="#FB9B00" />
 
 export const Plus_Icon = () => <HiOutlinePlus size={'22'} color="#FB9B00" />
 //플러스
+export const BigPlus_Icon = () => <HiOutlinePlus size={'40'} color="#FB9B00" />
 
 export const Up_Icon = () => <BiChevronsUp size={'40'} color="#FDD19B" />
 //Up
