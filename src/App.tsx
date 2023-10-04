@@ -6,7 +6,8 @@ import GlobalStyles from './Styles/global'
 import theme from './Styles/theme'
 import { RecoilRoot } from 'recoil'
 import AuthProvider from './Contexts/auth'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import './Components/Firebase/messaging_init_in_sw'
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function App() {
 	const RouterObject = createBrowserRouter(router)
