@@ -17,11 +17,11 @@ function ActivitySideFilterNav() {
 		},
 		{
 			name: '모임활동',
-			url: '/모임활동',
+			url: '',
 		},
 		{
 			name: '우리의 추억',
-			url: '/추억',
+			url: '',
 		},
 	]
 
