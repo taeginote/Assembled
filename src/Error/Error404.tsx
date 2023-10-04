@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Error404() {
 	const navigate = useNavigate()
+
 	return (
 		<S.Wrapper>
 			<div>
