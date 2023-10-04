@@ -24,18 +24,18 @@ function requestPermission() {
 			'BF-NXubsmJkLnmbSsQnbSUgRBMHu-HiGaxky5Niz2tJShRWq_HcZ2lhMC3Dbblb7L2cBJffbmeGmh-ovJ7m53vE',
 	}).then(currentToken => {
 		if (currentToken) {
-			console.log('currentoken : ', currentToken) //등록 토큰 받
+			// console.log('currentoken : ', currentToken) //등록 토큰 받
 		} else {
-			console.log('can not token ')
+			// console.log('can not token ')
 		}
 	})
 
-	console.log('Requesting permission...')
+	// console.log('Requesting permission...')
 	Notification.requestPermission().then(permission => {
 		if (permission === 'granted') {
-			console.log('Notification permission granted.')
+			// console.log('Notification permission granted.')
 		} else {
-			console.log('do not have premission!!')
+			// console.log('do not have premission!!')
 		}
 	})
 }
