@@ -34,7 +34,7 @@ function Detail() {
 	const navigate = useNavigate()
 	const queryClient = useQueryClient()
 	const token = TokenService.getAccessToken()
-	console.log(token?.length === 0)
+
 	const [searchParams] = useSearchParams()
 	const [joinModal, setJoinModal] = useState(false)
 	const [userListModal, setUserListModal] = useState(false)

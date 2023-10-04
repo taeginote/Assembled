@@ -7,7 +7,7 @@ function DateViewComponents() {
 	let date: Date = new Date() //현 날짜 시간
 	const [currentMonth, setCurrentMonth] = useState<number>(date.getMonth() + 1)
 	const [currentYear, setCurrentYear] = useState<number>(date.getFullYear())
-
+	const [viewYearArr, setViewYearArr] = useState<boolean>(false)
 	let lastDayOfMonthDate = new Date(currentYear, currentMonth, 0).getDate() //이번 달 마지막 일자 ex) 30
 	let lastDayOfMonthDay = new Date(currentYear, currentMonth, 0).getDay() //이번 달 마지막 일자 요일 ex)일요일
 
@@ -38,30 +38,65 @@ function DateViewComponents() {
 		}
 	}
 
-	const onPrevious = () => {
+	const onPrevious = (type: 'month' | 'year') => {
 		//월 previous
-		let month = currentMonth
-		month -= 1
-		if (month === 0)
-			return setCurrentMonth(12), setCurrentYear(prev => (prev -= 1))
-		setCurrentMonth(prev => (prev -= 1))
+		if (type === 'year') {
+			setCurrentYear(prev => (prev -= 1))
+			setCurrentMonth(1)
+		}
+
+		if (type === 'month') {
+			let month = currentMonth
+			month -= 1
+			if (month === 0)
+				return setCurrentMonth(12), setCurrentYear(prev => (prev -= 1))
+			setCurrentMonth(prev => (prev -= 1))
+		}
 	}
-	const onNext = () => {
+	const onNext = (type: 'month' | 'year') => {
 		//월 next
-		let month = currentMonth
-		month += 1
-		if (month === 13)
-			return setCurrentMonth(1), setCurrentYear(prev => (prev += 1))
-		setCurrentMonth(prev => (prev += 1))
+		if (type === 'year') {
+			setCurrentYear(prev => (prev += 1))
+			setCurrentMonth(1)
+		}
+
+		if (type === 'month') {
+			let month = currentMonth
+			month += 1
+			if (month === 13)
+				return setCurrentMonth(1), setCurrentYear(prev => (prev += 1))
+			setCurrentMonth(prev => (prev += 1))
+		}
+	}
+	let selectYearArr: number[] = []
+
+	for (let i = currentYear - 5; i < currentYear + 6; i++) {
+		selectYearArr.push(i)
+	}
+
+	const onClickSelectYear = (year: number) => {
+		setCurrentYear(year)
+		setViewYearArr(false)
 	}
 
 	return (
 		<S.Wrapper>
-			<h1>{currentYear}</h1>
+			<S.Year>
+				<Arrow_Icon rotate={180} onClick={() => onPrevious('year')} />
+				<h1 onClick={() => setViewYearArr(prev => !prev)}>{currentYear}</h1>
+				<Arrow_Icon rotate={0} onClick={() => onNext('year')} />
+				{viewYearArr && (
+					<S.SelectYear>
+						{selectYearArr.map((el, key) => (
+							<div onClick={() => onClickSelectYear(el)}>{el}</div>
+						))}
+					</S.SelectYear>
+				)}
+			</S.Year>
 			<S.Month>
-				<Arrow_Icon rotate={180} onClick={onPrevious} />
+				<Arrow_Icon rotate={180} onClick={() => onPrevious('month')} />
 				<div>{currentMonth}월달</div>
-				<Arrow_Icon rotate={0} onClick={onNext} />
+				<Arrow_Icon rotate={0} onClick={() => onNext('month')} />
 			</S.Month>
 			<S.Table>
 				<tr>
@@ -79,7 +114,9 @@ function DateViewComponents() {
 							<S.Th
 								key={idx}
 								$isStatus={
-									date.getMonth() + 1 === currentMonth && date.getDate() === day
+									date.getFullYear() === currentYear &&
+									date.getMonth() + 1 === currentMonth &&
+									date.getDate() === day
 								}
 							>
 								{day}
@@ -95,9 +132,19 @@ export default DateViewComponents
 
 const Wrapper = styled.div`
 	margin-top: 5rem;
+`
+const Year = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	& > h1 {
-		text-align: center;
+		&:hover {
+			color: orange;
+			cursor: pointer;
+		}
+		margin: 0 2rem;
 	}
+	position: relative;
 `
 const Month = styled.div`
 	width: 100%;
@@ -130,5 +177,20 @@ const Th = styled.th<{ $isStatus: boolean }>`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	background-color: ${({ theme, $isStatus }) => $isStatus && theme.COLOR.sub};
 `
-
-const S = { Wrapper, Month, Table, Th, FirstTh }
+const SelectYear = styled.div`
+	& > div {
+		padding: 1rem 2rem;
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		cursor: pointer;
+		&:hover {
+			scale: 1.1;
+		}
+	}
+	border: 1px solid gray;
+	background-color: white;
+	border-radius: 2rem;
+	position: absolute;
+	right: 47.3%;
+	top: 100%;
+`
+const S = { Wrapper, Month, Table, Th, FirstTh, Year, SelectYear }
