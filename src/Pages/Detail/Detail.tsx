@@ -34,7 +34,7 @@ function Detail() {
 	const navigate = useNavigate()
 	const queryClient = useQueryClient()
 	const token = TokenService.getAccessToken()
-
+	console.log(token?.length === 0)
 	const [searchParams] = useSearchParams()
 	const [joinModal, setJoinModal] = useState(false)
 	const [userListModal, setUserListModal] = useState(false)
@@ -49,6 +49,7 @@ function Detail() {
 	const profileImg = ProfileImgReturn(
 		data?.response?.writerProfileImages?.filePath,
 	)
+
 	const IsMinePage = data?.response?.writerId == UserId ? true : false
 
 	const { mutate } = useMutation(
@@ -135,126 +136,132 @@ function Detail() {
 			{isLoading ? (
 				<LoadingPage />
 			) : (
-				<S.Container>
-					<S.Top>
-						<span>
-							<h1>반가워요.</h1>
-							<h1>우리는 "{data?.response?.name}" 입니다</h1>
-							<S.Profile>
-								<S.UserImg src={profileImg} alt="ProfileImage" />
-								<div>{data?.response?.writerNickname}</div>
-							</S.Profile>
-						</span>
-						<>
-							<S.TopRight>
-								{IsMinePage && (
-									<p>
-										<button
-											title="Modify"
-											onClick={() => navigate(`/register/${meetingId}`)}
-										>
-											<div>
-												<Ballon text={'모임 수정'} />
-											</div>
-											<Pen_Icon />
-										</button>
-										<button title="Delete" onClick={onDeleteClub}>
-											<div>
-												<Ballon text={'모임 삭제'} />
-											</div>
-											<Trash_Icon />
-										</button>
-									</p>
+				<>
+					<S.Container>
+						<S.Top>
+							<span>
+								<h1>반가워요.</h1>
+								<h1>우리는 "{data?.response?.name}" 입니다</h1>
+								<S.Profile>
+									<S.UserImg src={profileImg} alt="ProfileImage" />
+									<div>{data?.response?.writerNickname}</div>
+								</S.Profile>
+							</span>
+							<>
+								<S.TopRight>
+									{IsMinePage && (
+										<p>
+											<button
+												title="Modify"
+												onClick={() => navigate(`/register/${meetingId}`)}
+											>
+												<div>
+													<Ballon text={'모임 수정'} />
+												</div>
+												<Pen_Icon />
+											</button>
+											<button title="Delete" onClick={onDeleteClub}>
+												<div>
+													<Ballon text={'모임 삭제'} />
+												</div>
+												<Trash_Icon />
+											</button>
+										</p>
+									)}
+									{token?.length !== 0 && (
+										<div>
+											<S.JoinButton
+												size="big"
+												onClick={onClickJoinBtn}
+												disabled={data?.response?.activity}
+											>
+												{data?.response?.activity ? '가입 중' : '가입 신청'}
+											</S.JoinButton>
+											<S.WebkHeartBox>
+												{!data?.response?.likeStatus ? (
+													<NotFillHeart_Icon onClick={onHeart} />
+												) : (
+													<FillHeart_Icon
+														onClick={() => cancelMutate(meetingId!)}
+													/>
+												)}
+												<div>{data?.response?.likes}</div>
+											</S.WebkHeartBox>
+										</div>
+									)}
+								</S.TopRight>
+							</>
+						</S.Top>
+						<S.Info>
+							<div>
+								<div>설립일</div>
+								<span>{data?.response?.createdTime.split('T')[0]}</span>
+							</div>
+							<div>
+								<div>카테고리</div>
+								<span>{data?.response?.categoryName}</span>
+							</div>
+							<div>
+								<div>활동 인원</div>
+								<S.ActivityUserSpan onClick={onActivityUserList}>
+									{data?.response?.activityUserCount === 0
+										? '제한없음'
+										: data?.response?.activityUserCount + '명'}
+									<UserQuestion_Icon />
+									<div>
+										<Ballon text={'멤버 구경'} />
+									</div>
+								</S.ActivityUserSpan>
+							</div>
+							<div>
+								<div>활동지역</div>
+								<span>{data?.response?.address}</span>
+							</div>
+						</S.Info>
+						<h3>모임 설명</h3>
+						<S.Dec>{data?.response?.description}</S.Dec>
+						{data && (
+							<CommentForm
+								comments={data?.response?.comments}
+								meetingId={meetingId}
+								refetch={refetch}
+								token={token}
+							/>
+						)}
+
+						{token?.length !== 0 && (
+							<S.FloatBox>
+								{!data?.response?.likeStatus ? (
+									<S.HeartBox onClick={onHeart}>
+										<NotFillHeart_Icon />
+										<div>{data?.response?.likes}</div>
+									</S.HeartBox>
+								) : (
+									<S.HeartBox onClick={() => cancelMutate(meetingId!)}>
+										<FillHeart_Icon />
+										<div>{data?.response?.likes}</div>
+									</S.HeartBox>
 								)}
-								<div>
+								{data?.response?.joinRequest ? (
 									<S.JoinButton
-										size="big"
+										onClick={() => meetingJoinCancel(data?.response?.meetingId)}
+										variant="default-white"
+									>
+										신청 취소
+									</S.JoinButton>
+								) : (
+									<S.JoinButton
 										onClick={onClickJoinBtn}
+										$status={true}
 										disabled={data?.response?.activity}
 									>
 										{data?.response?.activity ? '가입 중' : '가입 신청'}
 									</S.JoinButton>
-									<S.WebkHeartBox>
-										{!data?.response?.likeStatus ? (
-											<NotFillHeart_Icon onClick={onHeart} />
-										) : (
-											<FillHeart_Icon
-												onClick={() => cancelMutate(meetingId!)}
-											/>
-										)}
-										<div>{data?.response?.likes}</div>
-									</S.WebkHeartBox>
-								</div>
-							</S.TopRight>
-						</>
-					</S.Top>
-					<S.Info>
-						<div>
-							<div>설립일</div>
-							<span>{data?.response?.createdTime.split('T')[0]}</span>
-						</div>
-						<div>
-							<div>카테고리</div>
-							<span>{data?.response?.categoryName}</span>
-						</div>
-						<div>
-							<div>활동 인원</div>
-							<S.ActivityUserSpan onClick={onActivityUserList}>
-								{data?.response?.activityUserCount === 0
-									? '제한없음'
-									: data?.response?.activityUserCount + '명'}
-								<UserQuestion_Icon />
-								<div>
-									<Ballon text={'멤버 구경'} />
-								</div>
-							</S.ActivityUserSpan>
-						</div>
-						<div>
-							<div>활동지역</div>
-							<span>{data?.response?.roadNameAddress}</span>
-						</div>
-					</S.Info>
-					<h3>모임 설명</h3>
-					<S.Dec>{data?.response?.description}</S.Dec>
-					{data && (
-						<CommentForm
-							comments={data?.response?.comments}
-							meetingId={meetingId}
-							refetch={refetch}
-							token={token}
-						/>
-					)}
-
-					<S.FloatBox>
-						{!data?.response?.likeStatus ? (
-							<S.HeartBox onClick={onHeart}>
-								<NotFillHeart_Icon />
-								<div>{data?.response?.likes}</div>
-							</S.HeartBox>
-						) : (
-							<S.HeartBox onClick={() => cancelMutate(meetingId!)}>
-								<FillHeart_Icon />
-								<div>{data?.response?.likes}</div>
-							</S.HeartBox>
+								)}
+							</S.FloatBox>
 						)}
-						{data?.response?.joinRequest ? (
-							<S.JoinButton
-								onClick={() => meetingJoinCancel(data?.response?.meetingId)}
-								variant="default-white"
-							>
-								신청 취소
-							</S.JoinButton>
-						) : (
-							<S.JoinButton
-								onClick={onClickJoinBtn}
-								$status={true}
-								disabled={data?.response?.activity}
-							>
-								{data?.response?.activity ? '가입 중' : '가입 신청'}
-							</S.JoinButton>
-						)}
-					</S.FloatBox>
-				</S.Container>
+					</S.Container>
+				</>
 			)}
 			{recoilCounter && (
 				<ConfirmModal
@@ -360,7 +367,6 @@ const Profile = styled.div`
 		color: ${({ theme }) => theme.COLOR.common.black};
 		font-family: ${({ theme }) => theme.FONT_WEIGHT.bold};
 	}
-
 	padding: 4rem 0;
 `
 const Top = styled.div`
@@ -524,6 +530,7 @@ const ButtonWrap = styled.div`
 	}
 	margin: 0 6rem;
 `
+
 const S = {
 	Wrapper,
 	Container,
