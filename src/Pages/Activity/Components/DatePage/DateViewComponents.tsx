@@ -11,17 +11,17 @@ function DateViewComponents() {
 	let lastDayOfMonthDate = new Date(currentYear, currentMonth, 0).getDate() //이번 달 마지막 일자 ex) 30
 	let lastDayOfMonthDay = new Date(currentYear, currentMonth, 0).getDay() //이번 달 마지막 일자 요일 ex)일요일
 
-	let monthArr: (number | null)[][] = [[], [], [], [], []]
+	let monthArr: (number | null)[][] = [[], [], [], [], [], []]
 	let totalDate = lastDayOfMonthDate
 
 	//마지막 주
 	for (let lastWeek = lastDayOfMonthDay; lastWeek >= 0; lastWeek--) {
-		monthArr[4].unshift(totalDate)
+		monthArr[5].unshift(totalDate)
 		totalDate -= 1
 	}
 
 	//중간 주
-	for (let middleOfMonth = 3; middleOfMonth >= 1; middleOfMonth--) {
+	for (let middleOfMonth = 4; middleOfMonth >= 2; middleOfMonth--) {
 		for (let week = 7; week >= 1; week--) {
 			monthArr[middleOfMonth].unshift(totalDate)
 			totalDate -= 1
@@ -31,10 +31,21 @@ function DateViewComponents() {
 	//첫 주
 	for (let fistWeek = 7; fistWeek >= 1; fistWeek--) {
 		if (totalDate === 0) {
-			monthArr[0].unshift(null)
+			monthArr[1].unshift(null)
 		} else {
-			monthArr[0].unshift(totalDate)
+			monthArr[1].unshift(totalDate)
 			totalDate -= 1
+		}
+	}
+
+	if (totalDate !== 0) {
+		for (let i = 7; i > 0; i--) {
+			if (totalDate === 0) {
+				monthArr[0].unshift(null)
+			} else {
+				monthArr[0].unshift(totalDate)
+				totalDate -= 1
+			}
 		}
 	}
 
