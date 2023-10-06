@@ -89,7 +89,7 @@ function DateViewComponents() {
 		setCurrentYear(year)
 		setViewYearArr(false)
 	}
-
+	console.log(String(currentYear) + String(currentMonth))
 	return (
 		<S.Wrapper>
 			<S.Year>
@@ -131,6 +131,16 @@ function DateViewComponents() {
 								}
 							>
 								{day}
+
+								{/* 
+								이거가 달력 label? 스타일
+								{dateArr[
+									String(currentYear) + currentMonth + Number(day) < 10
+										? '0' + day
+										: day
+								].map((el, idx) => (
+									<S.Tag key={idx}>{el.title}</S.Tag>
+								))} */}
 							</S.Th>
 						))}
 					</tr>
@@ -204,4 +214,10 @@ const SelectYear = styled.div`
 	right: 47.3%;
 	top: 100%;
 `
-const S = { Wrapper, Month, Table, Th, FirstTh, Year, SelectYear }
+const Tag = styled.div`
+	background-color: ${({ theme }) => theme.COLOR.orange};
+	margin: 0.1rem 0;
+	overflow: hidden;
+	max-height: 2rem;
+`
+const S = { Wrapper, Month, Table, Th, FirstTh, Year, SelectYear, Tag }
