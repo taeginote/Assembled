@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import DateViewComponents from './DateViewComponents'
-import { BigPlus_Icon } from '../../../../Icons/Icons'
+import { BigPlusIcon } from '../../../../Icons/Icons'
 
 function DatePage() {
 	return (
@@ -10,7 +10,7 @@ function DatePage() {
 				<DateViewComponents />
 			</S.Date>
 			<S.AddBtn>
-				<BigPlus_Icon />
+				<BigPlusIcon />
 			</S.AddBtn>
 		</S.Wrapper>
 	)

@@ -7,7 +7,7 @@ import { FlexAlignCSS, FlexColumnCSS } from '../../../Styles/common'
 function AdminSideFilterNav() {
 	const navigate = useNavigate()
 	const { pathname } = useLocation()
-	const [selectTitle, setSelectTitle] = useState<string | null>(null)
+	const [, setSelectTitle] = useState<string | null>(null)
 
 	const currentPage = pathname.split('/')[2]
 

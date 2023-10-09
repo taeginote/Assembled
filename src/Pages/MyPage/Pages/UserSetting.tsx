@@ -6,11 +6,11 @@ import {
 } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
 import {
-	Camera_Icon,
-	Date_Icon,
-	Name_Icon,
-	Nickname_Icon,
-	Phone_Icon,
+	CameraIcon,
+	DateIcon,
+	NameIcon,
+	NicknameIcon,
+	PhoneIcon,
 } from '../../../Icons/Icons'
 
 import SignUpInput from '../../Form/SignUp/Components/SignUpInput'
@@ -106,7 +106,7 @@ function UserSetting() {
 							<S.InputBox>
 								<S.ProfileImg src={(preFile || profileImg) as string} />
 								<S.ImgLabel htmlFor="profileImg">
-									<Camera_Icon />
+									<CameraIcon />
 								</S.ImgLabel>
 								<Input
 									type="file"
@@ -124,7 +124,7 @@ function UserSetting() {
 								name="SignUpName"
 								control={control}
 								errorRules={HookFormRule.SignUpName}
-								Icon={<Name_Icon />}
+								Icon={<NameIcon />}
 								placeholder="이름을 입력해주세요"
 								data={data?.response?.name}
 							/>
@@ -132,7 +132,7 @@ function UserSetting() {
 								name="EditNickName"
 								control={control}
 								errorRules={HookFormRule.SignUpNickName}
-								Icon={<Nickname_Icon />}
+								Icon={<NicknameIcon />}
 								placeholder="닉네임을 입력해주세요"
 								data={data?.response?.nickname}
 							/>
@@ -140,7 +140,7 @@ function UserSetting() {
 								name="SignUpBirthday"
 								control={control}
 								errorRules={HookFormRule.SignUpBirthday}
-								Icon={<Date_Icon />}
+								Icon={<DateIcon />}
 								placeholder="생년월일(8자리) ex) 19980505"
 								data={data?.response?.birthDate}
 							/>
@@ -148,7 +148,7 @@ function UserSetting() {
 								name="SignUpPhone"
 								control={control}
 								errorRules={HookFormRule.SignUpPhone}
-								Icon={<Phone_Icon />}
+								Icon={<PhoneIcon />}
 								placeholder="휴대폰 번호를 -없이 입력해주세요"
 								data={data?.response?.phoneNumber}
 							/>

@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { Category } from '../../List/Components/CategoryNav/CategoryNav'
 import Button from '../../../Components/Button/Button'
-import { Refetch_Icon } from '../../../Icons/Icons'
+import { RefetchIcon } from '../../../Icons/Icons'
 import { FlexAlignCSS } from '../../../Styles/common'
 import CategoryApi from '../../../Apis/CategoryApi'
 import { useMutation } from '@tanstack/react-query'
@@ -94,7 +94,7 @@ function AdminCategory() {
 						<S.HeadLeft>
 							<h4>Assemble 카테고리</h4>
 							<div onClick={() => refetch()}>
-								<Refetch_Icon />
+								<RefetchIcon />
 							</div>
 						</S.HeadLeft>
 						<Button

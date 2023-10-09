@@ -5,7 +5,7 @@ import Button from '../Button/Button'
 import { modalViewNotification } from '../../Atoms/modalView.atom'
 import { useNavigate } from 'react-router-dom'
 import { modalTypeTwoProps } from '../../Types/modalType'
-import { Warning_Icon } from '../../Icons/Icons'
+import { WarningIcon } from '../../Icons/Icons'
 
 type NotificationProps = Omit<modalTypeTwoProps, 'setState'>
 
@@ -22,7 +22,7 @@ function NotificationModal({ text, url }: NotificationProps) {
 	return (
 		<S.Wrapper>
 			<S.Box>
-				<Warning_Icon size={'65'} />
+				<WarningIcon size={'65'} />
 				<S.Text>{text}</S.Text>
 				<Button size={'normal'} onClick={onClickBtn}>
 					확인

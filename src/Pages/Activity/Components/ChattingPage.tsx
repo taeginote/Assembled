@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import { useState } from 'react'
-import { Send_Icon } from '../../../Icons/Icons'
+import { SendIcon } from '../../../Icons/Icons'
 import { TextareaEventTargetType } from '../../../Types/type'
 
 function ChattingPage() {
@@ -45,7 +45,7 @@ function ChattingPage() {
 					onKeyDown={onEnterSend}
 				/>
 				<S.IconWrapper onClick={onSend}>
-					<Send_Icon />
+					<SendIcon />
 				</S.IconWrapper>
 			</S.InputWrapper>
 		</S.Chatting>

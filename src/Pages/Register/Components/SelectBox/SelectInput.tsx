@@ -79,7 +79,7 @@ function SelectInput(props: SelectInputProps) {
 												)
 											}
 										>
-											{name == 'Category' ? data.categoryName : data.text}
+											{name === 'Category' ? data.categoryName : data.text}
 										</S.List>
 									))}
 								</S.Box>

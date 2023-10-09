@@ -9,7 +9,7 @@ import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import TokenService from '../../../Utils/TokenService'
 import { TextareaEventTargetType } from '../../../Types/type'
 import { useState } from 'react'
-import { Cancel_Icon, Pen_Icon, Trash_Icon } from '../../../Icons/Icons'
+import { CancelIcon, PenIcon, TrashIcon } from '../../../Icons/Icons'
 import Ballon from '../../../Components/Ballon/Ballon'
 import { Comments } from '../../../Hooks/Queries/get-detail'
 
@@ -168,14 +168,14 @@ function CommentForm({
 											<div>
 												<Ballon text={'댓글 수정'} />
 											</div>
-											<Pen_Icon />
+											<PenIcon />
 										</button>
 									) : (
 										<button onClick={onCancelComment} title="Cancel">
 											<div>
 												<Ballon text={'수정 취소'} />
 											</div>
-											<Cancel_Icon />
+											<CancelIcon />
 										</button>
 									)}
 									<button
@@ -185,7 +185,7 @@ function CommentForm({
 										<div>
 											<Ballon text={'댓글 삭제'} />
 										</div>
-										<Trash_Icon />
+										<TrashIcon />
 									</button>
 								</>
 							)}

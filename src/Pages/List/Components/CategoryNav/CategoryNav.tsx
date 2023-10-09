@@ -4,7 +4,6 @@ import { FlexAlignCSS } from '../../../../Styles/common'
 import { Link, useSearchParams } from 'react-router-dom'
 import useGetCategoryData from '../../../../Hooks/Queries/get-category'
 import Categorykeleton from '../../../../Components/Skeleton/CategorySkeleton'
-import { Swiper, SwiperSlide } from 'swiper/react'
 
 import SwiperCore, {
 	Autoplay,
@@ -45,7 +44,7 @@ function CategoryNav() {
 						</S.NavBox>
 
 						{data?.response?.map((el: Category, idx: number) => (
-							<S.NavBox key={idx} $state={el.categoryId == category}>
+							<S.NavBox key={idx} $state={el.categoryId === category}>
 								<Link to={`?category=${el.categoryId}`}>{el.categoryName}</Link>
 							</S.NavBox>
 						))}

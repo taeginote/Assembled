@@ -18,13 +18,13 @@ import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
 import SuccessModal from '../../../Components/Modal/successModal'
 import {
-	Camera_Icon,
-	Date_Icon,
-	Email_Icon,
-	Lock_Icon,
-	Name_Icon,
-	Nickname_Icon,
-	Phone_Icon,
+	CameraIcon,
+	DateIcon,
+	EmailIcon,
+	LockIcon,
+	NameIcon,
+	NicknameIcon,
+	PhoneIcon,
 } from '../../../Icons/Icons'
 import { signUpProps } from '../../../Types/apiType'
 import { SignUpSubmitData } from '../../../Types/type'
@@ -167,7 +167,7 @@ function SignUp() {
 				<S.InputBox>
 					<S.ProfileImg src={preFile as string} />
 					<S.ImgLabel htmlFor="profileImg">
-						<Camera_Icon />
+						<CameraIcon />
 					</S.ImgLabel>
 					<Input
 						type="file"
@@ -198,7 +198,7 @@ function SignUp() {
 					name="SignUpEmail"
 					control={control}
 					errorRules={HookFormRule.SignUpEmail}
-					Icon={<Email_Icon />}
+					Icon={<EmailIcon />}
 					placeholder="example@assembled.com"
 					onValidation={onValidation}
 				/>
@@ -211,14 +211,14 @@ function SignUp() {
 					name="SignUpName"
 					control={control}
 					errorRules={HookFormRule.SignUpName}
-					Icon={<Name_Icon />}
+					Icon={<NameIcon />}
 					placeholder="이름을 입력해주세요"
 				/>
 				<SignUpInput
 					name="SignUpNickName"
 					control={control}
 					errorRules={HookFormRule.SignUpNickName}
-					Icon={<Nickname_Icon />}
+					Icon={<NicknameIcon />}
 					placeholder="닉네임을 입력해주세요"
 					onValidation={onValidation}
 				/>
@@ -231,11 +231,11 @@ function SignUp() {
 					name="SignUpPw"
 					control={control}
 					errorRules={HookFormRule.SignUpPw}
-					Icon={<Lock_Icon />}
+					Icon={<LockIcon />}
 					placeholder="비밀번호를 입력해주세요"
 				/>
 				<span>
-					<Lock_Icon />
+					<LockIcon />
 					<Input
 						type="password"
 						placeholder="위에 설정한 비밀번호를 입력해주세요"
@@ -256,14 +256,14 @@ function SignUp() {
 					name="SignUpBirthday"
 					control={control}
 					errorRules={HookFormRule.SignUpBirthday}
-					Icon={<Date_Icon />}
+					Icon={<DateIcon />}
 					placeholder="생년월일(8자리) ex) 19980505"
 				/>
 				<SignUpInput
 					name="SignUpPhone"
 					control={control}
 					errorRules={HookFormRule.SignUpPhone}
-					Icon={<Phone_Icon />}
+					Icon={<PhoneIcon />}
 					placeholder="휴대폰 번호를 -없이 입력해주세요"
 				/>
 

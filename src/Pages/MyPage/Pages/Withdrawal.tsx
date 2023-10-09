@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { FlexColumnCSS } from '../../../Styles/common'
 import Button from '../../../Components/Button/Button'
-import { Warning_Icon } from '../../../Icons/Icons'
+import { WarningIcon } from '../../../Icons/Icons'
 import { useState } from 'react'
 import SuccessModal from '../../../Components/Modal/successModal'
 import { useMutation } from '@tanstack/react-query'
@@ -33,7 +33,7 @@ function Withdrawal() {
 	}
 	return (
 		<S.Wrapper>
-			<Warning_Icon size={'80'} />
+			<WarningIcon size={'80'} />
 			<div>
 				<span>Assemble</span> 탈퇴를 하시면 회원정보, 가입하신 그룹, 등록
 				게시글이 전체 삭제 후 복구하실 수 없습니다. 정말로 탈퇴를 원하신다면

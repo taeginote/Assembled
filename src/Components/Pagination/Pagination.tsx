@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 import scrollToTop from '../../Utils/scrollToTop'
 import { FlexCenterCSS } from '../../Styles/common'
-import { PaginationArrowSingle_Icon } from '../../Icons/Icons'
+import { PaginationArrowSingleIcon } from '../../Icons/Icons'
 
 /**
  * @param limit - 페이지네이션 몇 개씩 할 것인지
@@ -70,7 +70,7 @@ function Pagination({
 				disabled={nowPage === 1}
 				title="Pagination Left"
 			>
-				<PaginationArrowSingle_Icon rotate={180} />
+				<PaginationArrowSingleIcon rotate={180} />
 			</S.Button>
 			{createArray(startPage, endPage).map((_, i) => (
 				<S.NumBtn
@@ -92,7 +92,7 @@ function Pagination({
 				disabled={nowPage === totalPage}
 				title="Pagination Right"
 			>
-				<PaginationArrowSingle_Icon />
+				<PaginationArrowSingleIcon />
 			</S.Button>
 		</S.Nav>
 	)

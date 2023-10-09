@@ -6,11 +6,11 @@ import CommentForm from './Components/CommentForm'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
 import {
-	FillHeart_Icon,
-	NotFillHeart_Icon,
-	Pen_Icon,
-	Trash_Icon,
-	UserQuestion_Icon,
+	FillHeartIcon,
+	NotFillHeartIcon,
+	PenIcon,
+	TrashIcon,
+	UserQuestionIcon,
 } from '../../Icons/Icons'
 import Ballon from '../../Components/Ballon/Ballon'
 import MeetingApi from '../../Apis/MeetingApi'
@@ -158,13 +158,13 @@ function Detail() {
 												<div>
 													<Ballon text={'모임 수정'} />
 												</div>
-												<Pen_Icon />
+												<PenIcon />
 											</button>
 											<button title="Delete" onClick={onDeleteClub}>
 												<div>
 													<Ballon text={'모임 삭제'} />
 												</div>
-												<Trash_Icon />
+												<TrashIcon />
 											</button>
 										</p>
 									)}
@@ -179,9 +179,9 @@ function Detail() {
 											</S.JoinButton>
 											<S.WebkHeartBox>
 												{!data?.response?.likeStatus ? (
-													<NotFillHeart_Icon onClick={onHeart} />
+													<NotFillHeartIcon onClick={onHeart} />
 												) : (
-													<FillHeart_Icon
+													<FillHeartIcon
 														onClick={() => cancelMutate(meetingId!)}
 													/>
 												)}
@@ -207,7 +207,7 @@ function Detail() {
 									{data?.response?.activityUserCount === 0
 										? '제한없음'
 										: data?.response?.activityUserCount + '명'}
-									<UserQuestion_Icon />
+									<UserQuestionIcon />
 									<div>
 										<Ballon text={'멤버 구경'} />
 									</div>
@@ -233,12 +233,12 @@ function Detail() {
 							<S.FloatBox>
 								{!data?.response?.likeStatus ? (
 									<S.HeartBox onClick={onHeart}>
-										<NotFillHeart_Icon />
+										<NotFillHeartIcon />
 										<div>{data?.response?.likes}</div>
 									</S.HeartBox>
 								) : (
 									<S.HeartBox onClick={() => cancelMutate(meetingId!)}>
-										<FillHeart_Icon />
+										<FillHeartIcon />
 										<div>{data?.response?.likes}</div>
 									</S.HeartBox>
 								)}

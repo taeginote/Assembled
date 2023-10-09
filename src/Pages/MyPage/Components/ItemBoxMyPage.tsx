@@ -5,12 +5,7 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../../Styles/common'
-import {
-	Chat_Icon,
-	Pen_Icon,
-	Person_Icon,
-	Trash_Icon,
-} from '../../../Icons/Icons'
+import { ChatIcon, PenIcon, PersonIcon, TrashIcon } from '../../../Icons/Icons'
 
 import Ballon from '../../../Components/Ballon/Ballon'
 import { modalViewConfirm } from '../../../Atoms/modalViewConfirm.atom'
@@ -76,13 +71,13 @@ function ItemBoxMyPage({
 						<div>
 							<Ballon text={'모임 수정'} />
 						</div>
-						<Pen_Icon />
+						<PenIcon />
 					</button>
 					<button onClick={() => onDeleteClub(meetingId)} title="Delete">
 						<div>
 							<Ballon text={'모임 삭제'} />
 						</div>
-						<Trash_Icon />
+						<TrashIcon />
 					</button>
 				</p>
 			</S.TopWrap>
@@ -107,9 +102,9 @@ function ItemBoxMyPage({
 					</div>
 				</div>
 				<span>
-					<Person_Icon />
+					<PersonIcon />
 					<span>{activityUserCount}인</span>
-					<Chat_Icon size={'20'} />
+					<ChatIcon size={'20'} />
 					<div>{commentCount}개</div>
 				</span>
 			</S.UserBox>

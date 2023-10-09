@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Up_Icon } from '../../Icons/Icons'
+import { UpIcon } from '../../Icons/Icons'
 import { FlexCenterCSS } from '../../Styles/common'
 import scrollToTop from '../../Utils/scrollToTop'
 import { useEffect, useState } from 'react'
@@ -26,7 +26,7 @@ function UpButton() {
 		<>
 			{scroll && (
 				<S.Wrapper onClick={() => scrollToTop(0)}>
-					<Up_Icon />
+					<UpIcon />
 				</S.Wrapper>
 			)}
 		</>

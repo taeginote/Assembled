@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import { FlexBetweenCSS, FlexCenterCSS } from '../../../../Styles/common'
 import Input from '../../../../Components/Input/Input'
 import {
-	Cancel_big_Icon,
-	Date_Icon,
-	Name_Icon,
-	Phone_Icon,
+	CancelbigIcon,
+	DateIcon,
+	NameIcon,
+	PhoneIcon,
 } from '../../../../Icons/Icons'
 import { FlexAlignCSS } from '../../../../Styles/common'
 import { FlexColumnCSS } from '../../../../Styles/common'
@@ -121,17 +121,17 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 				<S.TitleHead>
 					<h4>이메일 찾기</h4>
 					<div>
-						<Cancel_big_Icon onClick={() => setModalView(false)} />
+						<CancelbigIcon onClick={() => setModalView(false)} />
 					</div>
 				</S.TitleHead>
 				{successStatus.isSuccess !== true ? (
 					<>
 						<S.InputWrap>
-							<Name_Icon />
+							<NameIcon />
 							<Input placeholder="이름" id="name" onChange={onChangeInputVal} />
 						</S.InputWrap>
 						<S.InputWrap>
-							<Phone_Icon />
+							<PhoneIcon />
 							<Input
 								placeholder="휴대폰 번호를 -없이 입력해주세요"
 								maxlength="11"
@@ -140,7 +140,7 @@ function FindEmailModal({ setModalView }: FindEmailModalTypeProps) {
 							/>
 						</S.InputWrap>
 						<S.InputWrap>
-							<Date_Icon />
+							<DateIcon />
 							<Input
 								placeholder="생년월일(8자리) ex) 19980505"
 								maxlength="8"

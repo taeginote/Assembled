@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { Back_Icon, Cancel_big_Icon } from '../../Icons/Icons'
+import { BackIcon, CancelbigIcon } from '../../Icons/Icons'
 import { FlexBetweenCSS } from '../../Styles/common'
 import { FlexColumnCSS } from '../../Styles/common'
 import useGetAccessTokenData from '../../Hooks/Queries/get-mapAccessToken'
@@ -8,7 +8,7 @@ import useGetSearchAddressData, {
 	getSearchAddressList,
 } from '../../Hooks/Queries/get-mapSearchAddress'
 import { useEffect, useState } from 'react'
-import CommentSkeleton from '../Skeleton/CommentSkeleton'
+
 import SearchAddressModalSkeleton from '../Skeleton/SearchAddressModalSkeleton'
 
 interface stateSido {
@@ -59,13 +59,13 @@ const SearchAddress = ({
 			<S.Box>
 				<S.Top>
 					<div>모임 활동 지역을 선택해주세요</div>
-					<Cancel_big_Icon onClick={() => setModalView(false)} />
+					<CancelbigIcon onClick={() => setModalView(false)} />
 				</S.Top>
 				{sido.name && (
 					<S.Back onClick={onBackSido}>
 						<div>
 							{sido.name}
-							<Back_Icon />
+							<BackIcon />
 						</div>
 					</S.Back>
 				)}

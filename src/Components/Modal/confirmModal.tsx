@@ -3,7 +3,7 @@ import { FlexCenterCSS } from '../../Styles/common'
 import Button from '../Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { modalTypeFourProps } from '../../Types/modalType'
-import { Question_Icon } from '../../Icons/Icons'
+import { QuestionIcon } from '../../Icons/Icons'
 import { useSetRecoilState } from 'recoil'
 import { modalViewConfirm } from '../../Atoms/modalViewConfirm.atom'
 
@@ -39,7 +39,7 @@ function ConfirmModal({ text, url, mutate, meetingId }: modalTypeFourProps) {
 	return (
 		<S.Wrapper>
 			<S.Box>
-				<Question_Icon size={'65'} />
+				<QuestionIcon size={'65'} />
 				<S.Text>{text}</S.Text>
 				<span>
 					<Button size={'normal'} onClick={onClickClose}>

@@ -6,10 +6,10 @@ import {
 } from '../../Styles/common'
 import { useNavigate } from 'react-router-dom'
 import {
-	Chat_Icon,
-	FillHeart_Icon,
-	NotFillHeart_Icon,
-	View_Icon,
+	ChatIcon,
+	FillHeartIcon,
+	NotFillHeartIcon,
+	ViewIcon,
 } from '../../Icons/Icons'
 import { useMutation } from '@tanstack/react-query'
 import { MeetingLikeProps } from '../../Types/apiType'
@@ -75,9 +75,9 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 				{token && (
 					<>
 						{!likeStatus ? (
-							<NotFillHeart_Icon onClick={onClickNotHeart} />
+							<NotFillHeartIcon onClick={onClickNotHeart} />
 						) : (
-							<FillHeart_Icon onClick={onClickFillHeart} />
+							<FillHeartIcon onClick={onClickFillHeart} />
 						)}
 					</>
 				)}
@@ -98,9 +98,9 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 					</div>
 				</div>
 				<span>
-					<View_Icon />
+					<ViewIcon />
 					<span>{hits}</span>
-					<Chat_Icon size={'20'} />
+					<ChatIcon size={'20'} />
 					<div>{commentCount}</div>
 				</span>
 			</S.UserBox>

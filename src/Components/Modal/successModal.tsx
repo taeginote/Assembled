@@ -3,7 +3,7 @@ import { FlexCenterCSS } from '../../Styles/common'
 import Button from '../Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { modalTypeTwoProps } from '../../Types/modalType'
-import { Clap_Icon } from '../../Icons/Icons'
+import { ClapIcon } from '../../Icons/Icons'
 
 function SuccessModal({ text, url, setState }: modalTypeTwoProps) {
 	const navigate = useNavigate()
@@ -20,7 +20,7 @@ function SuccessModal({ text, url, setState }: modalTypeTwoProps) {
 	return (
 		<S.Wrapper>
 			<S.Box>
-				<Clap_Icon />
+				<ClapIcon />
 				<S.Text>{text}</S.Text>
 				<Button size={'normal'} onClick={onClickOkBtn}>
 					확인

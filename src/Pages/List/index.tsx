@@ -13,7 +13,7 @@ import useGetListData, {
 } from '../../Hooks/Queries/get-list'
 import { useSearchParams } from 'react-router-dom'
 import FilterSelectBox from './Components/SelectBox/FilterSelectBox'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Pagination from '../../Components/Pagination/Pagination'
 import ItemBox from '../../Components/ItemBox/ItemBox'
 import SearchBar from './Components/SearchBar/SearchBar'

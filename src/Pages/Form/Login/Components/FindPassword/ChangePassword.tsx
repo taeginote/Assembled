@@ -9,7 +9,7 @@ import Button from '../../../../../Components/Button/Button'
 import Input from '../../../../../Components/Input/Input'
 import { useState } from 'react'
 
-import { Lock_Icon } from '../../../../../Icons/Icons'
+import { LockIcon } from '../../../../../Icons/Icons'
 import UserApi from '../../../../../Apis/UserApi'
 import { useMutation } from '@tanstack/react-query'
 import HookFormError from '../../../../../Error/HookFormError'
@@ -97,7 +97,7 @@ function ChangePassword({ setModalView, token }: FindEmailModalTypeProps) {
 			{isStatus.isStatus !== 'success' ? (
 				<>
 					<S.InputWrap>
-						<Lock_Icon />
+						<LockIcon />
 						<Input
 							placeholder="변경할 비밀번호"
 							id="password"
@@ -106,7 +106,7 @@ function ChangePassword({ setModalView, token }: FindEmailModalTypeProps) {
 						/>
 					</S.InputWrap>
 					<S.InputWrap>
-						<Lock_Icon />
+						<LockIcon />
 						<Input
 							placeholder="변경할 비밀번호 확인"
 							id="passwordConfirm"

@@ -1,10 +1,10 @@
 import { styled } from 'styled-components'
 import {
-	Arrow_Icon,
-	Cancel_Black_Icon,
-	Hamburger_Icon,
-	Home_Icon,
-	LogOut_Icon,
+	ArrowIcon,
+	CancelBlackIcon,
+	HamburgerIcon,
+	HomeIcon,
+	LogOutIcon,
 } from '../../../../Icons/Icons'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -115,20 +115,20 @@ function Hamburger() {
 	return (
 		<>
 			<S.Wrapper>
-				<Hamburger_Icon onClick={() => setIsView(!isView)} />
+				<HamburgerIcon onClick={() => setIsView(!isView)} />
 				{isView && (
 					<S.ListBox>
 						<S.Head>
-							<Home_Icon onClick={onClickHome} />
+							<HomeIcon onClick={onClickHome} />
 							<div>
-								<LogOut_Icon onClick={onLogOut} />
-								<Cancel_Black_Icon onClick={() => setIsView(!isView)} />
+								<LogOutIcon onClick={onLogOut} />
+								<CancelBlackIcon onClick={() => setIsView(!isView)} />
 							</div>
 						</S.Head>
 						<S.UserInfo>
 							안녕하세요.
 							<div onClick={() => navigate('/myPage/setting/userSetting')}>
-								{userNickName}님 <Arrow_Icon rotate={0} />
+								{userNickName}님 <ArrowIcon rotate={0} />
 							</div>
 						</S.UserInfo>
 						<S.ListWrapper>
@@ -144,7 +144,7 @@ function Hamburger() {
 											})
 										}
 									>
-										{el.sort} <Arrow_Icon rotate={90} />
+										{el.sort} <ArrowIcon rotate={90} />
 									</S.OneDepthTitle>
 								))}
 							</S.ListOneDepth>

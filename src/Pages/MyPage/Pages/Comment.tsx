@@ -5,7 +5,7 @@ import Pagination from '../../../Components/Pagination/Pagination'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import Ballon from '../../../Components/Ballon/Ballon'
-import { Trash_Icon } from '../../../Icons/Icons'
+import { TrashIcon } from '../../../Icons/Icons'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import CommentApi from '../../../Apis/CommentApi'
 import { useRecoilState } from 'recoil'
@@ -83,7 +83,7 @@ function Comment() {
 											<div>
 												<Ballon text={'댓글 삭제'} />
 											</div>
-											<Trash_Icon />
+											<TrashIcon />
 										</button>
 									</S.Right>
 								</S.container>

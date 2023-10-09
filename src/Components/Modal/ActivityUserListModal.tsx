@@ -4,7 +4,7 @@ import {
 	FlexBetweenCSS,
 	FlexCenterCSS,
 } from '../../Styles/common'
-import { Cancel_big_Icon } from '../../Icons/Icons'
+import { CancelbigIcon } from '../../Icons/Icons'
 import useGetActivityUserData from '../../Hooks/Queries/get-activityUser'
 import ProfileImgReturn from '../../Utils/ProfileImgReturn'
 
@@ -25,7 +25,7 @@ function ActivityUserListModal({ meetingId, setState }: ActivityUserProps) {
 				<S.TitleHead>
 					<h4>활동중인 멤버들</h4>
 					<div>
-						<Cancel_big_Icon onClick={onCancelModal} />
+						<CancelbigIcon onClick={onCancelModal} />
 					</div>
 				</S.TitleHead>
 

@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
 import Button from '../Button/Button'
-import { Cancel_big_Icon } from '../../Icons/Icons'
+import { CancelbigIcon } from '../../Icons/Icons'
 import { FlexBetweenCSS } from '../../Styles/common'
 import { GroupJoinModalTypeProps } from '../../Types/modalType'
 import useGetJoinListData, { Content } from '../../Hooks/Queries/get-joinList'
@@ -79,7 +79,7 @@ function GroupJoiStatusModal({
 				<S.TitleHead>
 					<h4>모임 가입 신청 목록</h4>
 					<div>
-						<Cancel_big_Icon onClick={onCancelModal} />
+						<CancelbigIcon onClick={onCancelModal} />
 					</div>
 				</S.TitleHead>
 				<S.CategoryList>

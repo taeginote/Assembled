@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 
-import {
-	FlexAlignCSS,
-	FlexBetweenCSS,
-	FlexColumnCSS,
-} from '../../../Styles/common'
+import { FlexColumnCSS } from '../../../Styles/common'
 import { MyJoinRequestContent } from '../../../Hooks/Queries/get-myjoinRequestList'
 import { useNavigate } from 'react-router-dom'
 

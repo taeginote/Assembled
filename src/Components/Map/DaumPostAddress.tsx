@@ -2,7 +2,7 @@ import React from 'react'
 import DaumPostcode from 'react-daum-postcode'
 import { styled } from 'styled-components'
 import { FlexCenterCSS } from '../../Styles/common'
-import { Cancel_big_Icon } from '../../Icons/Icons'
+import { CancelbigIcon } from '../../Icons/Icons'
 import { FlexBetweenCSS } from '../../Styles/common'
 import { FlexColumnCSS } from '../../Styles/common'
 import { ResultAddressType } from '../../Pages/Register/Register'
@@ -33,7 +33,7 @@ const DaumPostAddress = ({
 			<S.Box>
 				<S.Top>
 					<div>모임 활동 지역</div>
-					<Cancel_big_Icon onClick={() => setModalView(false)} />
+					<CancelbigIcon onClick={() => setModalView(false)} />
 				</S.Top>
 				<DaumPostcode onComplete={completeHandler} />
 			</S.Box>

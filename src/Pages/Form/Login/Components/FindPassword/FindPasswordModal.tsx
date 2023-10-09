@@ -7,12 +7,12 @@ import {
 } from '../../../../../Styles/common'
 import Button from '../../../../../Components/Button/Button'
 import {
-	Cancel_big_Icon,
-	Date_Icon,
-	Email_Icon,
-	Lock_Icon,
-	Name_Icon,
-	Phone_Icon,
+	CancelbigIcon,
+	DateIcon,
+	EmailIcon,
+	LockIcon,
+	NameIcon,
+	PhoneIcon,
 } from '../../../../../Icons/Icons'
 import Input from '../../../../../Components/Input/Input'
 import { useState } from 'react'
@@ -194,7 +194,7 @@ function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 							: '비밀번호 재설정'}
 					</h4>
 					<div>
-						<Cancel_big_Icon onClick={() => setModalView(false)} />
+						<CancelbigIcon onClick={() => setModalView(false)} />
 					</div>
 				</S.TitleHead>
 				{successStatus.isFind === false ? (
@@ -202,7 +202,7 @@ function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 						{isLogin ? (
 							<>
 								<S.InputWrap>
-									<Lock_Icon />
+									<LockIcon />
 									<Input
 										placeholder="기존 비밀번호를 입력해주세요"
 										id="PwBeforeChange"
@@ -224,7 +224,7 @@ function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 						) : (
 							<>
 								<S.InputWrap>
-									<Email_Icon />
+									<EmailIcon />
 									<Input
 										placeholder="이메일"
 										id="email"
@@ -232,7 +232,7 @@ function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 									/>
 								</S.InputWrap>
 								<S.InputWrap>
-									<Name_Icon />
+									<NameIcon />
 									<Input
 										placeholder="이름"
 										id="name"
@@ -240,7 +240,7 @@ function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 									/>
 								</S.InputWrap>
 								<S.InputWrap>
-									<Phone_Icon />
+									<PhoneIcon />
 									<Input
 										placeholder="휴대폰 번호를 -없이 입력해주세요"
 										maxlength="11"
@@ -249,7 +249,7 @@ function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 									/>
 								</S.InputWrap>
 								<S.InputWrap>
-									<Date_Icon />
+									<DateIcon />
 									<Input
 										placeholder="생년월일(8자리) ex) 19980505"
 										maxlength="8"

@@ -13,7 +13,7 @@ import HookFormError from '../../../Error/HookFormError'
 import { useMutation } from '@tanstack/react-query'
 import UserApi from '../../../Apis/UserApi'
 import { useAuth } from '../../../Contexts/auth'
-import { Email_Icon, Lock_Icon } from '../../../Icons/Icons'
+import { EmailIcon, LockIcon } from '../../../Icons/Icons'
 import { LoginData } from '../../../Types/apiType'
 import { LoginSubmitData } from '../../../Types/type'
 import { useState } from 'react'
@@ -35,9 +35,7 @@ function Login() {
 		formState: { errors },
 	} = useForm()
 
-	const [recoilCounter, setRecoilCounter] = useRecoilState<string | null>(
-		userRole,
-	)
+	const [, setRecoilCounter] = useRecoilState<string | null>(userRole)
 	const [findEmailModalView, setFindEmailModalView] = useState<boolean>(false)
 	const [findPasswordModalView, setFindPasswordModalView] =
 		useState<boolean>(false)
@@ -48,7 +46,7 @@ function Login() {
 
 	const { mutate } = useMutation((data: LoginData) => UserApi.Login(data), {
 		onSuccess: res => {
-			const { nickname, profile, role } = res?.data?.response
+			const { nickname, role } = res?.data?.response
 			setRecoilCounter(role)
 
 			if (res.data.response.token.accessToken) {
@@ -80,7 +78,7 @@ function Login() {
 			<S.container>
 				<h3>로그인</h3>
 				<span>
-					<Email_Icon />
+					<EmailIcon />
 					<Input
 						placeholder="example@assembled.com"
 						{...register('LoginEmail', { required: '이메일을 입력해주세요' })}
@@ -92,7 +90,7 @@ function Login() {
 					</HookFormError>
 				)}
 				<span>
-					<Lock_Icon />
+					<LockIcon />
 					<Input
 						type="password"
 						placeholder="비밀번호를 입력해주세요"

@@ -4,12 +4,12 @@ import {
 	FlexBetweenCSS,
 	FlexColumnCSS,
 } from '../../../Styles/common'
-import { Chat_Icon, Person_Icon, UserQuestion_Icon } from '../../../Icons/Icons'
+import { ChatIcon, PersonIcon, UserQuestionIcon } from '../../../Icons/Icons'
 import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
 import Button from '../../../Components/Button/Button'
 
 import { Content } from '../../../Hooks/Queries/get-list'
-import ActivityUserListModal from '../../../Components/Modal/ActivityUserListModal'
+
 import Ballon from '../../../Components/Ballon/Ballon'
 
 interface ActivityItemBoxProps {
@@ -67,18 +67,18 @@ function ActivityItemBox({
 				</div>
 
 				<span>
-					<Person_Icon />
+					<PersonIcon />
 					<span>
 						{activityUserCount}인
 						<S.BallonWrap onClick={onViewActivityUser}>
-							<UserQuestion_Icon />
+							<UserQuestionIcon />
 							<div>
 								<Ballon text={'멤버 구경'} />
 							</div>
 						</S.BallonWrap>
 					</span>
 
-					<Chat_Icon size={'20'} />
+					<ChatIcon size={'20'} />
 					<span>{commentCount}개</span>
 				</span>
 			</S.UserBox>

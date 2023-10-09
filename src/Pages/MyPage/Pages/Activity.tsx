@@ -14,7 +14,7 @@ import CardSkeleton from '../../../Components/Skeleton/CardSkeleton'
 import MyPageListNoData from '../../../Error/MypageListNoData'
 import ActivityUserListModal from '../../../Components/Modal/ActivityUserListModal'
 import UserNickNameService from '../../../Utils/UserNickNameService'
-import { Arrow_Icon } from '../../../Icons/Icons'
+import { ArrowIcon } from '../../../Icons/Icons'
 import { FlexAlignCSS } from '../../../Styles/common'
 import Ballon from '../../../Components/Ballon/Ballon'
 
@@ -38,7 +38,7 @@ function Activity() {
 					<S.UserArrowIconWrap
 						onClick={() => navigate('/myPage/setting/userSetting')}
 					>
-						<Arrow_Icon rotate={0} />
+						<ArrowIcon rotate={0} />
 						<div>
 							<Ballon text="내정보" />
 						</div>

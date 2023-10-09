@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Arrow_Icon } from '../../../../Icons/Icons'
+import { ArrowIcon } from '../../../../Icons/Icons'
 import { FlexCenterCSS } from '../../../../Styles/common'
 import { useState } from 'react'
 
@@ -93,9 +93,9 @@ function DateViewComponents() {
 	return (
 		<S.Wrapper>
 			<S.Year>
-				<Arrow_Icon rotate={180} onClick={() => onPrevious('year')} />
+				<ArrowIcon rotate={180} onClick={() => onPrevious('year')} />
 				<h1 onClick={() => setViewYearArr(prev => !prev)}>{currentYear}</h1>
-				<Arrow_Icon rotate={0} onClick={() => onNext('year')} />
+				<ArrowIcon rotate={0} onClick={() => onNext('year')} />
 				{viewYearArr && (
 					<S.SelectYear>
 						{selectYearArr.map((el, key) => (
@@ -105,9 +105,9 @@ function DateViewComponents() {
 				)}
 			</S.Year>
 			<S.Month>
-				<Arrow_Icon rotate={180} onClick={() => onPrevious('month')} />
+				<ArrowIcon rotate={180} onClick={() => onPrevious('month')} />
 				<div>{currentMonth}월달</div>
-				<Arrow_Icon rotate={0} onClick={() => onNext('month')} />
+				<ArrowIcon rotate={0} onClick={() => onNext('month')} />
 			</S.Month>
 			<S.Table>
 				<tr>
