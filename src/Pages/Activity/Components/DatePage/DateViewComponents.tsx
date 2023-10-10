@@ -1,9 +1,15 @@
 import { styled } from 'styled-components'
-import { ArrowIcon } from '../../../../Icons/Icons'
+import { ArrowIcon, PlusIcon } from '../../../../Icons/Icons'
 import { FlexCenterCSS } from '../../../../Styles/common'
 import { useState } from 'react'
 
-function DateViewComponents() {
+function DateViewComponents({
+	setIsModalView,
+	setSelectDay,
+}: {
+	setIsModalView: (state: boolean) => void
+	setSelectDay: (state: string) => void
+}) {
 	let date: Date = new Date() //현 날짜 시간
 	const [currentMonth, setCurrentMonth] = useState<number>(date.getMonth() + 1)
 	const [currentYear, setCurrentYear] = useState<number>(date.getFullYear())
@@ -89,7 +95,11 @@ function DateViewComponents() {
 		setCurrentYear(year)
 		setViewYearArr(false)
 	}
-	console.log(String(currentYear) + String(currentMonth))
+	const onPlus = (day: number) => {
+		setIsModalView(true)
+		setSelectDay(`${currentYear}년${currentMonth}월${day}일`)
+	}
+
 	return (
 		<S.Wrapper>
 			<S.Year>
@@ -106,7 +116,7 @@ function DateViewComponents() {
 			</S.Year>
 			<S.Month>
 				<ArrowIcon rotate={180} onClick={() => onPrevious('month')} />
-				<div>{currentMonth}월달</div>
+				<div>{currentMonth}월</div>
 				<ArrowIcon rotate={0} onClick={() => onNext('month')} />
 			</S.Month>
 			<S.Table>
@@ -122,15 +132,19 @@ function DateViewComponents() {
 				{monthArr.map((month, idx: number) => (
 					<tr key={idx}>
 						{month.map((day, idx: number) => (
-							<S.Th
-								key={idx}
-								$isStatus={
-									date.getFullYear() === currentYear &&
-									date.getMonth() + 1 === currentMonth &&
-									date.getDate() === day
-								}
-							>
-								{day}
+							<S.Th key={idx}>
+								<S.Plus onClick={() => onPlus(day!)}>
+									<PlusIcon />
+								</S.Plus>
+								<S.Day
+									$isStatus={
+										date.getFullYear() === currentYear &&
+										date.getMonth() + 1 === currentMonth &&
+										date.getDate() === day
+									}
+								>
+									{day}
+								</S.Day>
 
 								{/* 
 								이거가 달력 label? 스타일
@@ -187,16 +201,23 @@ const FirstTh = styled.th`
 	text-align: center;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
-const Th = styled.th<{ $isStatus: boolean }>`
+const Th = styled.th`
 	&:hover {
-		background-color: ${({ theme }) => theme.COLOR.sub};
+		cursor: pointer;
+
+		& > div {
+			display: block;
+		}
 	}
 	vertical-align: top;
 	width: 10rem;
 	height: 8rem;
 	text-align: center;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-	background-color: ${({ theme, $isStatus }) => $isStatus && theme.COLOR.sub};
+
+	& > div {
+		display: none;
+	}
 `
 const SelectYear = styled.div`
 	& > div {
@@ -220,4 +241,26 @@ const Tag = styled.div`
 	overflow: hidden;
 	max-height: 2rem;
 `
-const S = { Wrapper, Month, Table, Th, FirstTh, Year, SelectYear, Tag }
+const Plus = styled.div`
+	position: absolute;
+	/* background-color: aliceblue; */
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px 0px gray;
+`
+const Day = styled.span<{ $isStatus: boolean }>`
+	background-color: ${({ theme, $isStatus }) => $isStatus && theme.COLOR.sub};
+	padding: 0.5rem;
+	border-radius: 50%;
+`
+const S = {
+	Wrapper,
+	Month,
+	Table,
+	Th,
+	FirstTh,
+	Year,
+	SelectYear,
+	Tag,
+	Plus,
+	Day,
+}
