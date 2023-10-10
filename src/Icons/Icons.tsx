@@ -11,6 +11,7 @@ import {
 	AiOutlineHome,
 	AiOutlineQuestionCircle,
 	AiOutlineSend,
+	AiOutlinePlus,
 } from 'react-icons/ai'
 import {
 	BsFillPersonFill,
@@ -57,6 +58,7 @@ export const NameIcon = () => <BiUser size={'22'} /> //인간
 export const PhoneIcon = () => <BsPhone size={'22'} /> //핸드폰
 
 export const DateIcon = () => <MdOutlineToday size={'22'} /> //달력
+export const BigDateIcon = () => <MdOutlineToday size={'32'} /> //달력
 
 export const NicknameIcon = () => <RiUser5Line size={'22'} /> //달력
 
@@ -110,7 +112,9 @@ export const CancelBlackIcon = ({ onClick }: OnClickIconType) => (
 	<RxCross2 size={'30'} onClick={onClick} />
 ) //취소 버튼
 
-export const BigPlusIcon = () => <HiOutlinePlus size={'40'} color="#FB9B00" />
+export const BigPlusIcon = ({ onClick }: OnClickIconType) => (
+	<HiOutlinePlus size={'40'} color="#FB9B00" onClick={onClick} />
+)
 
 export const UpIcon = () => <BiChevronsUp size={'40'} color="#FDD19B" />
 //Up
@@ -142,4 +146,7 @@ export const UserQuestionIcon = () => (
 export const BackIcon = () => <RiArrowGoBackLine size={'20'} />
 export const SendIcon = () => (
 	<AiOutlineSend size={'25'} style={{ cursor: 'Pointer' }} />
+)
+export const PlusIcon = () => (
+	<AiOutlinePlus size={'15'} style={{ cursor: 'Pointer' }} />
 )
