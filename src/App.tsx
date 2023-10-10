@@ -6,7 +6,8 @@ import GlobalStyles from './Styles/global'
 import theme from './Styles/theme'
 import { RecoilRoot } from 'recoil'
 import AuthProvider from './Contexts/auth'
-import './Components/Firebase/messaging_init_in_sw'
+// import './Components/FCM/fcm'
+// import './Components/Firebase/firebase'
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function App() {
@@ -37,5 +38,4 @@ function App() {
 		</>
 	)
 }
-
 export default App
