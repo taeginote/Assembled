@@ -1,17 +1,27 @@
 import { styled } from 'styled-components'
 import DateViewComponents from './DateViewComponents'
 import { BigPlusIcon } from '../../../../Icons/Icons'
+import DateModal from './DateModal'
+import { useState } from 'react'
 
 function DatePage() {
+	const [isModalView, setIsModalView] = useState<boolean>(false)
+	const [selectDay, setSelectDay] = useState<string | null>(null)
 	return (
 		<S.Wrapper>
 			<S.Title>달력</S.Title>
 			<S.Date>
-				<DateViewComponents />
+				<DateViewComponents
+					setIsModalView={setIsModalView}
+					setSelectDay={setSelectDay}
+				/>
 			</S.Date>
 			<S.AddBtn>
-				<BigPlusIcon />
+				<BigPlusIcon onClick={() => setIsModalView(true)} />
 			</S.AddBtn>
+			{isModalView && (
+				<DateModal setState={setIsModalView} selectDay={selectDay} />
+			)}
 		</S.Wrapper>
 	)
 }
