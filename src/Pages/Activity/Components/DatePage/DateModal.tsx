@@ -3,6 +3,7 @@ import { FlexBetweenCSS, FlexCenterCSS } from '../../../../Styles/common'
 import { BigDateIcon, CancelbigIcon } from '../../../../Icons/Icons'
 import Input from '../../../../Components/Input/Input'
 import Button from '../../../../Components/Button/Button'
+import { useState } from 'react'
 
 function DateModal({
 	setState,
@@ -11,6 +12,30 @@ function DateModal({
 	setState: (state: boolean) => void
 	selectDay: string | null
 }) {
+	const [inputTitleAndContent, setInputTitleAndContent] = useState<{
+		title: string
+		content: string
+	}>({
+		title: '',
+		content: '',
+	})
+
+	const onInputTitleAndContent = (value: string, kind: 'title' | 'content') => {
+		//onChange를 통해 useState값 넣고 제출버튼 누르면 title과 content 값 넣기 까지 하면 끝
+	}
+	const onAddSchedule = () => {
+		if (
+			inputTitleAndContent.title.trim().length === 0 ||
+			inputTitleAndContent.content.trim().length === 0
+		)
+			return
+
+		const total = {
+			title: inputTitleAndContent.title,
+			content: inputTitleAndContent.content,
+			date: selectDay,
+		}
+	}
 	return (
 		<S.Wrapper>
 			<S.Box>
@@ -25,10 +50,22 @@ function DateModal({
 					{selectDay}
 				</S.Day>
 
-				<S.TitleInput placeholder={'제목'} />
-				<S.ContentTextarea placeholder={'내용'} />
+				<S.TitleInput
+					placeholder={'제목'}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+						onInputTitleAndContent(e.target.value, 'title')
+					}
+				/>
+				<S.ContentTextarea
+					placeholder={'내용'}
+					onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+						onInputTitleAndContent(e.target.value, 'content')
+					}
+				/>
 
-				<Button size="big">일정 추가</Button>
+				<Button size="big" onClick={onAddSchedule}>
+					일정 추가
+				</Button>
 			</S.Box>
 		</S.Wrapper>
 	)
