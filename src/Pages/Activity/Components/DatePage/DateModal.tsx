@@ -5,6 +5,10 @@ import Input from '../../../../Components/Input/Input'
 import Button from '../../../../Components/Button/Button'
 import { useState } from 'react'
 
+interface InputState {
+	title: string
+	content: string
+}
 function DateModal({
 	setState,
 	selectDay,
@@ -12,16 +16,23 @@ function DateModal({
 	setState: (state: boolean) => void
 	selectDay: string | null
 }) {
-	const [inputTitleAndContent, setInputTitleAndContent] = useState<{
-		title: string
-		content: string
-	}>({
+	const [inputTitleAndContent, setInputTitleAndContent] = useState<InputState>({
 		title: '',
 		content: '',
 	})
 
 	const onInputTitleAndContent = (value: string, kind: 'title' | 'content') => {
 		//onChange를 통해 useState값 넣고 제출버튼 누르면 title과 content 값 넣기 까지 하면 끝
+		if (kind === 'title')
+			return setInputTitleAndContent((prev: InputState) => ({
+				...prev,
+				title: value,
+			}))
+		if (kind === 'content')
+			return setInputTitleAndContent((prev: InputState) => ({
+				...prev,
+				content: value,
+			}))
 	}
 	const onAddSchedule = () => {
 		if (
@@ -30,10 +41,10 @@ function DateModal({
 		)
 			return
 
-		const total = {
-			title: inputTitleAndContent.title,
-			content: inputTitleAndContent.content,
-			date: selectDay,
+		const sendData = {
+			title: inputTitleAndContent.title.trim(),
+			content: inputTitleAndContent.content.trim(),
+			date: selectDay, //이거가 아직까지 2023년10월12일 이런 형식임 API나오면 수정 예정
 		}
 	}
 	return (
