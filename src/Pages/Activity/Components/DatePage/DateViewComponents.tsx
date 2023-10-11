@@ -243,9 +243,9 @@ const Tag = styled.div`
 `
 const Plus = styled.div`
 	position: absolute;
-	/* background-color: aliceblue; */
+
 	border-radius: 3px;
-	box-shadow: 1px 1px 1px 0px gray;
+	color: ${({ theme }) => theme.COLOR.sub};
 `
 const Day = styled.span<{ $isStatus: boolean }>`
 	background-color: ${({ theme, $isStatus }) => $isStatus && theme.COLOR.sub};
