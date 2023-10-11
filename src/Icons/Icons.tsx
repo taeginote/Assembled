@@ -148,5 +148,5 @@ export const SendIcon = () => (
 	<AiOutlineSend size={'25'} style={{ cursor: 'Pointer' }} />
 )
 export const PlusIcon = () => (
-	<AiOutlinePlus size={'15'} style={{ cursor: 'Pointer' }} />
+	<AiOutlinePlus size={'25'} style={{ cursor: 'Pointer' }} />
 )
