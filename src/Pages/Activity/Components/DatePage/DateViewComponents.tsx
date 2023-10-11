@@ -100,6 +100,7 @@ function DateViewComponents({
 		setSelectDay(`${currentYear}년${currentMonth}월${day}일`)
 	}
 
+	const testTag = '치킨파티하자'
 	return (
 		<S.Wrapper>
 			<S.Year>
@@ -146,15 +147,11 @@ function DateViewComponents({
 									{day}
 								</S.Day>
 
-								{/* 
-								이거가 달력 label? 스타일
-								{dateArr[
-									String(currentYear) + currentMonth + Number(day) < 10
-										? '0' + day
-										: day
-								].map((el, idx) => (
-									<S.Tag key={idx}>{el.title}</S.Tag>
-								))} */}
+								<S.Tag key={idx}>
+									{testTag && testTag?.length > 8
+										? testTag?.substr(0, 8) + '...'
+										: testTag}
+								</S.Tag>
 							</S.Th>
 						))}
 					</tr>
@@ -205,7 +202,7 @@ const Th = styled.th`
 	&:hover {
 		cursor: pointer;
 
-		& > div {
+		& > p {
 			display: block;
 		}
 	}
@@ -215,7 +212,7 @@ const Th = styled.th`
 	text-align: center;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 
-	& > div {
+	& > p {
 		display: none;
 	}
 `
@@ -237,11 +234,13 @@ const SelectYear = styled.div`
 `
 const Tag = styled.div`
 	background-color: ${({ theme }) => theme.COLOR.orange};
+	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+
 	margin: 0.1rem 0;
 	overflow: hidden;
 	max-height: 2rem;
 `
-const Plus = styled.div`
+const Plus = styled.p`
 	position: absolute;
 
 	border-radius: 3px;
