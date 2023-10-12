@@ -162,8 +162,8 @@ function DateViewComponents({
 											.find(el => el.date === day)
 											?.children.map((el, idx) => (
 												<S.Tag key={idx}>
-													{el.title && el.title?.length > 8
-														? el.title?.substr(0, 8) + '...'
+													{el.title && el.title?.length > 7
+														? el.title?.substr(0, 7) + '...'
 														: el.title}
 												</S.Tag>
 											))}
@@ -218,20 +218,16 @@ const FirstTh = styled.th`
 `
 const Th = styled.th<{ $isWeekend: boolean }>`
 	&:hover {
-		cursor: pointer;
-
 		& > p {
 			display: block;
 		}
 	}
-	background-color: ${({ theme, $isWeekend }) =>
-		$isWeekend && theme.COLOR.common.gray[100]};
+	background-color: ${({ theme, $isWeekend }) => $isWeekend && '#f8f9fa'};
 	vertical-align: top;
 	width: 10rem;
 	height: 8rem;
 	text-align: center;
-	color: ${({ theme, $isWeekend }) =>
-		$isWeekend && theme.COLOR.common.gray[200]};
+
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 
 	& > p {
@@ -257,10 +253,10 @@ const SelectYear = styled.div`
 const Tag = styled.div`
 	background-color: ${({ theme }) => theme.COLOR.orange};
 	font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-
-	margin: 0.1rem 0;
+	margin: 0.3rem 0.2rem;
 	overflow: hidden;
 	max-height: 2rem;
+	border-radius: 0.3rem;
 `
 const Plus = styled.p`
 	position: absolute;
