@@ -100,7 +100,17 @@ function DateViewComponents({
 		setSelectDay(`${currentYear}년${currentMonth}월${day}일`)
 	}
 
-	const testTag = '치킨파티하자'
+	let test = [
+		{
+			date: 9,
+			children: [{ title: '한강가서 치킨먹자' }, { title: '신한님과 카공' }],
+		},
+		{
+			date: 19,
+			children: [{ title: '롯데월드 가기' }],
+		},
+	]
+
 	return (
 		<S.Wrapper>
 			<S.Year>
@@ -133,7 +143,7 @@ function DateViewComponents({
 				{monthArr.map((month, idx: number) => (
 					<tr key={idx}>
 						{month.map((day, idx: number) => (
-							<S.Th key={idx}>
+							<S.Th key={idx} $isWeekend={idx === 0 || idx === 6}>
 								<S.Plus onClick={() => onPlus(day!)}>
 									<PlusIcon />
 								</S.Plus>
@@ -146,12 +156,19 @@ function DateViewComponents({
 								>
 									{day}
 								</S.Day>
-
-								<S.Tag key={idx}>
-									{testTag && testTag?.length > 8
-										? testTag?.substr(0, 8) + '...'
-										: testTag}
-								</S.Tag>
+								{
+									<>
+										{test
+											.find(el => el.date === day)
+											?.children.map((el, idx) => (
+												<S.Tag key={idx}>
+													{el.title && el.title?.length > 8
+														? el.title?.substr(0, 8) + '...'
+														: el.title}
+												</S.Tag>
+											))}
+									</>
+								}
 							</S.Th>
 						))}
 					</tr>
@@ -196,9 +213,10 @@ const FirstTh = styled.th`
 	width: 10rem;
 	height: 3rem;
 	text-align: center;
+
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
-const Th = styled.th`
+const Th = styled.th<{ $isWeekend: boolean }>`
 	&:hover {
 		cursor: pointer;
 
@@ -206,10 +224,14 @@ const Th = styled.th`
 			display: block;
 		}
 	}
+	background-color: ${({ theme, $isWeekend }) =>
+		$isWeekend && theme.COLOR.common.gray[100]};
 	vertical-align: top;
 	width: 10rem;
 	height: 8rem;
 	text-align: center;
+	color: ${({ theme, $isWeekend }) =>
+		$isWeekend && theme.COLOR.common.gray[200]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 
 	& > p {
