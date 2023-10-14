@@ -26,6 +26,9 @@ const Left = styled.div`
 	width: 13%;
 	min-height: 100vh;
 	background-color: ${({ theme }) => theme.COLOR.orange};
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		display: none;
+	}
 `
 
 const Right = styled.div`

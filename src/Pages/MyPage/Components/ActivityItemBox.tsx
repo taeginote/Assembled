@@ -11,6 +11,7 @@ import Button from '../../../Components/Button/Button'
 import { Content } from '../../../Hooks/Queries/get-list'
 
 import Ballon from '../../../Components/Ballon/Ballon'
+import { useNavigate } from 'react-router-dom'
 
 interface ActivityItemBoxProps {
 	data: Content
@@ -33,7 +34,7 @@ function ActivityItemBox({
 		activityUserCount,
 		commentCount,
 	} = data
-
+	const navigate = useNavigate()
 	const onViewActivityUser = () => {
 		setMeetingId(meetingId)
 		setUserListModal(true)
@@ -46,10 +47,7 @@ function ActivityItemBox({
 		<S.Wrapper>
 			<S.TopWrap>
 				<S.Status>모집중</S.Status>
-				<Button
-					size="big"
-					onClick={() => alert('모임 활동 페이지는 준비중입니다 :)')}
-				>
+				<Button size="big" onClick={() => navigate('/activity')}>
 					모임 활동
 				</Button>
 			</S.TopWrap>
