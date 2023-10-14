@@ -105,6 +105,24 @@ function Hamburger() {
 		})
 	}, [pathname])
 
+	if (pathname.split('/')[1] === 'activity') {
+		oneDepthList.push({
+			sort: '모임활동',
+			title: 'activity',
+			depth: 2,
+			children: [
+				{
+					name: '채팅',
+					url: '/activity',
+				},
+
+				{
+					name: '달력',
+					url: '/activity/date',
+				},
+			],
+		})
+	}
 	const onClickHome = () => {
 		navigate('/')
 		setIsView(false)
