@@ -63,6 +63,8 @@ const Wrapper = styled.div`
 const Chatting = styled.div`
 	width: 100%;
 	height: 100%;
+
+	width: 100%;
 `
 
 const ChattingZone = styled.div`
@@ -112,9 +114,14 @@ const InputChatting = styled.textarea<{ $status: boolean }>`
 	height: 12.9vh;
 	padding: 2rem;
 	margin: 0 3rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		margin: 0;
+		margin-left: 2rem;
+	}
 	white-space: pre-wrap;
 	word-wrap: break-word;
 	border-radius: 2rem;
+	resize: none;
 	&:focus {
 		outline: 2px solid ${({ theme }) => theme.COLOR.sub};
 	}
@@ -122,12 +129,17 @@ const InputChatting = styled.textarea<{ $status: boolean }>`
 `
 const InputWrapper = styled.div`
 	width: 99%;
+
 	height: 12.9vh;
 `
 const IconWrapper = styled.div`
 	position: absolute;
 	bottom: 4rem;
 	right: 9rem;
+	@media screen and (max-width: ${({ theme }) => theme.MEDIA.mobile}) {
+		right: 4rem;
+		bottom: 5%;
+	}
 `
 const Time = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ss};
