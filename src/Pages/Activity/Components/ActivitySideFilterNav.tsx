@@ -15,14 +15,14 @@ function ActivitySideFilterNav() {
 			name: '달력',
 			url: 'date',
 		},
-		{
-			name: '모임활동',
-			url: '',
-		},
-		{
-			name: '우리의 추억',
-			url: '',
-		},
+		// {
+		// 	name: '모임활동',
+		// 	url: '',
+		// },
+		// {
+		// 	name: '우리의 추억',
+		// 	url: '',
+		// },
 	]
 
 	const navigate = useNavigate()
