@@ -149,7 +149,11 @@ function DateViewComponents({
 				{monthArr.map((month, idx: number) => (
 					<tr key={idx}>
 						{month.map((day, idx: number) => (
-							<S.Th key={idx} $isWeekend={idx === 0 || idx === 6}>
+							<S.Th
+								key={idx}
+								$isWeekend={idx === 0 || idx === 6}
+								$isRealDay={day}
+							>
 								<S.Plus onClick={() => onPlus(day!)}>
 									<PlusIcon />
 								</S.Plus>
@@ -222,10 +226,10 @@ const FirstTh = styled.th`
 
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
-const Th = styled.th<{ $isWeekend: boolean }>`
+const Th = styled.th<{ $isWeekend: boolean; $isRealDay: number }>`
 	&:hover {
 		& > p {
-			display: block;
+			display: ${({ theme, $isRealDay }) => $isRealDay !== null && 'block'};
 		}
 	}
 	background-color: ${({ theme, $isWeekend }) => $isWeekend && '#f8f9fa'};
