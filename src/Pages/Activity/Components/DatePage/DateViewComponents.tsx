@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import { ArrowIcon, PlusIcon } from '../../../../Icons/Icons'
 import { FlexCenterCSS } from '../../../../Styles/common'
 import { useState } from 'react'
+import useGetMonthScheduleListData from '../../../../Hooks/Queries/get-monthSchedule'
 
 function DateViewComponents({
 	setIsModalView,
@@ -19,6 +20,9 @@ function DateViewComponents({
 
 	let monthArr: (number | null)[][] = [[], [], [], [], [], []]
 	let totalDate = lastDayOfMonthDate
+
+	const { data } = useGetMonthScheduleListData('2023-11-07')
+	console.log(data)
 
 	//마지막 주
 	for (let lastWeek = lastDayOfMonthDay; lastWeek >= 0; lastWeek--) {
@@ -97,7 +101,9 @@ function DateViewComponents({
 	}
 	const onPlus = (day: number) => {
 		setIsModalView(true)
-		setSelectDay(`${currentYear}년${currentMonth}월${day}일`)
+		setSelectDay(
+			`${currentYear}-${currentMonth}-${day >= 10 ? day : '0' + day}`,
+		)
 	}
 
 	let test = [
