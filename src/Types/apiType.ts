@@ -31,6 +31,20 @@ export interface MeetingLikeApiType {
 	CancelLike(params?: number): Promise<AxiosResponse>
 }
 
+// export interface MonthScheduleListProps {
+// 	yearAndMonth: string
+// }
+
+export interface PostScheduleType {
+	title: string
+	content: string
+	date: string
+}
+export interface ScheduleApiType {
+	MonthScheduleList(yearAndMonth: string): Promise<AxiosResponse>
+	PostSchedule(data: PostScheduleType): Promise<AxiosResponse>
+}
+
 interface GetListProps {
 	page?: number
 	searchBy?: string
