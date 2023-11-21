@@ -43,7 +43,7 @@ export interface PostScheduleType {
 export interface putScheduleType {
 	title: string
 	content: string
-	id: string
+	id: number
 }
 export interface ScheduleApiType {
 	MonthScheduleList(yearAndMonth: string): Promise<AxiosResponse>

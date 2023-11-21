@@ -4,11 +4,11 @@ import { CancelbigIcon } from '../../../../Icons/Icons'
 import useGetDetailScheduleData from '../../../../Hooks/Queries/get-DetailSchedule'
 import Button from '../../../../Components/Button/Button'
 import ScheduleApi from '../../../../Apis/ScheduleApi'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import Input from '../../../../Components/Input/Input'
 import { InputState } from './DatePostModal'
-import { PostScheduleType } from '../../../../Types/apiType'
+import { PostScheduleType, putScheduleType } from '../../../../Types/apiType'
 
 function DateDetailModal({
 	setState,
@@ -21,6 +21,7 @@ function DateDetailModal({
 	selectDetailId: number | null
 	setSelectDetailId: (state: number | null) => void
 }) {
+	const queryClient = useQueryClient()
 	const [isChange, setIsChange] = useState<boolean>(false)
 	const [inputTitleAndContent, setInputTitleAndContent] = useState<InputState>({
 		title: '',
@@ -34,6 +35,10 @@ function DateDetailModal({
 		{
 			onSuccess: () => {
 				setState(false)
+				queryClient.invalidateQueries([
+					'useGetMonthScheduleListData',
+					selectDay?.slice(0, 7),
+				])
 			},
 			onError: () => {},
 		},
@@ -43,7 +48,12 @@ function DateDetailModal({
 		(content: putScheduleType) => ScheduleApi.putSchedule(content),
 		{
 			onSuccess: () => {
+				refetch()
 				setIsChange(false)
+				queryClient.invalidateQueries([
+					'useGetMonthScheduleListData',
+					selectDay?.slice(0, 7),
+				])
 			},
 			onError: () => {},
 		},
@@ -65,7 +75,6 @@ function DateDetailModal({
 		})
 	}
 	const onClickChange = (value: string) => {
-		console.log(value)
 		if (value === '수정') {
 			setIsChange(true)
 			setInputTitleAndContent({
@@ -89,7 +98,6 @@ function DateDetailModal({
 		}
 	}
 	const onInputTitleAndContent = (value: string, kind: 'title' | 'content') => {
-		console.log(value)
 		if (kind === 'title')
 			return setInputTitleAndContent((prev: InputState) => ({
 				...prev,
