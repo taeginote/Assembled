@@ -4,12 +4,16 @@ import { BigDateIcon, CancelbigIcon } from '../../../../Icons/Icons'
 import Input from '../../../../Components/Input/Input'
 import Button from '../../../../Components/Button/Button'
 import { useState } from 'react'
+import ScheduleApi from '../../../../Apis/ScheduleApi'
+import { PostScheduleType } from '../../../../Types/apiType'
+import { useMutation } from '@tanstack/react-query'
 
-interface InputState {
+export interface InputState {
 	title: string
 	content: string
 }
-function DateModal({
+
+function DatePostModal({
 	setState,
 	selectDay,
 }: {
@@ -20,6 +24,15 @@ function DateModal({
 		title: '',
 		content: '',
 	})
+	const { mutate } = useMutation(
+		(data: PostScheduleType) => ScheduleApi.PostSchedule(data),
+		{
+			onSuccess: () => {
+				setState(false)
+			},
+			onError: () => {},
+		},
+	)
 
 	const onInputTitleAndContent = (value: string, kind: 'title' | 'content') => {
 		//onChange를 통해 useState값 넣고 제출버튼 누르면 title과 content 값 넣기 까지 하면 끝
@@ -42,10 +55,11 @@ function DateModal({
 			return
 
 		const sendData = {
-			title: inputTitleAndContent.title.trim(),
-			content: inputTitleAndContent.content.trim(),
-			date: selectDay, //이거가 아직까지 2023년10월12일 이런 형식임 API나오면 수정 예정
+			title: inputTitleAndContent.title.trim()!,
+			content: inputTitleAndContent.content.trim()!,
+			date: selectDay!, //이거가 아직까지 2023년10월12일 이런 형식임 API나오면 수정 예정
 		}
+		mutate(sendData)
 	}
 	return (
 		<S.Wrapper>
@@ -81,7 +95,7 @@ function DateModal({
 		</S.Wrapper>
 	)
 }
-export default DateModal
+export default DatePostModal
 
 const Wrapper = styled.div`
 	position: fixed;
