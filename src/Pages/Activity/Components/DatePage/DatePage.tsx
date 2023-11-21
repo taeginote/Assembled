@@ -1,12 +1,15 @@
 import { styled } from 'styled-components'
 import DateViewComponents from './DateViewComponents'
 
-import DateModal from './DateModal'
+import DateModal from './DatePostModal'
 import { useState } from 'react'
+import DateDetailModal from './DateDetailModal'
 
 function DatePage() {
 	const [isModalView, setIsModalView] = useState<boolean>(false)
+	const [isDateDetailModal, setIsDateDetailModal] = useState<boolean>(false)
 	const [selectDay, setSelectDay] = useState<string | null>(null)
+	const [selectDetailId, setSelectDetailId] = useState<number | null>(null)
 	return (
 		<S.Wrapper>
 			<S.Title>달력</S.Title>
@@ -14,11 +17,22 @@ function DatePage() {
 				<DateViewComponents
 					setIsModalView={setIsModalView}
 					setSelectDay={setSelectDay}
+					isModalView={isModalView}
+					setIsDateDetailModal={setIsDateDetailModal}
+					setSelectDetailId={setSelectDetailId}
 				/>
 			</S.Date>
 
 			{isModalView && (
 				<DateModal setState={setIsModalView} selectDay={selectDay} />
+			)}
+			{isDateDetailModal && (
+				<DateDetailModal
+					setState={setIsDateDetailModal}
+					selectDay={selectDay}
+					selectDetailId={selectDetailId}
+					setSelectDetailId={setSelectDetailId}
+				/>
 			)}
 		</S.Wrapper>
 	)

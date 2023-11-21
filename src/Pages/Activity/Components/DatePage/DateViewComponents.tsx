@@ -1,28 +1,36 @@
 import { styled } from 'styled-components'
 import { ArrowIcon, PlusIcon } from '../../../../Icons/Icons'
 import { FlexCenterCSS } from '../../../../Styles/common'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useGetMonthScheduleListData from '../../../../Hooks/Queries/get-monthSchedule'
 
 function DateViewComponents({
 	setIsModalView,
 	setSelectDay,
+	isModalView,
+	setIsDateDetailModal,
+	setSelectDetailId,
 }: {
 	setIsModalView: (state: boolean) => void
 	setSelectDay: (state: string) => void
+	isModalView: boolean
+	setIsDateDetailModal: (state: boolean) => void
+	setSelectDetailId: (state: number) => void
 }) {
 	let date: Date = new Date() //현 날짜 시간
 	const [currentMonth, setCurrentMonth] = useState<number>(date.getMonth() + 1)
 	const [currentYear, setCurrentYear] = useState<number>(date.getFullYear())
 	const [viewYearArr, setViewYearArr] = useState<boolean>(false)
+
 	let lastDayOfMonthDate = new Date(currentYear, currentMonth, 0).getDate() //이번 달 마지막 일자 ex) 30
 	let lastDayOfMonthDay = new Date(currentYear, currentMonth, 0).getDay() //이번 달 마지막 일자 요일 ex)일요일
 
 	let monthArr: (number | null)[][] = [[], [], [], [], [], []]
 	let totalDate = lastDayOfMonthDate
 
-	const { data } = useGetMonthScheduleListData('2023-11-07')
-	console.log(data)
+	const { data, isLoading, refetch } = useGetMonthScheduleListData(
+		`${currentYear}-${currentMonth >= 10 ? currentMonth : '0' + currentMonth}`,
+	)
 
 	//마지막 주
 	for (let lastWeek = lastDayOfMonthDay; lastWeek >= 0; lastWeek--) {
@@ -102,8 +110,15 @@ function DateViewComponents({
 	const onPlus = (day: number) => {
 		setIsModalView(true)
 		setSelectDay(
-			`${currentYear}-${currentMonth}-${day >= 10 ? day : '0' + day}`,
+			`${currentYear}-${
+				currentMonth >= 10 ? currentMonth : '0' + currentMonth
+			}-${day >= 10 ? day : '0' + day}`,
 		)
+	}
+	const onClickTag = (date: string, id: number) => {
+		setIsDateDetailModal(true)
+		setSelectDay(date)
+		setSelectDetailId(id)
 	}
 
 	let test = [
@@ -116,6 +131,10 @@ function DateViewComponents({
 			children: [{ title: '롯데월드 가기' }],
 		},
 	]
+
+	useEffect(() => {
+		refetch()
+	}, [isModalView, currentMonth, currentYear])
 
 	return (
 		<S.Wrapper>
@@ -168,10 +187,13 @@ function DateViewComponents({
 								</S.Day>
 								{
 									<>
-										{test
-											.find(el => el.date === day)
-											?.children.map((el, idx) => (
-												<S.Tag key={idx}>
+										{data?.response?.schedules
+											.find(el => el.day === day)
+											?.schedulesOfMonth.map((el, idx) => (
+												<S.Tag
+													key={idx}
+													onClick={() => onClickTag(el.date!, el.id!)}
+												>
 													{el.title && el.title?.length > 7
 														? el.title?.substr(0, 7) + '...'
 														: el.title}
@@ -226,7 +248,7 @@ const FirstTh = styled.th`
 
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 `
-const Th = styled.th<{ $isWeekend: boolean; $isRealDay: number }>`
+const Th = styled.th<{ $isWeekend: boolean; $isRealDay?: number }>`
 	&:hover {
 		& > p {
 			display: ${({ theme, $isRealDay }) => $isRealDay !== null && 'block'};
@@ -267,6 +289,10 @@ const Tag = styled.div`
 	overflow: hidden;
 	max-height: 2rem;
 	border-radius: 0.3rem;
+	&:hover {
+		cursor: pointer;
+		opacity: 0.8;
+	}
 `
 const Plus = styled.p`
 	position: absolute;
