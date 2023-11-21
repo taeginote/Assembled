@@ -26,7 +26,7 @@ const useGetMonthScheduleListData = (yearAndMonth: string) => {
 	const { data, isLoading, refetch } = useQuery<
 		getMonthScheduleListDataType,
 		boolean
-	>(['useGetMonthScheduleListData'], () =>
+	>(['useGetMonthScheduleListData', yearAndMonth], () =>
 		getMonthScheduleListData(yearAndMonth),
 	)
 
