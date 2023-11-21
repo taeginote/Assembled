@@ -40,9 +40,17 @@ export interface PostScheduleType {
 	content: string
 	date: string
 }
+export interface putScheduleType {
+	title: string
+	content: string
+	id: string
+}
 export interface ScheduleApiType {
 	MonthScheduleList(yearAndMonth: string): Promise<AxiosResponse>
 	PostSchedule(data: PostScheduleType): Promise<AxiosResponse>
+	DetailSchedule(scheduleId: number): Promise<AxiosResponse>
+	putSchedule(data: putScheduleType): Promise<AxiosResponse>
+	deleteSchedule(scheduleId: number): Promise<AxiosResponse>
 }
 
 interface GetListProps {
