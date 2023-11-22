@@ -11,8 +11,8 @@ export interface PostScheduleType {
 }
 
 const ScheduleApi: ScheduleApiType = {
-	MonthScheduleList(yearAndMonth) {
-		return axiosInstance.get(PATH, {
+	MonthScheduleList(yearAndMonth, meetingId) {
+		return axiosInstance.get(PATH + '/list/' + meetingId, {
 			params: {
 				yearAndMonth,
 			},
