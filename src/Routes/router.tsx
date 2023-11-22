@@ -96,7 +96,7 @@ const router = [
 								element: <ChattingPage />,
 							},
 							{
-								path: 'date',
+								path: 'date/',
 								element: <DatePage />,
 							},
 						],

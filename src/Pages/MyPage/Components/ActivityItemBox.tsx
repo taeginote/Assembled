@@ -47,7 +47,11 @@ function ActivityItemBox({
 		<S.Wrapper>
 			<S.TopWrap>
 				<S.Status>모집중</S.Status>
-				<Button size="big" onClick={() => navigate('/activity')}>
+
+				<Button
+					size="big"
+					onClick={() => navigate(`/activity?meetingId=${meetingId}`)}
+				>
 					모임 활동
 				</Button>
 			</S.TopWrap>

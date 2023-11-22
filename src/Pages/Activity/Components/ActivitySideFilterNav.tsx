@@ -1,10 +1,13 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 function ActivitySideFilterNav() {
 	const { pathname } = useLocation()
 
 	const currentPage = pathname.split('/')[2]
+
+	const [searchParams] = useSearchParams()
+	let meetingId: number | null = Number(searchParams.get('meetingId')) || null
 
 	const list = [
 		{
@@ -32,7 +35,7 @@ function ActivitySideFilterNav() {
 				<S.SelectList
 					key={idx}
 					$status={currentPage === el.url}
-					onClick={() => navigate(`/activity/${el.url}`)}
+					onClick={() => navigate(`/activity/${el.url}?meetingId=${meetingId}`)}
 				>
 					{el.name}
 				</S.SelectList>

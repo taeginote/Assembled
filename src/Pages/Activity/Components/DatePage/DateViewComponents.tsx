@@ -3,6 +3,7 @@ import { ArrowIcon, PlusIcon } from '../../../../Icons/Icons'
 import { FlexCenterCSS } from '../../../../Styles/common'
 import { useEffect, useState } from 'react'
 import useGetMonthScheduleListData from '../../../../Hooks/Queries/get-monthSchedule'
+import { useSearchParams } from 'react-router-dom'
 
 function DateViewComponents({
 	setIsModalView,
@@ -22,6 +23,9 @@ function DateViewComponents({
 	const [currentYear, setCurrentYear] = useState<number>(date.getFullYear())
 	const [viewYearArr, setViewYearArr] = useState<boolean>(false)
 
+	const [searchParams] = useSearchParams()
+	let meetingId: number | null = Number(searchParams.get('meetingId')) || null
+
 	let lastDayOfMonthDate = new Date(currentYear, currentMonth, 0).getDate() //이번 달 마지막 일자 ex) 30
 	let lastDayOfMonthDay = new Date(currentYear, currentMonth, 0).getDay() //이번 달 마지막 일자 요일 ex)일요일
 
@@ -30,6 +34,7 @@ function DateViewComponents({
 
 	const { data, isLoading, refetch } = useGetMonthScheduleListData(
 		`${currentYear}-${currentMonth >= 10 ? currentMonth : '0' + currentMonth}`,
+		meetingId!,
 	)
 
 	//마지막 주
