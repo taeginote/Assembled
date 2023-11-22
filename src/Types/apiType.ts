@@ -39,6 +39,7 @@ export interface PostScheduleType {
 	title: string
 	content: string
 	date: string
+	meetingId: number
 }
 export interface putScheduleType {
 	title: string

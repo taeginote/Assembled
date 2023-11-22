@@ -16,14 +16,17 @@ export interface InputState {
 function DatePostModal({
 	setState,
 	selectDay,
+	meetingId,
 }: {
 	setState: (state: boolean) => void
 	selectDay: string | null
+	meetingId: number | null
 }) {
 	const [inputTitleAndContent, setInputTitleAndContent] = useState<InputState>({
 		title: '',
 		content: '',
 	})
+
 	const { mutate } = useMutation(
 		(data: PostScheduleType) => ScheduleApi.PostSchedule(data),
 		{
@@ -58,7 +61,9 @@ function DatePostModal({
 			title: inputTitleAndContent.title.trim()!,
 			content: inputTitleAndContent.content.trim()!,
 			date: selectDay!, //이거가 아직까지 2023년10월12일 이런 형식임 API나오면 수정 예정
+			meetingId: meetingId!,
 		}
+
 		mutate(sendData)
 	}
 	return (

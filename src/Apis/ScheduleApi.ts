@@ -8,6 +8,7 @@ export interface PostScheduleType {
 	content: string
 	date: string
 	title: string
+	meetingId: number
 }
 
 const ScheduleApi: ScheduleApiType = {
@@ -19,7 +20,11 @@ const ScheduleApi: ScheduleApiType = {
 		})
 	},
 	PostSchedule(content: PostScheduleType) {
-		return axiosInstance.post(PATH, content)
+		return axiosInstance.post(`${PATH}/${content.meetingId}`, {
+			content: content.content,
+			date: content.date,
+			title: content.title,
+		})
 	},
 	DetailSchedule(scheduleId: number) {
 		return axiosInstance.get(PATH + '/' + scheduleId)

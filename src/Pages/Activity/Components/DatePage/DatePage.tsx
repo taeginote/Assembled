@@ -4,12 +4,17 @@ import DateViewComponents from './DateViewComponents'
 import DateModal from './DatePostModal'
 import { useState } from 'react'
 import DateDetailModal from './DateDetailModal'
+import { useSearchParams } from 'react-router-dom'
 
 function DatePage() {
 	const [isModalView, setIsModalView] = useState<boolean>(false)
 	const [isDateDetailModal, setIsDateDetailModal] = useState<boolean>(false)
 	const [selectDay, setSelectDay] = useState<string | null>(null)
 	const [selectDetailId, setSelectDetailId] = useState<number | null>(null)
+
+	const [searchParams] = useSearchParams()
+	let meetingId: number | null = Number(searchParams.get('meetingId')) || null
+
 	return (
 		<S.Wrapper>
 			<S.Title>달력</S.Title>
@@ -24,7 +29,11 @@ function DatePage() {
 			</S.Date>
 
 			{isModalView && (
-				<DateModal setState={setIsModalView} selectDay={selectDay} />
+				<DateModal
+					setState={setIsModalView}
+					selectDay={selectDay}
+					meetingId={meetingId}
+				/>
 			)}
 			{isDateDetailModal && (
 				<DateDetailModal
