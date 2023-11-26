@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import ScheduleApi from '../../Apis/ScheduleApi'
+import { useNavigate } from 'react-router-dom'
 
 interface getMonthScheduleListDataType {
 	response: {
@@ -29,11 +30,20 @@ const useGetMonthScheduleListData = (
 	yearAndMonth: string,
 	meetingId: number,
 ) => {
+	const navigate = useNavigate()
 	const { data, isLoading, refetch } = useQuery<
 		getMonthScheduleListDataType,
 		boolean
-	>(['useGetMonthScheduleListData', yearAndMonth], () =>
-		getMonthScheduleListData(yearAndMonth, meetingId),
+	>(
+		['useGetMonthScheduleListData', yearAndMonth],
+		() => getMonthScheduleListData(yearAndMonth, meetingId),
+		{
+			onError: (error: any) => {
+				console.log(error)
+
+				navigate('/오류가났습니다')
+			},
+		},
 	)
 
 	return { data, isLoading, refetch }
