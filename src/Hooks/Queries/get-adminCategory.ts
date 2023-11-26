@@ -21,7 +21,9 @@ const useGetAdminCategoryData = () => {
 		() => getAdminCategoryData(),
 		{
 			onError: (error: any) => {
-				if (error.response.data.status === 405) return navigate('/그러지마세요')
+				if (error.response.data.status === 405) return
+
+				navigate('/그러지마세요')
 			},
 		},
 	)
