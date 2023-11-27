@@ -17,6 +17,7 @@ import LoadingPage from '../../../Components/Spinner/Spinner'
 
 function AdminCategory() {
 	const { data, isLoading, refetch } = useGetAdminCategoryData()
+
 	const [changeCategoryNum, setChangeCategoryNum] = useState<null | number>(
 		null,
 	)

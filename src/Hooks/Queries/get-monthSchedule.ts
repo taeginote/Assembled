@@ -39,8 +39,6 @@ const useGetMonthScheduleListData = (
 		() => getMonthScheduleListData(yearAndMonth, meetingId),
 		{
 			onError: (error: any) => {
-				console.log(error)
-
 				navigate('/오류가났습니다')
 			},
 		},
