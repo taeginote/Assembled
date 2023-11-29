@@ -20,6 +20,7 @@ import JoinRequest from '../Pages/MyPage/Pages/JoinRequest'
 import MeetingActivity from '../Pages/Activity'
 import ChattingPage from '../Pages/Activity/Components/ChattingPage'
 import DatePage from '../Pages/Activity/Components/DatePage/DatePage'
+import HomePage from '../Pages/Activity/Components/HomePage'
 
 const router = [
 	{
@@ -93,6 +94,10 @@ const router = [
 						children: [
 							{
 								path: '',
+								element: <HomePage />,
+							},
+							{
+								path: 'chatting',
 								element: <ChattingPage />,
 							},
 							{

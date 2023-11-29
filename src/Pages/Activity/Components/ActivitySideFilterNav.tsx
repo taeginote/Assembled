@@ -11,8 +11,12 @@ function ActivitySideFilterNav() {
 
 	const list = [
 		{
-			name: '채팅',
+			name: '모임활동',
 			url: '',
+		},
+		{
+			name: '채팅',
+			url: 'chatting',
 		},
 		{
 			name: '달력',
