@@ -35,7 +35,7 @@ function ActivityUserListModal({ meetingId, setState }: ActivityUserProps) {
 							<S.User key={idx}>
 								<S.UserImgBox>
 									<S.KingImg
-										src="assets/img/king.png"
+										src="/assets/img/king.png"
 										alt="king"
 										$isKing={idx === 0}
 									/>
