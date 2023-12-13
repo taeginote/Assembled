@@ -11,7 +11,7 @@ function HomePage() {
 	let meetingId: number | null = Number(searchParams.get('meetingId')) || null
 
 	const { data, isLoading } = useGetDetailData(meetingId!)
-	console.log(data?.response?.name)
+]
 
 	return (
 		<S.Wrapper>
