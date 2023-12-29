@@ -19,6 +19,8 @@
 <br/>
 <br/>
 
+<img width="1728" alt="스크린샷 2023-12-29 오후 4 26 14" src="https://github.com/taeginote/Assemble/assets/103398790/d7aec840-ef3b-41fa-b132-eb7385e0160b">
+
 ## 프로젝트 기술스택 💡
 
 <img width="600" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/192a5544-c0fe-4678-b82f-db9bae1559be">
