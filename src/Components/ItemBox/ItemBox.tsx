@@ -90,7 +90,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={profileImg} alt="UserImage" />
+					<S.UserImg src={writerProfileImages?.filePath} alt="UserImage" />
 					<div>
 						{writerNickname && writerNickname?.length > 7
 							? writerNickname?.substr(0, 7) + '...'

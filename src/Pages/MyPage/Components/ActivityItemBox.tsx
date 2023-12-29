@@ -5,7 +5,7 @@ import {
 	FlexColumnCSS,
 } from '../../../Styles/common'
 import { ChatIcon, PersonIcon, UserQuestionIcon } from '../../../Icons/Icons'
-import ProfileImgReturn from '../../../Utils/ProfileImgReturn'
+// import ProfileImgReturn from '../../../Utils'
 import Button from '../../../Components/Button/Button'
 
 import { Content } from '../../../Hooks/Queries/get-list'
@@ -41,7 +41,7 @@ function ActivityItemBox({
 		document.body.style.overflow = 'hidden'
 	}
 
-	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
+	// const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
 
 	return (
 		<S.Wrapper>
@@ -64,7 +64,7 @@ function ActivityItemBox({
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={profileImg} alt="UserImage" />
+					<S.UserImg src={writerProfileImages?.filePath} alt="UserImage" />
 					<div>{writerNickname}</div>
 				</div>
 
