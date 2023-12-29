@@ -49,7 +49,7 @@ function Detail() {
 	const profileImg = ProfileImgReturn(
 		data?.response?.writerProfileImages?.filePath,
 	)
-
+	console.log(profileImg)
 	const IsMinePage = data?.response?.writerId == UserId ? true : false
 
 	const { mutate } = useMutation(
@@ -143,7 +143,10 @@ function Detail() {
 								<h1>반가워요.</h1>
 								<h1>우리는 "{data?.response?.name}" 입니다</h1>
 								<S.Profile>
-									<S.UserImg src={profileImg} alt="ProfileImage" />
+									<S.UserImg
+										src={data?.response?.writerProfileImages?.filePath}
+										alt="ProfileImage"
+									/>
 									<div>{data?.response?.writerNickname}</div>
 								</S.Profile>
 							</span>
