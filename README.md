@@ -1,12 +1,12 @@
 <p align="middle" >
-<img width="250" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/460514cd-dd01-47e5-8bab-d95966010081">
+<img width="100" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/460514cd-dd01-47e5-8bab-d95966010081">
 </p>
 <!-- <br/> -->
  
 <!-- <h2 align="center">프로젝트 소개 ✏️</h2>
 <br/> -->
 
-<div align="center">
+<div align="middle">
 어셈블은 모임 및 동아리를 생성하고 참여할 수 있는 플랫폼입니다.
 <br/>
 <br/>
@@ -21,28 +21,7 @@
 
 <img width="1728" alt="스크린샷 2023-12-29 오후 4 26 14" src="https://github.com/taeginote/Assemble/assets/103398790/d7aec840-ef3b-41fa-b132-eb7385e0160b">
 
-## 프로젝트 기술스택 💡
-
-<img width="600" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/192a5544-c0fe-4678-b82f-db9bae1559be">
-
-**Deploy :** Vercel
-
-**Language :** TypeScript, JavaScript
-
-**Framework :** React
-
-**Library :** React Router, React Query, Recoil, Axios
-
-**Test :** Storybook, MSW
-
-**Build :** Webpack, Babel
-
 <br/>
-<br/>
-
-## Assemble 주요기능
-
-2023.06.15 ~ 2023.12.13
 
 #### v1.0.0
 
@@ -111,6 +90,25 @@
 
   - 모임 달력 서비스
     - 일정 추가, 삭제, 수정 가능
+
+<br/>
+<br/>
+
+## 프로젝트 기술스택 💡
+
+<img width="600" alt="image" src="https://github.com/taeginote/Assembled/assets/103398790/192a5544-c0fe-4678-b82f-db9bae1559be">
+
+**Deploy :** Vercel
+
+**Language :** TypeScript, JavaScript
+
+**Framework :** React
+
+**Library :** React Router, React Query, Recoil, Axios
+
+**Test :** Storybook, MSW
+
+**Build :** Webpack, Babel
 
 <br/>
 <br/>
