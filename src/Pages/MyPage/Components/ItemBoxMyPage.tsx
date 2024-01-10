@@ -94,7 +94,7 @@ function ItemBoxMyPage({
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={profileImg} alt="UserImage" />
+					<S.UserImg src={writerProfileImages?.filePath} alt="UserImage" />
 					<div>
 						{writerNickname && writerNickname?.length > 10
 							? writerNickname?.substr(0, 10) + '...'

@@ -104,7 +104,9 @@ function UserSetting() {
 						<S.ChangePw>내정보 수정</S.ChangePw>
 						<S.container>
 							<S.InputBox>
-								<S.ProfileImg src={(preFile || profileImg) as string} />
+								<S.ProfileImg
+									src={(preFile || data?.response?.profile?.filePath) as string}
+								/>
 								<S.ImgLabel htmlFor="profileImg">
 									<CameraIcon />
 								</S.ImgLabel>

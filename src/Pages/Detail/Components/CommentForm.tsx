@@ -148,10 +148,7 @@ function CommentForm({
 				<S.CommentsList key={idx}>
 					<S.CommentTop>
 						<span>
-							<S.UserImg
-								src={ProfileImgReturn(comment?.profile?.filePath)}
-								alt="UserImage"
-							/>
+							<S.UserImg src={comment?.profile?.filePath} alt="UserImage" />
 							<div>
 								<div>{comment.writerNickname}</div>
 								<span>{comment.writeDate}</span>
