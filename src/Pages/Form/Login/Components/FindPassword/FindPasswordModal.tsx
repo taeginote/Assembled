@@ -205,6 +205,7 @@ function FindPasswordModal({ setModalView, isLogin }: FindEmailModalTypeProps) {
 									<LockIcon />
 									<Input
 										placeholder="기존 비밀번호를 입력해주세요"
+										type="password"
 										id="PwBeforeChange"
 										onChange={onChangeInputVal}
 										onKeyDown={onKeyDownChangePw}

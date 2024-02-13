@@ -87,13 +87,14 @@ function AdminCategory() {
 
 	return (
 		<>
-			{isLoading ? (
+			{false ? (
 				<LoadingPage />
 			) : (
 				<S.Wrapper>
 					<S.Head>
 						<S.HeadLeft>
 							<h4>Assemble 카테고리</h4>
+
 							<div onClick={() => refetch()}>
 								<RefetchIcon />
 							</div>
@@ -114,6 +115,7 @@ function AdminCategory() {
 							<S.CellChangeOrDelete>카테고리 삭제</S.CellChangeOrDelete>
 						</S.Row>
 					</S.TableTitle>
+
 					{data?.response.map((category: Category, idx: number) => (
 						<S.Table $isEven={idx % 2 === 1} key={idx}>
 							<S.Row>

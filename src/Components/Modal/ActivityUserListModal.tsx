@@ -39,7 +39,7 @@ function ActivityUserListModal({ meetingId, setState }: ActivityUserProps) {
 										alt="king"
 										$isKing={idx === 0}
 									/>
-									<S.UserImg src={ProfileImgReturn(el?.profile?.filePath)} />
+									<S.UserImg src={el?.profile?.filePath} />
 								</S.UserImgBox>
 								{el.nickname}
 							</S.User>
