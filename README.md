@@ -119,7 +119,7 @@ https://www.notion.so/FE-f603f8185a1b4a1390664860d2240e94?pvs=4
 
 ## 팀원 소개
 
-|                                                   김태기(FrontEnd)                                                   |                                                      BackEnd 1명                                                      |
-| :------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/teagu123/Assemble/assets/103398790/c0e44b6f-409f-4d3d-bab2-b7ead057e1bb" width="90px"/> | <img src="https://github.com/teagu123/Assemble/assets/103398790/c0e44b6f-409f-4d3d-bab2-b7ead057e1bb" width="90px" /> |
-|                                       [teagu123](https://github.com/teagu123)                                        |                                                        Shinhan                                                        |
+|                                                   김태기(FrontEnd)                                                    |                                                      BackEnd 1명                                                       |
+| :-------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://github.com/teagu123/Assemble/assets/103398790/c0e44b6f-409f-4d3d-bab2-b7ead057e1bb" width="120px"/> | <img src="https://github.com/teagu123/Assemble/assets/103398790/c0e44b6f-409f-4d3d-bab2-b7ead057e1bb" width="120px" /> |
+|                                        [teagu123](https://github.com/teagu123)                                        |                                                        Shinhan                                                         |
