@@ -203,7 +203,7 @@ async function getResponse(event, client, requestId) {
 		const headers = Object.fromEntries(clonedRequest.headers.entries())
 
 		// Remove MSW-specific request headers so the bypassed requests
-		// comply with the server's CORS preflight check.
+		// comply with the server's  preflight check.
 		// Operate with the headers as an object because request "Headers"
 		// are immutable.
 		delete headers['x-msw-bypass']
