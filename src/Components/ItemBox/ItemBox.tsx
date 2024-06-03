@@ -35,8 +35,6 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 		hits,
 	} = data
 
-	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
-
 	const { mutate } = useMutation(
 		(likeData: MeetingLikeProps) => MeetingLikeApi.MeetingLike(likeData),
 		{
@@ -90,7 +88,7 @@ function ItemBox({ data, refetch }: { data: Content; refetch: () => void }) {
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={writerProfileImages?.filePath} alt="UserImage" />
+					<S.UserImg src={ProfileImgReturn()} alt="UserImage" />
 					<div>
 						{writerNickname && writerNickname?.length > 7
 							? writerNickname?.substr(0, 7) + '...'

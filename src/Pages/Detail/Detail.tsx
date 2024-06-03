@@ -46,9 +46,7 @@ function Detail() {
 
 	const { data, isLoading, refetch } = useGetDetailData(meetingId)
 
-	const profileImg = ProfileImgReturn(
-		data?.response?.writerProfileImages?.filePath,
-	)
+	const profileImg = ProfileImgReturn()
 	console.log(profileImg)
 	const IsMinePage = data?.response?.writerId == UserId ? true : false
 
@@ -143,10 +141,7 @@ function Detail() {
 								<h1>반가워요.</h1>
 								<h1>우리는 "{data?.response?.name}" 입니다</h1>
 								<S.Profile>
-									<S.UserImg
-										src={data?.response?.writerProfileImages?.filePath}
-										alt="ProfileImage"
-									/>
+									<S.UserImg src={ProfileImgReturn()} alt="ProfileImage" />
 									<div>{data?.response?.writerNickname}</div>
 								</S.Profile>
 							</span>

@@ -41,7 +41,7 @@ function ActivityUserListEditModal({
 											alt="king"
 											$isKing={idx === 0}
 										/>
-										<S.UserImg src={ProfileImgReturn(el?.profile?.filePath)} />
+										<S.UserImg src={ProfileImgReturn()} />
 									</S.UserImgBox>
 									{el.nickname}
 								</S.UserLeft>

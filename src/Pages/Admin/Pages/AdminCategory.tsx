@@ -22,7 +22,7 @@ function AdminCategory() {
 		null,
 	)
 	const [changeVal, setChangeVal] = useState<null | string>(null)
-	const [adminAddModal, setAdminAddModal] = useState(false)
+	const [adminAddModal, AdminAddModal] = useState(false)
 	const [recoilCounter, setRecoilCounter] = useRecoilState(modalViewConfirm)
 
 	const { mutate: changeMutate } = useMutation(

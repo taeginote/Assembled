@@ -29,7 +29,7 @@ function ChattingPage() {
 				</S.Intro>
 				{testArr.map((el, idx: number) => (
 					<S.ChatList key={idx}>
-						<S.UserImg src={ProfileImgReturn(undefined)} />
+						<S.UserImg src={ProfileImgReturn()} />
 						<S.ChattingContent>안녕하세요~~</S.ChattingContent>
 						<S.Time>16:00</S.Time>
 					</S.ChatList>

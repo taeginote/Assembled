@@ -11,6 +11,7 @@ export const ColumnNumberCSS = (count: number) => css`
 	column-gap: 2rem;
 	row-gap: 2rem;
 `
+
 export const FlexColumnCSS = css`
 	display: flex;
 	flex-direction: column;

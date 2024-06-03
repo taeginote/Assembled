@@ -1,5 +1,9 @@
 const TOKEN_KEY = 'userStatus'
 
+const UserStatus = {
+	userNickName: TOKEN_KEY,
+}
+
 const UserStatusService = {
 	getUserStatus() {
 		return localStorage.getItem(TOKEN_KEY)
