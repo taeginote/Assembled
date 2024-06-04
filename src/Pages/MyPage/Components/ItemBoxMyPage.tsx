@@ -38,8 +38,6 @@ function ItemBoxMyPage({
 		meetingStatus,
 	} = data
 
-	const profileImg = ProfileImgReturn(writerProfileImages?.filePath)
-
 	const setRecoilCounter = useSetRecoilState(modalViewConfirm)
 
 	const onDeleteClub = (e?: number) => {
@@ -94,7 +92,7 @@ function ItemBoxMyPage({
 			</S.Container>
 			<S.UserBox>
 				<div>
-					<S.UserImg src={writerProfileImages?.filePath} alt="UserImage" />
+					<S.UserImg src={ProfileImgReturn()} alt="UserImage" />
 					<div>
 						{writerNickname && writerNickname?.length > 10
 							? writerNickname?.substr(0, 10) + '...'
